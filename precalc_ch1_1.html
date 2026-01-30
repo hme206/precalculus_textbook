@@ -1,1 +1,265 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="styles.css">
+    <!-- MathJax -->
+    <script>
+        window.MathJax = { /* ... */ };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<div class="container">
+        <h1>Chapter 1.1: Functions & Graphs</h1>
+
+        <div class="intro-section">
+
+
+          
+        </div>
+
+        <div class="definition-box">
+            <h2>Definition: Percent</h2>
+            <p>The word <strong>Percent</strong> literally means "per 100" or "parts per hundred." If we have a <em>part</em> that is some <em>percent</em> of a <em>whole</em>, then:</p>
+            <div class="equation">
+                $$\text{percent} = \frac{\text{part}}{\text{whole}} \times 100\%$$
+            </div>
+            <p>Equivalently:</p>
+            <div class="equation">
+                $$\text{part} = \frac{\text{percent}}{100\%} \times \text{whole}$$
+            </div>
+        </div>
+
+        <!-- Example 1 -->
+        <div class="example">
+            <div class="example-problem">
+                <h3>Example 1: Finding a Percentage</h3>
+                <p>In a study, 243 people out of 400 people state that they like dogs. What percent of people like dogs?</p>
+            </div>
+            <button class="solution-header" onclick="toggleExample(this)">
+                <span class="toggle-arrow">▼</span>
+                <span>Show Solution</span>
+            </button>
+            <div class="example-content">
+                <div class="solution">
+                    <h4>Solution</h4>
+                    $$\text{percent} = \frac{\text{part}}{\text{whole}} \times 100\%$$
+                    $$\text{percent} = \frac{243}{400} \times 100\%$$
+                    $$\text{percent} = 0.6075 \times 100\%$$
+                    $$\text{percent} = 60.75\%$$
+                </div>
+            </div>
+        </div>
+
+        <!-- Example 2 -->
+        <div class="example">
+            <div class="example-problem">
+                <h3>Example 2: Converting to Percentages</h3>
+                <p>Write each of the following as a percentage:</p>
+                <ul>
+                    <li>1/4</li>
+                    <li>0.02</li>
+                    <li>2.35</li>
+                </ul>
+            </div>
+            <button class="solution-header" onclick="toggleExample(this)">
+                <span class="toggle-arrow">▼</span>
+                <span>Show Solution</span>
+            </button>
+            <div class="example-content">
+                <div class="solution">
+                    <h4>Solution</h4>
+                    <p><strong>Part 1:</strong> To convert 1/4 to a percentage, we first have to turn it into a decimal, which is 0.25. Then, we multiply the decimal by 100% to get:</p>
+                    $$0.25 \times 100\% = 25\%$$
+
+                    <p><strong>Part 2:</strong> To convert a decimal to a percentage we multiply by 100%:</p>
+                    $$0.02 \times 100\% = 2\%$$
+
+                    <p><strong>Part 3:</strong></p>
+                    $$2.35 \times 100\% = 235\%$$
+                </div>
+            </div>
+        </div>
+
+        <!-- Example 3 -->
+        <div class="example">
+            <div class="example-problem">
+                <h3>Example 3: Converting Percentages to Decimals</h3>
+                <p>Write each percentage as a decimal:</p>
+                <ul>
+                    <li>1.25%</li>
+                    <li>0.02%</li>
+                    <li>52.3%</li>
+                </ul>
+            </div>
+            <button class="solution-header" onclick="toggleExample(this)">
+                <span class="toggle-arrow">▼</span>
+                <span>Show Solution</span>
+            </button>
+            <div class="example-content">
+                <div class="solution">
+                    <h4>Solution</h4>
+                    <p>To convert a percentage to a decimal, we divide each percentage by 100%:</p>
+                    $$\frac{1.25\%}{100\%} = 0.0125$$
+                    $$\frac{0.02\%}{100\%} = 0.0002$$
+                    $$\frac{52.3\%}{100\%} = 0.523$$
+                </div>
+            </div>
+        </div>
+
+        <!-- Example 4 -->
+        <div class="example">
+            <div class="example-problem">
+                <h3>Example 4: Calculating Sales Tax</h3>
+                <p>The sales tax in a town is 9.4%. How much tax will you pay on a $140 purchase?</p>
+            </div>
+            <button class="solution-header" onclick="toggleExample(this)">
+                <span class="toggle-arrow">▼</span>
+                <span>Show Solution</span>
+            </button>
+            <div class="example-content">
+                <div class="solution">
+                    <h4>Solution</h4>
+                    <p>We are looking to find the part that makes up 9.4% of the whole of $140. First, we will need to convert our percent to a decimal: 9.4% ÷ 100% = 0.094. Then, we multiply the whole by the decimal to get the part.</p>
+                    $$\$140 \times 0.094 = \$13.16$$
+                </div>
+            </div>
+        </div>
+
+        <!-- Example 5 -->
+        <div class="example">
+            <div class="example-problem">
+                <h3>Example 5: Finding a Percent Increase</h3>
+                <p>In the News you hear, "tuition is expected to increase by 7% next year." If tuition this year was $1,200 per quarter, what will the cost of tuition be next year?</p>
+            </div>
+            <button class="solution-header" onclick="toggleExample(this)">
+                <span class="toggle-arrow">▼</span>
+                <span>Show Solution</span>
+            </button>
+            <div class="example-content">
+                <div class="solution">
+                    <h4>Solution</h4>
+                    <p>First we need to find the annual tuition. If the tuition is $1,200 a quarter, that means it is 4($1,200) = $4,800 a year. Next to find a 7% increase, it is really 107% because you already pay 100% of the tuition and an increase would be added to that amount. Thus next year's annual tuition would be:</p>
+                    $$\$4,800(1.07) = \$5,136$$
+                    <p>Which would be an increase of $5,136 - $4,800 = $336 annually or $336 ÷ 4 = $84 quarterly.</p>
+
+                    <p><strong>Alternative Method:</strong> This could also be solved by finding the increase first and then adding it to the initial amount:</p>
+                    $$\text{Increase: } \$4,800 \times \frac{7\%}{100\%} = \$336$$
+                    $$\text{Total: } \$4,800 + \$336 = \$5,136$$
+                </div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="try-it">
+            <h3>Try It!</h3>
+            <p>A TV originally priced at $799 is on sale for 30% off. What is the price after the discount?</p>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="definition-box">
+            <h2>Definition: Percent Change</h2>
+            <p>Given two quantities:</p>
+            <ul>
+                <li><strong>Absolute Change</strong> = |starting quantity - ending quantity|</li>
+                <li><strong>Relative Change</strong> = (Absolute Change / starting quantity) × 100%</li>
+            </ul>
+            <p>Absolute change has the same units as the original quantity, and should always be positive. Relative change is the percent change. It is a percent increase if the ending quantity is larger than the starting quantity, and a percent decrease if the starting number is lower than the ending quantity. The starting quantity is called the <strong>base</strong> of the percent change.</p>
+        </div>
+
+        <!-- Example 6 -->
+        <div class="example">
+            <div class="example-problem">
+                <h3>Example 6: Calculating Percent Decrease</h3>
+                <p>The value of a car dropped from $7,400 to $6,800 over the last year. What is the percent decrease?</p>
+            </div>
+            <button class="solution-header" onclick="toggleExample(this)">
+                <span class="toggle-arrow">▼</span>
+                <span>Show Solution</span>
+            </button>
+            <div class="example-content">
+                <div class="solution">
+                    <h4>Solution</h4>
+                    <p>Using the relative change formula:</p>
+                    $$\frac{|\$7,400 - \$6,800|}{\$7,400} \times 100\%$$
+                    $$\frac{|\$600|}{\$7,400} \times 100\%$$
+                    $$0.081 \times 100\%$$
+                    $$8.1\%$$
+                    <p>The value of the vehicle has decreased by 8.1% over the last year.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Example 7 -->
+        <div class="example">
+            <div class="example-problem">
+                <h3>Example 7: Compound Percent Changes</h3>
+                <p>Suppose a stock drops in value by 60% one week, then increases in value the next week by 75%. Is the value higher or lower than where it started?</p>
+            </div>
+            <button class="solution-header" onclick="toggleExample(this)">
+                <span class="toggle-arrow">▼</span>
+                <span>Show Solution</span>
+            </button>
+            <div class="example-content">
+                <div class="solution">
+                    <h4>Solution</h4>
+                    <p>To answer this question, suppose the value started at $100. After one week the value dropped 60%:</p>
+                    $$\$100 - \$100(0.60) = \$100 - \$60 = \$40$$
+                    <p>In the next week, notice that the base of the percentage has changed from $100 to $40. Computing the 75% increase:</p>
+                    $$\$40 + \$40(0.75) = \$40 + \$30 = \$70$$
+                    <p>In the end, the stock is lower than where it started. To be exact, it is $\frac{|100 - 70|}{100} \times 100\% = \frac{30}{100} \times 100\% = 30\%$. Thus the total change over time was a 30% decrease.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="try-it">
+            <h3>Try It!</h3>
+            <p>The U.S. federal debt at the end of 2001 was $5.77 trillion, and grew to be $6.20 trillion by the end of 2002. At the end of 2005 it was $7.91 trillion, and grew to be $8.45 trillion by the end of 2006. Calculate the relative change for 2001-2002 and 2005-2006. Which year(s) saw the larger increase in federal debt?</p>
+        </div>
+     <nav aria-label="Page navigation">
+  <div class="page-navigation">
+    <div class="page-navigation" style="display:flex; justify-content:space-between; margin-top:40px;">
+        
+        <a href="MTH154CH1_2.html" class="nav-button" aria-label="Go to next section">Next &rarr;</a>
+    </div>
+  </div>
+</nav>
+
+</div>
+<script>
+        function toggleExample(button) {
+            const content = button.nextElementSibling;
+            const arrow = button.querySelector('.toggle-arrow');
+            
+            if (content.classList.contains('open')) {
+                content.classList.remove('open');
+                arrow.classList.remove('open');
+                button.querySelector('span:last-child').textContent = 'Show Solution';
+            } else {
+                content.classList.add('open');
+                arrow.classList.add('open');
+                button.querySelector('span:last-child').textContent = 'Hide Solution';
+            }
+        }
+    </script>
+
+    <script>
+        const chapterButtons = document.querySelectorAll(".toc-chapter");
+
+        chapterButtons.forEach(button => {
+            button.addEventListener("click", () => {
+                const expanded = button.getAttribute("aria-expanded") === "true";
+                button.setAttribute("aria-expanded", !expanded);
+
+                const submenu = button.nextElementSibling;
+                submenu.classList.toggle("open");
+            });
+        });
+    </script>
+</div>
+</body>
+</html>
 

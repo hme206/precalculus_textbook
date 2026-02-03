@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <!-- MathJax configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)'], ['$', '$']],
+                displayMath: [['\\[', '\\]'], ['$$', '$$']]
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            },
+            loader: {
+                load: ['input/tex', 'output/chtml']
+            }
+        };
+    </script>
+    <!-- MathJax loader -->
+    <script id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+
+    <link rel="stylesheet" href="styles.css">
+    <!-- MathJax -->
+    <script>
+        window.MathJax = { /* ... */ };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+</head>
+ <body> 
+<div id="toc-placeholder"></div>
+
+
+
+
+            
+<script>
+        function toggleExample(button) {
+            const content = button.nextElementSibling;
+            const arrow = button.querySelector('.toggle-arrow');
+            
+            if (content.classList.contains('open')) {
+                content.classList.remove('open');
+                arrow.classList.remove('open');
+                button.querySelector('span:last-child').textContent = 'Show Solution';
+            } else {
+                content.classList.add('open');
+                arrow.classList.add('open');
+                button.querySelector('span:last-child').textContent = 'Hide Solution';
+            }
+        }
+    </script>
+
+    <script>
+        const chapterButtons = document.querySelectorAll(".toc-chapter");
+
+        chapterButtons.forEach(button => {
+            button.addEventListener("click", () => {
+                const expanded = button.getAttribute("aria-expanded") === "true";
+                button.setAttribute("aria-expanded", !expanded);
+
+                const submenu = button.nextElementSibling;
+                submenu.classList.toggle("open");
+            });
+        });
+    </script>
+                  <script>
+        // Load TOC
+        fetch('toc.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('toc-placeholder').innerHTML = data;
+                
+                // Initialize chapter buttons
+                const chapterButtons = document.querySelectorAll(".toc-chapter");
+                chapterButtons.forEach(button => {
+                    button.addEventListener("click", () => {
+                        const expanded = button.getAttribute("aria-expanded") === "true";
+                        button.setAttribute("aria-expanded", !expanded);
+                        const submenu = button.nextElementSibling;
+                        submenu.classList.toggle("open");
+                    });
+                });
+            });
+    </script>
+ 
+</body>
+</html>

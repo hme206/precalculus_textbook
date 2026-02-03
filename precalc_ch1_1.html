@@ -27,27 +27,10 @@
         window.MathJax = { /* ... */ };
     </script>
     <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-      <script>
-        // Load TOC
-        fetch('toc.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('toc-placeholder').innerHTML = data;
-                
-                // Initialize chapter buttons
-                const chapterButtons = document.querySelectorAll(".toc-chapter");
-                chapterButtons.forEach(button => {
-                    button.addEventListener("click", () => {
-                        const expanded = button.getAttribute("aria-expanded") === "true";
-                        button.setAttribute("aria-expanded", !expanded);
-                        const submenu = button.nextElementSibling;
-                        submenu.classList.toggle("open");
-                    });
-                });
-            });
-    </script>
+
 </head>
  <body> 
+     <div id="toc-placeholder"></div>
         <div class="container">
         <h1>Chapter 1.1: Functions & Graphs</h1>
 
@@ -536,7 +519,27 @@
             });
         });
     </script>
+                  <script>
+        // Load TOC
+        fetch('toc.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('toc-placeholder').innerHTML = data;
+                
+                // Initialize chapter buttons
+                const chapterButtons = document.querySelectorAll(".toc-chapter");
+                chapterButtons.forEach(button => {
+                    button.addEventListener("click", () => {
+                        const expanded = button.getAttribute("aria-expanded") === "true";
+                        button.setAttribute("aria-expanded", !expanded);
+                        const submenu = button.nextElementSibling;
+                        submenu.classList.toggle("open");
+                    });
+                });
+            });
+    </script>
 </div>
+ 
 </body>
 </html>
 

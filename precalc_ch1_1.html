@@ -47,7 +47,88 @@
     <h3>Example</h3>
     <p>If we were to look at the mapping below, which relates the time of day to the temperature in degree Fahrenheit:</p>
     
-    <!--holder-->
+    <figure role="group" aria-labelledby="mapping-title mapping-desc">
+  <svg
+    width="600"
+    height="300"
+    viewBox="0 0 600 300"
+    xmlns="http://www.w3.org/2000/svg"
+    aria-labelledby="mapping-title mapping-desc"
+    role="img"
+  >
+    <title id="mapping-title">
+      Mapping of Time of Day to Temperature
+    </title>
+
+    <desc id="mapping-desc">
+      A mapping diagram showing a relationship between time of day and temperature
+      in degrees Fahrenheit. The inputs are 1 pm, 2 pm, and 3 pm. The outputs are
+      32 degrees, 56 degrees, and 65 degrees Fahrenheit. Each input maps to exactly
+      one output, demonstrating a function.
+    </desc>
+
+    <!-- Left set -->
+    <ellipse cx="150" cy="150" rx="90" ry="120"
+             fill="#FFF6CC" stroke="#000" />
+
+    <!-- Right set -->
+    <ellipse cx="450" cy="150" rx="90" ry="120"
+             fill="#CCFFCC" stroke="#000" />
+
+    <!-- Input circles -->
+    <circle cx="150" cy="80" r="25" fill="#FFF" stroke="#000" />
+    <circle cx="150" cy="150" r="25" fill="#FFF" stroke="#000" />
+    <circle cx="150" cy="220" r="25" fill="#FFF" stroke="#000" />
+
+    <!-- Output circles -->
+    <circle cx="450" cy="80" r="25" fill="#FFF" stroke="#000" />
+    <circle cx="450" cy="150" r="25" fill="#FFF" stroke="#000" />
+    <circle cx="450" cy="220" r="25" fill="#FFF" stroke="#000" />
+
+    <!-- Text labels -->
+    <text x="150" y="85" text-anchor="middle" font-size="14">1 pm</text>
+    <text x="150" y="155" text-anchor="middle" font-size="14">2 pm</text>
+    <text x="150" y="225" text-anchor="middle" font-size="14">3 pm</text>
+
+    <text x="450" y="85" text-anchor="middle" font-size="14">32°F</text>
+    <text x="450" y="155" text-anchor="middle" font-size="14">56°F</text>
+    <text x="450" y="225" text-anchor="middle" font-size="14">65°F</text>
+
+    <!-- Arrow marker -->
+    <defs>
+      <marker
+        id="arrow"
+        markerWidth="10"
+        markerHeight="10"
+        refX="10"
+        refY="5"
+        orient="auto"
+        markerUnits="strokeWidth"
+      >
+        <path d="M0,0 L10,5 L0,10 Z" fill="#000" />
+      </marker>
+    </defs>
+
+    <!-- Arrows -->
+    <line x1="175" y1="80" x2="425" y2="150"
+          stroke="#000" stroke-width="2"
+          marker-end="url(#arrow)" />
+
+    <line x1="175" y1="150" x2="425" y2="80"
+          stroke="#000" stroke-width="2"
+          marker-end="url(#arrow)" />
+
+    <line x1="175" y1="220" x2="425" y2="220"
+          stroke="#000" stroke-width="2"
+          marker-end="url(#arrow)" />
+  </svg>
+
+  <figcaption>
+    Mapping diagram showing time of day as inputs and temperature in degrees
+    Fahrenheit as outputs. Each time maps to exactly one temperature.
+  </figcaption>
+</figure>
+
     
     <p>The mapping above is a function as we can see each input value(yellow) is mapped to only one output value(green). Additionally we can identify the ordered pairs that would represent this function. The starting place is the x-value(input) and the ending place is the y-value(output), which would produce the set:</p>
     

@@ -32,7 +32,1137 @@
  <body> 
 <div id="toc-placeholder"></div>
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 5 Section 1: Angles</title>
+    <style>
+.nav-button {
+    padding: 10px 20px;
+    background-color: #33AB2B;
+    color: #000000;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
 
+.nav-button:hover,
+.nav-button:focus {
+    background-color: #33AB2B;
+    outline: none;
+}
+
+/* Layout unchanged */
+.side-toc {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 230px;
+    height: 100vh;
+    background-color: #f0f8ed;
+    border-right: 3px solid #33AB2B;
+    padding: 20px;
+    overflow: hidden;
+}
+
+.diagram-row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(150px, 1fr));
+    gap: 2rem;
+    justify-items: center;
+    align-items: start;
+    margin: 1.5rem 0;
+}
+
+.diagram {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.toc-title {
+    font-size: 1.4em;
+    margin-bottom: 15px;
+    color: #33AB2B;
+}
+
+/* Chapter buttons */
+.toc-chapter {
+    width: 100%;
+    background: none;
+    border: none;
+    text-align: left;
+    font-size: 1em;
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    color: #333;
+}
+
+.toc-chapter:hover,
+.toc-chapter:focus {
+    color: #33AB2B;
+}
+
+.arrow {
+    transition: transform 0.25s ease;
+}
+
+/* Rotated when opened */
+.toc-chapter[aria-expanded="true"] .arrow {
+    transform: rotate(90deg);
+}
+
+/* Submenu collapsed by default */
+.toc-submenu {
+    list-style: none;
+    padding-left: 15px;
+    margin: 5px 0 10px 0;
+    display: none;
+}
+
+/* Visible when expanded */
+.toc-submenu.open {
+    display: block;
+}
+
+.toc-submenu li {
+    margin: 6px 0;
+}
+
+.toc-submenu a {
+    color: #333;
+    text-decoration: none;
+}
+
+.toc-submenu a:hover,
+.toc-submenu a:focus {
+    color: #33AB2B;
+    text-decoration: underline;
+}
+
+/* Push main body over */
+body {
+    margin-left: 250px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f9f9f9;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    background-color: #ffffff;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: #33AB2B;
+    margin-bottom: 30px;
+    font-size: 2.5em;
+    border-bottom: 3px solid #33AB2B;
+    padding-bottom: 15px;
+}
+
+h2 {
+    color: #33AB2B;
+    font-size: 1.8em;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+h3 {
+    color: #33AB2B;
+    font-size: 1.2em;
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
+
+h4 {
+    color: #33AB2B;
+    font-size: 1.1em;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+.definition-box {
+    background-color: #f0f8ed;
+    border: 2px solid #33AB2B;
+    border-radius: 6px;
+    padding: 25px;
+    margin: 30px 0;
+}
+
+.definition-box h3 {
+    color: #33AB2B;
+    font-size: 1.2em;
+    margin-bottom: 15px;
+    margin-top: 0;
+}
+
+.definition-box p {
+    margin-bottom: 15px;
+}
+
+.definition-box ul {
+    margin-left: 20px;
+    margin-bottom: 15px;
+}
+
+.definition-box li {
+    margin-bottom: 10px;
+}
+
+.conversion-box {
+    background-color: #ffffff;
+    border: 2px solid #b84d7e;
+    border-radius: 6px;
+    padding: 25px;
+    margin: 30px 0;
+}
+
+.conversion-box h3 {
+    color: #b84d7e;
+    margin-top: 0;
+}
+
+.conversion-box table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 15px 0;
+}
+
+.conversion-box table th,
+.conversion-box table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+.conversion-box table th {
+    background-color: #f0f0f0;
+    color: #333;
+    font-weight: bold;
+}
+
+.orange-box {
+    background-color: #fff3cd;
+    border: 2px solid #ffc107;
+    border-radius: 6px;
+    padding: 20px;
+    margin: 30px 0;
+}
+
+.orange-box h3 {
+    margin-top: 0;
+}
+
+.orange-box ol {
+    margin-left: 20px;
+}
+
+.orange-box li {
+    margin-bottom: 8px;
+}
+
+.example {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    margin: 25px 0;
+    overflow: hidden;
+}
+
+.example-problem {
+    padding: 15px 20px;
+}
+
+.example-problem h3 {
+    color: #33AB2B;
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.1em;
+}
+
+.example-problem p {
+    margin-bottom: 10px;
+}
+
+.example-problem ol {
+    margin-left: 20px;
+    margin-bottom: 15px;
+}
+
+.example-problem li {
+    margin-bottom: 8px;
+}
+
+.example-problem ul {
+    margin-left: 20px;
+    margin-bottom: 15px;
+}
+
+.solution-header {
+    background-color: #33AB2B;
+    color: white;
+    padding: 12px 20px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    margin-top: 15px;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+    border: none;
+    font-size: 1em;
+}
+
+.solution-header:hover {
+    background-color: #2a8922;
+}
+
+.toggle-arrow {
+    display: inline-block;
+    margin-right: 12px;
+    transition: transform 0.3s ease;
+    font-size: 1.2em;
+}
+
+.toggle-arrow.open {
+    transform: rotate(180deg);
+}
+
+.example-content {
+    padding: 0;
+    display: none;
+    overflow: hidden;
+}
+
+.example-content.open {
+    display: block;
+}
+
+.solution {
+    background-color: #f0f8ed;
+    padding: 20px;
+    border-top: 2px solid #33AB2B;
+}
+
+.solution h4 {
+    color: #33AB2B;
+    margin-bottom: 15px;
+    margin-top: 0;
+}
+
+.solution p {
+    margin-bottom: 15px;
+    line-height: 1.7;
+}
+
+.solution ol {
+    margin-left: 20px;
+    margin-bottom: 15px;
+}
+
+.solution li {
+    margin-bottom: 8px;
+}
+
+.solution ul {
+    margin-left: 20px;
+    margin-bottom: 15px;
+}
+
+ul {
+    margin-left: 20px;
+    margin-bottom: 15px;
+}
+
+ul li {
+    margin-bottom: 8px;
+}
+
+ol {
+    margin-left: 20px;
+    margin-bottom: 15px;
+}
+
+ol li {
+    margin-bottom: 8px;
+}
+
+p {
+    margin-bottom: 15px;
+}
+
+strong {
+    font-weight: bold;
+}
+
+em {
+    font-style: italic;
+}
+
+.blue-text {
+    color: #0066cc;
+}
+
+.divider {
+    border-top: 2px dashed #33AB2B;
+    margin: 30px 0;
+}
+
+.image-placeholder {
+    background-color: #e0e0e0;
+    border: 2px dashed #999;
+    padding: 40px;
+    margin: 20px 0;
+    text-align: center;
+    color: #666;
+    font-style: italic;
+    border-radius: 4px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+table th {
+    background-color: #f0f8ed;
+    color: #33AB2B;
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ccc;
+    font-weight: bold;
+}
+
+table td {
+    padding: 12px;
+    border: 1px solid #ccc;
+}
+
+table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+table tr.highlighted {
+    background-color: #ffff99;
+}
+
+.subsection-title {
+    color: #33AB2B;
+    font-size: 1.3em;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+.visually-hidden {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0 0 0 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+}
+
+/* Math display styles */
+.math-display {
+    display: block;
+    text-align: center;
+    margin: 20px 0;
+    overflow-x: auto;
+}
+
+.math-array {
+    display: inline-block;
+    text-align: left;
+}
+
+/* ========================================
+   RESPONSIVE DESIGN FOR MOBILE DEVICES
+   ======================================== */
+
+@media (max-width: 768px) {
+    /* Make TOC stack on top instead of sidebar */
+    .side-toc {
+        position: static;
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 3px solid #33AB2B;
+        overflow-y: auto;
+        margin-bottom: 20px;
+    }
+    
+    /* Remove left margin on body */
+    body {
+        margin-left: 0;
+    }
+    
+    /* Adjust container for mobile */
+    .container {
+        max-width: 100%;
+        padding: 20px 15px;
+        margin: 0;
+        box-shadow: none;
+    }
+    
+    /* Scale down headings */
+    h1 {
+        font-size: 1.8em;
+        padding-bottom: 10px;
+    }
+    
+    h2 {
+        font-size: 1.4em;
+        margin-top: 20px;
+    }
+    
+    h3 {
+        font-size: 1.1em;
+    }
+    
+    /* Make diagrams stack vertically on mobile */
+    .diagram-row {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    /* Adjust boxes for mobile */
+    .definition-box,
+    .conversion-box,
+    .orange-box,
+    .example {
+        padding: 15px;
+        margin: 20px 0;
+    }
+    
+    /* Make tables scrollable on mobile */
+    table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+    
+    /* Adjust navigation buttons */
+    .nav-button {
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+}
+
+/* Extra small devices (phones in portrait, less than 480px) */
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.5em;
+    }
+    
+    h2 {
+        font-size: 1.2em;
+    }
+    
+    .container {
+        padding: 15px 10px;
+    }
+    
+    .toc-title {
+        font-size: 1.2em;
+    }
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Chapter 5, Section 1: Angles</h1>
+        
+        <p>In geometry class you learn about angles and the basics of trigonometry. In this chapter we are going to explore more on the concepts of trigonometry. The Greek word <strong class="blue-text">trigonometry</strong> means "measurement of triangles". Thus it should come as no surprise that, throughout this chapter and the next several chapters we going going to learn a lot of information regarding angles and their measurements, and more specifically where we can use this information in the real world.</p>
+
+        <p>When an angle is put into <strong class="blue-text">standard position</strong>, that means that the <strong class="blue-text">initial side</strong> of the angle is along the x-axis and the angle is measure from that side to the <strong class="blue-text">terminal side</strong>. Each of these sides of an angle are known as <em>rays</em> that meet at something called a <em>vertex</em> as can be seen in the images below.</p>
+
+        <!-- TikZ placeholder: Standard position angle diagram -->
+        <div class="image-placeholder" role="img" aria-label="Diagram showing an angle in standard position with initial side along the positive x-axis, terminal side in the second quadrant, vertex at origin, and angle alpha marked">
+            [Diagram: Angle in Standard Position]
+        </div>
+
+        <p>When this angle is measure counter-clockwise α is a positive angle. When the angle is measured clockwise α is a negative angle.</p>
+
+        <h2 class="subsection-title">Degree-Minute-Seconds</h2>
+
+        <p>By definition of degree measure, we have that 1° represents the measure of an angle which constitutes 1/360 of a revolution. Even though it may be hard to draw, it is nonetheless not difficult to imagine an angle with measure smaller than 1°. There are two ways to subdivide degrees. The first, and most familiar, is <strong class="blue-text">decimal degrees</strong>. For example, an angle with a measure of 30.5° would represent a rotation halfway between 30° and 31°, or equivalently, 30.5/360 = 61/720 of a full rotation. This can be taken to the limit using Calculus so that measures like √2° make sense.</p>
+
+        <p>The second way to divide degrees is the <strong class="blue-text">Degree-Minute-Second (DMS)</strong> system. In this system, one degree is divided equally into sixty minutes, and in turn, each minute is divided equally into sixty seconds. In symbols, we write 1° = 60' and 1' = 60'', from which it follows that 1° = 3600''. To convert a measure of 42.125° to the DMS system, we start by noting that 42.125° = 42° + 0.125°. Converting the partial amount of degrees to minutes, we find 0.125° × (60'/1°) = 7.5' = 7' + 0.5'. Converting the partial amount of minutes to seconds gives 0.5' × (60''/1') = 30''. Putting it all together yields</p>
+
+        <div class="math-display">
+            <div class="math-array">
+                42.125° = 42° + 0.125°<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= 42° + 7.5'<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= 42° + 7' + 0.5'<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= 42° + 7' + 30''<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= 42°7'30''
+            </div>
+        </div>
+
+        <p>On the other hand, to convert 117°15'45'' to decimal degrees, we first compute 15' × (1°/60') = 1/4° and 45'' × (1°/3600'') = 1/80°. Then we find</p>
+
+        <div class="math-display">
+            <div class="math-array">
+                117°15'45'' = 117° + 15' + 45''<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= 117° + 1/4° + 1/80°<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= 9381/80°<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= 117.2625°
+            </div>
+        </div>
+
+        <p>Recall that two acute angles are called <strong>complementary angles</strong> if their measures add to 90°. Two angles, either a pair of right angles or one acute angle and one obtuse angle, are called <strong>supplementary angles</strong> if their measures add to 180°. In the diagram below, the angles α and β are supplementary angles while the pair γ and θ are complementary angles.</p>
+
+        <div class="diagram-row">
+            <div class="diagram">
+                <!-- TikZ placeholder: Supplementary angles diagram -->
+                <div class="image-placeholder" role="img" aria-label="Diagram showing supplementary angles alpha and beta on a straight line">
+                    [Diagram: Supplementary Angles]
+                </div>
+            </div>
+            <div class="diagram">
+                <!-- TikZ placeholder: Complementary angles diagram -->
+                <div class="image-placeholder" role="img" aria-label="Diagram showing complementary angles gamma and theta forming a right angle">
+                    [Diagram: Complementary Angles]
+                </div>
+            </div>
+        </div>
+
+        <p>In practice, the distinction between the angle itself and its measure is blurred so that the sentence 'α is an angle measuring 42°' is often abbreviated as 'α = 42°.' It is now time for an example.</p>
+
+        <div class="example">
+            <div class="example-problem">
+                <h3>Example</h3>
+                <p>Let α = 111.371° and β = 37°28'17''.</p>
+                <ol>
+                    <li>Convert α to the DMS system. Round your answer to the nearest second.</li>
+                    <li>Convert β to decimal degrees. Round your answer to the nearest thousandth of a degree.</li>
+                    <li>Sketch α and β.</li>
+                    <li>Find a supplementary angle for α.</li>
+                    <li>Find a complementary angle for β.</li>
+                </ol>
+            </div>
+            
+            <button class="solution-header" onclick="toggleSolution(this)" aria-expanded="false">
+                <span class="toggle-arrow">▼</span>
+                <span>Solution</span>
+            </button>
+            
+            <div class="example-content">
+                <div class="solution">
+                    <ol>
+                        <li>
+                            <p>To convert α to the DMS system, we start with 111.371° = 111° + 0.371°. Next we convert 0.371° × (60'/1°) = 22.26'. Writing 22.26' = 22' + 0.26', we convert 0.26' × (60''/1') = 15.6''. Hence,</p>
+                            <div class="math-display">
+                                <div class="math-array">
+                                    111.371° = 111° + 0.371°<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= 111° + 22.26'<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= 111° + 22' + 0.26'<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= 111° + 22' + 15.6''<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= 111°22'15.6''
+                                </div>
+                            </div>
+                            <p>Rounding to seconds, we obtain α ≈ 111°22'16''.</p>
+                        </li>
+                        <li>
+                            <p>To convert β to decimal degrees, we convert 28' × (1°/60') = 7/15° and 17'' × (1°/3600') = 17/3600°. Putting it all together, we have</p>
+                            <div class="math-display">
+                                <div class="math-array">
+                                    37°28'17'' = 37° + 28' + 17''<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= 37° + 7/15° + 17/3600°<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= 134897/3600°<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;≈ 37.471°
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <p>To sketch α, we first note that 90° &lt; α &lt; 180°. If we divide this range in half, we get 90° &lt; α &lt; 135°, and once more, we have 90° &lt; α &lt; 112.5°. This gives us a pretty good estimate for α, as shown below. Proceeding similarly for β, we find 0° &lt; β &lt; 90°, then 0° &lt; β &lt; 45°, 22.5° &lt; β &lt; 45°, and lastly, 33.75° &lt; β &lt; 45°.</p>
+                            
+                            <div class="diagram-row">
+                                <div class="diagram">
+                                    <!-- TikZ placeholder: Angle alpha diagram -->
+                                    <div class="image-placeholder" role="img" aria-label="Diagram showing angle alpha in standard position, approximately 111 degrees in the second quadrant">
+                                        [Diagram: Angle α]
+                                    </div>
+                                </div>
+                                <div class="diagram">
+                                    <!-- TikZ placeholder: Angle beta diagram -->
+                                    <div class="image-placeholder" role="img" aria-label="Diagram showing angle beta in standard position, approximately 37 degrees in the first quadrant">
+                                        [Diagram: Angle β]
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <p>To find a supplementary angle for α, we seek an angle θ so that α + θ = 180°. We get θ = 180° - α = 180° - 111.371° = 68.629°.</p>
+                        </li>
+                        <li>
+                            <p>To find a complementary angle for β, we seek an angle γ so that β + γ = 90°. We get γ = 90° - β = 90° - 37°28'17''. While we could reach for the calculator to obtain an approximate answer, we choose instead to do a bit of sexagesimal arithmetic. We first rewrite 90° = 90°0'0'' = 89°60'0'' = 89°59'60''. In essence, we are 'borrowing' 1° = 60' from the degree place, and then borrowing 1' = 60'' from the minutes place. This yields, γ = 90° - 37°28'17'' = 89°59'60'' - 37°28'17'' = 52°31'43''.</p>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <p>When two angles α and β share both an initial side and a terminal side of an angle they are known as <strong class="blue-text">coterminal</strong> angles. As can be seen in the examples below.</p>
+
+        <div class="diagram-row">
+            <div class="diagram">
+                <!-- TikZ placeholder: Coterminal angles example 1 -->
+                <div class="image-placeholder" role="img" aria-label="Diagram showing two coterminal angles alpha and beta with the same initial and terminal sides">
+                    [Diagram: Coterminal Angles Example 1]
+                </div>
+            </div>
+            <div class="diagram">
+                <!-- TikZ placeholder: Coterminal angles example 2 -->
+                <div class="image-placeholder" role="img" aria-label="Diagram showing coterminal angles with beta making multiple rotations">
+                    [Diagram: Coterminal Angles Example 2]
+                </div>
+            </div>
+        </div>
+
+        <p>More precisely, if α and β are coterminal angles, then β = α + 360° × k where k is any integer value.</p>
+
+        <div class="example">
+            <div class="example-problem">
+                <h3>Example</h3>
+                <p>Find three coterminal angles with at least one of them being negative.</p>
+                <ol>
+                    <li>60°</li>
+                    <li>-45°</li>
+                    <li>451°</li>
+                </ol>
+            </div>
+            
+            <button class="solution-header" onclick="toggleSolution(this)" aria-expanded="false">
+                <span class="toggle-arrow">▼</span>
+                <span>Solution</span>
+            </button>
+            
+            <div class="example-content">
+                <div class="solution">
+                    <ol>
+                        <li>
+                            <p>First we can find the negative coterminal angle by taking 60° and subtracting 360° to find:</p>
+                            <p style="text-align: center;">β = 60° - 360° = -300°</p>
+                            <p>To find another positive coterminal angle we can simply just add 360° to our angle to get</p>
+                            <p style="text-align: center;">β = 60° + 360° × 1 = 420°</p>
+                            <p>Which is just our angle plus one full rotation, we can find another positive angle by making two full rotations</p>
+                            <p style="text-align: center;">β = 60° + 360° × 2 = 780°</p>
+                        </li>
+                        <li>
+                            <p>Since this one is already negative we can find the positive version of this angle by adding it to 360°, thus we'd find that</p>
+                            <p style="text-align: center;">β = -45° + 360° = 315°</p>
+                            <p>To find a second negative coterminal angle we would do similarly to what was done above</p>
+                            <p style="text-align: center;">β = -45° - 360° × 1 = -395°</p>
+                            <p>We can do that once more to get another rotation</p>
+                            <p style="text-align: center;">β = -45° - 360° × 2 = -765°</p>
+                        </li>
+                        <li>
+                            <p>For our last one, we could just keep making rotations around by adding multiples of 360° but those numbers will add up quickly, instead note how 451° &gt; 360° that means this angle is already a multiple of 360°, in this case we can go backwards a few rotations to find a positive coterminal angle and a negative coterminal angle</p>
+                            <p style="text-align: center;">β = 451° + 360° × -1 = 91°</p>
+                            <p style="text-align: center;">β = 451° + 360° × -2 = -269°</p>
+                            <p style="text-align: center;">β = 451° + 360° × -3 = -629°</p>
+                            <p>All we did in this example is go around the angle clockwise multiple times to keep getting to a new coterminal angle.</p>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="subsection-title">Radian Measure</h2>
+
+        <p>Degrees are not the only method for which you can measure an angle. Another type of measurement that we will use in this course is <strong class="blue-text">radians</strong>.</p>
+
+        <div class="definition-box">
+            <p>A <strong>radian</strong> can be defined as the measure of an angle θ that is created from the initial side of an angle to the terminal side of an angle that intercepts an arc <em>s</em> that is equal in length to the radius of the circle.</p>
+            <p style="text-align: center; font-size: 1.5em;">θ = s/r</p>
+        </div>
+
+        <!-- TikZ placeholder: Radian definition diagram -->
+        <div class="image-placeholder" role="img" aria-label="Diagram showing a circle with radius r, arc length s, and angle theta, illustrating that the radian measure is s divided by r">
+            [Diagram: Radian Measure Definition - The radian measure of θ is s/r]
+        </div>
+
+        <p>To get a better feel for radian measure, we note that an angle with radian measure 1 means the corresponding arc length <em>s</em> equals the radius of the circle <em>r</em>, hence s = r. When the radian measure is 2, we have s = 2r; when the radian measure is 3, s = 3r, and so forth. Thus the radian measure of an angle θ tells us how many 'radius lengths' we need to sweep out along the circle to subtend the angle θ.</p>
+
+        <div class="diagram-row">
+            <div class="diagram">
+                <!-- TikZ placeholder: Radian measure 1 -->
+                <div class="image-placeholder" role="img" aria-label="Diagram showing an angle with radian measure 1, where arc length equals radius">
+                    [Diagram: α has radian measure 1]
+                </div>
+            </div>
+            <div class="diagram">
+                <!-- TikZ placeholder: Radian measure 4 -->
+                <div class="image-placeholder" role="img" aria-label="Diagram showing an angle with radian measure 4, where arc length equals 4 times the radius">
+                    [Diagram: β has radian measure of 4]
+                </div>
+            </div>
+        </div>
+
+        <p>Since one revolution sweeps out the entire circumference 2πr, one revolution has radian measure (2πr)/r = 2π. From this we can find the radian measure of other central angles using proportions, just like we did with degrees. For instance, half of a revolution has radian measure (1/2)(2π) = π, a quarter revolution has radian measure (1/4)(2π) = π/2, and so forth. Note that, by definition, the radian measure of an angle is a length divided by another length so that these measurements are actually dimensionless and are considered 'pure' numbers. For this reason, we do not use any symbols to denote radian measure, but we use the word 'radians' to denote these dimensionless units as needed. For instance, we say one revolution measures '2π radians,' half of a revolution measures 'π radians,' and so forth.</p>
+
+        <p>As with degree measure, the distinction between the angle itself and its measure is often blurred in practice, so when we write 'θ = π/2', we mean θ is an angle which measures π/2 radians. We extend radian measure to oriented angles, just as we did with degrees beforehand, so that a positive measure indicates counter-clockwise rotation and a negative measure indicates clockwise rotation. Much like before, two positive angles α and β are supplementary if α + β = π and complementary if α + β = π/2. Finally, we leave it to the reader to show that when using radian measure, two angles α and β are coterminal if and only if β = α + 2πk for some integer k.</p>
+
+        <div class="example">
+            <div class="example-problem">
+                <h3>Example</h3>
+                <p>Graph each of the (oriented) angles below in standard position and classify them according to where their terminal side lies. Find three coterminal angles, at least one of which is positive and one of which is negative.</p>
+                <ol>
+                    <li>α = π/6</li>
+                    <li>β = -4π/3</li>
+                    <li>γ = 9π/4</li>
+                    <li>φ = -5π/2</li>
+                </ol>
+            </div>
+            
+            <button class="solution-header" onclick="toggleSolution(this)" aria-expanded="false">
+                <span class="toggle-arrow">▼</span>
+                <span>Solution</span>
+            </button>
+            
+            <div class="example-content">
+                <div class="solution">
+                    <ol>
+                        <li>
+                            <p>The angle α = π/6 is positive, so we draw an angle with its initial side on the positive x-axis and rotate counter-clockwise (π/6)/(2π) = 1/12 of a revolution. Thus α is a Quadrant I angle. Coterminal angles θ are of the form θ = α + 2π · k, for some integer k. To make the arithmetic a bit easier, we note that 2π = 12π/6, thus when k = 1, we get θ = π/6 + 12π/6 = 13π/6. Substituting k = -1 gives θ = π/6 - 12π/6 = -11π/6 and when we let k = 2, we get θ = π/6 + 24π/6 = 25π/6.</p>
+                        </li>
+                        <li>
+                            <p>Since β = -4π/3 is negative, we start at the positive x-axis and rotate clockwise (4π/3)/(2π) = 2/3 of a revolution. We find β to be a Quadrant II angle. To find coterminal angles, we proceed as before using 2π = 6π/3, and compute θ = -4π/3 + 6π/3 · k for integer values of k. We obtain 2π/3, -10π/3 and 8π/3 as coterminal angles.</p>
+                            
+                            <div class="diagram-row">
+                                <div class="diagram">
+                                    <!-- TikZ placeholder: Alpha = pi/6 -->
+                                    <div class="image-placeholder" role="img" aria-label="Diagram showing angle alpha equals pi over 6 in standard position in Quadrant I">
+                                        [Diagram: α = π/6 in standard position]
+                                    </div>
+                                </div>
+                                <div class="diagram">
+                                    <!-- TikZ placeholder: Beta = -4pi/3 -->
+                                    <div class="image-placeholder" role="img" aria-label="Diagram showing angle beta equals negative 4 pi over 3 in standard position in Quadrant II">
+                                        [Diagram: β = -4π/3 in standard position]
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <p>Since γ = 9π/4 is positive, we rotate counter-clockwise from the positive x-axis. One full revolution accounts for 2π = 8π/4 of the radian measure with π/4 or 1/8 of a revolution remaining. We have γ as a Quadrant I angle. All angles coterminal with γ are of the form θ = 9π/4 + 8π/4 · k, where k is an integer. Working through the arithmetic, we find: π/4, -7π/4 and 17π/4.</p>
+                        </li>
+                        <li>
+                            <p>To graph φ = -5π/2, we begin our rotation clockwise from the positive x-axis. As 2π = 4π/2, after one full revolution clockwise, we have π/2 or 1/4 of a revolution remaining. Since the terminal side of φ lies on the negative y-axis, φ is a quadrantal angle. To find coterminal angles, we compute θ = -5π/2 + 4π/2 · k for a few integers k and obtain -π/2, 3π/2 and 7π/2.</p>
+                            
+                            <div class="diagram-row">
+                                <div class="diagram">
+                                    <!-- TikZ placeholder: Gamma = 9pi/4 -->
+                                    <div class="image-placeholder" role="img" aria-label="Diagram showing angle gamma equals 9 pi over 4 in standard position in Quadrant I">
+                                        [Diagram: γ = 9π/4 in standard position]
+                                    </div>
+                                </div>
+                                <div class="diagram">
+                                    <!-- TikZ placeholder: Phi = -5pi/2 -->
+                                    <div class="image-placeholder" role="img" aria-label="Diagram showing angle phi equals negative 5 pi over 2 in standard position on the negative y-axis">
+                                        [Diagram: φ = -5π/2 in standard position]
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <p>It is worth mentioning that we could have plotted the angles in the above examples by first converting them to degree measure and following the procedure set forth by using coterminal angles. While converting back and forth from degrees and radians is certainly a good skill to have, it is best that you learn to 'think in radians' as well as you can 'think in degrees'.</p>
+
+        <p>Since one revolution counter-clockwise measures 360° and the same angle measures 2π radians, we can use the proportion (2π radians)/(360°), or its reduced equivalent, (π radians)/(180°), as the conversion factor between the two systems. For example, to convert 60° to radians we find 60° × (π radians/180°) = π/3 radians, or simply π/3. To convert from radian measure back to degrees, we multiply by the ratio (180°)/(π radian). For example, -5π/6 radians is equal to (-5π/6 radians) × (180°/π radians) = -150°.</p>
+
+        <div class="conversion-box">
+            <h3>Degree-Radian Conversions</h3>
+            <table>
+                <tr>
+                    <th>Degree → Radian</th>
+                    <th>Radian → Degree</th>
+                </tr>
+                <tr>
+                    <td>
+                        <p><strong>Multiply by:</strong></p>
+                        <p style="font-size: 1.3em; text-align: center;">π/180°</p>
+                    </td>
+                    <td>
+                        <p><strong>Multiply by:</strong></p>
+                        <p style="font-size: 1.3em; text-align: center;">180°/π</p>
+                    </td>
+                </tr>
+            </table>
+            <p><strong>Important:</strong> Treat π like a variable. Do not compute it.</p>
+        </div>
+
+        <div class="example">
+            <div class="example-problem">
+                <h3>Example</h3>
+                <p>Convert the following from Degree measure to Radian measure. Then plot them in standard form.</p>
+                <ol>
+                    <li>135°</li>
+                    <li>60°</li>
+                    <li>-320°</li>
+                </ol>
+            </div>
+            
+            <button class="solution-header" onclick="toggleSolution(this)" aria-expanded="false">
+                <span class="toggle-arrow">▼</span>
+                <span>Solution</span>
+            </button>
+            
+            <div class="example-content">
+                <div class="solution">
+                    <ol>
+                        <li>
+                            <p>To convert 135° into Radian we need to multiply by our conversion factor of π/180°. Remember you want to treat π as if it was a variable, and don't actual compute the value right now. It is important to note that the degree symbol reduces itself out, since we have a degree in both the numerator and denominator.</p>
+                            <p style="text-align: center;">135° · π/180° = (135°π)/(180°) = 3π/4 radians</p>
+                            
+                            <!-- TikZ placeholder: 135 degrees -->
+                            <div class="image-placeholder" role="img" aria-label="Diagram showing 135 degrees or 3 pi over 4 radians in standard position in Quadrant II">
+                                [Diagram: 135° = 3π/4]
+                            </div>
+                            
+                            <p>If you look at the graph notice how the denominator of the radian is the number of sections that it breaks the top section of the graph into. This is because 180° = π try to think of it as a pizza. We want to have 3 of those four slices that it just split that area into. If we moved just one "slice" we'd end up on that dotted line in quadrant I, and if we wanted two "slices" we'd have the terminal side of our angle on the y-axis. Hence when we move to that third "slice" we end up in the second quadrant.</p>
+                        </li>
+                        <li>
+                            <p>To convert 60° we take the same approach</p>
+                            <p style="text-align: center;">60° · π/180° = (60°π)/(180°) = π/3 radians</p>
+                            
+                            <!-- TikZ placeholder: 60 degrees -->
+                            <div class="image-placeholder" role="img" aria-label="Diagram showing 60 degrees or pi over 3 radians in standard position in Quadrant I">
+                                [Diagram: 60° = π/3]
+                            </div>
+                            
+                            <p>Notice how in this one, we "cut" π into three equal pieces, and then since the numerator was one, we put the terminal side of the angle at that first marker.</p>
+                        </li>
+                        <li>
+                            <p>Lastly to convert -320°</p>
+                            <p style="text-align: center;">-320° · π/180° = (-320°π)/(180°) = -16π/9 radians</p>
+                            
+                            <!-- TikZ placeholder: -320 degrees -->
+                            <div class="image-placeholder" role="img" aria-label="Diagram showing negative 320 degrees or negative 16 pi over 9 radians in standard position">
+                                [Diagram: -320° = -16π/9]
+                            </div>
+                            
+                            <p>For this one, we needed 9 divisions of π both positive and negative giving us 18 divisions total, and we needed to move clockwise since it was negative 16 of those divisions, which actually would be the same as 2π/9.</p>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="example">
+            <div class="example-problem">
+                <h3>Example</h3>
+                <p>Convert the following radian measure into degrees.</p>
+                <ol>
+                    <li>π/5</li>
+                    <li>5π/3</li>
+                </ol>
+            </div>
+            
+            <button class="solution-header" onclick="toggleSolution(this)" aria-expanded="false">
+                <span class="toggle-arrow">▼</span>
+                <span>Solution</span>
+            </button>
+            
+            <div class="example-content">
+                <div class="solution">
+                    <ol>
+                        <li>
+                            <p>To convert a radian into a degree we flip our conversion factor over to multiply by 180°/π</p>
+                            <p style="text-align: center;">π/5 · 180°/π = (180°π)/(5π) = 180°/5 = 36°</p>
+                        </li>
+                        <li>
+                            <p>Once again multiply by the conversion factor.</p>
+                            <p style="text-align: center;">5π/3 · 180°/π = (180° · 5π)/(3π) = 900°/3 = 300°</p>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="subsection-title">Applications of Radian Measure: Circular Motion</h2>
+
+        <p>Now that we have paired angles with real numbers via radian measure, a whole world of applications awaits us. Our first excursion into this realm comes by way of circular motion. Suppose an object is moving as pictured below along a circular path of radius <em>r</em> from the point P to the point Q in an amount of time <em>t</em>.</p>
+
+        <!-- TikZ placeholder: Circular motion diagram -->
+        <div class="image-placeholder" role="img" aria-label="Diagram showing circular motion with radius r, arc length s, angle theta, point P at the start and point Q at the end">
+            [Diagram: Circular Motion from P to Q]
+        </div>
+
+        <p>Here <em>s</em> represents a <em>displacement</em> so that s &gt; 0 means the object is traveling in a counter-clockwise direction and s &lt; 0 indicates movement in a clockwise direction. Note that with this convention the formula we used to define radian measure, namely θ = s/r, still holds since a negative value of s incurred from a clockwise displacement matches the negative we assign to θ for a clockwise rotation.</p>
+
+        <p>In Physics, the <strong>average velocity</strong> of the object, denoted v̄ and read as 'v-bar', is defined as the average rate of change of the position of the object with respect to time. As a result, we have v̄ = displacement/time = s/t. The quantity v̄ has units of length/time and conveys two ideas: the direction in which the object is moving and how fast the position of the object is changing. The contribution of direction in the quantity v̄ is either to make it positive (in the case of counter-clockwise motion) or negative (in the case of clockwise motion), so that the quantity |v̄| quantifies how fast the object is moving - it is the <strong>speed</strong> of the object. Measuring θ in radians we have θ = s/r thus s = rθ and</p>
+
+        <p style="text-align: center;">v̄ = s/t = rθ/t = r · θ/t</p>
+
+        <p>The quantity θ/t is called the <strong>average angular velocity</strong> of the object. It is denoted by ω̄ and is read 'omega-bar'. The quantity ω̄ is the average rate of change of the angle θ with respect to time and thus has units radians/time. If ω̄ is constant throughout the duration of the motion, then it can be shown that the average velocities involved, namely v̄ and ω̄, are the same as their instantaneous counterparts, v and ω, respectively. In this case, v is simply called the 'velocity' of the object and is the instantaneous rate of change of the position of the object with respect to time. Similarly, ω is called the 'angular velocity' and is the instantaneous rate of change of the angle with respect to time.</p>
+
+        <p>If the path of the object were 'uncurled' from a circle to form a line segment, then the velocity of the object on that line segment would be the same as the velocity on the circle. For this reason, the quantity v is often called the <em>linear</em> velocity of the object in order to distinguish it from the <em>angular</em> velocity, ω. Putting together the ideas of the previous paragraph, we get the following.</p>
+
+        <div class="definition-box">
+            <h3>Velocity for Circular Motion:</h3>
+            <p>For an object moving on a circular path of radius <em>r</em> with constant angular velocity ω, the (linear) velocity of the object is given by <strong>v = rω</strong>.</p>
+        </div>
+
+        <p>We need to talk about units here. The units of v are length/time, the units of r are length only, and the units of ω are radians/time. Thus the left hand side of the equation v = rω has units length/time, whereas the right hand side has units length · radians/time = length · radians/time. The supposed contradiction in units is resolved by remembering that radians are a dimensionless quantity and angles in radian measure are identified with real numbers so that the units length · radians/time reduce to the units length/time. We are long overdue for an example.</p>
+
+        <div class="example">
+            <div class="example-problem">
+                <h3>Example</h3>
+                <p>Assuming that the surface of the Earth is a sphere, any point on the Earth can be thought of as an object traveling on a circle which completes one revolution in (approximately) 24 hours. The path traced out by the point during this 24 hour period is the Latitude of that point. Lakeland Community College is at 41.628° north latitude, and it can be shown that the radius of the earth at this Latitude is approximately 2960 miles. Find the linear velocity, in miles per hour, of Lakeland Community College as the world turns.</p>
+            </div>
+            
+            <button class="solution-header" onclick="toggleSolution(this)" aria-expanded="false">
+                <span class="toggle-arrow">▼</span>
+                <span>Solution</span>
+            </button>
+            
+            <div class="example-content">
+                <div class="solution">
+                    <p>To use the formula v = rω, we first need to compute the angular velocity ω. The earth makes one revolution in 24 hours, and one revolution is 2π radians, so ω = (2π radians)/(24 hours) = π/(12 hours), where, once again, we are using the fact that radians are real numbers and are dimensionless. (For simplicity's sake, we are also assuming that we are viewing the rotation of the earth as counter-clockwise so ω &gt; 0.) Hence, the linear velocity is</p>
+                    <p style="text-align: center;">v = 2960 miles · π/(12 hours) ≈ 775 miles/hour</p>
+                </div>
+            </div>
+        </div>
+
+        <p>It is worth noting that the quantity (1 revolution)/(24 hours) in the above example is called the <strong>ordinary frequency</strong> of the motion and is usually denoted by the variable <em>f</em>. The ordinary frequency is a measure of how often an object makes a complete cycle of the motion. The fact that ω = 2πf suggests that ω is also a frequency. Indeed, it is called the <strong>angular frequency</strong> of the motion. On a related note, the quantity T = 1/f is called the <strong>period</strong> of the motion and is the amount of time it takes for the object to complete one cycle of the motion. In the scenario of the previous example, the period of the motion is 24 hours, or one day.</p>
+
+        <p>The concepts of frequency and period help frame the equation v = rω in a new light. That is, if ω is fixed, points which are farther from the center of rotation need to travel faster to maintain the same angular frequency since they have farther to travel to make one revolution in one period's time. The distance of the object to the center of rotation is the radius of the circle, r, and is the 'magnification factor' which relates ω and v. We will have more to say about frequencies and periods in a future section. While we have exhaustively discussed velocities associated with circular motion, we have yet to discuss a more natural question: if an object is moving on a circular path of radius r with a fixed angular velocity (frequency) ω, what is the position of the object at time t? The answer to this question is the very heart of Trigonometry and is answered in the next section.</p>
+
+        <h2>Exercises</h2>
+
+        <p><strong>In Exercises 1-4, convert the angles into the DMS system. Round each of your answers to the nearest second.</strong></p>
+        <ol>
+            <li>63.75°</li>
+            <li>200.325°</li>
+            <li>-317.06°</li>
+            <li>179.999°</li>
+        </ol>
+
+        <p><strong>In Exercises 5-8, convert the angles into decimal degrees. Round each of your answers to three decimal places.</strong></p>
+        <ol start="5">
+            <li>125°50'</li>
+            <li>-32°10'12''</li>
+            <li>502°35'</li>
+            <li>237°58'43''</li>
+        </ol>
+
+        <p><strong>In Exercises 9-28, graph the oriented angle in standard position. Classify each angle according to where its terminal side lies and then give two coterminal angles, one of which is positive and the other negative.</strong></p>
+        <ol start="9">
+            <li>330°</li>
+            <li>-135°</li>
+            <li>120°</li>
+            <li>405°</li>
+            <li>-270°</li>
+            <li>5π/6</li>
+            <li>-11π/3</li>
+            <li>5π/4</li>
+            <li>3π/4</li>
+            <li>-π/3</li>
+            <li>7π/2</li>
+            <li>π/4</li>
+            <li>-π/2</li>
+            <li>7π/6</li>
+            <li>-5π/3</li>
+            <li>3π</li>
+            <li>-2π</li>
+            <li>-π/4</li>
+            <li>15π/4</li>
+            <li>-13π/6</li>
+        </ol>
+
+        <p><strong>In Exercises 29-36, convert the angle from degree measure into radian measure, giving the exact value in terms of π.</strong></p>
+        <ol start="29">
+            <li>0°</li>
+            <li>240°</li>
+            <li>135°</li>
+            <li>-270°</li>
+            <li>-315°</li>
+            <li>150°</li>
+            <li>45°</li>
+            <li>-225°</li>
+        </ol>
+
+        <p><strong>In Exercises 37-44, convert the angle from radian measure into degree measure.</strong></p>
+        <ol start="37">
+            <li>π</li>
+            <li>-2π/3</li>
+            <li>7π/6</li>
+            <li>11π/6</li>
+            <li>π/3</li>
+            <li>5π/3</li>
+            <li>-π/6</li>
+            <li>π/2</li>
+        </ol>
+
+        <p><strong>In Exercises 45-49, sketch the oriented arc on the Unit Circle which corresponds to the given real number.</strong></p>
+        <ol start="45">
+            <li>t = 5π/6</li>
+            <li>t = -π</li>
+            <li>t = 6</li>
+            <li>t = -2</li>
+            <li>t = 12</li>
+        </ol>
+
+        <ol start="50">
+            <li>A yo-yo which is 2.25 inches in diameter spins at a rate of 4500 revolutions per minute. How fast is the edge of the yo-yo spinning in miles per hour? Round your answer to two decimal places.</li>
+            <li>How many revolutions per minute would the yo-yo in exercise 50 have to complete if the edge of the yo-yo is to be spinning at a rate of 42 miles per hour? Round your answer to two decimal places.</li>
+            <li>In the yo-yo trick 'Around the World,' the performer throws the yo-yo so it sweeps out a vertical circle whose radius is the yo-yo string. If the yo-yo string is 28 inches long and the yo-yo takes 3 seconds to complete one revolution of the circle, compute the speed of the yo-yo in miles per hour. Round your answer to two decimal places.</li>
+            <li>A computer hard drive contains a circular disk with diameter 2.5 inches and spins at a rate of 7200 RPM (revolutions per minute). Find the linear speed of a point on the edge of the disk in miles per hour.</li>
+            <li>A rock got stuck in the tread of my tire and when I was driving 70 miles per hour, the rock came loose and hit the inside of the wheel well of the car. How fast, in miles per hour, was the rock traveling when it came out of the tread? (The tire has a diameter of 23 inches.)</li>
+            <li>The Giant Wheel at Cedar Point is a circle with diameter 128 feet which sits on an 8 foot tall platform making its overall height is 136 feet. It completes two revolutions in 2 minutes and 7 seconds. Assuming the riders are at the edge of the circle, how fast are they traveling in miles per hour?</li>
+        </ol>
+
+    </div>
+
+    <script>
+        function toggleSolution(button) {
+            const content = button.nextElementSibling;
+            const arrow = button.querySelector('.toggle-arrow');
+            const isOpen = content.classList.contains('open');
+            
+            if (isOpen) {
+                content.classList.remove('open');
+                arrow.classList.remove('open');
+                button.setAttribute('aria-expanded', 'false');
+            } else {
+                content.classList.add('open');
+                arrow.classList.add('open');
+                button.setAttribute('aria-expanded', 'true');
+            }
+        }
+    </script>
+</body>
+</html>
 
 
             

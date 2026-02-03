@@ -32,224 +32,380 @@
         <div class="container">
         <h1>Chapter 1.1: Functions & Graphs</h1>
 
-        <div class="intro-section">
-
-
-          
-        </div>
-
-        <div class="definition-box">
-            <h2>Definition: Percent</h2>
-            <p>The word <strong>Percent</strong> literally means "per 100" or "parts per hundred." If we have a <em>part</em> that is some <em>percent</em> of a <em>whole</em>, then:</p>
-            <div class="equation">
-                $$\text{percent} = \frac{\text{part}}{\text{whole}} \times 100\%$$
-            </div>
-            <p>Equivalently:</p>
-            <div class="equation">
-                $$\text{part} = \frac{\text{percent}}{100\%} \times \text{whole}$$
-            </div>
-        </div>
-
-        <!-- Example 1 -->
-        <div class="example">
-            <div class="example-problem">
-                <h3>Example 1: Finding a Percentage</h3>
-                <p>In a study, 243 people out of 400 people state that they like dogs. What percent of people like dogs?</p>
-            </div>
-            <button class="solution-header" onclick="toggleExample(this)">
-                <span class="toggle-arrow">▼</span>
-                <span>Show Solution</span>
-            </button>
-            <div class="example-content">
-                <div class="solution">
-                    <h4>Solution</h4>
-                    $$\text{percent} = \frac{\text{part}}{\text{whole}} \times 100\%$$
-                    $$\text{percent} = \frac{243}{400} \times 100\%$$
-                    $$\text{percent} = 0.6075 \times 100\%$$
-                    $$\text{percent} = 60.75\%$$
-                </div>
-            </div>
-        </div>
-
-        <!-- Example 2 -->
-        <div class="example">
-            <div class="example-problem">
-                <h3>Example 2: Converting to Percentages</h3>
-                <p>Write each of the following as a percentage:</p>
-                <ul>
-                    <li>1/4</li>
-                    <li>0.02</li>
-                    <li>2.35</li>
-                </ul>
-            </div>
-            <button class="solution-header" onclick="toggleExample(this)">
-                <span class="toggle-arrow">▼</span>
-                <span>Show Solution</span>
-            </button>
-            <div class="example-content">
-                <div class="solution">
-                    <h4>Solution</h4>
-                    <p><strong>Part 1:</strong> To convert 1/4 to a percentage, we first have to turn it into a decimal, which is 0.25. Then, we multiply the decimal by 100% to get:</p>
-                    $$0.25 \times 100\% = 25\%$$
-
-                    <p><strong>Part 2:</strong> To convert a decimal to a percentage we multiply by 100%:</p>
-                    $$0.02 \times 100\% = 2\%$$
-
-                    <p><strong>Part 3:</strong></p>
-                    $$2.35 \times 100\% = 235\%$$
-                </div>
-            </div>
-        </div>
-
-        <!-- Example 3 -->
-        <div class="example">
-            <div class="example-problem">
-                <h3>Example 3: Converting Percentages to Decimals</h3>
-                <p>Write each percentage as a decimal:</p>
-                <ul>
-                    <li>1.25%</li>
-                    <li>0.02%</li>
-                    <li>52.3%</li>
-                </ul>
-            </div>
-            <button class="solution-header" onclick="toggleExample(this)">
-                <span class="toggle-arrow">▼</span>
-                <span>Show Solution</span>
-            </button>
-            <div class="example-content">
-                <div class="solution">
-                    <h4>Solution</h4>
-                    <p>To convert a percentage to a decimal, we divide each percentage by 100%:</p>
-                    $$\frac{1.25\%}{100\%} = 0.0125$$
-                    $$\frac{0.02\%}{100\%} = 0.0002$$
-                    $$\frac{52.3\%}{100\%} = 0.523$$
-                </div>
-            </div>
-        </div>
-
-        <!-- Example 4 -->
-        <div class="example">
-            <div class="example-problem">
-                <h3>Example 4: Calculating Sales Tax</h3>
-                <p>The sales tax in a town is 9.4%. How much tax will you pay on a $140 purchase?</p>
-            </div>
-            <button class="solution-header" onclick="toggleExample(this)">
-                <span class="toggle-arrow">▼</span>
-                <span>Show Solution</span>
-            </button>
-            <div class="example-content">
-                <div class="solution">
-                    <h4>Solution</h4>
-                    <p>We are looking to find the part that makes up 9.4% of the whole of $140. First, we will need to convert our percent to a decimal: 9.4% ÷ 100% = 0.094. Then, we multiply the whole by the decimal to get the part.</p>
-                    $$\$140 \times 0.094 = \$13.16$$
-                </div>
-            </div>
-        </div>
-
-        <!-- Example 5 -->
-        <div class="example">
-            <div class="example-problem">
-                <h3>Example 5: Finding a Percent Increase</h3>
-                <p>In the News you hear, "tuition is expected to increase by 7% next year." If tuition this year was $1,200 per quarter, what will the cost of tuition be next year?</p>
-            </div>
-            <button class="solution-header" onclick="toggleExample(this)">
-                <span class="toggle-arrow">▼</span>
-                <span>Show Solution</span>
-            </button>
-            <div class="example-content">
-                <div class="solution">
-                    <h4>Solution</h4>
-                    <p>First we need to find the annual tuition. If the tuition is $1,200 a quarter, that means it is 4($1,200) = $4,800 a year. Next to find a 7% increase, it is really 107% because you already pay 100% of the tuition and an increase would be added to that amount. Thus next year's annual tuition would be:</p>
-                    $$\$4,800(1.07) = \$5,136$$
-                    <p>Which would be an increase of $5,136 - $4,800 = $336 annually or $336 ÷ 4 = $84 quarterly.</p>
-
-                    <p><strong>Alternative Method:</strong> This could also be solved by finding the increase first and then adding it to the initial amount:</p>
-                    $$\text{Increase: } \$4,800 \times \frac{7\%}{100\%} = \$336$$
-                    $$\text{Total: } \$4,800 + \$336 = \$5,136$$
-                </div>
-            </div>
-        </div>
-
-        <div class="divider"></div>
-
-        <div class="try-it">
-            <h3>Try It!</h3>
-            <p>A TV originally priced at $799 is on sale for 30% off. What is the price after the discount?</p>
-        </div>
-
-        <div class="divider"></div>
-
-        <div class="definition-box">
-            <h2>Definition: Percent Change</h2>
-            <p>Given two quantities:</p>
-            <ul>
-                <li><strong>Absolute Change</strong> = |starting quantity - ending quantity|</li>
-                <li><strong>Relative Change</strong> = (Absolute Change / starting quantity) × 100%</li>
-            </ul>
-            <p>Absolute change has the same units as the original quantity, and should always be positive. Relative change is the percent change. It is a percent increase if the ending quantity is larger than the starting quantity, and a percent decrease if the starting number is lower than the ending quantity. The starting quantity is called the <strong>base</strong> of the percent change.</p>
-        </div>
-
-        <!-- Example 6 -->
-        <div class="example">
-            <div class="example-problem">
-                <h3>Example 6: Calculating Percent Decrease</h3>
-                <p>The value of a car dropped from $7,400 to $6,800 over the last year. What is the percent decrease?</p>
-            </div>
-            <button class="solution-header" onclick="toggleExample(this)">
-                <span class="toggle-arrow">▼</span>
-                <span>Show Solution</span>
-            </button>
-            <div class="example-content">
-                <div class="solution">
-                    <h4>Solution</h4>
-                    <p>Using the relative change formula:</p>
-                    $$\frac{|\$7,400 - \$6,800|}{\$7,400} \times 100\%$$
-                    $$\frac{|\$600|}{\$7,400} \times 100\%$$
-                    $$0.081 \times 100\%$$
-                    $$8.1\%$$
-                    <p>The value of the vehicle has decreased by 8.1% over the last year.</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Example 7 -->
-        <div class="example">
-            <div class="example-problem">
-                <h3>Example 7: Compound Percent Changes</h3>
-                <p>Suppose a stock drops in value by 60% one week, then increases in value the next week by 75%. Is the value higher or lower than where it started?</p>
-            </div>
-            <button class="solution-header" onclick="toggleExample(this)">
-                <span class="toggle-arrow">▼</span>
-                <span>Show Solution</span>
-            </button>
-            <div class="example-content">
-                <div class="solution">
-                    <h4>Solution</h4>
-                    <p>To answer this question, suppose the value started at $100. After one week the value dropped 60%:</p>
-                    $$\$100 - \$100(0.60) = \$100 - \$60 = \$40$$
-                    <p>In the next week, notice that the base of the percentage has changed from $100 to $40. Computing the 75% increase:</p>
-                    $$\$40 + \$40(0.75) = \$40 + \$30 = \$70$$
-                    <p>In the end, the stock is lower than where it started. To be exact, it is $\frac{|100 - 70|}{100} \times 100\% = \frac{30}{100} \times 100\% = 30\%$. Thus the total change over time was a 30% decrease.</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="divider"></div>
-
-        <div class="try-it">
-            <h3>Try It!</h3>
-            <p>The U.S. federal debt at the end of 2001 was $5.77 trillion, and grew to be $6.20 trillion by the end of 2002. At the end of 2005 it was $7.91 trillion, and grew to be $8.45 trillion by the end of 2006. Calculate the relative change for 2001-2002 and 2005-2006. Which year(s) saw the larger increase in federal debt?</p>
-        </div>
-     <nav aria-label="Page navigation">
-  <div class="page-navigation">
-    <div class="page-navigation" style="display:flex; justify-content:space-between; margin-top:40px;">
-        
-        <a href="MTH154CH1_2.html" class="nav-button" aria-label="Go to next section">Next &rarr;</a>
+  <div class="container">
+    <h1>1.1 Relations & Functions</h1>
+    
+    <p>In mathematics we use a variety of different equations, formulas, and graphical representations to help explain phenomena that happens in the real world. Sometimes those phenomena involves more than one type of quantity, and we are trying to decide if there is some type of relationship between the two quantities, this is known as a <strong class="blue-text">relation</strong>. An example would be the relationship between the amount of interest accumulated in a bank account over a specific amount of time.</p>
+    
+    <p>The equation \(I=prt\) which is the simple interest formula, can look like \(I=\$1000t\), this equation would be an example of a <strong class="blue-text">function</strong>.</p>
+    
+    <div class="definition-box">
+        <h3>Function</h3>
+        <p>A <strong class="blue-text">relation</strong> <em>f</em>, from set A to a set B is a <strong class="blue-text">function</strong> if the x-value(input) does not repeat. In more technical terms if for every input there is only one output(y-value).</p>
     </div>
-  </div>
-</nav>
-
+    
+    <h3>Example</h3>
+    <p>If we were to look at the mapping below, which relates the time of day to the temperature in degree Fahrenheit:</p>
+    
+    <!--holder-->
+    
+    <p>The mapping above is a function as we can see each input value(yellow) is mapped to only one output value(green). Additionally we can identify the ordered pairs that would represent this function. The starting place is the x-value(input) and the ending place is the y-value(output), which would produce the set:</p>
+    
+    <p>\[\{(1,65),(2,56),(3,32)\}\]</p>
+    
+    <p>We use {} to denote sets, the curly brackets mean that everything between them belongs to one set. When it comes to writing sets there are a number of ways that we can do that:</p>
+    
+    <div class="definition-box">
+        <h3>Different Ways to Represent Sets</h3>
+        
+        <p><strong>1.) Verbally</strong> - using sentences and words to depict and input variable and an output variable.</p>
+        <p style="color: #d32f2f; font-style: italic; margin-left: 40px;">The input value x is the age of all female bodybuilders, and the output value y is their average body fat percentage.</p>
+        
+        <p><strong>2.) Numerically</strong> - This could be done using a table like format, or a mapping like seen on the previous page.</p>
+        <table style="margin: 20px auto; max-width: 300px;">
+            <tr style="background-color: #ffebee;">
+                <th>Input</th>
+                <th>Output</th>
+            </tr>
+            <tr style="background-color: #ffebee;">
+                <td>2</td>
+                <td>3</td>
+            </tr>
+            <tr style="background-color: #ffebee;">
+                <td>2</td>
+                <td>5</td>
+            </tr>
+            <tr style="background-color: #ffebee;">
+                <td>4</td>
+                <td>6</td>
+            </tr>
+            <tr style="background-color: #ffebee;">
+                <td>5</td>
+                <td>3</td>
+            </tr>
+        </table>
+        
+        <p><strong>3.) Graphically</strong> - Where the relationship between the two sets can be seen in a graphical display where the horizontal values(x-values) are the inputs, and the vertical values(y-values) are the outputs.</p>
+        
+        <!--holder-->
+        
+        <p><strong>4.) Algebraically</strong> - this would be with an equation in two-variables.</p>
+        <p style="color: #d32f2f; font-style: italic; text-align: center;">\(y=\sqrt{x^2+3}\)</p>
+    </div>
+    
+    <h2>Examples</h2>
+    <p>Determine whether each of the examples on the previous page are functions or relations.</p>
+    
+    <div class="example">
+        <div class="example-problem">
+            <p><strong>1.)</strong> The input value x is the age of all female bodybuilders, and the output value y is their average body fat percentage.</p>
+            
+            <p style="color: #0066cc;"><strong>Relation</strong> - In this relationship, you could have two female bodybuilders that are the same age but different weights that means that one could be 33 years old and weigh 133 pounds while another one could be 33 years old and weigh 145 pounds, therefore in this case one x-value goes to two different y-values.</p>
+            
+            <p><strong>2.)</strong></p>
+            <table style="max-width: 250px;">
+                <tr>
+                    <th>Input</th>
+                    <th>Output</th>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>3</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>5</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>6</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>3</td>
+                </tr>
+            </table>
+            
+            <p style="color: #0066cc;"><strong>Relation</strong> - Once again we can see that 1 x-value maps to two y-values, which can be seen in the table because the x-value repeats.</p>
+            
+            <p><strong>3.)</strong></p>
+            
+            <!--holder-->
+            
+            <p style="color: #0066cc;"><strong>Function</strong> - By looking at the graph we can see that that each x-value only goes to one y-value. There is two x-values that go to the same y-value, but that doesn't mean it's not a function. Only the x-value cannot repeat.</p>
+            
+            <p><strong>4.)</strong> \(y=\sqrt{x^2+3}\)</p>
+            <p style="color: #0066cc;"><strong>Function</strong> - If you were to look at the graph of this function you would notice that each x-value goes to only one y-value.</p>
+        </div>
+    </div>
+    
+    <h2>Determining Functions Algebraically</h2>
+    
+    <p>Example 4 on the previous page is a great lead into what we will discuss next. How do we determine if an equation is a function algebraically?</p>
+    
+    <p>To determine this we take the algebraic equation and we solve it for the "y" variable. When it comes to functions we typically call the y-variable the <strong class="blue-text">dependent variable</strong>, because its value <em>depends</em> on the value that you plugged in or the x-value which we call the <strong class="blue-text">independent variable</strong>.</p>
+    
+    <div class="example">
+        <div class="example-problem">
+            <h3>Example</h3>
+            <p>Determine whether the following equations represent y as a function of x?</p>
+            <p>a.) \(x^2+3x-y=1\)</p>
+            <p>b.) \(x^2+y^2-2x=5\)</p>
+        </div>
+        
+        <button class="solution-header" onclick="toggleExample(this)">
+            <span class="toggle-arrow">▼</span>
+            <span>Show Solution</span>
+        </button>
+        
+        <div class="example-content">
+            <div class="solution">
+                <h4>Solution</h4>
+                
+                <p><strong>a.)</strong> If we were to solve for y in this equation we would get:</p>
+                <p>\[\begin{aligned}
+                x^2+3x-y &= 1 \\
+                y &= x^2+3x-1
+                \end{aligned}\]</p>
+                
+                <p>Notice, that regardless of what value you plug in for x only one value will come out for y, which makes this a Function.</p>
+                
+                <p><strong>b.)</strong> If we were to solve for y in this equation we would get:</p>
+                <p>\[\begin{aligned}
+                x^2+y^2-2x &= 5 \\
+                y &= \pm\sqrt{5-x^2+2x}
+                \end{aligned}\]</p>
+                
+                <p>Notice how this one differs from the previous one in the manner that for every x-value we plug in we get two y-values back out. This is because anytime you take the square root of a number you don't know if that number was negative or positive to begin with.</p>
+            </div>
+        </div>
+    </div>
+    
+    <h2>Function Notation</h2>
+    
+    <p>Once we have determined that an equation is a function, using any of the methods we just covered, we can then take and write that equation in <strong class="blue-text">Function Notation</strong>. In this notation you take and swap the <em>y</em> for \(f(x)\).</p>
+    
+    <p>The notation of \(f(x)\) does not mean <em>f</em> times \(x\), it is not an operation. What it does mean is the \(f\) is a function with variable \(x\), where x is the input variable.</p>
+    
+    <table style="margin: 30px auto; max-width: 700px; border: none;">
+        <tr style="background-color: white; border: none;">
+            <th style="border: none; background-color: white; color: #333;">Input</th>
+            <th style="border: none; background-color: white; color: #333;">Output</th>
+            <th style="border: none; background-color: white; color: #333;">Equation</th>
+        </tr>
+        <tr style="background-color: white; border: none;">
+            <td style="border: none; text-align: center;">\(x\)</td>
+            <td style="border: none; text-align: center;">\(f(x)\)</td>
+            <td style="border: none; text-align: center;">\(f(x)=x+3\)</td>
+        </tr>
+    </table>
+    
+    <p>We can use this notation to help us evaluate the function at given x-values or inputs. Lets suppose that we wanted to find \(f(0)\), \(f(-1)\), and \(f(3)\). To find these values all you have to do is plug each value into the equation where you see \(x\).</p>
+    
+    <p>\(f(0)\) <span style="margin-left: 100px;"></span> \(f(\color{red}{0}\color{black})=(\color{red}{0}\color{black})+3=3\)</p>
+    
+    <p>\(f(-1)\) <span style="margin-left: 90px;"></span> \(f(\color{red}{-1}\color{black})=(\color{red}{-1}\color{black})+3=2\)</p>
+    
+    <p>\(f(3)\) <span style="margin-left: 100px;"></span> \(f(\color{red}{3}\color{black})=(\color{red}{3}\color{black})+3=6\)</p>
+    
+    <p>Keep in mind that while \(f(x)\) is the most commonly used notation, it is not the only notation that is possible. \(f\) is simply the name of the function. A function can be named anything. Just like the variable \(x\). The assigned variable can be a number of different letters of the alphabet. For example someone could use the notation \(h(t)=-1.6t^2+2t+560\) as a representation of the height of a rocket, \(t\) seconds after it is launched.</p>
+    
+    <div class="example">
+        <div class="example-problem">
+            <h3>Example</h3>
+            <p>Let \(h(x)=-x^2+4x-5\) evaluate the function for each of the values below.</p>
+            <p>a.) \(h(-2)\) <span style="margin-left: 50px;"></span> b.) \(h(2s)\) <span style="margin-left: 50px;"></span> c.) \(h(r+2)\)</p>
+        </div>
+        
+        <button class="solution-header" onclick="toggleExample(this)">
+            <span class="toggle-arrow">▼</span>
+            <span>Show Solution</span>
+        </button>
+        
+        <div class="example-content">
+            <div class="solution">
+                <h4>Solution</h4>
+                
+                <p><strong>a.)</strong> Replace \(x\) with \(-2\) and simplify the equation.</p>
+                <p>\[\begin{aligned}
+                h(-2) &= -(-2)^2+4(-2)-5 \\
+                &= -(4)+(-8)-5 \\
+                &= -4-8-5 \\
+                &= -17
+                \end{aligned}\]</p>
+                
+                <p><strong>b.)</strong> Replace \(x\) with \(2s\) and simplify the equation.</p>
+                <p>\[\begin{aligned}
+                h(2s) &= -(2s)^2+4(2s)-5 \\
+                &= -(4s^2)+8s-5 \\
+                &= -4s^2+8s-5
+                \end{aligned}\]</p>
+                
+                <p><strong>c.)</strong> Replace \(x\) with \(r+2\) and simplify the equation.</p>
+                <p>\[\begin{aligned}
+                h(r+2) &= -(r+2)^2+4(r+2)-5 \\
+                &= -(r+2)(r+2)+4r+8-5 \\
+                &= -(r^2+4r+4)+4r+3 \\
+                &= -r^2-4r-4+4r+3 \\
+                &= -r^2-1
+                \end{aligned}\]</p>
+                
+                <p style="color: #d32f2f; font-style: italic; font-size: 0.9em;"><strong>Note:</strong> Remember that \((r+2)^2\) is not as simple as squaring the \(r\) and the \(2\) you have to multiply the polynomial by itself and use either "foil" or the "box method" to multiply out the polynomials.</p>
+            </div>
+        </div>
+    </div>
+    
+    <h2>Domain & Range</h2>
+    
+    <p>When talking about functions and relations it is important to discuss their <strong class="blue-text">domains</strong> and <strong class="blue-text">ranges</strong>. The <em>domain</em> of a function is the set of all the inputs or x-values, if a value repeats we do not write that value you twice. Whereas the <em>range</em> is the set of all the outputs or y-values. Like with domain if a value repeats we don't list that value twice.</p>
+    
+    <p>When it comes to writing a domain and a range, there are a number of different ways to do it. Lets take a look at some examples.</p>
+    
+    <div class="example">
+        <div class="example-problem">
+            <h3>Example</h3>
+            <p>Identify the domain and range of the relations given below. Then identify if the relation is a function.</p>
+            
+            <p><strong>a.)</strong> \(\{(3,4),(4,3),(5,3),(6,2),(4,4)\}\)</p>
+            
+            <p><strong>b.)</strong> \(\{(Blue,4),(Green,5),(Yellow,4)\}\)</p>
+            
+            <p><strong>c.)</strong> The table below represents the weights of females in their 30's.</p>
+            <table style="max-width: 300px; margin: 20px auto;">
+                <tr>
+                    <th>Age</th>
+                    <th>Weight</th>
+                </tr>
+                <tr>
+                    <td>34</td>
+                    <td>135</td>
+                </tr>
+                <tr>
+                    <td>35</td>
+                    <td>145</td>
+                </tr>
+                <tr>
+                    <td>30</td>
+                    <td>125</td>
+                </tr>
+                <tr>
+                    <td>34</td>
+                    <td>145</td>
+                </tr>
+                <tr>
+                    <td>37</td>
+                    <td>155</td>
+                </tr>
+            </table>
+        </div>
+        
+        <button class="solution-header" onclick="toggleExample(this)">
+            <span class="toggle-arrow">▼</span>
+            <span>Show Solution</span>
+        </button>
+        
+        <div class="example-content">
+            <div class="solution">
+                <h4>Solution</h4>
+                
+                <p><strong>a.)</strong> <span style="color: #0066cc;">Domain:</span> \(\{3,4,5,6\}\) <span style="margin-left: 50px;"></span> <span style="color: #d32f2f;">Range:</span> \(\{2,3,4\}\)</p>
+                <p>This is a relation because the x-value of 4 is in two different relationships.</p>
+                
+                <p><strong>b.)</strong> <span style="color: #0066cc;">Domain:</span> \(\{Blue, Green, Yellow\}\) <span style="margin-left: 20px;"></span> <span style="color: #d32f2f;">Range:</span> \(\{4,5\}\)</p>
+                <p>This is a function, if you notice none of the input values go to more than one output value.</p>
+                
+                <p><strong>c.)</strong> <span style="color: #0066cc;">Domain:</span> \(\{30,34,35,37\}\) <span style="margin-left: 40px;"></span> <span style="color: #d32f2f;">Range:</span> \(\{125,135,145,155\}\)</p>
+                <p>This is a relation because the Age of 34 appears twice and goes to two different y-values or weights.</p>
+            </div>
+        </div>
+    </div>
+    
+    <p>When it comes to the domain and range of a equation algebraically, things get a bit more complicated. We will discuss this situation and how to answer those questions later on in the chapter.</p>
+    
+    <h2>Exercises</h2>
+    
+    <p>In Exercises 1 - 12, determine whether or not the relation represents \(y\) as a function of \(x\). Find the domain and range of those relations which are functions.</p>
+    
+    <ol>
+        <li>\(\{(-3, 9), (-2, 4), (-1, 1), (0, 0), (1, 1), (2, 4), (3, 9)\}\)</li>
+        <li>\(\{(-3,0), (1,6), (2, -3), (4,2), (-5,6), (4, -9), (6,2)\}\)</li>
+        <li>\(\{(-3,0), (-7,6), (5,5), (6,4), (4,9), (3,0)\}\)</li>
+        <li>\(\{(1,2), (4,4), (9,6), (16,8), (25,10), (36, 12), \ldots\}\)</li>
+        <li>\(\{(x, y) | x\) is an odd integer, and \(y\) is an even integer\(\}\)</li>
+        <li>\(\{(x, 1) | x\) is an irrational number\(\}\)</li>
+        <li>\(\{(1, 0), (2, 1), (4, 2), (8, 3), (16, 4), (32, 5), \ldots\}\)</li>
+        <li>\(\{\ldots, (-3, 9), (-2, 4), (-1, 1), (0, 0), (1, 1), (2, 4), (3, 9), \ldots\}\)</li>
+        <li>\(\{(-2, y) | -3 < y < 4\}\)</li>
+        <li>\(\{(x,3) | -2 \leq x < 4\}\)</li>
+        <li>\(\{(x,x^2) | x\) is a real number\(\}\)</li>
+        <li>\(\{(x^2,x) | x\) is a real number\(\}\)</li>
+    </ol>
+    
+    <p>In Exercises 13 - 27, determine whether or not the equation represents \(y\) as a function of \(x\), algebraically.</p>
+    
+    <ol start="13">
+        <li>\(y = x^{3} - x\)</li>
+        <li>\(y = \sqrt{x - 2}\)</li>
+        <li>\(x^{3}y = -4\)</li>
+        <li>\(x^{2} - y^{2} = 1\)</li>
+        <li>\(y = \dfrac{x}{x^{2} - 9}\)</li>
+        <li>\(x = -6\)</li>
+        <li>\(x = y^2 + 4\)</li>
+        <li>\(y = x^2 + 4\)</li>
+        <li>\(x^2 + y^2 = 4\)</li>
+        <li>\(y = \sqrt{4-x^2}\)</li>
+        <li>\(x^2 - y^2 = 4\)</li>
+        <li>\(x^3 + y^3 = 4\)</li>
+        <li>\(2x + 3y = 4\)</li>
+        <li>\(2xy = 4\)</li>
+        <li>\(x^2 = y^2\)</li>
+    </ol>
+    
+    <p>In Exercises 28-35, use the given function \(f\) to find and simplify the following:</p>
+    <ul>
+        <li>\(f(3)\)</li>
+        <li>\(f(-1)\)</li>
+        <li>\(f\left(\frac{3}{2}\right)\)</li>
+        <li>\(f(4x)\)</li>
+        <li>\(4f(x)\)</li>
+        <li>\(f(-x)\)</li>
+        <li>\(f(x-4)\)</li>
+        <li>\(f(x) - 4\)</li>
+        <li>\(f(x^2)\)</li>
+    </ul>
+    
+    <ol start="28">
+        <li>\(f(x) = 2x+1\)</li>
+        <li>\(f(x) = 3 - 4x\)</li>
+        <li>\(f(x) = 2 - x^2\)</li>
+        <li>\(f(x) = x^2 - 3x + 2\)</li>
+        <li>\(f(x) = \dfrac{x}{x-1}\)</li>
+        <li>\(f(x) = \dfrac{2}{x^{3}}\)</li>
+        <li>\(f(x) = 6\)</li>
+        <li>\(f(x) = 0\)</li>
+    </ol>
+    
+    <p>In Exercises 36 - 43 determine whether or not the relation represents \(y\) as a function of \(x\). Find the domain and range of each.</p>
+    
+    <ol start="36">
+        <li><!--holder--></li>
+        <li><!--holder--></li>
+        <li><!--holder--></li>
+        <li><!--holder--></li>
+        <li><!--holder--></li>
+        <li><!--holder--></li>
+        <li><!--holder--></li>
+        <li><!--holder--></li>
+    </ol>
+    
 </div>
+
+
+
+
+
+
+            
 <script>
         function toggleExample(button) {
             const content = button.nextElementSibling;

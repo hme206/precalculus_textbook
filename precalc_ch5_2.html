@@ -40,55 +40,60 @@
         
         <p>In section 5.1, we introduced circular motion and derived a formula which describes the linear velocity of an object moving on a circular path at a constant angular velocity. One of the goals of this section is describe the <em>position</em> of such an object. To that end, consider an angle \(\theta\) in standard position and let \(P\) denote the point where the terminal side of \(\theta\) intersects the Unit Circle. By associating the point \(P\) with the angle \(\theta\), we are assigning a <strong>position</strong> on the Unit Circle to the angle \(\theta\). The \(x\)-coordinate of \(P\) is called the <strong>cosine</strong> of \(\theta\), written \(\cos(\theta)\), while the \(y\)-coordinate of \(P\) is called the <strong>sine</strong> of \(\theta\), written \(\sin(\theta)\).</p>
 
-   <svg 
+ <svg 
     viewBox="-4 -4 8 8" 
     role="img" 
-    aria-labelledby="unitCircleSVGtitle unitCircleSVGdesc" 
+    aria-labelledby="unitCircleTitle unitCircleDesc" 
     xmlns="http://www.w3.org/2000/svg"
     width="400" height="400">
 
-  <title id="unitCircleSVGtitle">Unit Circle with Angle &#x03B8; and Point P</title>
-  <desc id="unitCircleSVGdesc">
+  <title id="unitCircleTitle">Unit Circle with Angle &#x03B8; and Point P</title>
+  <desc id="unitCircleDesc">
     A unit circle centered at the origin with axes drawn. The angle theta is shown
     in the first quadrant. A point P(cos(theta), sin(theta)) lies on the unit circle.
     The circle, axes, angle arc, point, and coordinate labels are shown.
   </desc>
 
-  <!-- axes with arrowheads -->
-  <defs>
-    <marker id="arrow" markerWidth="4" markerHeight="4" refX="0" refY="2" orient="auto">
-      <path d="M0,0 L0,4 L4,2 Z" fill="#000"/>
-    </marker>
-  </defs>
-  <line x1="-3.5" y1="0" x2="3.5" y2="0" stroke="#000" stroke-width="0.05" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
-  <line x1="0" y1="-3.5" x2="0" y2="3.5" stroke="#000" stroke-width="0.05" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  <!-- Flip y-axis for math coordinates -->
+  <g transform="scale(1,-1)">
 
-  <!-- unit circle -->
-  <circle cx="0" cy="0" r="2" stroke="gray" stroke-width="0.05" fill="none"/>
+    <!-- axes with arrowheads -->
+    <defs>
+      <marker id="arrow" markerWidth="4" markerHeight="4" refX="0" refY="2" orient="auto">
+        <path d="M0,0 L0,4 L4,2 Z" fill="#000"/>
+      </marker>
+    </defs>
 
-  <!-- angle arc in first quadrant -->
-  <path d="M2,0 A2,2 0 0,1 1.4142,1.4142" stroke="red" stroke-width="0.1" fill="none"/>
-  <text x="1.2" y="0.6" font-family="IBM Plex Sans" font-size="0.5" fill="red">&#x03B8;</text>
+    <line x1="-3.5" y1="0" x2="3.5" y2="0" stroke="#000" stroke-width="0.05" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+    <line x1="0" y1="-3.5" x2="0" y2="3.5" stroke="#000" stroke-width="0.05" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
 
-  <!-- radius to point P -->
-  <line x1="0" y1="0" x2="1.4142" y2="1.4142" stroke="blue" stroke-width="0.08"/>
+    <!-- unit circle -->
+    <circle cx="0" cy="0" r="2" stroke="gray" stroke-width="0.05" fill="none"/>
 
-  <!-- point P -->
-  <circle cx="1.4142" cy="-1.4142" r="0.08" fill="#000"/>
-  <text x="1.5" y="-1.6" font-family="IBM Plex Sans" font-size="0.4" text-anchor="start">
-    P(cos(&#x03B8;), sin(&#x03B8;))
-  </text>
+    <!-- angle arc in first quadrant -->
+    <path d="M2,0 A2,2 0 0,1 1.4142,1.4142" stroke="red" stroke-width="0.1" fill="none"/>
+    <text x="1.2" y="0.6" font-family="IBM Plex Sans" font-size="0.5" fill="red" transform="scale(1,-1)">θ</text>
 
-  <!-- mark (1,0) and (0,1) -->
-  <circle cx="2" cy="0" r="0.08" fill="#000"/>
-  <circle cx="0" cy="-2" r="0.08" fill="#000"/>
-  <text x="2" y="-0.15" font-family="IBM Plex Sans" font-size="0.4" text-anchor="middle">1</text>
-  <text x="-0.15" y="-2" font-family="IBM Plex Sans" font-size="0.4" text-anchor="end">1</text>
+    <!-- radius to point P -->
+    <line x1="0" y1="0" x2="1.4142" y2="1.4142" stroke="blue" stroke-width="0.08"/>
 
-  <!-- axis labels -->
-  <text x="3.6" y="0.15" font-family="IBM Plex Sans" font-size="0.5" text-anchor="start">x</text>
-  <text x="0.15" y="3.6" font-family="IBM Plex Sans" font-size="0.5" text-anchor="start">y</text>
+    <!-- point P -->
+    <circle cx="1.4142" cy="1.4142" r="0.08" fill="#000"/>
+    <text x="1.5" y="1.6" font-family="IBM Plex Sans" font-size="0.4" text-anchor="start" transform="scale(1,-1)">
+      P(cos(&#x03B8;), sin(&#x03B8;))
+    </text>
 
+    <!-- mark (1,0) and (0,1) -->
+    <circle cx="2" cy="0" r="0.08" fill="#000"/>
+    <circle cx="0" cy="2" r="0.08" fill="#000"/>
+    <text x="2" y="-0.15" font-family="IBM Plex Sans" font-size="0.4" text-anchor="middle" transform="scale(1,-1)">1</text>
+    <text x="-0.15" y="-2" font-family="IBM Plex Sans" font-size="0.4" text-anchor="end" transform="scale(1,-1)">1</text>
+
+    <!-- axis labels -->
+    <text x="3.6" y="0.15" font-family="IBM Plex Sans" font-size="0.5" text-anchor="start" transform="scale(1,-1)">x</text>
+    <text x="0.15" y="3.6" font-family="IBM Plex Sans" font-size="0.5" text-anchor="start" transform="scale(1,-1)">y</text>
+
+  </g>
 </svg>
 
         <!-- Example: Find cosine and sine -->

@@ -38,60 +38,56 @@
     <section id="unitcircle" aria-labelledby="unit-circle-heading">
         <h2 id="unit-circle-heading">The Unit Circle</h2>
         
-        <p>In Section <span class="section-ref">angles</span>, we introduced circular motion and derived a formula which describes the linear velocity of an object moving on a circular path at a constant angular velocity. One of the goals of this section is describe the <em>position</em> of such an object. To that end, consider an angle \(\theta\) in standard position and let \(P\) denote the point where the terminal side of \(\theta\) intersects the Unit Circle. By associating the point \(P\) with the angle \(\theta\), we are assigning a <strong>position</strong> on the Unit Circle to the angle \(\theta\). The \(x\)-coordinate of \(P\) is called the <strong>cosine</strong> of \(\theta\), written \(\cos(\theta)\), while the \(y\)-coordinate of \(P\) is called the <strong>sine</strong> of \(\theta\), written \(\sin(\theta)\).</p>
+        <p>In section 5.1, we introduced circular motion and derived a formula which describes the linear velocity of an object moving on a circular path at a constant angular velocity. One of the goals of this section is describe the <em>position</em> of such an object. To that end, consider an angle \(\theta\) in standard position and let \(P\) denote the point where the terminal side of \(\theta\) intersects the Unit Circle. By associating the point \(P\) with the angle \(\theta\), we are assigning a <strong>position</strong> on the Unit Circle to the angle \(\theta\). The \(x\)-coordinate of \(P\) is called the <strong>cosine</strong> of \(\theta\), written \(\cos(\theta)\), while the \(y\)-coordinate of \(P\) is called the <strong>sine</strong> of \(\theta\), written \(\sin(\theta)\).</p>
 
-    <svg 
-    width="400" 
-    height="400" 
-    viewBox="-3 -3 6 6" 
+   <svg 
+    viewBox="-4 -4 8 8" 
     role="img" 
-    aria-labelledby="unitCircleTitle unitCircleDesc" 
-    xmlns="http://www.w3.org/2000/svg">
+    aria-labelledby="unitCircleSVGtitle unitCircleSVGdesc" 
+    xmlns="http://www.w3.org/2000/svg"
+    width="400" height="400">
 
-    <title id="unitCircleTitle">Unit Circle with Angle Theta and Point P</title>
-    <desc id="unitCircleDesc">
-        A unit circle is drawn centered at the origin with axes labeled x and y. 
-        The angle θ is shown in the first quadrant. A point P(cos(θ), sin(θ)) is plotted on the circle. 
-        The coordinates 1 on x and y axes are labeled.
-    </desc>
+  <title id="unitCircleSVGtitle">Unit Circle with Angle &#x03B8; and Point P</title>
+  <desc id="unitCircleSVGdesc">
+    A unit circle centered at the origin with axes drawn. The angle theta is shown
+    in the first quadrant. A point P(cos(theta), sin(theta)) lies on the unit circle.
+    The circle, axes, angle arc, point, and coordinate labels are shown.
+  </desc>
 
-    <!-- Axes -->
-    <line x1="-3" y1="0" x2="3" y2="0" stroke="black" stroke-width="0.05" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
-    <line x1="0" y1="-3" x2="0" y2="3" stroke="black" stroke-width="0.05" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  <!-- axes with arrowheads -->
+  <defs>
+    <marker id="arrow" markerWidth="4" markerHeight="4" refX="0" refY="2" orient="auto">
+      <path d="M0,0 L0,4 L4,2 Z" fill="#000"/>
+    </marker>
+  </defs>
+  <line x1="-3.5" y1="0" x2="3.5" y2="0" stroke="#000" stroke-width="0.05" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  <line x1="0" y1="-3.5" x2="0" y2="3.5" stroke="#000" stroke-width="0.05" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
 
-    <!-- Unit circle -->
-    <circle cx="0" cy="0" r="2" stroke="gray" stroke-width="0.05" fill="none"/>
+  <!-- unit circle -->
+  <circle cx="0" cy="0" r="2" stroke="gray" stroke-width="0.05" fill="none"/>
 
-    <!-- Angle arc -->
-    <path d="M1,0 A1,1 0 0,1 0.7071,0.7071" stroke="red" stroke-width="0.05" fill="none"/>
-    <text x="1" y="1" font-family="IBM Plex Sans" font-size="0.3em" fill="black">θ</text>
+  <!-- angle arc in first quadrant -->
+  <path d="M2,0 A2,2 0 0,1 1.4142,1.4142" stroke="red" stroke-width="0.1" fill="none"/>
+  <text x="1.2" y="0.6" font-family="IBM Plex Sans" font-size="0.5" fill="red">&#x03B8;</text>
 
-    <!-- Radius / vector to P -->
-    <line x1="0" y1="0" x2="1.4142" y2="1.4142" stroke="blue" stroke-width="0.05"/>
-    
-    <!-- Origin -->
-    <circle cx="0" cy="0" r="0.05" fill="black"/>
-    
-    <!-- Axes labels -->
-    <text x="3.1" y="0" font-family="IBM Plex Sans" font-size="0.3em" text-anchor="start">x</text>
-    <text x="0.1" y="3" font-family="IBM Plex Sans" font-size="0.3em" text-anchor="start">y</text>
+  <!-- radius to point P -->
+  <line x1="0" y1="0" x2="1.4142" y2="1.4142" stroke="blue" stroke-width="0.08"/>
 
-    <!-- Unit marks -->
-    <circle cx="2" cy="0" r="0.05" fill="black"/>
-    <circle cx="0" cy="2" r="0.05" fill="black"/>
-    <text x="2" y="-0.1" font-family="IBM Plex Sans" font-size="0.3em" text-anchor="middle">1</text>
-    <text x="-0.2" y="2" font-family="IBM Plex Sans" font-size="0.3em" text-anchor="end">1</text>
+  <!-- point P -->
+  <circle cx="1.4142" cy="1.4142" r="0.08" fill="#000"/>
+  <text x="1.5" y="1.6" font-family="IBM Plex Sans" font-size="0.4" text-anchor="start">
+    P(cos(&#x03B8;), sin(&#x03B8;))
+  </text>
 
-    <!-- Point P -->
-    <circle cx="1.4142" cy="1.4142" r="0.05" fill="black"/>
-    <text x="1.5" y="1.5" font-family="IBM Plex Sans" font-size="0.3em" text-anchor="start">P(cos(θ), sin(θ))</text>
+  <!-- mark (1,0) and (0,1) -->
+  <circle cx="2" cy="0" r="0.08" fill="#000"/>
+  <circle cx="0" cy="2" r="0.08" fill="#000"/>
+  <text x="2" y="-0.15" font-family="IBM Plex Sans" font-size="0.4" text-anchor="middle">1</text>
+  <text x="-0.15" y="2" font-family="IBM Plex Sans" font-size="0.4" text-anchor="end">1</text>
 
-    <!-- Arrowhead marker definition -->
-    <defs>
-        <marker id="arrow" markerWidth="4" markerHeight="4" refX="0" refY="2" orient="auto" markerUnits="strokeWidth">
-            <path d="M0,0 L0,4 L4,2 Z" fill="#000"/>
-        </marker>
-    </defs>
+  <!-- axis labels -->
+  <text x="3.6" y="0.15" font-family="IBM Plex Sans" font-size="0.5" text-anchor="start">x</text>
+  <text x="0.15" y="3.6" font-family="IBM Plex Sans" font-size="0.5" text-anchor="start">y</text>
 
 </svg>
 

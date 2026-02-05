@@ -117,107 +117,28 @@
                         </li>
                     </ol>
 
-<div style="display:flex; justify-content:center; gap:2rem; flex-wrap:wrap; margin:2rem 0;">
+<div class="diagram-row">
+  <div class="diagram">
+    <figure class="figure-image">
 
-  <div style="text-align:center;">
-
-  <!-- Unit Circle 1: θ = 270° -->
-  <svg viewBox="-4 -4 8 8" width="400" height="400" role="img" aria-labelledby="unitCircle270Title unitCircle270Desc" xmlns="http://www.w3.org/2000/svg">
-    <title id="unitCircle270Title">Unit Circle with Angle θ = 270°</title>
-    <desc id="unitCircle270Desc">
-      A unit circle centered at the origin. Angle θ = 270° is drawn in standard position.
-      Point P(0,-1) is shown on the circle. Marks for 1 on each axis are included.
-    </desc>
-
-    <defs>
-      <marker id="arrow1" markerWidth="4" markerHeight="4" refX="0" refY="2" orient="auto">
-        <path d="M0,0 L0,4 L4,2 Z" fill="#000"/>
-      </marker>
-    </defs>
-
-    <!-- Axes -->
-    <line x1="-3.5" y1="0" x2="3.5" y2="0" stroke="black" stroke-width="0.05" marker-start="url(#arrow1)" marker-end="url(#arrow1)"/>
-    <line x1="0" y1="-3.5" x2="0" y2="3.5" stroke="black" stroke-width="0.05" marker-start="url(#arrow1)" marker-end="url(#arrow1)"/>
-
-    <!-- Unit circle -->
-    <circle cx="0" cy="0" r="2" stroke="gray" stroke-width="0.05" fill="none"/>
-
-    <!-- Radius/vector to P -->
-    <line x1="0" y1="0" x2="0" y2="-2" stroke="blue" stroke-width="0.08"/>
-
-    <!-- Angle arc -->
-    <path d="M2,0 A2,2 0 0,0 0,-2" stroke="red" stroke-width="0.1" fill="none"/>
-    <text x="0.8" y="-0.6" font-family="IBM Plex Sans" font-size="0.5" fill="red">θ</text>
-
-    <!-- Point P -->
-    <circle cx="0" cy="-2" r="0.08" fill="black"/>
-    <text x="0.15" y="-2.15" font-family="IBM Plex Sans" font-size="0.4" font-weight="600">P(0,-1)</text>
-
-    <!-- Unit points -->
-    <circle cx="2" cy="0" r="0.08" fill="black"/>
-    <text x="2.1" y="-0.15" font-family="IBM Plex Sans" font-size="0.4" text-anchor="middle">1</text>
-    <circle cx="0" cy="2" r="0.08" fill="black"/>
-    <text x="-0.15" y="2.1" font-family="IBM Plex Sans" font-size="0.4" text-anchor="end">1</text>
-
-    <!-- Axis labels -->
-    <text x="3.6" y="-0.15" font-family="IBM Plex Sans" font-size="0.5">x</text>
-    <text x="-0.25" y="3.6" font-family="IBM Plex Sans" font-size="0.5">y</text>
-  </svg>
-
-  <!-- Unit Circle 2: θ = -180° -->
-  <svg viewBox="-4 -4 8 8" width="400" height="400" role="img" aria-labelledby="unitCircleNeg180Title unitCircleNeg180Desc" xmlns="http://www.w3.org/2000/svg">
-    <title id="unitCircleNeg180Title">Unit Circle with Angle θ = -180°</title>
-    <desc id="unitCircleNeg180Desc">
-      A unit circle centered at the origin. Angle θ = -180° is drawn in standard position.
-      Point P(-1,0) is shown on the circle. Marks for 1 on each axis are included.
-    </desc>
-
-    <defs>
-      <marker id="arrow2" markerWidth="4" markerHeight="4" refX="0" refY="2" orient="auto">
-        <path d="M0,0 L0,4 L4,2 Z" fill="#000"/>
-      </marker>
-    </defs>
-
-    <!-- Axes -->
-    <line x1="-3.5" y1="0" x2="3.5" y2="0" stroke="black" stroke-width="0.05" marker-start="url(#arrow2)" marker-end="url(#arrow2)"/>
-    <line x1="0" y1="-3.5" x2="0" y2="3.5" stroke="black" stroke-width="0.05" marker-start="url(#arrow2)" marker-end="url(#arrow2)"/>
-
-    <!-- Unit circle -->
-    <circle cx="0" cy="0" r="2" stroke="gray" stroke-width="0.05" fill="none"/>
-
-    <!-- Radius/vector to P -->
-    <line x1="0" y1="0" x2="-2" y2="0" stroke="blue" stroke-width="0.08"/>
-
-    <!-- Angle arc -->
-    <path d="M2,0 A2,2 0 0,0 -2,0" stroke="red" stroke-width="0.1" fill="none"/>
-    <text x="0" y="0.8" font-family="IBM Plex Sans" font-size="0.5" fill="red">θ</text>
-
-    <!-- Point P -->
-    <circle cx="-2" cy="0" r="0.08" fill="black"/>
-    <text x="-2.25" y="0.15" font-family="IBM Plex Sans" font-size="0.4" font-weight="600">P(-1,0)</text>
-
-    <!-- Unit points -->
-    <circle cx="2" cy="0" r="0.08" fill="black"/>
-    <text x="2.1" y="-0.15" font-family="IBM Plex Sans" font-size="0.4" text-anchor="middle">1</text>
-    <circle cx="0" cy="2" r="0.08" fill="black"/>
-    <text x="-0.15" y="2.1" font-family="IBM Plex Sans" font-size="0.4" text-anchor="end">1</text>
-
-    <!-- Axis labels -->
-    <text x="3.6" y="-0.15" font-family="IBM Plex Sans" font-size="0.5">x</text>
-    <text x="-0.25" y="3.6" font-family="IBM Plex Sans" font-size="0.5">y</text>
-  </svg>
-<div style="margin-top:0.5rem; font-family:'IBM Plex Sans'; font-size:0.9rem;">
-      Finding cos(270°) and sin(270°)
-    </div>
-  </div>
- <div style="text-align:center;">
-    <!-- SVG for θ = -180° -->
-    <svg ...> ... </svg>
-    <div style="margin-top:0.5rem; font-family:'IBM Plex Sans'; font-size:0.9rem;">
-      Finding cos(-180°) and sin(-180°)
-    </div>
+<img src="images/5_2_1.png" alt="A unit circle centered at the origin. Angle θ = 270° is drawn in standard position.
+      Point P(0,-1) is shown on the circle. Marks for 1 on each axis are included."
+        loading="lazy"
+      >
+      <figcaption>Unit Circle with Angle θ = 270°</figcaption>
+    </figure>
   </div>
 
+  <div class="diagram">
+    <figure class="figure-image">
+     <img src="images/5_2_2.png" alt="A unit circle centered at the origin. Angle θ = -180° is drawn in standard position.
+      Point P(-1,0) is shown on the circle. Marks for 1 on each axis are included."
+
+        loading="lazy"
+      >
+      <figcaption>Unit Circle with Angle θ = -180°</figcaption>
+    </figure>
+  </div>
 </div>
                     <ol start="3">
                         <li>
@@ -245,39 +166,55 @@
                         </li>
                     </ol>
 
-                    <!-- TikZ Diagrams 6 & 7: π/6 angle diagrams -->
-                    <!-- 
-                    Left diagram: Unit circle with π/6 (30°) angle
-                    - Point P(x,y) on terminal side
-                    - Dashed perpendicular to x-axis
-                    - Right angle marker
-                    - π/6 angle marked
-                    
-                    Right diagram: 30-60-90 triangle
-                    - Right triangle with x=2, y=1
-                    - Hypotenuse labeled √3
-                    - θ = π/6 = 30° marked
-                    -->
+            <div class="diagram-row">
+  <div class="diagram">
+    <figure class="figure-image">
+
+<img src="images/5_2_3.png" alt="Unit circle centered at the origin with x- and y-axes. Angle θ = 45° is drawn from the positive x-axis in the first quadrant. A blue radius vector extends from the origin to point P(x, y) on the circle. A dashed vertical line shows the x-coordinate of P, and a small square highlights the angle. Unit marks for 1 on each axis are labeled."
+        loading="lazy"
+      >
+      <figcaption>Unit Circle with Angle θ = 45°</figcaption>
+    </figure>
+  </div>
+
+  <div class="diagram">
+    <figure class="figure-image">
+     <img src="images/5_2_4.png" alt=“Right triangle with a 45° angle at the origin. The horizontal leg along the x-axis is labeled x = 1, the vertical leg along the y-axis is labeled y = 1, and the hypotenuse is labeled √2. A red arc marks the 45° angle at the origin, illustrating the triangle formed by projecting point P from the unit circle.”
+
+        loading="lazy"
+      >
+      <figcaption>Right 45° Triangle</figcaption>
+    </figure>
+  </div>
+</div>
 
                     <ol start="5">
                         <li>
                             <p>Plotting \(\theta = 60^{\circ}\) in standard position, we find it is not a quadrantal angle and set about using a triangle approach. Once again, we get a \(30^{\circ} - 60^{\circ} - 90^{\circ}\) right triangle and, after the usual computations, find \(x = \cos\left(60^{\circ}\right) = \frac{1}{2}\) and \(y = \sin\left(60^{\circ}\right) = \frac{\sqrt{3}}{2}\).</p>
                         </li>
                     </ol>
+            <div class="diagram-row">
+  <div class="diagram">
+    <figure class="figure-image">
 
-                    <!-- TikZ Diagrams 8 & 9: 60° angle diagrams -->
-                    <!-- 
-                    Left diagram: Unit circle with 60° angle
-                    - Point P(x,y) on terminal side
-                    - Dashed perpendicular to x-axis
-                    - Right angle marker
-                    - 60° angle marked
-                    
-                    Right diagram: 30-60-90 triangle
-                    - Right triangle with x=1, y=2
-                    - Hypotenuse labeled √3
-                    - θ = 60° marked
-                    -->
+<img src="images/5_2_5.png" alt="Unit circle centered at the origin with x- and y-axes. Angle θ = 30° is drawn from the positive x-axis in the first quadrant. A blue radius vector extends from the origin to point P(x, y) on the circle. A dashed vertical line shows the x-coordinate of P, and a small square highlights the angle. Unit marks for 1 on each axis are labeled."
+        loading="lazy"
+      >
+      <figcaption>Unit Circle with Angle θ = 30°</figcaption>
+    </figure>
+  </div>
+
+  <div class="diagram">
+    <figure class="figure-image">
+     <img src="images/5_2_6.png" alt=“Right triangle with a 30° angle at the origin. The horizontal leg along the x-axis is labeled x = 1, the vertical leg along the y-axis is labeled y = 2, and the hypotenuse is labeled √3. A red arc marks the 30° angle at the origin, illustrating the triangle formed by projecting point P from the unit circle.”
+
+        loading="lazy"
+      >
+      <figcaption>Right 30° Triangle</figcaption>
+    </figure>
+  </div>
+</div>
+                  
                 </div>
             </div>
         </section>
@@ -289,19 +226,27 @@
 
         <p>In Example <span class="section-ref">cosinesineviaunitcircle</span>, we determined that \(\cos\left(\frac{\pi}{6}\right) = \frac{\sqrt{3}}{2}\) and \(\sin\left( \frac{\pi}{6} \right) = \frac{1}{2}\). This means that the point on the terminal side of the angle \(\frac{\pi}{6}\), when plotted in standard position, is \(\left(\frac{\sqrt{3}}{2}, \frac{1}{2}\right)\). From the figure below, it is clear that the point \(P(x,y)\) we seek can be obtained by reflecting that point about the \(y\)-axis. Hence, \(\cos\left(\frac{5\pi}{6}\right) = -\frac{\sqrt{3}}{2}\) and \(\sin\left( \frac{5\pi}{6} \right) = \frac{1}{2}\).</p>
 
-        <!-- TikZ Diagrams 10 & 11: 5π/6 angle and symmetry -->
-        <!-- 
-        Left diagram: Unit circle with 5π/6 angle
-        - Point P(x,y) in Quadrant II
-        - Angle marked as 5π/6
-        - Green arc showing π/6 from negative x-axis
-        
-        Right diagram: Symmetry demonstration
-        - Both points P and Q shown
-        - P(-√3/2, 1/2) in Quadrant II
-        - Q(√3/2, 1/2) in Quadrant I (dashed)
-        - Both π/6 angles marked
-        -->
+                 <div class="diagram-row">
+  <div class="diagram">
+    <figure class="figure-image">
+
+<img src="images/5_2_7.png" alt="Unit circle centered at the origin with x- and y-axes. Angle θ = 60° is drawn from the positive x-axis in the first quadrant. A blue radius vector extends from the origin to point P(x, y) on the circle. A dashed vertical line shows the x-coordinate of P, and a small square highlights the angle. Unit marks for 1 on each axis are labeled."
+        loading="lazy"
+      >
+      <figcaption>Unit Circle with Angle θ = 60°</figcaption>
+    </figure>
+  </div>
+
+  <div class="diagram">
+    <figure class="figure-image">
+     <img src="images/5_2_8.png" alt=“Right triangle with a 60° angle at the origin. The horizontal leg along the x-axis is labeled x = 2, the vertical leg along the y-axis is labeled y = 1, and the hypotenuse is labeled √3. A red arc marks the 60° angle at the origin, illustrating the triangle formed by projecting point P from the unit circle.”
+
+        loading="lazy"
+      >
+      <figcaption>Right 60° Triangle</figcaption>
+    </figure>
+  </div>
+</div>
 
         <!-- Reference Angle Definition -->
         <p>In the above scenario, the angle \(\frac{\pi}{6}\) is called the <strong>reference angle</strong> for the angle \(\frac{5 \pi}{6}\). In general, for a non-quadrantal angle \(\theta\), the reference angle for \(\theta\) (usually denoted \(\alpha\)) is the <em>acute</em> angle made between the terminal side of \(\theta\) and the \(x\)-axis. If \(\theta\) is a Quadrant I or IV angle, \(\alpha\) is the angle between the terminal side of \(\theta\) and the <em>positive</em> \(x\)-axis; if \(\theta\) is a Quadrant II or III angle, \(\alpha\) is the angle between the terminal side of \(\theta\) and the <em>negative</em> \(x\)-axis.</p>

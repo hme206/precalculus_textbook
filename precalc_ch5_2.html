@@ -32,6 +32,222 @@
  <body> 
 <div id="toc-placeholder"></div>
 
+<!-- Main Content Section -->
+<main class="container">
+    
+    <p>In Section <span class="section-ref">unitcircle</span>, we generalized our six basic trigonometric functions from coordinates on the Unit Circle. But, we extend this idea out to be of any angle not just those along the Unit Circle.</p>
+
+    <!-- TikZ Diagram Placeholder -->
+    <!-- TikZ picture: Definitions of Trigonometric Functions of Any Angle
+         Contains: 
+         - Definition box with gray background
+         - Formulas for sin, cos, tan, csc, sec, cot
+         - Coordinate system diagram showing angle theta, point (x,y), and radius r
+         - Note about denominators not equaling zero
+    -->
+    
+    <div class="definition-box" role="region" aria-labelledby="trig-def-title">
+        <h3 id="trig-def-title">Definitions of Trigonometric Functions of Any Angle</h3>
+        <p>Allow \(\theta\) to be any angle in standard position such that \((x,y)\) is a point on the terminal side of the angle and \(r=\sqrt{x^2+y^2}\ne0\)</p>
+        
+        <div class="diagram-row">
+            <div class="diagram">
+                <p>\(\sin(\theta)=\dfrac{y}{r}\)</p>
+                <p>\(\csc(\theta)=\dfrac{r}{y}\)</p>
+            </div>
+            <div class="diagram">
+                <p>\(\cos(\theta)=\dfrac{x}{r}\)</p>
+                <p>\(\sec(\theta)=\dfrac{r}{x}\)</p>
+            </div>
+        </div>
+        
+        <div class="diagram-row">
+            <div class="diagram">
+                <p>\(\tan(\theta)=\dfrac{y}{x}\)</p>
+            </div>
+            <div class="diagram">
+                <p>\(\cot(\theta)=\dfrac{x}{y}\)</p>
+            </div>
+        </div>
+        
+        <p><strong>This is all assuming the denominators do not equal zero!</strong></p>
+    </div>
+
+    <!-- Example Section -->
+    <section class="example" aria-labelledby="example-circular-functions">
+        <div class="example-problem">
+            <h3 id="example-circular-functions">Example</h3>
+            <ol>
+                <li>Suppose the terminal side of \(\theta\), when plotted in standard position, contains the point \(Q(3,-4)\). Find the values of the six circular functions of \(\theta\).</li>
+                <li>Suppose \(\theta\) is a Quadrant IV angle with \(\cot(\theta) = -4\). Find the values of the five remaining circular functions of \(\theta\).</li>
+            </ol>
+        </div>
+
+        <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-circular-functions">
+            <span class="toggle-arrow">▼</span>
+            <span>Show Solution</span>
+        </button>
+
+        <div id="solution-circular-functions" class="example-content">
+            <div class="solution">
+                <h4>Solution</h4>
+                <ol>
+                    <li>
+                        <p>Since \(x = 3\) and \(y=-4\), \(r = \sqrt{x^2 + y^2} = \sqrt{(3)^2+(-4)^2} = \sqrt{25} = 5\). The definition above tells us \(\cos(\theta) = \frac{3}{5}\), \(\sin(\theta) = -\frac{4}{5}\), \(\sec(\theta) = \frac{5}{3}\), \(\csc(\theta) = -\frac{5}{4}\), \(\tan(\theta) = -\frac{4}{3}\) and \(\cot(\theta) = - \frac{3}{4}\).</p>
+                    </li>
+                    <li>
+                        <p>In order to use the definitions above, we need to find a point \(Q(x,y)\) which lies on the terminal side of \(\theta\), when \(\theta\) is plotted in standard position. We have that \(\cot(\theta) = -4 = \frac{x}{y}\), and since \(\theta\) is a Quadrant IV angle, we know that only the \(\cos\) and \(\sec\) functions are positive in this quadrant, using the C.A.S.T. method we learned in section <span class="section-ref">unitcircle</span>. Viewing \(-4 = \frac{4}{-1}\), we may choose \(x = 4\) and \(y = -1\) so that \(r = \sqrt{x^2+y^2} = \sqrt{(4)^2 + (-1)^2} = \sqrt{17}\). Using the theorems above once more, we find \(\cos(\theta) = \frac{4}{\sqrt{17}} = \frac{4 \sqrt{17}}{17}\), \(\sin(\theta) =- \frac{1}{\sqrt{17}} = -\frac{\sqrt{17}}{17}\), \(\sec(\theta) = \frac{\sqrt{17}}{4}\), \(\csc(\theta) = - \sqrt{17}\) and \(\tan(\theta) = -\frac{1}{4}\).</p>
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </section>
+
+    <!-- Page Break Indicator -->
+    <div class="divider" role="separator" aria-label="Section break"></div>
+
+    <!-- Exercises Section -->
+    <section aria-labelledby="exercises-heading">
+        <h2 id="exercises-heading" class="subsection-title">Exercises</h2>
+
+        <p>In Exercises <span class="exercise-ref">1</span> - <span class="exercise-ref">20</span>, find the exact value of all six trigonometric functions given angle.</p>
+
+        <!-- Exercises 1-4 -->
+        <div role="list" aria-label="Exercises 1 through 4">
+            <ol>
+                <li id="exercise-1" value="1">\(\theta = 0\)</li>
+                <li id="exercise-2">\(\theta = \dfrac{\pi}{4}\)</li>
+                <li id="exercise-3">\(\theta = \dfrac{\pi}{3}\)</li>
+                <li id="exercise-4">\(\theta = \dfrac{\pi}{2}\)</li>
+            </ol>
+        </div>
+
+        <!-- Exercises 5-8 -->
+        <div role="list" aria-label="Exercises 5 through 8">
+            <ol start="5">
+                <li id="exercise-5">\(\theta = \dfrac{2\pi}{3}\)</li>
+                <li id="exercise-6">\(\theta = \dfrac{3\pi}{4}\)</li>
+                <li id="exercise-7">\(\theta = \pi\)</li>
+                <li id="exercise-8">\(\theta = \dfrac{7\pi}{6}\)</li>
+            </ol>
+        </div>
+
+        <!-- Exercises 9-12 -->
+        <div role="list" aria-label="Exercises 9 through 12">
+            <ol start="9">
+                <li id="exercise-9">\(\theta = \dfrac{5\pi}{4}\)</li>
+                <li id="exercise-10">\(\theta = \dfrac{4\pi}{3}\)</li>
+                <li id="exercise-11">\(\theta = \dfrac{3\pi}{2}\)</li>
+                <li id="exercise-12">\(\theta = \dfrac{5\pi}{3}\)</li>
+            </ol>
+        </div>
+
+        <!-- Exercises 13-16 -->
+        <div role="list" aria-label="Exercises 13 through 16">
+            <ol start="13">
+                <li id="exercise-13">\(\theta = \dfrac{7\pi}{4}\)</li>
+                <li id="exercise-14">\(\theta = \dfrac{23\pi}{6}\)</li>
+                <li id="exercise-15">\(\theta = -\dfrac{13\pi}{2}\)</li>
+                <li id="exercise-16">\(\theta = -\dfrac{43\pi}{6}\)</li>
+            </ol>
+        </div>
+
+        <!-- Exercises 17-20 -->
+        <div role="list" aria-label="Exercises 17 through 20">
+            <ol start="17">
+                <li id="exercise-17">\(\theta = -\dfrac{3\pi}{4}\)</li>
+                <li id="exercise-18">\(\theta = -\dfrac{\pi}{6}\)</li>
+                <li id="exercise-19">\(\theta = \dfrac{10\pi}{3}\)</li>
+                <li id="exercise-20">\(\theta = 117\pi\)</li>
+            </ol>
+        </div>
+
+        <!-- Exercises 21-30 -->
+        <p>In Exercises <span class="exercise-ref">21</span> - <span class="exercise-ref">30</span>, use the results developed throughout the section to find the requested value.</p>
+
+        <ol start="21">
+            <li id="exercise-21">If \(\sin(\theta) = -\dfrac{7}{25}\) with \(\theta\) in Quadrant IV, what is \(\cos(\theta)\)?</li>
+            <li id="exercise-22">If \(\cos(\theta) = \dfrac{4}{9}\) with \(\theta\) in Quadrant I, what is \(\sin(\theta)\)?</li>
+            <li id="exercise-23">If \(\sin(\theta) = \dfrac{5}{13}\) with \(\theta\) in Quadrant II, what is \(\cos(\theta)\)?</li>
+            <li id="exercise-24">If \(\cos(\theta) = -\dfrac{2}{11}\) with \(\theta\) in Quadrant III, what is \(\sin(\theta)\)?</li>
+            <li id="exercise-25">If \(\sin(\theta) = -\dfrac{2}{3}\) with \(\theta\) in Quadrant III, what is \(\cos(\theta)\)?</li>
+            <li id="exercise-26">If \(\cos(\theta) = \dfrac{28}{53}\) with \(\theta\) in Quadrant IV, what is \(\sin(\theta)\)?</li>
+            <li id="exercise-27">If \(\sin(\theta) = \dfrac{2\sqrt{5}}{5}\) and \(\dfrac{\pi}{2} < \theta < \pi\), what is \(\cos(\theta)\)?</li>
+            <li id="exercise-28">If \(\cos(\theta) = \dfrac{\sqrt{10}}{10}\) and \(2\pi < \theta < \dfrac{5\pi}{2}\), what is \(\sin(\theta)\)?</li>
+            <li id="exercise-29">If \(\sin(\theta) = -0.42\) and \(\pi < \theta < \dfrac{3\pi}{2}\), what is \(\cos(\theta)\)?</li>
+            <li id="exercise-30">If \(\cos(\theta) = -0.98\) and \(\dfrac{\pi}{2} < \theta < \pi\), what is \(\sin(\theta)\)?</li>
+        </ol>
+
+        <!-- Page Break Indicator -->
+        <div class="divider" role="separator" aria-label="Section break"></div>
+
+        <!-- Exercises 31-39 -->
+        <p>In Exercises <span class="exercise-ref">31</span> - <span class="exercise-ref">39</span>, find all of the angles which satisfy the given equation.</p>
+
+        <!-- Exercises 31-33 -->
+        <div role="list" aria-label="Exercises 31 through 33">
+            <ol start="31">
+                <li id="exercise-31">\(\sin(\theta) = \dfrac{1}{2}\)</li>
+                <li id="exercise-32">\(\cos(\theta) = -\dfrac{\sqrt{3}}{2}\)</li>
+                <li id="exercise-33">\(\sin(\theta) = 0\)</li>
+            </ol>
+        </div>
+
+        <!-- Exercises 34-36 -->
+        <div role="list" aria-label="Exercises 34 through 36">
+            <ol start="34">
+                <li id="exercise-34">\(\cos(\theta) = \dfrac{\sqrt{2}}{2}\)</li>
+                <li id="exercise-35">\(\sin(\theta) = \dfrac{\sqrt{3}}{2}\)</li>
+                <li id="exercise-36">\(\cos(\theta) = -1\)</li>
+            </ol>
+        </div>
+
+        <!-- Exercises 37-39 -->
+        <div role="list" aria-label="Exercises 37 through 39">
+            <ol start="37">
+                <li id="exercise-37">\(\sin(\theta) = -1\)</li>
+                <li id="exercise-38">\(\cos(\theta) = \dfrac{\sqrt{3}}{2}\)</li>
+                <li id="exercise-39">\(\cos(\theta) = -1.001\)</li>
+            </ol>
+        </div>
+
+        <!-- Exercises 40-48 -->
+        <p>In Exercises <span class="exercise-ref">40</span> - <span class="exercise-ref">48</span>, solve the equation for \(t\).</p>
+
+        <!-- Exercises 40-42 -->
+        <div role="list" aria-label="Exercises 40 through 42">
+            <ol start="40">
+                <li id="exercise-40">\(\cos(t) = 0\)</li>
+                <li id="exercise-41">\(\sin(t) = -\dfrac{\sqrt{2}}{2}\)</li>
+                <li id="exercise-42">\(\cos(t) = 3\)</li>
+            </ol>
+        </div>
+
+        <!-- Exercises 43-45 -->
+        <div role="list" aria-label="Exercises 43 through 45">
+            <ol start="43">
+                <li id="exercise-43">\(\sin(t) = -\dfrac{1}{2}\)</li>
+                <li id="exercise-44">\(\cos(t) = \dfrac{1}{2}\)</li>
+                <li id="exercise-45">\(\sin(t) = -2\)</li>
+            </ol>
+        </div>
+
+        <!-- Exercises 46-48 -->
+        <div role="list" aria-label="Exercises 46 through 48">
+            <ol start="46">
+                <li id="exercise-46">\(\cos(t) = 1\)</li>
+                <li id="exercise-47">\(\sin(t) = 1\)</li>
+                <li id="exercise-48">\(\cos(t) = -\dfrac{\sqrt{2}}{2}\)</li>
+            </ol>
+        </div>
+
+    </section>
+
+</main>
+
+
+
+     
 
 
 

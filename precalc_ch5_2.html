@@ -40,7 +40,7 @@
         
         <p>In section 5.1, we introduced circular motion and derived a formula which describes the linear velocity of an object moving on a circular path at a constant angular velocity. One of the goals of this section is describe the <em>position</em> of such an object. To that end, consider an angle \(\theta\) in standard position and let \(P\) denote the point where the terminal side of \(\theta\) intersects the Unit Circle. By associating the point \(P\) with the angle \(\theta\), we are assigning a <strong>position</strong> on the Unit Circle to the angle \(\theta\). The \(x\)-coordinate of \(P\) is called the <strong>cosine</strong> of \(\theta\), written \(\cos(\theta)\), while the \(y\)-coordinate of \(P\) is called the <strong>sine</strong> of \(\theta\), written \(\sin(\theta)\).</p>
 
- <svg 
+<svg 
     viewBox="-4 -4 8 8" 
     width="400" 
     height="400" 
@@ -58,7 +58,7 @@
   <!-- Flip y-axis for Cartesian coordinates -->
   <g transform="scale(1,-1)">
 
-    <!-- Arrowhead definition for axes -->
+    <!-- Arrowhead for axes -->
     <defs>
       <marker id="arrow" markerWidth="4" markerHeight="4" refX="0" refY="2" orient="auto">
         <path d="M0,0 L0,4 L4,2 Z" fill="#000"/>
@@ -74,14 +74,16 @@
 
     <!-- Angle arc in first quadrant -->
     <path d="M2,0 A2,2 0 0,1 1.4142,1.4142" stroke="red" stroke-width="0.1" fill="none"/>
-    <text x="1.2" y="0.6" font-family="IBM Plex Sans" font-size="0.5" fill="red" transform="scale(1,-1)">θ</text>
+    <text x="1.2" y="0.65" font-family="IBM Plex Sans" font-size="0.5" fill="red" transform="scale(1,-1)">θ</text>
 
     <!-- Radius/vector to P -->
     <line x1="0" y1="0" x2="1.4142" y2="1.4142" stroke="blue" stroke-width="0.08"/>
 
     <!-- Point P -->
     <circle cx="1.4142" cy="1.4142" r="0.08" fill="black"/>
-    <text x="1.55" y="1.55" font-family="IBM Plex Sans" font-size="0.4" transform="scale(1,-1)">P(cos(θ), sin(θ))</text>
+    <text x="1.55" y="1.75" font-family="IBM Plex Sans" font-size="0.4" font-weight="600" transform="scale(1,-1)">
+      P(cos(θ), sin(θ))
+    </text>
 
     <!-- Axis unit marks -->
     <circle cx="2" cy="0" r="0.08" fill="black"/>
@@ -129,20 +131,103 @@
                         </li>
                     </ol>
 
-                    <!-- TikZ Diagrams 2 & 3: Two side-by-side diagrams -->
-                    <!-- 
-                    Left diagram: Finding cos(270°) and sin(270°)
-                    - Unit circle with terminal side on negative y-axis
-                    - Point P(0,-1) marked
-                    - Blue arrow pointing down
-                    - Red arc showing 270° angle
-                    
-                    Right diagram: Finding cos(-π) and sin(-π)
-                    - Unit circle with terminal side on negative x-axis
-                    - Point P(-1,0) marked
-                    - Blue arrow pointing left
-                    - Red arc showing clockwise rotation
-                    -->
+                  <div style="display:flex; justify-content:center; gap:2rem; flex-wrap:wrap;">
+
+  <!-- First diagram: θ = 270° -->
+  <svg viewBox="-4 -4 8 8" width="300" height="300" role="img" aria-labelledby="theta270Title theta270Desc" xmlns="http://www.w3.org/2000/svg">
+    <title id="theta270Title">Unit Circle showing θ = 270°</title>
+    <desc id="theta270Desc">
+      A unit circle centered at the origin. The angle θ = 270° is shown in standard position,
+      pointing downward. Point P(0,-1) lies on the circle. X and Y axes labeled with 1 marks.
+    </desc>
+
+    <g transform="scale(1,-1)">
+      <!-- Arrowhead definition -->
+      <defs>
+        <marker id="arrow1" markerWidth="4" markerHeight="4" refX="0" refY="2" orient="auto">
+          <path d="M0,0 L0,4 L4,2 Z" fill="#000"/>
+        </marker>
+      </defs>
+
+      <!-- Axes -->
+      <line x1="-3.5" y1="0" x2="3.5" y2="0" stroke="black" stroke-width="0.05" marker-start="url(#arrow1)" marker-end="url(#arrow1)"/>
+      <line x1="0" y1="-3.5" x2="0" y2="3.5" stroke="black" stroke-width="0.05" marker-start="url(#arrow1)" marker-end="url(#arrow1)"/>
+
+      <!-- Unit circle -->
+      <circle cx="0" cy="0" r="2" stroke="gray" stroke-width="0.05" fill="none"/>
+
+      <!-- Angle arc -->
+      <path d="M1,0 A1,1 0 0,1 0,-1" stroke="red" stroke-width="0.1" fill="none"/>
+      <text x="0.7" y="-0.7" font-family="IBM Plex Sans" font-size="0.4" fill="red" transform="scale(1,-1)">θ</text>
+
+      <!-- Radius/vector to P -->
+      <line x1="0" y1="0" x2="0,-2" stroke="blue" stroke-width="0.08"/>
+      <circle cx="0" cy="-2" r="0.08" fill="black"/>
+      <text x="0.1" y="-2.2" font-family="IBM Plex Sans" font-size="0.35" transform="scale(1,-1)">P(0,-1)</text>
+
+      <!-- Unit marks -->
+      <circle cx="2" cy="0" r="0.08" fill="black"/>
+      <circle cx="0" cy="2" r="0.08" fill="black"/>
+      <text x="2" y="-0.15" font-family="IBM Plex Sans" font-size="0.35" text-anchor="middle" transform="scale(1,-1)">1</text>
+      <text x="-0.15" y="-2" font-family="IBM Plex Sans" font-size="0.35" text-anchor="end" transform="scale(1,-1)">1</text>
+
+      <!-- Axis labels -->
+      <text x="3.6" y="0.15" font-family="IBM Plex Sans" font-size="0.4" transform="scale(1,-1)">x</text>
+      <text x="0.15" y="3.6" font-family="IBM Plex Sans" font-size="0.4" transform="scale(1,-1)">y</text>
+
+      <!-- Footer text -->
+      <text x="0" y="-3" font-family="IBM Plex Sans" font-size="0.35" text-anchor="middle" transform="scale(1,-1)">Finding cos(270°) and sin(270°)</text>
+    </g>
+  </svg>
+
+  <!-- Second diagram: θ = -180° -->
+  <svg viewBox="-4 -4 8 8" width="300" height="300" role="img" aria-labelledby="thetaNeg180Title thetaNeg180Desc" xmlns="http://www.w3.org/2000/svg">
+    <title id="thetaNeg180Title">Unit Circle showing θ = -180°</title>
+    <desc id="thetaNeg180Desc">
+      A unit circle centered at the origin. The angle θ = -180° is shown in standard position,
+      pointing left. Point P(-1,0) lies on the circle. X and Y axes labeled with 1 marks.
+    </desc>
+
+    <g transform="scale(1,-1)">
+      <!-- Arrowhead definition -->
+      <defs>
+        <marker id="arrow2" markerWidth="4" markerHeight="4" refX="0" refY="2" orient="auto">
+          <path d="M0,0 L0,4 L4,2 Z" fill="#000"/>
+        </marker>
+      </defs>
+
+      <!-- Axes -->
+      <line x1="-3.5" y1="0" x2="3.5" y2="0" stroke="black" stroke-width="0.05" marker-start="url(#arrow2)" marker-end="url(#arrow2)"/>
+      <line x1="0" y1="-3.5" x2="0" y2="3.5" stroke="black" stroke-width="0.05" marker-start="url(#arrow2)" marker-end="url(#arrow2)"/>
+
+      <!-- Unit circle -->
+      <circle cx="0" cy="0" r="2" stroke="gray" stroke-width="0.05" fill="none"/>
+
+      <!-- Angle arc -->
+      <path d="M1,0 A1,1 0 0,0 -1,0" stroke="red" stroke-width="0.1" fill="none"/>
+      <text x="0.5" y="0.7" font-family="IBM Plex Sans" font-size="0.4" fill="red" transform="scale(1,-1)">θ</text>
+
+      <!-- Radius/vector to P -->
+      <line x1="0" y1="0" x2="-2,0" stroke="blue" stroke-width="0.08"/>
+      <circle cx="-2" cy="0" r="0.08" fill="black"/>
+      <text x="-2.2" y="0.1" font-family="IBM Plex Sans" font-size="0.35" transform="scale(1,-1)">P(-1,0)</text>
+
+      <!-- Unit marks -->
+      <circle cx="2" cy="0" r="0.08" fill="black"/>
+      <circle cx="0" cy="2" r="0.08" fill="black"/>
+      <text x="2" y="-0.15" font-family="IBM Plex Sans" font-size="0.35" text-anchor="middle" transform="scale(1,-1)">1</text>
+      <text x="-0.15" y="-2" font-family="IBM Plex Sans" font-size="0.35" text-anchor="end" transform="scale(1,-1)">1</text>
+
+      <!-- Axis labels -->
+      <text x="3.6" y="0.15" font-family="IBM Plex Sans" font-size="0.4" transform="scale(1,-1)">x</text>
+      <text x="0.15" y="3.6" font-family="IBM Plex Sans" font-size="0.4" transform="scale(1,-1)">y</text>
+
+      <!-- Footer text -->
+      <text x="0" y="-3" font-family="IBM Plex Sans" font-size="0.35" text-anchor="middle" transform="scale(1,-1)">Finding cos(-π) and sin(-π)</text>
+    </g>
+  </svg>
+
+</div>
 
                     <ol start="3">
                         <li>

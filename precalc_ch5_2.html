@@ -32,76 +32,601 @@
  <body> 
 <div id="toc-placeholder"></div>
 
-<!-- Main Content Section -->
+<!-- The Unit Circle Section -->
 <main class="container">
     
-    <p>In Section <span class="section-ref">unitcircle</span>, we generalized our six basic trigonometric functions from coordinates on the Unit Circle. But, we extend this idea out to be of any angle not just those along the Unit Circle.</p>
-
-    <!-- TikZ Diagram Placeholder -->
-    <!-- TikZ picture: Definitions of Trigonometric Functions of Any Angle
-         Contains: 
-         - Definition box with gray background
-         - Formulas for sin, cos, tan, csc, sec, cot
-         - Coordinate system diagram showing angle theta, point (x,y), and radius r
-         - Note about denominators not equaling zero
-    -->
-    
-    <div class="definition-box" role="region" aria-labelledby="trig-def-title">
-        <h3 id="trig-def-title">Definitions of Trigonometric Functions of Any Angle</h3>
-        <p>Allow \(\theta\) to be any angle in standard position such that \((x,y)\) is a point on the terminal side of the angle and \(r=\sqrt{x^2+y^2}\ne0\)</p>
+    <section id="unitcircle" aria-labelledby="unit-circle-heading">
+        <h2 id="unit-circle-heading">The Unit Circle</h2>
         
-        <div class="diagram-row">
-            <div class="diagram">
-                <p>\(\sin(\theta)=\dfrac{y}{r}\)</p>
-                <p>\(\csc(\theta)=\dfrac{r}{y}\)</p>
-            </div>
-            <div class="diagram">
-                <p>\(\cos(\theta)=\dfrac{x}{r}\)</p>
-                <p>\(\sec(\theta)=\dfrac{r}{x}\)</p>
-            </div>
-        </div>
-        
-        <div class="diagram-row">
-            <div class="diagram">
-                <p>\(\tan(\theta)=\dfrac{y}{x}\)</p>
-            </div>
-            <div class="diagram">
-                <p>\(\cot(\theta)=\dfrac{x}{y}\)</p>
-            </div>
-        </div>
-        
-        <p><strong>This is all assuming the denominators do not equal zero!</strong></p>
-    </div>
+        <p>In Section <span class="section-ref">angles</span>, we introduced circular motion and derived a formula which describes the linear velocity of an object moving on a circular path at a constant angular velocity. One of the goals of this section is describe the <em>position</em> of such an object. To that end, consider an angle \(\theta\) in standard position and let \(P\) denote the point where the terminal side of \(\theta\) intersects the Unit Circle. By associating the point \(P\) with the angle \(\theta\), we are assigning a <strong>position</strong> on the Unit Circle to the angle \(\theta\). The \(x\)-coordinate of \(P\) is called the <strong>cosine</strong> of \(\theta\), written \(\cos(\theta)\), while the \(y\)-coordinate of \(P\) is called the <strong>sine</strong> of \(\theta\), written \(\sin(\theta)\).</p>
 
-    <!-- Example Section -->
-    <section class="example" aria-labelledby="example-circular-functions">
-        <div class="example-problem">
-            <h3 id="example-circular-functions">Example</h3>
-            <ol>
-                <li>Suppose the terminal side of \(\theta\), when plotted in standard position, contains the point \(Q(3,-4)\). Find the values of the six circular functions of \(\theta\).</li>
-                <li>Suppose \(\theta\) is a Quadrant IV angle with \(\cot(\theta) = -4\). Find the values of the five remaining circular functions of \(\theta\).</li>
-            </ol>
-        </div>
+        <!-- TikZ Diagram 1: Unit Circle with angle theta and point P -->
+        <!-- 
+        TikZ picture showing:
+        - Coordinate axes with x and y labels
+        - Unit circle (gray)
+        - Blue arrow from origin to point P
+        - Red arc showing angle theta
+        - Point P labeled as P(cos(theta), sin(theta))
+        - Markings showing radius of 1 on both axes
+        -->
 
-        <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-circular-functions">
-            <span class="toggle-arrow">▼</span>
-            <span>Show Solution</span>
-        </button>
-
-        <div id="solution-circular-functions" class="example-content">
-            <div class="solution">
-                <h4>Solution</h4>
+        <!-- Example: Find cosine and sine -->
+        <section class="example" aria-labelledby="example-cosine-sine">
+            <div class="example-problem">
+                <h3 id="example-cosine-sine">Example</h3>
+                <p>Find the cosine and sine of the following angles.</p>
                 <ol>
-                    <li>
-                        <p>Since \(x = 3\) and \(y=-4\), \(r = \sqrt{x^2 + y^2} = \sqrt{(3)^2+(-4)^2} = \sqrt{25} = 5\). The definition above tells us \(\cos(\theta) = \frac{3}{5}\), \(\sin(\theta) = -\frac{4}{5}\), \(\sec(\theta) = \frac{5}{3}\), \(\csc(\theta) = -\frac{5}{4}\), \(\tan(\theta) = -\frac{4}{3}\) and \(\cot(\theta) = - \frac{3}{4}\).</p>
-                    </li>
-                    <li>
-                        <p>In order to use the definitions above, we need to find a point \(Q(x,y)\) which lies on the terminal side of \(\theta\), when \(\theta\) is plotted in standard position. We have that \(\cot(\theta) = -4 = \frac{x}{y}\), and since \(\theta\) is a Quadrant IV angle, we know that only the \(\cos\) and \(\sec\) functions are positive in this quadrant, using the C.A.S.T. method we learned in section <span class="section-ref">unitcircle</span>. Viewing \(-4 = \frac{4}{-1}\), we may choose \(x = 4\) and \(y = -1\) so that \(r = \sqrt{x^2+y^2} = \sqrt{(4)^2 + (-1)^2} = \sqrt{17}\). Using the theorems above once more, we find \(\cos(\theta) = \frac{4}{\sqrt{17}} = \frac{4 \sqrt{17}}{17}\), \(\sin(\theta) =- \frac{1}{\sqrt{17}} = -\frac{\sqrt{17}}{17}\), \(\sec(\theta) = \frac{\sqrt{17}}{4}\), \(\csc(\theta) = - \sqrt{17}\) and \(\tan(\theta) = -\frac{1}{4}\).</p>
-                    </li>
+                    <li>\(\theta = 270^{\circ}\)</li>
+                    <li>\(\theta = - \pi\)</li>
+                    <li>\(\theta = 45^{\circ}\)</li>
+                    <li>\(\theta = \frac{\pi}{6}\)</li>
+                    <li>\(\theta = 60^{\circ}\)</li>
                 </ol>
             </div>
+
+            <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-cosine-sine">
+                <span class="toggle-arrow">▼</span>
+                <span>Show Solution</span>
+            </button>
+
+            <div id="solution-cosine-sine" class="example-content">
+                <div class="solution">
+                    <h4>Solution</h4>
+                    
+                    <ol>
+                        <li>
+                            <p>To find \(\cos\left(270^{\circ}\right)\) and \(\sin\left(270^{\circ}\right)\), we plot the angle \(\theta =270^{\circ}\) in standard position and find the point on the terminal side of \(\theta\) which lies on the Unit Circle. Since \(270^{\circ}\) represents \(\frac{3}{4}\) of a counter-clockwise revolution, the terminal side of \(\theta\) lies along the negative \(y\)-axis. Hence, the point we seek is \((0,-1)\) so that \(\cos\left(\frac{3 \pi}{2}\right) = 0\) and \(\sin\left(\frac{3 \pi}{2}\right) = -1\).</p>
+                        </li>
+                        
+                        <li>
+                            <p>The angle \(\theta=-\pi\) represents one half of a clockwise revolution so its terminal side lies on the negative \(x\)-axis. The point on the Unit Circle that lies on the negative \(x\)-axis is \((-1,0)\) which means \(\cos(-\pi) = -1\) and \(\sin(-\pi) = 0\).</p>
+                        </li>
+                    </ol>
+
+                    <!-- TikZ Diagrams 2 & 3: Two side-by-side diagrams -->
+                    <!-- 
+                    Left diagram: Finding cos(270°) and sin(270°)
+                    - Unit circle with terminal side on negative y-axis
+                    - Point P(0,-1) marked
+                    - Blue arrow pointing down
+                    - Red arc showing 270° angle
+                    
+                    Right diagram: Finding cos(-π) and sin(-π)
+                    - Unit circle with terminal side on negative x-axis
+                    - Point P(-1,0) marked
+                    - Blue arrow pointing left
+                    - Red arc showing clockwise rotation
+                    -->
+
+                    <ol start="3">
+                        <li>
+                            <p>When we sketch \(\theta = 45^{\circ}\) in standard position, we see that its terminal does not lie along any of the coordinate axes which makes our job of finding the cosine and sine values a bit more difficult. Let \(P(x,y)\) denote the point on the terminal side of \(\theta\) which lies on the Unit Circle. By definition, \(x = \cos\left(45^{\circ}\right)\) and \(y = \sin\left(45^{\circ}\right)\). If we drop a perpendicular line segment from \(P\) to the \(x\)-axis, we obtain a \(45^{\circ} - 45^{\circ} - 90^{\circ}\) right triangle whose legs have lengths \(x\) and \(y\) units. From Geometry, we get \(y=x\). Since \(P(x,y)\) lies on the Unit Circle, we have \(x^2+y^2 = 1\). Substituting \(y=x\) into this equation yields \(2x^2 = 1\), or \(x =\pm \sqrt{\frac{1}{2}} = \pm \frac{\sqrt{2}}{2}\). Since \(P(x,y)\) lies in the first quadrant, \(x>0\), so \(x = \cos\left(45^{\circ}\right) = \frac{\sqrt{2}}{2}\) and with \(y=x\) we have \(y = \sin\left(45^{\circ}\right) = \frac{\sqrt{2}}{2}\).</p>
+                        </li>
+                    </ol>
+
+                    <!-- TikZ Diagrams 4 & 5: 45° angle diagrams -->
+                    <!-- 
+                    Left diagram: Unit circle with 45° angle
+                    - Point P(x,y) on terminal side
+                    - Dashed perpendicular to x-axis
+                    - Right angle marker
+                    - 45° angle marked
+                    
+                    Right diagram: 45-45-90 triangle
+                    - Right triangle with legs x=1, y=1
+                    - Hypotenuse labeled √2
+                    - 45° angle marked
+                    -->
+
+                    <ol start="4">
+                        <li>
+                            <p>As before, the terminal side of \(\theta = \frac{\pi}{6}\) does not lie on any of the coordinate axes, so we proceed using a triangle approach. Letting \(P(x,y)\) denote the point on the terminal side of \(\theta\) which lies on the Unit Circle, we drop a perpendicular line segment from \(P\) to the \(x\)-axis to form a \(30^{\circ} - 60^{\circ} - 90^{\circ}\) right triangle. After a bit of Geometry we find \(y = \frac{1}{2}\) so \(\sin\left(\frac{\pi}{6}\right) = \frac{1}{2}\). Since \(P(x,y)\) lies on the Unit Circle, we substitute \(y = \frac{1}{2}\) into \(x^2 + y^2 = 1\) to get \(x^{2} = \frac{3}{4}\), or \(x = \pm \frac{\sqrt{3}}{2}\). Here, \(x > 0\) so \(x = \cos\left(\frac{\pi}{6}\right) = \frac{\sqrt{3}}{2}\).</p>
+                        </li>
+                    </ol>
+
+                    <!-- TikZ Diagrams 6 & 7: π/6 angle diagrams -->
+                    <!-- 
+                    Left diagram: Unit circle with π/6 (30°) angle
+                    - Point P(x,y) on terminal side
+                    - Dashed perpendicular to x-axis
+                    - Right angle marker
+                    - π/6 angle marked
+                    
+                    Right diagram: 30-60-90 triangle
+                    - Right triangle with x=2, y=1
+                    - Hypotenuse labeled √3
+                    - θ = π/6 = 30° marked
+                    -->
+
+                    <ol start="5">
+                        <li>
+                            <p>Plotting \(\theta = 60^{\circ}\) in standard position, we find it is not a quadrantal angle and set about using a triangle approach. Once again, we get a \(30^{\circ} - 60^{\circ} - 90^{\circ}\) right triangle and, after the usual computations, find \(x = \cos\left(60^{\circ}\right) = \frac{1}{2}\) and \(y = \sin\left(60^{\circ}\right) = \frac{\sqrt{3}}{2}\).</p>
+                        </li>
+                    </ol>
+
+                    <!-- TikZ Diagrams 8 & 9: 60° angle diagrams -->
+                    <!-- 
+                    Left diagram: Unit circle with 60° angle
+                    - Point P(x,y) on terminal side
+                    - Dashed perpendicular to x-axis
+                    - Right angle marker
+                    - 60° angle marked
+                    
+                    Right diagram: 30-60-90 triangle
+                    - Right triangle with x=1, y=2
+                    - Hypotenuse labeled √3
+                    - θ = 60° marked
+                    -->
+                </div>
+            </div>
+        </section>
+
+        <div class="divider" role="separator" aria-label="Section break"></div>
+
+        <!-- Reference Angle Discussion -->
+        <p>Another tool which helps immensely in determining cosines and sines of angles is the symmetry inherent in the Unit Circle. Suppose, for instance, we wish to know the cosine and sine of \(\theta = \frac{5 \pi}{6}\). We plot \(\theta\) in standard position below and, as usual, let \(P(x,y)\) denote the point on the terminal side of \(\theta\) which lies on the Unit Circle. Note that the terminal side of \(\theta\) lies \(\frac{\pi}{6}\) radians short of one half revolution.</p>
+
+        <p>In Example <span class="section-ref">cosinesineviaunitcircle</span>, we determined that \(\cos\left(\frac{\pi}{6}\right) = \frac{\sqrt{3}}{2}\) and \(\sin\left( \frac{\pi}{6} \right) = \frac{1}{2}\). This means that the point on the terminal side of the angle \(\frac{\pi}{6}\), when plotted in standard position, is \(\left(\frac{\sqrt{3}}{2}, \frac{1}{2}\right)\). From the figure below, it is clear that the point \(P(x,y)\) we seek can be obtained by reflecting that point about the \(y\)-axis. Hence, \(\cos\left(\frac{5\pi}{6}\right) = -\frac{\sqrt{3}}{2}\) and \(\sin\left( \frac{5\pi}{6} \right) = \frac{1}{2}\).</p>
+
+        <!-- TikZ Diagrams 10 & 11: 5π/6 angle and symmetry -->
+        <!-- 
+        Left diagram: Unit circle with 5π/6 angle
+        - Point P(x,y) in Quadrant II
+        - Angle marked as 5π/6
+        - Green arc showing π/6 from negative x-axis
+        
+        Right diagram: Symmetry demonstration
+        - Both points P and Q shown
+        - P(-√3/2, 1/2) in Quadrant II
+        - Q(√3/2, 1/2) in Quadrant I (dashed)
+        - Both π/6 angles marked
+        -->
+
+        <!-- Reference Angle Definition -->
+        <p>In the above scenario, the angle \(\frac{\pi}{6}\) is called the <strong>reference angle</strong> for the angle \(\frac{5 \pi}{6}\). In general, for a non-quadrantal angle \(\theta\), the reference angle for \(\theta\) (usually denoted \(\alpha\)) is the <em>acute</em> angle made between the terminal side of \(\theta\) and the \(x\)-axis. If \(\theta\) is a Quadrant I or IV angle, \(\alpha\) is the angle between the terminal side of \(\theta\) and the <em>positive</em> \(x\)-axis; if \(\theta\) is a Quadrant II or III angle, \(\alpha\) is the angle between the terminal side of \(\theta\) and the <em>negative</em> \(x\)-axis.</p>
+
+        <p>Allow \(P\) to denote the point \((\cos(\theta), \sin(\theta))\), then \(P\) lies on the Unit Circle. Since the Unit Circle possesses symmetry with respect to the \(x\)-axis, \(y\)-axis and origin, regardless of where the terminal side of \(\theta\) lies, there is a point \(Q\) symmetric with \(P\) which determines \(\theta\)'s reference angle, \(\alpha\) as seen below.</p>
+
+        <!-- TikZ Diagrams 12-15: Reference angles for each quadrant -->
+        <!-- 
+        Four diagrams showing reference angle α for angles in each quadrant:
+        
+        Diagram 12 (Quadrant I): P = Q, angle α same as θ
+        Diagram 13 (Quadrant II): P(-x,y) and Q(x,y), both showing α from respective x-axes
+        Diagram 14 (Quadrant III): P(-x,-y) and Q(x,y), showing α from negative x-axis
+        Diagram 15 (Quadrant IV): P(x,-y) and Q(x,y), showing α from positive x-axis
+        -->
+
+        <!-- Reference Angle Theorem Box -->
+        <div class="definition-box" role="region" aria-labelledby="ref-angle-theorem">
+            <h3 id="ref-angle-theorem">Reference Angle Theorem</h3>
+            <p>Suppose \(\alpha\) is the reference angle for \(\theta\). Then \(\cos(\theta) = \pm \cos(\alpha)\) and \(\sin(\theta) = \pm \sin(\alpha)\), where the choice of the (\(\pm\)) depends on the quadrant in which the terminal side of \(\theta\) lies.</p>
         </div>
-    </section>
+
+        <!-- Trigonometric Functions Definition -->
+        <p>Earlier in this section we defined \(\cos(\theta)\) and \(\sin(\theta)\) for angles \(\theta\) using the coordinate value of points on the Unit Circle. As such, these functions earn the moniker <strong class="blue-text">circular functions</strong>. It turns out that cosine and sine are just two of the six commonly used circular functions which we define below.</p>
+
+        <div class="definition-box" role="region" aria-labelledby="trig-functions-def">
+            <h3 id="trig-functions-def">Trigonometric Functions</h3>
+            <p>Suppose \(\theta\) is an angle plotted in standard position and \(P(x,y)\) is the point on the terminal side of \(\theta\) which lies on the Unit Circle</p>
+            <ul>
+                <li>The <strong>sine</strong> of \(\theta\), denoted \(\sin(\theta)\), is defined by \(\sin(\theta)= y \).</li>
+                <li>The <strong>cosine</strong> of \(\theta\), denoted \(\cos(\theta)\), is defined by \(\cos(\theta)= x \).</li>
+                <li>The <strong>tangent</strong> of \(\theta\), denoted \(\tan(\theta)\), is defined by \(\tan(\theta)= \frac{y}{x}\), provided \(x\ne 0\).</li>
+                <li>The <strong>cosecant</strong> of \(\theta\), denoted \(\csc(\theta)\), is defined by \(\csc(\theta)= \frac{1}{y}\), provided \(y\ne 0\).</li>
+                <li>The <strong>secant</strong> of \(\theta\), denoted \(\sec(\theta)\), is defined by \(\sec(\theta)= \frac{1}{x}\), provided \(x\ne 0\).</li>
+                <li>The <strong>cotangent</strong> of \(\theta\), denoted \(\cot(\theta)\), is defined by \(\cot(\theta)= \frac{x}{y}\), provided \(y\ne 0\).</li>
+            </ul>
+        </div>
+
+        <!-- Example: Six trig functions from point -->
+        <section class="example" aria-labelledby="example-six-trig">
+            <div class="example-problem">
+                <h3 id="example-six-trig">Example</h3>
+                <p>Identify the six trigonometric functions for the points below that fall on the unit circle.</p>
+                <ol>
+                    <li>\(P\left(\frac{1}{2},\frac{\sqrt{3}}{2}\right)\)</li>
+                </ol>
+            </div>
+
+            <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-six-trig">
+                <span class="toggle-arrow">▼</span>
+                <span>Show Solution</span>
+            </button>
+
+            <div id="solution-six-trig" class="example-content">
+                <div class="solution">
+                    <h4>Solution</h4>
+                    <ol>
+                        <li>
+                            <p>It is important to note that since both coordinates are positive that suggest that our angle \(\theta\) would be in quadrant I. Using the definitions of each function above we'd find that:</p>
+                            <p>\[\sin(\theta)=y=\frac{\sqrt{3}}{2}\]</p>
+                            <p>\[\cos(\theta)=x=\frac{1}{2}\]</p>
+                            <p>\[\tan(\theta)=\frac{y}{x}=\frac{\frac{\sqrt{3}}{2}}{\frac{1}{2}}\]</p>
+                            <p>When it comes to doing the functions like csc, cot, and sec it is important to remember to rationalize the denominator if you're working with a value containing radicals.</p>
+                            <p>\[\csc(\theta)=\frac{1}{y}=\frac{1}{\frac{\sqrt{3}}{2}}=\frac{2}{\sqrt{3}}\cdot \color{red}\frac{\sqrt{3}}{\sqrt{3}}\color{black}=\frac{2\sqrt{3}}{3}\]</p>
+                            <p>\[\sec(\theta)=\frac{1}{x}=\frac{1}{\frac{1}{2}}=\frac{2}{1}=2\]</p>
+                            <p>\[\cot(\theta)=\frac{x}{y}=\frac{\frac{1}{2}}{\frac{\sqrt{3}}{2}}=\frac{1}{\sqrt{3}}\color{red}\frac{\sqrt{3}}{\sqrt{3}}\color{black}=\frac{\sqrt{3}}{3}\]</p>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- Common Angles Table -->
+        <p>In light of the Reference Angle Theorem, it pays to know the cosine and sine values for certain common angles. In the table below, we summarize the values which we consider essential and must be memorized.</p>
+
+        <table aria-label="Cosine and Sine Values of Common Angles">
+            <caption><strong>Cosine and Sine Values of Common Angles</strong></caption>
+            <thead>
+                <tr>
+                    <th scope="col">\(\theta\) (degrees)</th>
+                    <th scope="col">\(\theta\) (radians)</th>
+                    <th scope="col">\(\cos(\theta)\)</th>
+                    <th scope="col">\(\sin(\theta)\)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>\(0^{\circ}\)</td>
+                    <td>\(0\)</td>
+                    <td>\(1\)</td>
+                    <td>\(0\)</td>
+                </tr>
+                <tr>
+                    <td>\(30^{\circ}\)</td>
+                    <td>\(\frac{\pi}{6}\)</td>
+                    <td>\(\frac{\sqrt{3}}{2}\)</td>
+                    <td>\(\frac{1}{2}\)</td>
+                </tr>
+                <tr>
+                    <td>\(45^{\circ}\)</td>
+                    <td>\(\frac{\pi}{4}\)</td>
+                    <td>\(\frac{\sqrt{2}}{2}\)</td>
+                    <td>\(\frac{\sqrt{2}}{2}\)</td>
+                </tr>
+                <tr>
+                    <td>\(60^{\circ}\)</td>
+                    <td>\(\frac{\pi}{3}\)</td>
+                    <td>\(\frac{1}{2}\)</td>
+                    <td>\(\frac{\sqrt{3}}{2}\)</td>
+                </tr>
+                <tr>
+                    <td>\(90^{\circ}\)</td>
+                    <td>\(\frac{\pi}{2}\)</td>
+                    <td>\(0\)</td>
+                    <td>\(1\)</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Example: Reference angles -->
+        <section class="example" aria-labelledby="example-ref-angles">
+            <div class="example-problem">
+                <h3 id="example-ref-angles">Example</h3>
+                <p>Find the cosine and sine of the following angles.</p>
+                <ol>
+                    <li>\(\theta = 225^{\circ}\)</li>
+                    <li>\(\theta = \frac{11 \pi}{6}\)</li>
+                    <li>\(\theta = -\frac{5 \pi}{4}\)</li>
+                </ol>
+            </div>
+
+            <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-ref-angles">
+                <span class="toggle-arrow">▼</span>
+                <span>Show Solution</span>
+            </button>
+
+            <div id="solution-ref-angles" class="example-content">
+                <div class="solution">
+                    <h4>Solution</h4>
+                    <ol>
+                        <li>
+                            <p>We begin by plotting \(\theta = 225^{\circ}\) in standard position and find its terminal side overshoots the negative \(x\)-axis to land in Quadrant III. Hence, we obtain \(\theta\)'s reference angle \(\alpha\) by subtracting: \(\alpha = \theta - 180^{\circ} = 225^{\circ} - 180^{\circ} = 45^{\circ}\). Since \(\theta\) is a Quadrant III angle, both \(\cos(\theta) < 0\) and \(\sin(\theta) < 0\). The Reference Angle Theorem yields: \(\cos\left(225^{\circ}\right) = -\cos\left(45^{\circ}\right) = -\frac{\sqrt{2}}{2}\) and \(\sin\left(225^{\circ}\right) = - \sin\left(45^{\circ}\right) = -\frac{\sqrt{2}}{2}\).</p>
+                            
+                            <!-- TikZ Diagram 16: 225° angle -->
+                            <!-- 
+                            Unit circle with:
+                            - Terminal side in Quadrant III at 225°
+                            - Red arc showing 225° from positive x-axis
+                            - Red arc showing 45° from negative x-axis
+                            - Point P(-√2/2, -√2/2) marked
+                            -->
+                        </li>
+                        
+                        <li>
+                            <p>The terminal side of \(\theta = \frac{11\pi}{6}\), when plotted in standard position, lies in Quadrant IV, just shy of the positive \(x\)-axis. To find \(\theta\)'s reference angle \(\alpha\), we subtract: \(\alpha = 2\pi - \theta = 2\pi - \frac{11 \pi}{6} = \frac{\pi}{6}\). Since \(\theta\) is a Quadrant IV angle, \(\cos(\theta) > 0\) and \(\sin(\theta) < 0\), so the Reference Angle Theorem gives: \(\cos\left(\frac{11 \pi}{6} \right) = \cos\left(\frac{\pi}{6} \right) = \frac{\sqrt{3}}{2}\) and \(\sin\left(\frac{11\pi}{6}\right) = -\sin\left(\frac{\pi}{6}\right) = -\frac{1}{2}\).</p>
+                            
+                            <!-- TikZ Diagram 17: 11π/6 angle -->
+                            <!-- 
+                            Unit circle with:
+                            - Terminal side in Quadrant IV at 11π/6
+                            - Red arc showing 11π/6 from positive x-axis
+                            - Red arc showing π/6 from positive x-axis
+                            - Point P(√3/2, -1/2) marked
+                            -->
+                        </li>
+                        
+                        <li>
+                            <p>To plot \(\theta = -\frac{5\pi}{4}\), we rotate <em>clockwise</em> an angle of \(\frac{5 \pi}{4}\) from the positive \(x\)-axis. The terminal side of \(\theta\), therefore, lies in Quadrant II making an angle of \(\alpha = \frac{5 \pi}{4} - \pi = \frac{\pi}{4}\) radians with respect to the negative \(x\)-axis. Since \(\theta\) is a Quadrant II angle, the Reference Angle Theorem gives: \(\cos\left(-\frac{5 \pi}{4}\right) = -\cos\left(\frac{\pi}{4}\right) = -\frac{\sqrt{2}}{2}\) and \(\sin\left(-\frac{5 \pi}{4}\right) = \sin\left(\frac{\pi}{4}\right) = \frac{\sqrt{2}}{2}\).</p>
+                            
+                            <!-- TikZ Diagram 18: -5π/4 angle -->
+                            <!-- 
+                            Unit circle with:
+                            - Terminal side in Quadrant II at -5π/4 (clockwise)
+                            - Red arc showing -5π/4 clockwise from positive x-axis
+                            - Red arc showing π/4 from negative x-axis
+                            - Point P(-√2/2, √2/2) marked
+                            -->
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <p>We can make an extension of this idea, by continuing the process through for the other four trigonometric functions, being sure to be careful in regards to the signs for each value.</p>
+
+        <!-- Example: All six trig functions with quadrants -->
+        <section class="example" aria-labelledby="example-all-six-quad">
+            <div class="example-problem">
+                <h3 id="example-all-six-quad">Example</h3>
+                <p>Find all six trigonometric functions given each of the angles below. Also identify the reference angle, and quadrant.</p>
+                <ol>
+                    <li>\(\theta=\frac{\pi}{6}\)</li>
+                    <li>\(\theta=\frac{5\pi}{4}\)</li>
+                    <li>\(\theta=\frac{3\pi}{2}\)</li>
+                </ol>
+            </div>
+
+            <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-all-six-quad">
+                <span class="toggle-arrow">▼</span>
+                <span>Show Solution</span>
+            </button>
+
+            <div id="solution-all-six-quad" class="example-content">
+                <div class="solution">
+                    <h4>Solution</h4>
+                    <ol>
+                        <li>
+                            <p>For this first example our reference angle would just be the angle \(\theta\), since it falls in quadrant I. To find our six trigonometric functions we first need to recall that \(P\left(\frac{\sqrt{3}}{2},\frac{1}{2}\right)\) using that information we can find all six values.</p>
+                            
+                            <table aria-label="Trigonometric functions for π/6">
+                                <tbody>
+                                    <tr>
+                                        <td>\(\sin\left(\frac{\pi}{6}\right)=y=\frac{1}{2}\)</td>
+                                        <td>\(\csc\left(\frac{\pi}{6}\right)=\frac{1}{y}=\frac{1}{\frac{1}{2}}=2\)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>\(\cos\left(\frac{\pi}{6}\right)=x=\frac{\sqrt{3}}{2}\)</td>
+                                        <td>\(\sec\left(\frac{\pi}{6}\right)=\frac{1}{x}=\frac{1}{\frac{\sqrt{3}}{2}}=\frac{2\sqrt{3}}{3}\)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>\(\tan\left(\frac{\pi}{6}\right)=\frac{y}{x}=\frac{\frac{1}{2}}{\frac{\sqrt{3}}{2}}=\frac{\sqrt{3}}{3}\)</td>
+                                        <td>\(\cot\left(\frac{\pi}{6}\right)=\frac{x}{y}=\frac{\frac{\sqrt{3}}{2}}{\frac{1}{2}}=\sqrt{3}\)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </li>
+                        
+                        <li>
+                            <p>First we need to identify that our reference angle would be \(\frac{\pi}{4}\), and our terminal side of our angle would be in quadrant III. This tells us the \(P\left(\frac{-\sqrt{2}}{2},\frac{-\sqrt{2}}{2}\right)\)</p>
+                            
+                            <table aria-label="Trigonometric functions for 5π/4">
+                                <tbody>
+                                    <tr>
+                                        <td>\(\sin\left(\frac{5\pi}{4}\right)=y=\frac{-\sqrt{2}}{2}\)</td>
+                                        <td>\(\csc\left(\frac{5\pi}{4}\right)=\frac{1}{y}=\frac{1}{\frac{-\sqrt{2}}{2}}=-\sqrt{2}\)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>\(\cos\left(\frac{5\pi}{4}\right)=x=\frac{-\sqrt{2}}{2}\)</td>
+                                        <td>\(\sec\left(\frac{5\pi}{4}\right)=\frac{1}{x}=\frac{1}{\frac{-\sqrt{2}}{2}}=-\sqrt{2}\)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>\(\tan\left(\frac{5\pi}{4}\right)=\frac{y}{x}=\frac{\frac{-\sqrt{2}}{2}}{\frac{-\sqrt{2}}{2}}=1\)</td>
+                                        <td>\(\cot\left(\frac{5\pi}{4}\right)=\frac{x}{y}=\frac{\frac{-\sqrt{2}}{2}}{\frac{-\sqrt{2}}{2}}=1\)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </li>
+                        
+                        <li>
+                            <p>For the last example \(\theta\) is the negative portion of the \(y\)-axis. Meaning there is no reference angle and it isn't a quadrant it is the \(y\)-axis. Giving us the point \(P(0,-1)\) producing the following functions</p>
+                            
+                            <table aria-label="Trigonometric functions for 3π/2">
+                                <tbody>
+                                    <tr>
+                                        <td>\(\sin\left(\frac{3\pi}{2}\right)=y=-1\)</td>
+                                        <td>\(\csc\left(\frac{3\pi}{2}\right)=\frac{1}{y}=\frac{1}{-1}=-1\)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>\(\cos\left(\frac{3\pi}{2}\right)=x=0\)</td>
+                                        <td>\(\sec\left(\frac{3\pi}{2}\right)=\frac{1}{x}=\frac{1}{0}=\text{undefined}\)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>\(\tan\left(\frac{3\pi}{2}\right)=\frac{y}{x}=\frac{-1}{0}=\text{undefined}\)</td>
+                                        <td>\(\cot\left(\frac{3\pi}{2}\right)=\frac{x}{y}=\frac{0}{-1}=0\)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- C.A.S.T. Method -->
+        <p>When it comes to determining signs based on quadrants it is helpful to use an acronym or <strong>C.A.S.T</strong>, which is illustrated in the diagram below</p>
+
+        <!-- TikZ Diagram 19: C.A.S.T. diagram -->
+        <!-- 
+        Coordinate axes showing four quadrants with:
+        - Quadrant I (top right): "A" - All positive (Sine +, Cosine +, Tangent +)
+        - Quadrant II (top left): "S" - Sine positive (Sine +, Cosine -, Tangent -)
+        - Quadrant III (bottom left): "T" - Tangent positive (Sine -, Cosine -, Tangent +)
+        - Quadrant IV (bottom right): "C" - Cosine positive (Sine -, Cosine +, Tangent -)
+        -->
+
+        <p>In the illustration we can place the letters from C.A.S.T in a counter-clockwise direction starting in Quadrant IV. It can be seen that in Quadrant I, the "A" stands for all trigonometric functions are positive. In Quadrant II, the "S" illustrates that the Sine function is the only one that is positive. Quadrant III, we can see that "T" represents that Tangent is the positive function while the others are negative, and lastly in Quadrant IV we can associate the "C" with Cosine being the positive function. Now, while we only illustrate this with our 3 basic trigonometric functions, the extensions can be made to the Cosecant, Secant, and Cotangent function as well.</p>
+
+        <!-- Example: Using quadrants for signs -->
+        <section class="example" aria-labelledby="example-cast">
+            <div class="example-problem">
+                <h3 id="example-cast">Example</h3>
+                <p>Find the six trigonometric functions for each of the following below</p>
+                <ol>
+                    <li>\(\theta = \frac{\pi}{6}\) when \(\theta\) is in Quadrant II.</li>
+                    <li>\(\theta = \frac{\pi}{4}\) when \(\theta\) is in Quadrant III.</li>
+                </ol>
+            </div>
+
+            <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-cast">
+                <span class="toggle-arrow">▼</span>
+                <span>Show Solution</span>
+            </button>
+
+            <div id="solution-cast" class="example-content">
+                <div class="solution">
+                    <h4>Solution</h4>
+                    <ol>
+                        <li>
+                            <p>Since \(\theta = \frac{\pi}{6}\) we know that the point we need is \(P\left(\frac{\sqrt{3}}{2},\frac{1}{2}\right)\), and since we are in Quadrant II we know that Sine and Cosecant will be our only two positive functions giving us the following:</p>
+                            
+                            <table aria-label="Trigonometric functions for π/6 in Quadrant II">
+                                <tbody>
+                                    <tr>
+                                        <td>\(\sin(\theta)=y=\frac{1}{2}\)</td>
+                                        <td>\(\csc(\theta)=\frac{1}{y}=\frac{1}{\frac{1}{2}}=2\)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>\(\cos(\theta)=x=\frac{-\sqrt{3}}{2}\)</td>
+                                        <td>\(\sec(\theta)=\frac{1}{x}=\frac{1}{\frac{-\sqrt{3}}{2}}=\frac{-2\sqrt{3}}{3}\)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>\(\tan(\theta)=\frac{y}{x}=\frac{\frac{1}{2}}{\frac{-\sqrt{3}}{2}}=\frac{-\sqrt{3}}{3}\)</td>
+                                        <td>\(\cot(\theta)=\frac{x}{y}=\frac{\frac{-\sqrt{3}}{2}}{\frac{1}{2}}=-\sqrt{3}\)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </li>
+                        
+                        <li>
+                            <p>Since \(\theta=\frac{\pi}{4}\) that means we are working with the point \(P\left(\frac{\sqrt{2}}{2},\frac{\sqrt{2}}{2}\right)\). Since we are in Quadrant III that means only Tangent and Cotangent are the positive functions and everything else is negative.</p>
+                            
+                            <table aria-label="Trigonometric functions for π/4 in Quadrant III">
+                                <tbody>
+                                    <tr>
+                                        <td>\(\sin(\theta)=y=\frac{-\sqrt{2}}{2}\)</td>
+                                        <td>\(\csc(\theta)=\frac{1}{y}=\frac{1}{\frac{-\sqrt{2}}{2}}=-\sqrt{2}\)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>\(\cos(\theta)=x=\frac{-\sqrt{2}}{2}\)</td>
+                                        <td>\(\sec(\theta)=\frac{1}{x}=\frac{1}{\frac{-\sqrt{2}}{2}}=-\sqrt{2}\)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>\(\tan(\theta)=\frac{y}{x}=\frac{\frac{-\sqrt{2}}{2}}{\frac{-\sqrt{2}}{2}}=1\)</td>
+                                        <td>\(\cot(\theta)=\frac{x}{y}=\frac{\frac{-\sqrt{2}}{2}}{\frac{-\sqrt{2}}{2}}=1\)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- Unit Circle construction -->
+        <p>By now you should start to put together the fact that we really only have three major points that repeat themselves around the unit circle. We have three main angles which are \(\frac{\pi}{3}\), \(\frac{\pi}{4}\), and \(\frac{\pi}{6}\). All of our other angles are just simply variations of those three. Using those three angles and our knowledge of C.A.S.T we can construct the entire unit circle as outlined below.</p>
+
+        <!-- TikZ Diagram 20: Complete Unit Circle -->
+        <!-- 
+        Large detailed unit circle diagram showing:
+        - All 16 key points on the unit circle
+        - Coordinates for each point (with square roots)
+        - Angle labels in radians (0, π/6, π/4, π/3, π/2, 2π/3, 3π/4, 5π/6, π, 7π/6, 5π/4, 4π/3, 3π/2, 5π/3, 7π/4, 11π/6, 2π)
+        - Dashed lines connecting symmetric points
+        - Points at (1,0), (-1,0), (0,1), (0,-1)
+        - Points at 45° intervals with (±√2/2, ±√2/2)
+        - Points at 30° and 60° intervals with appropriate coordinates
+        Caption: "Important points on the Unit Circle"
+        -->
+
+        <p>At this point it is important to note that the value of Sine and Cosine can never be larger than one or less than negative one. We call these two functions <strong class="blue-text">circular (cyclic)</strong> functions, because of the fact that their value will always fluctuate between negative one and positive one. This makes sense if you think about it. As you move around the unit circle neither the \(x\)-value(s) or \(y\)-value(s) are ever larger than one or less than negative one.</p>
+
+        <div class="divider" role="separator" aria-label="Section break"></div>
+
+        <!-- Beyond the Unit Circle subsection -->
+        <h3 id="circularfunctionsbeyond" class="subsection-title">Beyond the Unit Circle</h3>
+
+        <p>In Section <span class="section-ref">unitcircle</span>, we generalized our six basic trigonometric functions from coordinates on the Unit Circle. But, we extend this idea out to be of any angle not just those along the Unit Circle.</p>
+
+        <!-- TikZ Diagram 21: General angle definitions -->
+        <!-- 
+        Gray box diagram showing:
+        - Title: "Definitions of Trigonometric Functions of Any Angle"
+        - Definitions: sin(θ)=y/r, cos(θ)=x/r, tan(θ)=y/x, csc(θ)=r/y, sec(θ)=r/x, cot(θ)=x/y
+        - Coordinate system with angle θ in standard position
+        - Point (x,y) on terminal side
+        - Radius r from origin to (x,y)
+        - Note: "This is all assuming the denominators do not equal zero!"
+        -->
+
+        <div class="definition-box" role="region" aria-labelledby="trig-any-angle-def">
+            <h3 id="trig-any-angle-def">Definitions of Trigonometric Functions of Any Angle</h3>
+            <p>Allow \(\theta\) to be any angle in standard position such that \((x,y)\) is a point on the terminal side of the angle and \(r=\sqrt{x^2+y^2}\ne0\)</p>
+            
+            <div class="diagram-row">
+                <div class="diagram">
+                    <p>\(\sin(\theta)=\dfrac{y}{r}\)</p>
+                    <p>\(\csc(\theta)=\dfrac{r}{y}\)</p>
+                </div>
+                <div class="diagram">
+                    <p>\(\cos(\theta)=\dfrac{x}{r}\)</p>
+                    <p>\(\sec(\theta)=\dfrac{r}{x}\)</p>
+                </div>
+            </div>
+            
+            <div class="diagram-row">
+                <div class="diagram">
+                    <p>\(\tan(\theta)=\dfrac{y}{x}\)</p>
+                </div>
+                <div class="diagram">
+                    <p>\(\cot(\theta)=\dfrac{x}{y}\)</p>
+                </div>
+            </div>
+            
+            <p><strong>This is all assuming the denominators do not equal zero!</strong></p>
+        </div>
+
+        <!-- Example: Circular functions -->
+        <section class="example" aria-labelledby="example-circular-functions-circle">
+            <div class="example-problem">
+                <h3 id="example-circular-functions-circle">Example</h3>
+                <ol>
+                    <li>Suppose the terminal side of \(\theta\), when plotted in standard position, contains the point \(Q(3,-4)\). Find the values of the six circular functions of \(\theta\).</li>
+                    <li>Suppose \(\theta\) is a Quadrant IV angle with \(\cot(\theta) = -4\). Find the values of the five remaining circular functions of \(\theta\).</li>
+                </ol>
+            </div>
+
+            <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-circular-functions-circle">
+                <span class="toggle-arrow">▼</span>
+                <span>Show Solution</span>
+            </button>
+
+            <div id="solution-circular-functions-circle" class="example-content">
+                <div class="solution">
+                    <h4>Solution</h4>
+                    <ol>
+                        <li>
+                            <p>Since \(x = 3\) and \(y=-4\), \(r = \sqrt{x^2 + y^2} = \sqrt{(3)^2+(-4)^2} = \sqrt{25} = 5\). The definition above tells us \(\cos(\theta) = \frac{3}{5}\), \(\sin(\theta) = -\frac{4}{5}\), \(\sec(\theta) = \frac{5}{3}\), \(\csc(\theta) = -\frac{5}{4}\), \(\tan(\theta) = -\frac{4}{3}\) and \(\cot(\theta) = - \frac{3}{4}\).</p>
+                        </li>
+                        <li>
+                            <p>In order to use the definitions above, we need to find a point \(Q(x,y)\) which lies on the terminal side of \(\theta\), when \(\theta\) is plotted in standard position. We have that \(\cot(\theta) = -4 = \frac{x}{y}\), and since \(\theta\) is a Quadrant IV angle, we know that only the \(\cos\) and \(\sec\) functions are positive in this quadrant, using the C.A.S.T. method we learned in section <span class="section-ref">unitcircle</span>. Viewing \(-4 = \frac{4}{-1}\), we may choose \(x = 4\) and \(y = -1\) so that \(r = \sqrt{x^2+y^2} = \sqrt{(4)^2 + (-1)^2} = \sqrt{17}\). Using the theorems above once more, we find \(\cos(\theta) = \frac{4}{\sqrt{17}} = \frac{4 \sqrt{17}}{17}\), \(\sin(\theta) =- \frac{1}{\sqrt{17}} = -\frac{\sqrt{17}}{17}\), \(\sec(\theta) = \frac{\sqrt{17}}{4}\), \(\csc(\theta) = - \sqrt{17}\) and \(\tan(\theta) = -\frac{1}{4}\).</p>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </section>
 
     <!-- Page Break Indicator -->
     <div class="divider" role="separator" aria-label="Section break"></div>
@@ -243,11 +768,7 @@
 
     </section>
 
-</main>
-
-
-
-     
+</main>   
 
 
 

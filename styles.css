@@ -445,6 +445,50 @@ table tr.highlighted {
     white-space: nowrap !important;
     border: 0 !important;
 }
+.tight-list {
+    margin: 0;          /* remove extra margin around the ol */
+    padding-left: 1.2em; /* keep numbers aligned */
+    list-style-position: inside;
+}
+
+.tight-list li {
+    margin-bottom: 0.3rem !important; /* override MathJax padding/margin */
+    line-height: 1.3 !important;       /* slightly tighter line spacing */
+}
+/* =========================
+   TRIGONOMETRIC IDENTITY GRIDS
+   ========================= */
+
+/* Base grid container */
+.identity-grid {
+    display: grid;
+    gap: 1rem; /* spacing between items */
+}
+
+/* Reciprocal identities: 2 rows x 3 columns */
+.grid-2x3 {
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: auto;
+}
+
+/* Quotient identities: 1 row x 2 columns */
+.grid-1x2 {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: auto;
+}
+
+/* Pythagorean identities: 1 row x 3 columns */
+.grid-1x3 {
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: auto;
+}
+
+/* Responsive: all grids stack on mobile */
+@media (max-width: 768px) {
+    .identity-grid {
+        grid-template-columns: 1fr !important;
+    }
+}
 
 /* ========================================
    RESPONSIVE DESIGN FOR MOBILE DEVICES
@@ -536,4 +580,5 @@ table tr.highlighted {
     .toc-title {
         font-size: 1.2em;
     }
+
 }

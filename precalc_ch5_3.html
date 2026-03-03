@@ -57,7 +57,28 @@
         <td>\( \cot(\theta) = \frac{\text{Adjacent}}{\text{Opposite}} \)</td>
       </tr>
     </table>
-    <img src="5_3_d.png" alt="Right triangle labeled with angle θ, opposite, adjacent, and hypotenuse sides" />
+<!-- Right Triangle Diagram SVG - Accessible and Corrected Arc -->
+<svg width="300" height="250" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="triangle-diagram-title" font-family="Arial, sans-serif">
+  <title id="triangle-diagram-title">Right Triangle Relationships</title>
+  <desc>Right triangle with sides labeled Adjacent, Opposite, and Hypotenuse. Angle θ shown at the bottom left corner.</desc>
+
+  <!-- Triangle lines -->
+  <line x1="75" y1="200" x2="150" y2="100" stroke="#000" stroke-width="2"/>
+  <line x1="150" y1="100" x2="150" y2="200" stroke="#000" stroke-width="2"/>
+  <line x1="150" y1="200" x2="75" y2="200" stroke="#000" stroke-width="2"/>
+
+  <!-- Right angle box -->
+  <rect x="145" y="195" width="10" height="10" fill="none" stroke="#000" stroke-width="2"/>
+
+  <!-- Labels -->
+  <text x="105" y="210" font-size="14" text-anchor="middle">Adjacent</text>
+  <text x="155" y="150" font-size="14" dominant-baseline="middle">Opposite</text>
+  <text x="115" y="125" font-size="14" transform="rotate(-35 115,125)">Hypotenuse</text>
+
+  <!-- Angle arc (curving upwards to the left) -->
+  <path d="M105,200 A15,15 0 0,0 90,185" fill="none" stroke="#000" stroke-width="2"/>
+  <text x="88" y="190" font-size="14">θ</text>
+</svg>
     <p>A common mnemonic for remembering these relationships is <strong>SohCahToa</strong>.</p>
   </figure>
 
@@ -68,7 +89,7 @@
 
   <p>Find all six trigonometric functions for the triangle below.</p>
   <figure>
-    <img src="5_3_1.png" alt="Right triangle with sides labeled 2, 2√3, and 4 and angle α" />
+    <img src="images/5_3_1.png" alt="Right triangle with sides labeled 2, 2√3, and 4 and angle α" />
   </figure>
 </div>
               <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-ref-angles">
@@ -81,7 +102,7 @@
                     <h4>Solution</h4>
   <p>Identify the sides as opposite, adjacent, and hypotenuse:</p>
   <figure>
-    <img src="5_3_2.png" alt="Right triangle with sides color-coded: Opposite in red, Adjacent in purple, Hypotenuse in blue" />
+    <img src="images/5_3_2.png" alt="Right triangle with sides color-coded: Opposite in red, Adjacent in purple, Hypotenuse in blue" />
   </figure>
 
   <table>
@@ -112,7 +133,7 @@
                 <h3 id="example-example2">Example 2</h3>
   <p>Find all six trigonometric functions for this triangle:</p>
   <figure>
-    <img src="5_3_4.png" alt="Right triangle with sides 7 and 7√2, and angle α" />
+    <img src="images/5_3_4.png" alt="Right triangle with sides 7 and 7√2, and angle α" />
   </figure>
 </div>
 
@@ -252,7 +273,7 @@
         <h3 id="example-angle-inclination">Example 4</h3>
         <p>Find the angle of inclination \( \theta \) for the line passing through the points \( (1,2) \) and \( (5,6) \).</p>
         <figure>
-            <img src="5_3_5.png" alt="Line passing through points (1,2) and (5,6) on a coordinate plane" />
+            <img src="images/5_3_5.png" alt="Line passing through points (1,2) and (5,6) on a coordinate plane" />
         </figure>
 </div>
         <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-angle-inclination">
@@ -312,7 +333,7 @@
         <h3 id="example-missing-side">Example 6</h3>
         <p>Find all six trigonometric functions for a triangle with sides 7, ?, 7√2.</p>
         <figure>
-            <img src="5_3_6.png" alt="Right triangle with hypotenuse 7√2, one leg 7, unknown leg" />
+            <img src="images/5_3_6.png" alt="Right triangle with hypotenuse 7√2, one leg 7, unknown leg" />
         </figure>
 </div>
         <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-missing-side">
@@ -354,7 +375,7 @@
         <h3 id="example-7trigfcn">Example 7</h3>
         <p>Find all six trigonometric functions for the triangle below.</p>
         <figure>
-            <img src="5_3_7.png" alt="Right triangle with sides labeled 2, 2√3, and 4 and angle α" />
+            <img src="images/5_3_7.png" alt="Right triangle with sides labeled 2, 2√3, and 4 and angle α" />
         </figure>
 </div>
         <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-ref-angles">
@@ -367,7 +388,7 @@
                 <h4>Solution</h4>
                 <p>Identify the sides as opposite, adjacent, and hypotenuse:</p>
                 <figure>
-                    <img src="5_3_8.png" alt="Right triangle with sides color-coded: Opposite in red, Adjacent in purple, Hypotenuse in blue" />
+                    <img src="images/5_3_8.png" alt="Right triangle with sides color-coded: Opposite in red, Adjacent in purple, Hypotenuse in blue" />
                 </figure>
 
                 <table>
@@ -398,7 +419,7 @@
         <h3 id="example-angle-inclination">Example 8</h3>
         <p>Find the angle of inclination \( \theta \) for the line passing through the points \( (1,2) \) and \( (5,6) \).</p>
         <figure>
-            <img src="5_3_9.png" alt="Line passing through points (1,2) and (5,6) on a coordinate plane" />
+            <img src="images/5_3_9.png" alt="Line passing through points (1,2) and (5,6) on a coordinate plane" />
         </figure>
 </div>
         <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-angle-inclination">
@@ -458,7 +479,7 @@
         <h3 id="example-missing-side">Example 10</h3>
         <p>Find all six trigonometric functions for a triangle with sides 7, ?, 7√2.</p>
         <figure>
-            <img src="5_3_10.png" alt="Right triangle with hypotenuse 7√2, one leg 7, unknown leg" />
+            <img src="images/5_3_10.png" alt="Right triangle with hypotenuse 7√2, one leg 7, unknown leg" />
         </figure>
 </div>
         <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-missing-side">

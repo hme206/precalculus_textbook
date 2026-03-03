@@ -29,11 +29,477 @@
     <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
 </head>
- <body> 
+<body> 
 <div id="toc-placeholder"></div>
 
+<main class="container">
+    
+<section id="right-triangle-trigonometry">
+  <h2>Right Triangle Trigonometry</h2>
+  <p>In the previous section we introduced the six basic trigonometric functions and their rotations around the Unit Circle. In this section, we will dive deeper into those functions and how you can use them to find sides and angles in a right triangle, even when the Unit Circle is not involved.</p>
+
+  <p>It is important to note that these six functions only work in right triangles using the methods outlined here. Right triangle trigonometry relies on special relationships between the sides, which create different ratios.</p>
+
+  <figure>
+    <figcaption>Right Triangle Relationships</figcaption>
+    <p>Given a right triangle with a selected angle \( \theta \):</p>
+    <table>
+      <tr>
+        <td>\( \sin(\theta) = \frac{\text{Opposite}}{\text{Hypotenuse}} \)</td>
+        <td>\( \csc(\theta) = \frac{\text{Hypotenuse}}{\text{Opposite}} \)</td>
+      </tr>
+      <tr>
+        <td>\( \cos(\theta) = \frac{\text{Adjacent}}{\text{Hypotenuse}} \)</td>
+        <td>\( \sec(\theta) = \frac{\text{Hypotenuse}}{\text{Adjacent}} \)</td>
+      </tr>
+      <tr>
+        <td>\( \tan(\theta) = \frac{\text{Opposite}}{\text{Adjacent}} \)</td>
+        <td>\( \cot(\theta) = \frac{\text{Adjacent}}{\text{Opposite}} \)</td>
+      </tr>
+    </table>
+    <img src="5_3_d.png" alt="Right triangle labeled with angle θ, opposite, adjacent, and hypotenuse sides" />
+    <p>A common mnemonic for remembering these relationships is <strong>SohCahToa</strong>.</p>
+  </figure>
+
+ <!-- Example 1 -->
+<section class="example" aria-labelledby="example-example1">
+            <div class="example-problem">
+                <h3 id="example-example1">Example 1</h3>
+
+  <p>Find all six trigonometric functions for the triangle below.</p>
+  <figure>
+    <img src="5_3_1.png" alt="Right triangle with sides labeled 2, 2√3, and 4 and angle α" />
+  </figure>
+</div>
+              <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-ref-angles">
+                <span class="toggle-arrow">▼</span>
+                <span>Show Solution</span>
+            </button>
+
+            <div id="solution-ref-angles" class="example-content">
+                <div class="solution">
+                    <h4>Solution</h4>
+  <p>Identify the sides as opposite, adjacent, and hypotenuse:</p>
+  <figure>
+    <img src="5_3_2.png" alt="Right triangle with sides color-coded: Opposite in red, Adjacent in purple, Hypotenuse in blue" />
+  </figure>
+
+  <table>
+    <caption>Trigonometric functions for angle \( \alpha \)</caption>
+    <tr>
+      <td>\( \sin(\alpha) = \frac{2}{4} = \frac{1}{2} \)</td>
+      <td>\( \csc(\alpha) = \frac{4}{2} = 2 \)</td>
+    </tr>
+    <tr>
+      <td>\( \cos(\alpha) = \frac{2\sqrt{3}}{4} = \frac{\sqrt{3}}{2} \)</td>
+      <td>\( \sec(\alpha) = \frac{4}{2\sqrt{3}} = \frac{2}{\sqrt{3}} = \frac{2\sqrt{3}}{3} \)</td>
+    </tr>
+    <tr>
+      <td>\( \tan(\alpha) = \frac{2}{2\sqrt{3}} = \frac{\sqrt{3}}{3} \)</td>
+      <td>\( \cot(\alpha) = \frac{2\sqrt{3}}{2} = \sqrt{3} \)</td>
+    </tr>
+  </table>
+
+  <p>    Occasionally we use the Pythagorean Theorem $$a^2 + b^2 = c^2$$ to find missing sides:
+    $$\text{adjacent}^2 + \text{opposite}^2 = \text{hypotenuse}^2$$</p>
+  </div>
+  
+</div>
+</section>
+ <!-- Example 2 -->
+<section class="example" aria-labelledby="example-example2">
+            <div class="example-problem">
+                <h3 id="example-example2">Example 2</h3>
+  <p>Find all six trigonometric functions for this triangle:</p>
+  <figure>
+    <img src="5_3_4.png" alt="Right triangle with sides 7 and 7√2, and angle α" />
+  </figure>
+</div>
+
+              <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-example2">
+                <span class="toggle-arrow">▼</span>
+                <span>Show Solution</span>
+            </button>
+
+            <div id="solution-example2" class="example-content">
+                <div class="solution">
+ 
+  <p>Use the Pythagorean theorem to find the missing side:</p>
+  <p>
+      $$7^2 + x^2 = (7\sqrt{2})^2$$
+      $$49 + x^2 = 98$$
+      $$x^2 = 49$$
+      $$x = 7$$
+    </p>
+
+  <table>
+      <tr>
+        <td>$$\sin(\alpha) = \frac{7}{7\sqrt{2}} = \frac{\sqrt{2}}{2}$$</td>
+        <td>$$\csc(\alpha) = \frac{7\sqrt{2}}{7} = \sqrt{2}$$</td>
+      </tr>
+      <tr>
+        <td>$$\cos(\alpha) = \frac{7}{7\sqrt{2}} = \frac{\sqrt{2}}{2}$$</td>
+        <td>$$\sec(\alpha) = \frac{7\sqrt{2}}{7} = \sqrt{2}$$</td>
+      </tr>
+      <tr>
+        <td>$$\tan(\alpha) = \frac{7}{7} = 1$$</td>
+        <td>$$\cot(\alpha) = \frac{7}{7} = 1$$</td>
+      </tr>
+    </table>
+  </div>
+  </div>
+  </section>
+ <div class="figure">
+    <strong>Fundamental Trigonometric Identities</strong>
+
+    <!-- Reciprocal Identities: 2 rows x 3 columns -->
+    <section aria-labelledby="reciprocal-identities">
+        <h2 id="reciprocal-identities">Reciprocal Identities</h2>
+        <div class="identity-grid grid-2x3">
+            <p>\( \sin x = \dfrac{1}{\csc x} \)</p>
+            <p>\( \csc x = \dfrac{1}{\sin x} \)</p>
+            <p>\( \cos x = \dfrac{1}{\sec x} \)</p>
+            <p>\( \sec x = \dfrac{1}{\cos x} \)</p>
+            <p>\( \tan x = \dfrac{1}{\cot x} \)</p>
+            <p>\( \cot x = \dfrac{1}{\tan x} \)</p>
+        </div>
+    </section>
+
+    <!-- Quotient Identities: 1 row x 2 columns -->
+    <section aria-labelledby="quotient-identities">
+        <h2 id="quotient-identities">Quotient Identities</h2>
+        <div class="identity-grid grid-1x2">
+            <p>\( \tan x = \dfrac{\sin x}{\cos x} \)</p>
+            <p>\( \cot x = \dfrac{\cos x}{\sin x} \)</p>
+        </div>
+    </section>
+
+    <!-- Pythagorean Identities: 1 row x 3 columns -->
+    <section aria-labelledby="pythagorean-identities">
+        <h2 id="pythagorean-identities">Pythagorean Identities</h2>
+        <div class="identity-grid grid-1x3">
+            <p>\( \sin^2 x + \cos^2 x = 1 \)</p>
+            <p>\( 1 + \cot^2 x = \csc^2 x \)</p>
+            <p>\( 1 + \tan^2 x = \sec^2 x \)</p>
+        </div>
+    </section>
+
+    <hr class="divider" role="separator" aria-hidden="true"/>
+</div>
+  <div class="figure">
+    <strong>Tangent and Cotangent Values of Common Angles</strong>
+    <table>
+      <tr>
+        <th>θ (degrees)</th>
+        <th>θ (radians)</th>
+        <th>tan(θ)</th>
+        <th>cot(θ)</th>
+      </tr>
+      <tr>
+        <td>0°</td><td>0</td><td>0</td><td>undefined</td>
+      </tr>
+      <tr>
+        <td>30°</td><td>π/6</td><td>√3/3</td><td>√3</td>
+      </tr>
+      <tr>
+        <td>45°</td><td>π/4</td><td>1</td><td>1</td>
+      </tr>
+      <tr>
+        <td>60°</td><td>π/3</td><td>√3</td><td>√3/3</td>
+      </tr>
+      <tr>
+        <td>90°</td><td>π/2</td><td>undefined</td><td>0</td>
+      </tr>
+    </table>
+  </div>
+
+ <!-- Example 3 -->
+<section class="example" aria-labelledby="example-example3">
+            <div class="example-problem">
+                <h3 id="example-example3">Example 3</h3>
+    Find the indicated values, if they exist.
+   <ol class="tight-list">
+  <li>\(\sec(60^\circ)\)</li>
+  <li>\(\csc(7\pi/4)\)</li>
+  <li>\(\cot(3)\)</li>
+  <li>\(\tan(\theta)\), where θ is coterminal with 3π/2</li>
+  <li>\(\cos(\theta)\), where \(\csc(\theta) = -\sqrt{5}\) and θ is Quadrant IV</li>
+  <li>\(\sin(\theta)\), where \(\tan(\theta) = 3\) and π < θ < 3π/2</li>
+</ol>
+  </div>
+
+</div>
+
+              <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-example2">
+                <span class="toggle-arrow">▼</span>
+                <span>Show Solution</span>
+            </button>
+
+            <div id="solution-example2" class="example-content">
+                <div class="solution">
+<ol class="tight-list">
+  <li>\(\sec(60^\circ) = \frac{1}{\cos(60^\circ)} = 2\)</li>
+  <li>\(\csc(7\pi/4) = \frac{1}{\sin(7\pi/4)} = -\sqrt{2}\)</li>
+  <li>\(\cot(3) = \frac{\cos(3)}{\sin(3)} \approx -7.015\)</li>
+  <li>Undefined, since \(\tan(\theta) = \frac{\sin(\theta)}{\cos(\theta)} = \frac{-1}{0}\)</li>
+  <li>\(\cos(\theta) = \frac{2\sqrt{5}}{5}\)</li>
+  <li>\(\sin(\theta) = -\frac{3\sqrt{10}}{10}\)</li>
+</ol>
+  </div>
+<!-- Example 4 : Angle of Inclination -->
+<section class="example" aria-labelledby="example-angle-inclination">
+    <div class="example-problem">
+        <h3 id="example-angle-inclination">Example 4</h3>
+        <p>Find the angle of inclination \( \theta \) for the line passing through the points \( (1,2) \) and \( (5,6) \).</p>
+        <figure>
+            <img src="5_3_5.png" alt="Line passing through points (1,2) and (5,6) on a coordinate plane" />
+        </figure>
+</div>
+        <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-angle-inclination">
+            <span class="toggle-arrow">▼</span>
+            <span>Show Solution</span>
+        </button>
+
+        <div id="solution-angle-inclination" class="example-content">
+            <div class="solution">
+                <h4>Solution</h4>
+                <p>Use the slope formula \( m = \frac{y_2 - y_1}{x_2 - x_1} \):</p>
+                <p>\( m = \frac{6-2}{5-1} = \frac{4}{4} = 1 \)</p>
+                <p>The angle of inclination is \( \theta = \arctan(m) = \arctan(1) = 45^\circ \).</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Example 5: Trigonometric values from given functions -->
+<section class="example" aria-labelledby="example-trig-values">
+    <div class="example-problem">
+        <h3 id="example-trig-values">Example 5</h3>
+        <p>Find the indicated values:</p>
+        <ol class="tight-list">
+            <li>\( \sec(60^\circ) \)</li>
+            <li>\( \csc(7\pi/4) \)</li>
+            <li>\( \cot(3) \)</li>
+            <li>\( \tan(\theta) \), where \( \theta \) is coterminal with \( 3\pi/2 \)</li>
+            <li>\( \cos(\theta) \), where \( \csc(\theta) = -\sqrt{5} \) and \( \theta \) is in Quadrant IV</li>
+            <li>\( \sin(\theta) \), where \( \tan(\theta) = 3 \) and \( \pi < \theta < 3\pi/2 \)</li>
+        </ol>
+</div>
+        <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-trig-values">
+            <span class="toggle-arrow">▼</span>
+            <span>Show Solution</span>
+        </button>
+
+        <div id="solution-trig-values" class="example-content">
+            <div class="solution">
+                <h4>Solution</h4>
+                <ol>
+                    <li>\( \sec(60^\circ) = \frac{1}{\cos(60^\circ)} = 2 \)</li>
+                    <li>\( \csc(7\pi/4) = \frac{1}{\sin(7\pi/4)} = -\sqrt{2} \)</li>
+                    <li>\( \cot(3) = \frac{\cos(3)}{\sin(3)} \approx -7.015 \)</li>
+                    <li>Undefined, since \( \tan(3\pi/2) = \frac{\sin(3\pi/2)}{\cos(3\pi/2)} = \frac{-1}{0} \)</li>
+                    <li>\( \cos(\theta) = \frac{2\sqrt{5}}{5} \)</li>
+                    <li>\( \sin(\theta) = -\frac{3\sqrt{10}}{10} \)</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Example 6: Finding missing side using Pythagorean theorem -->
+<section class="example" aria-labelledby="example-missing-side">
+    <div class="example-problem">
+        <h3 id="example-missing-side">Example 6</h3>
+        <p>Find all six trigonometric functions for a triangle with sides 7, ?, 7√2.</p>
+        <figure>
+            <img src="5_3_6.png" alt="Right triangle with hypotenuse 7√2, one leg 7, unknown leg" />
+        </figure>
+</div>
+        <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-missing-side">
+            <span class="toggle-arrow">▼</span>
+            <span>Show Solution</span>
+        </button>
+
+        <div id="solution-missing-side" class="example-content">
+            <div class="solution">
+                <h4>Solution</h4>
+                <p>Using the Pythagorean theorem:</p>
+                <p>\( 7^2 + x^2 = (7\sqrt{2})^2 \)</p>
+                <p>\( 49 + x^2 = 98 \)</p>
+                <p>\( x^2 = 49 \)</p>
+                <p>\( x = 7 \)</p>
+
+                <table>
+                    <caption>Trigonometric functions for the triangle</caption>
+                    <tr>
+                        <td>\( \sin(\alpha) = \frac{7}{7\sqrt{2}} = \frac{\sqrt{2}}{2} \)</td>
+                        <td>\( \csc(\alpha) = \frac{7\sqrt{2}}{7} = \sqrt{2} \)</td>
+                    </tr>
+                    <tr>
+                        <td>\( \cos(\alpha) = \frac{7}{7\sqrt{2}} = \frac{\sqrt{2}}{2} \)</td>
+                        <td>\( \sec(\alpha) = \frac{7\sqrt{2}}{7} = \sqrt{2} \)</td>
+                    </tr>
+                    <tr>
+                        <td>\( \tan(\alpha) = \frac{7}{7} = 1 \)</td>
+                        <td>\( \cot(\alpha) = \frac{7}{7} = 1 \)</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Example 7: Reference Angles -->
+<section class="example" aria-labelledby="example-7trigfcn">
+    <div class="example-problem">
+        <h3 id="example-7trigfcn">Example 7</h3>
+        <p>Find all six trigonometric functions for the triangle below.</p>
+        <figure>
+            <img src="5_3_7.png" alt="Right triangle with sides labeled 2, 2√3, and 4 and angle α" />
+        </figure>
+</div>
+        <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-ref-angles">
+            <span class="toggle-arrow">▼</span>
+            <span>Show Solution</span>
+        </button>
+
+        <div id="solution-ref-angles" class="example-content">
+            <div class="solution">
+                <h4>Solution</h4>
+                <p>Identify the sides as opposite, adjacent, and hypotenuse:</p>
+                <figure>
+                    <img src="5_3_8.png" alt="Right triangle with sides color-coded: Opposite in red, Adjacent in purple, Hypotenuse in blue" />
+                </figure>
+
+                <table>
+                    <caption>Trigonometric functions for angle \( \alpha \)</caption>
+                    <tr>
+                        <td>\( \sin(\alpha) = \frac{2}{4} = \frac{1}{2} \)</td>
+                        <td>\( \csc(\alpha) = \frac{4}{2} = 2 \)</td>
+                    </tr>
+                    <tr>
+                        <td>\( \cos(\alpha) = \frac{2\sqrt{3}}{4} = \frac{\sqrt{3}}{2} \)</td>
+                        <td>\( \sec(\alpha) = \frac{4}{2\sqrt{3}} = \frac{2}{\sqrt{3}} = \frac{2\sqrt{3}}{3} \)</td>
+                    </tr>
+                    <tr>
+                        <td>\( \tan(\alpha) = \frac{2}{2\sqrt{3}} = \frac{\sqrt{3}}{3} \)</td>
+                        <td>\( \cot(\alpha) = \frac{2\sqrt{3}}{2} = \sqrt{3} \)</td>
+                    </tr>
+                </table>
+
+                <p>We often use the Pythagorean theorem \( a^2 + b^2 = c^2 \) to find missing sides.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Example 8: Angle of Inclination -->
+<section class="example" aria-labelledby="example-angle-inclination">
+    <div class="example-problem">
+        <h3 id="example-angle-inclination">Example 8</h3>
+        <p>Find the angle of inclination \( \theta \) for the line passing through the points \( (1,2) \) and \( (5,6) \).</p>
+        <figure>
+            <img src="5_3_9.png" alt="Line passing through points (1,2) and (5,6) on a coordinate plane" />
+        </figure>
+</div>
+        <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-angle-inclination">
+            <span class="toggle-arrow">▼</span>
+            <span>Show Solution</span>
+        </button>
+
+        <div id="solution-angle-inclination" class="example-content">
+            <div class="solution">
+                <h4>Solution</h4>
+                <p>Use the slope formula \( m = \frac{y_2 - y_1}{x_2 - x_1} \):</p>
+                <p>\( m = \frac{6-2}{5-1} = \frac{4}{4} = 1 \)</p>
+                <p>The angle of inclination is \( \theta = \arctan(m) = \arctan(1) = 45^\circ \).</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Example 9: Trigonometric values from given functions -->
+<section class="example" aria-labelledby="example-trig-values">
+    <div class="example-problem">
+        <h3 id="example-trig-values">Example 9</h3>
+        <p>Find the indicated values:</p>
+        <ol>
+            <li>\( \sec(60^\circ) \)</li>
+            <li>\( \csc(7\pi/4) \)</li>
+            <li>\( \cot(3) \)</li>
+            <li>\( \tan(\theta) \), where \( \theta \) is coterminal with \( 3\pi/2 \)</li>
+            <li>\( \cos(\theta) \), where \( \csc(\theta) = -\sqrt{5} \) and \( \theta \) is in Quadrant IV</li>
+            <li>\( \sin(\theta) \), where \( \tan(\theta) = 3 \) and \( \pi < \theta < 3\pi/2 \)</li>
+        </ol>
+</div>
+        <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-trig-values">
+            <span class="toggle-arrow">▼</span>
+            <span>Show Solution</span>
+        </button>
+
+        <div id="solution-trig-values" class="example-content">
+            <div class="solution">
+                <h4>Solution</h4>
+                <ol>
+                    <li>\( \sec(60^\circ) = \frac{1}{\cos(60^\circ)} = 2 \)</li>
+                    <li>\( \csc(7\pi/4) = \frac{1}{\sin(7\pi/4)} = -\sqrt{2} \)</li>
+                    <li>\( \cot(3) = \frac{\cos(3)}{\sin(3)} \approx -7.015 \)</li>
+                    <li>Undefined, since \( \tan(3\pi/2) = \frac{\sin(3\pi/2)}{\cos(3\pi/2)} = \frac{-1}{0} \)</li>
+                    <li>\( \cos(\theta) = \frac{2\sqrt{5}}{5} \)</li>
+                    <li>\( \sin(\theta) = -\frac{3\sqrt{10}}{10} \)</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Example 10: Finding missing side using Pythagorean theorem -->
+<section class="example" aria-labelledby="example-missing-side">
+    <div class="example-problem">
+        <h3 id="example-missing-side">Example 10</h3>
+        <p>Find all six trigonometric functions for a triangle with sides 7, ?, 7√2.</p>
+        <figure>
+            <img src="5_3_10.png" alt="Right triangle with hypotenuse 7√2, one leg 7, unknown leg" />
+        </figure>
+</div>
+        <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-missing-side">
+            <span class="toggle-arrow">▼</span>
+            <span>Show Solution</span>
+        </button>
+
+        <div id="solution-missing-side" class="example-content">
+            <div class="solution">
+                <h4>Solution</h4>
+                <p>Using the Pythagorean theorem:</p>
+                <p>\( 7^2 + x^2 = (7\sqrt{2})^2 \)</p>
+                <p>\( 49 + x^2 = 98 \)</p>
+                <p>\( x^2 = 49 \)</p>
+                <p>\( x = 7 \)</p>
+
+                <table>
+                    <caption>Trigonometric functions for the triangle</caption>
+                    <tr>
+                        <td>\( \sin(\alpha) = \frac{7}{7\sqrt{2}} = \frac{\sqrt{2}}{2} \)</td>
+                        <td>\( \csc(\alpha) = \frac{7\sqrt{2}}{7} = \sqrt{2} \)</td>
+                    </tr>
+                    <tr>
+                        <td>\( \cos(\alpha) = \frac{7}{7\sqrt{2}} = \frac{\sqrt{2}}{2} \)</td>
+                        <td>\( \sec(\alpha) = \frac{7\sqrt{2}}{7} = \sqrt{2} \)</td>
+                    </tr>
+                    <tr>
+                        <td>\( \tan(\alpha) = \frac{7}{7} = 1 \)</td>
+                        <td>\( \cot(\alpha) = \frac{7}{7} = 1 \)</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
 
 
+
+
+</section>
+</main> 
 
             
 <script>

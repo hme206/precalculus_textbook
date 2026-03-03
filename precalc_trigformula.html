@@ -1,1 +1,475 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Trigonometric Identities Reference Sheet</title>
+<script>
+  window.MathJax = {
+    tex: { inlineMath: [['\\(','\\)']] },
+    options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+  };
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;line-height:1.6;color:#333;background-color:#f9f9f9;margin-left:250px}
+.side-toc{position:fixed;top:0;left:0;width:230px;height:100vh;background-color:#f0f8ed;border-right:3px solid #33AB2B;padding:20px;overflow-y:auto}
+.toc-title{font-size:1.4em;margin-bottom:15px;color:#33AB2B}
+.toc-chapter{width:100%;background:none;border:none;text-align:left;font-size:1em;padding:10px 0;display:flex;justify-content:space-between;align-items:center;cursor:pointer;color:#333}
+.toc-chapter:hover,.toc-chapter:focus{color:#33AB2B}
+.toc-chapter:focus-visible{outline:2px solid #33AB2B;outline-offset:2px}
+.arrow{transition:transform 0.25s ease}
+.toc-chapter[aria-expanded="true"] .arrow{transform:rotate(90deg)}
+.toc-submenu{list-style:none;padding-left:15px;margin:5px 0 10px;display:none}
+.toc-submenu.open{display:block}
+.toc-submenu li{margin:6px 0}
+.toc-submenu a{color:#333;text-decoration:none}
+.toc-submenu a:hover,.toc-submenu a:focus{color:#33AB2B;text-decoration:underline}
+.toc-submenu a:focus-visible{outline:2px solid #33AB2B;outline-offset:2px}
+.toc-submenu a[aria-current="page"]{color:#33AB2B;font-weight:bold}
+.container{max-width:900px;margin:0 auto;padding:40px 20px;background-color:#fff;box-shadow:0 0 20px rgba(0,0,0,.1)}
+h1{color:#33AB2B;margin-bottom:30px;font-size:2.5em;border-bottom:3px solid #33AB2B;padding-bottom:15px}
+h2{color:#33AB2B;font-size:1.8em;margin-top:30px;margin-bottom:20px}
+h3{color:#33AB2B;font-size:1.2em;margin-top:20px;margin-bottom:15px}
+.identity-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.6rem 2.5rem;margin-bottom:1rem}
+.identity-grid p{margin-bottom:0}
+p{margin-bottom:15px}
+.divider{border:none;border-top:2px dashed #33AB2B;margin:30px 0}
+table{width:100%;border-collapse:collapse;margin:20px 0}
+table th{background-color:#f0f8ed;color:#33AB2B;padding:12px;text-align:left;border:1px solid #ccc;font-weight:bold}
+table td{padding:12px;border:1px solid #ccc}
+table tr:nth-child(even){background-color:#f9f9f9}
+.unit-circle-container{width:100%;max-width:700px;margin:0 auto;overflow-x:auto}
+.unit-circle-container svg{display:block;width:100%;height:auto}
+.visually-hidden{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0 0 0 0)!important;white-space:nowrap!important;border:0!important}
+:focus-visible{outline:3px solid #33AB2B;outline-offset:2px}
+.print-bar{position:fixed;bottom:28px;right:28px;z-index:200}
+.print-btn{display:flex;align-items:center;gap:8px;background-color:#33AB2B;color:#000;border:none;border-radius:6px;padding:12px 20px;font-size:1em;font-weight:bold;cursor:pointer;box-shadow:0 3px 10px rgba(0,0,0,.2);transition:background-color .2s,box-shadow .2s}
+.print-btn:hover{background-color:#2a8922;box-shadow:0 5px 16px rgba(0,0,0,.28)}
+.print-btn:focus-visible{outline:3px solid #005a1f;outline-offset:3px}
+@media(max-width:768px){
+  .side-toc{position:static;width:100%;height:auto;border-right:none;border-bottom:3px solid #33AB2B;margin-bottom:20px}
+  body{margin-left:0}
+  .container{max-width:100%;padding:20px 15px;margin:0;box-shadow:none}
+  h1{font-size:1.8em}h2{font-size:1.4em}
+  .identity-grid{grid-template-columns:1fr}
+  table{display:block;overflow-x:auto;white-space:nowrap}
+  .print-bar{bottom:16px;right:16px}
+}
+@media(max-width:480px){
+  h1{font-size:1.5em}h2{font-size:1.2em}
+  .container{padding:15px 10px}
+  .toc-title{font-size:1.2em}
+}
+@media print{
+  .side-toc,.print-bar{display:none!important}
+  body{margin:0;background:white;font-size:10pt;color:#000}
+  .container{max-width:100%;margin:0;padding:0.35in 0.5in;box-shadow:none}
+  h1{font-size:17pt;color:#000;border-bottom-color:#555;padding-bottom:6pt;margin-bottom:10pt}
+  h2{font-size:12pt;color:#000;margin-top:9pt;margin-bottom:5pt}
+  h3{font-size:10pt;color:#000;margin-top:7pt;margin-bottom:3pt}
+  .divider{border-top-color:#bbb;margin:6pt 0}
+  .identity-grid{gap:2pt 16pt}
+  section{break-inside:avoid}
+  #unit-circle{break-before:page}
+  .unit-circle-container{max-width:5.4in;margin:0.15in auto 0}
+  table th,table td{font-size:9pt;padding:4pt 7pt}
+  table th{-webkit-print-color-adjust:exact;print-color-adjust:exact;background-color:#e8f5e3!important}
+  a{text-decoration:none;color:#000}
+}
+</style>
+</head>
+<body>
+
+<nav class="side-toc" aria-label="Textbook Navigation">
+  <h2 class="toc-title">Contents</h2>
+
+  <button class="toc-chapter" aria-expanded="false" aria-controls="ch1">
+    <span>Chapter 1: Functions &amp; Graphs</span>
+    <span class="arrow" aria-hidden="true">&#9658;</span>
+  </button>
+  <ul class="toc-submenu" id="ch1">
+    <li><a href="precalc_ch1_1.html">1.1 Functions &amp; Relations</a></li>
+    <li><a href="precalc_ch1_1.html">1.2 Graphs of Functions</a></li>
+    <li><a href="precalc_ch1_1.html">1.3 Parent Functions &amp; Their Transformations</a></li>
+    <li><a href="precalc_ch1_1.html">1.4 Function Algebra &amp; Compositions</a></li>
+    <li><a href="precalc_ch1_1.html">1.5 Inverse Functions &amp; Relations</a></li>
+  </ul>
+
+  <button class="toc-chapter" aria-expanded="false" aria-controls="ch2">
+    <span>Chapter 2: Polynomials &amp; Rational Functions</span>
+    <span class="arrow" aria-hidden="true">&#9658;</span>
+  </button>
+  <ul class="toc-submenu" id="ch2">
+    <li><a href="precalc_ch2_1.html">2.1 Quadratic Functions</a></li>
+    <li><a href="precalc_ch2_2.html">2.2 Polynomial Functions</a></li>
+    <li><a href="precalc_ch2_3.html">2.3 Zero&#8217;s of Polynomial Functions</a></li>
+    <li><a href="precalc_ch2_4.html">2.4 Graphing Polynomial Functions</a></li>
+    <li><a href="precalc_ch2_5.html">2.5 Rational Functions</a></li>
+    <li><a href="precalc_ch2_6.html">2.6 Nonlinear Inequalities</a></li>
+  </ul>
+
+  <button class="toc-chapter" aria-expanded="false" aria-controls="ch3">
+    <span>Chapter 3: Exponential &amp; Logarithmic Functions</span>
+    <span class="arrow" aria-hidden="true">&#9658;</span>
+  </button>
+  <ul class="toc-submenu" id="ch3">
+    <li><a href="precalc_ch3_1.html">3.1 Exponentail Functions</a></li>
+    <li><a href="precalc_ch3_2.html">3.2 Logarithmic Functions</a></li>
+    <li><a href="precalc_ch3_3.html">3.3 Properties of Logarithms</a></li>
+    <li><a href="precalc_ch3_4.html">3.4 Solving Exponential &amp; Logarithmic Equations</a></li>
+  </ul>
+
+  <button class="toc-chapter" aria-expanded="false" aria-controls="ch4">
+    <span>Chapter 4: Systems of Equations</span>
+    <span class="arrow" aria-hidden="true">&#9658;</span>
+  </button>
+  <ul class="toc-submenu" id="ch4">
+    <li><a href="precalc_ch4_1.html">4.1 Two Variable Systems of Equations</a></li>
+    <li><a href="precalc_ch4_2.html">4.2 Solving Systems by Substitution</a></li>
+    <li><a href="precalc_ch4_3.html">4.3 Solving Systems by Elimination</a></li>
+    <li><a href="precalc_ch4_4.html">4.4 Multivariable Linear Systems</a></li>
+    <li><a href="precalc_ch4_4.html">4.4 Partial Fractions</a></li>
+  </ul>
+
+  <button class="toc-chapter" aria-expanded="false" aria-controls="ch5">
+    <span>Chapter 5: Trigonometric Equations</span>
+    <span class="arrow" aria-hidden="true">&#9658;</span>
+  </button>
+  <ul class="toc-submenu" id="ch5">
+    <li><a href="precalc_ch5_1.html">5.1 Angles</a></li>
+    <li><a href="precalc_ch5_2.html">5.2 The Unit Circle</a></li>
+    <li><a href="precalc_ch5_3.html">5.3 Right Triangle Trigonometry</a></li>
+    <li><a href="precalc_ch5_4.html">5.4 Graphing Trigonometric Functions</a></li>
+    <li><a href="precalc_ch5_5.html">5.5 Inverse Trigonometric Functions</a></li>
+  </ul>
+
+  <button class="toc-chapter" aria-expanded="false" aria-controls="ch6">
+    <span>Chapter 6: Analytic Trigonometry</span>
+    <span class="arrow" aria-hidden="true">&#9658;</span>
+  </button>
+  <ul class="toc-submenu" id="ch6">
+    <li><a href="precalc_ch6_1.html">6.1 Fundamental Identities</a></li>
+    <li><a href="precalc_ch6_2.html">6.2 More with Identities</a></li>
+    <li><a href="precalc_ch6_3.html">6.3 Solving Trigonometric Functions</a></li>
+    <li><a href="precalc_ch6_4.html">6.4 Law of Sines</a></li>
+    <li><a href="precalc_ch6_5.html">6.5 Law of Cosines</a></li>
+  </ul>
+
+  <button class="toc-chapter" aria-expanded="false" aria-controls="ch7">
+    <span>Chapter 7: Conics</span>
+    <span class="arrow" aria-hidden="true">&#9658;</span>
+  </button>
+  <ul class="toc-submenu" id="ch7">
+    <li><a href="precalc_ch7_1.html">7.1 Introduction to Conics &amp; Circles</a></li>
+    <li><a href="precalc_ch7_2.html">7.2 Parabolas</a></li>
+    <li><a href="precalc_ch7_3.html">7.3 Ellipses</a></li>
+    <li><a href="precalc_ch7_4.html">7.4 Hyperbolas</a></li>
+  </ul>
+
+  <button class="toc-chapter" aria-expanded="false" aria-controls="ch8">
+    <span>Chapter 8: Supplemental Information</span>
+    <span class="arrow" aria-hidden="true">&#9658;</span>
+  </button>
+  <ul class="toc-submenu" id="ch8">
+    <li><a href="precalc_ch8_1.html">8.1 Sequences</a></li>
+    <li><a href="precalc_ch8_2.html">8.2 Summation Notation</a></li>
+    <li><a href="precalc_ch8_3.html">8.3 The Binomial Theorem</a></li>
+    <li><a href="precalc_ch8_4.html">8.4 Polar Coordinates &amp; Equations</a></li>
+    <li><a href="precalc_ch8_5.html">8.5 Graphs of Polar Equations</a></li>
+  </ul>
+
+  <!-- Appendix: pre-expanded, current page marked -->
+  <button class="toc-chapter" aria-expanded="true" aria-controls="app">
+    <span>Appendix</span>
+    <span class="arrow" aria-hidden="true">&#9658;</span>
+  </button>
+  <ul class="toc-submenu open" id="app">
+    <li><a href="precalc_trigformula.html" aria-current="page">Trigonometric Formula Sheet</a></li>
+  </ul>
+</nav>
+
+<main id="main-content">
+<div class="container">
+
+  <h1>Trigonometric Identities</h1>
+
+  <section aria-labelledby="basic-identities">
+    <h2 id="basic-identities">Basic Identities</h2>
+    <div class="identity-grid">
+      <p>\( \sin x = \dfrac{1}{\csc x} \)</p>
+      <p>\( \cos x = \dfrac{1}{\sec x} \)</p>
+      <p>\( \csc x = \dfrac{1}{\sin x} \)</p>
+      <p>\( \sec x = \dfrac{1}{\cos x} \)</p>
+      <p>\( \tan x = \dfrac{1}{\cot x} \)</p>
+      <p>\( \cot x = \dfrac{1}{\tan x} \)</p>
+      <p>\( \tan x = \dfrac{\sin x}{\cos x} \)</p>
+      <p>\( \cot x = \dfrac{\cos x}{\sin x} \)</p>
+    </div>
+    <p>\( \sin(-x) = -\sin x \)</p>
+    <p>\( \cos(-x) = \cos x \)</p>
+    <p>\( \tan(-x) = -\tan x \)</p>
+  </section>
+  <hr class="divider" role="separator" aria-hidden="true"/>
+
+  <section aria-labelledby="pythagorean-identities">
+    <h2 id="pythagorean-identities">Pythagorean Identities</h2>
+    <p>\( \sin^2 x + \cos^2 x = 1 \)</p>
+    <p>\( 1 + \cot^2 x = \csc^2 x \)</p>
+    <p>\( 1 + \tan^2 x = \sec^2 x \)</p>
+  </section>
+  <hr class="divider" role="separator" aria-hidden="true"/>
+
+  <section aria-labelledby="sum-difference">
+    <h2 id="sum-difference">Sum &amp; Difference Identities</h2>
+    <p>\( \sin(u+v) = \sin u\cos v + \cos u\sin v \)</p>
+    <p>\( \sin(u-v) = \sin u\cos v - \cos u\sin v \)</p>
+    <p>\( \cos(u+v) = \cos u\cos v - \sin u\sin v \)</p>
+    <p>\( \cos(u-v) = \cos u\cos v + \sin u\sin v \)</p>
+    <p>\( \tan(u+v) = \dfrac{\tan u + \tan v}{1 - \tan u\tan v} \)</p>
+    <p>\( \tan(u-v) = \dfrac{\tan u - \tan v}{1 + \tan u\tan v} \)</p>
+  </section>
+  <hr class="divider" role="separator" aria-hidden="true"/>
+
+  <section aria-labelledby="double-angle">
+    <h2 id="double-angle">Double Angle Identities</h2>
+    <p>\( \sin 2x = 2\sin x\cos x \)</p>
+    <p>\( \cos 2x = \cos^2 x - \sin^2 x \)</p>
+    <p>\( \cos 2x = 1 - 2\sin^2 x \)</p>
+    <p>\( \cos 2x = 2\cos^2 x - 1 \)</p>
+    <p>\( \tan 2x = \dfrac{2\tan x}{1 - \tan^2 x} \)</p>
+  </section>
+  <hr class="divider" role="separator" aria-hidden="true"/>
+
+  <section aria-labelledby="half-angle">
+    <h2 id="half-angle">Half Angle Identities</h2>
+    <p>\( \sin\dfrac{x}{2} = \pm\sqrt{\dfrac{1-\cos x}{2}} \)</p>
+    <p>\( \cos\dfrac{x}{2} = \pm\sqrt{\dfrac{1+\cos x}{2}} \)</p>
+    <p>\( \tan\dfrac{x}{2} = \pm\sqrt{\dfrac{1-\cos x}{1+\cos x}} \)</p>
+    <p>\( \tan\dfrac{x}{2} = \dfrac{\sin x}{1+\cos x} \)</p>
+    <p>\( \tan\dfrac{x}{2} = \dfrac{1-\cos x}{\sin x} \)</p>
+  </section>
+  <hr class="divider" role="separator" aria-hidden="true"/>
+
+  <section aria-labelledby="product-to-sum">
+    <h2 id="product-to-sum">Product-to-Sum Identities</h2>
+    <p>\( \sin x\sin y = \tfrac{1}{2}\left[\cos(x-y) - \cos(x+y)\right] \)</p>
+    <p>\( \cos x\cos y = \tfrac{1}{2}\left[\cos(x-y) + \cos(x+y)\right] \)</p>
+    <p>\( \sin x\cos y = \tfrac{1}{2}\left[\sin(x+y) + \sin(x-y)\right] \)</p>
+    <p>\( \cos x\sin y = \tfrac{1}{2}\left[\sin(x+y) - \sin(x-y)\right] \)</p>
+  </section>
+  <hr class="divider" role="separator" aria-hidden="true"/>
+
+  <section aria-labelledby="sum-to-product">
+    <h2 id="sum-to-product">Sum-to-Product Identities</h2>
+    <p>\( \sin x + \sin y = 2\sin\dfrac{x+y}{2}\cos\dfrac{x-y}{2} \)</p>
+    <p>\( \sin x - \sin y = 2\cos\dfrac{x+y}{2}\sin\dfrac{x-y}{2} \)</p>
+    <p>\( \cos x + \cos y = 2\cos\dfrac{x+y}{2}\cos\dfrac{x-y}{2} \)</p>
+    <p>\( \cos x - \cos y = -2\sin\dfrac{x+y}{2}\sin\dfrac{x-y}{2} \)</p>
+  </section>
+  <hr class="divider" role="separator" aria-hidden="true"/>
+
+  <!--
+    id="unit-circle" is the print trigger: @media print sets break-before:page on this section.
+    SVG coordinates: centre (350,350), radius 260
+      x = 350 + 260*cos(deg)   y = 350 - 260*sin(deg)
+    Key points:
+      0/360  (610,350)   90  (350, 90)   180  (90,350)   270  (350,610)
+      30     (575,220)   60  (480,125)   120  (220,125)   150  (125,220)
+      210    (125,480)   240 (220,575)   300  (480,575)   330  (575,480)
+      45     (534,166)   135 (166,166)   225  (166,534)   315  (534,534)
+  -->
+  <section aria-labelledby="unit-circle-heading" id="unit-circle">
+    <h2 id="unit-circle-heading">Unit Circle</h2>
+
+    <div class="unit-circle-container">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 700"
+           role="img" aria-labelledby="uc-title uc-desc" focusable="false">
+
+        <title id="uc-title">Unit Circle Diagram</title>
+        <desc id="uc-desc">
+          A unit circle centred at the origin with radius 1. Angles are colour-coded:
+          red for multiples of pi over 6 (30 degrees), green for multiples of pi over 4
+          (45 degrees), and blue for multiples of pi over 3 (60 degrees). Each point is
+          labelled with its radian measure and the coordinate pair (cos theta, sin theta).
+          Cardinals at 0, pi/2, pi, and 3pi/2 are black. A reference table follows.
+        </desc>
+
+        <rect width="700" height="700" fill="white"/>
+        <defs>
+          <marker id="arr" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+            <polygon points="0,0 7,3.5 0,7" fill="#333"/>
+          </marker>
+        </defs>
+
+        <!-- Axes -->
+        <line x1="48" y1="350" x2="652" y2="350" stroke="#333" stroke-width="2" marker-end="url(#arr)" marker-start="url(#arr)"/>
+        <line x1="350" y1="48" x2="350" y2="652" stroke="#333" stroke-width="2" marker-end="url(#arr)" marker-start="url(#arr)"/>
+
+        <!-- Circle -->
+        <circle cx="350" cy="350" r="260" fill="none" stroke="#333" stroke-width="2.5"/>
+
+        <!-- Red spokes: pi/6 family (30,150,210,330) -->
+        <g stroke="#c00000" stroke-width="1.6">
+          <line x1="350" y1="350" x2="575" y2="220"/>
+          <line x1="350" y1="350" x2="125" y2="220"/>
+          <line x1="350" y1="350" x2="125" y2="480"/>
+          <line x1="350" y1="350" x2="575" y2="480"/>
+        </g>
+        <!-- Green spokes: pi/4 family (45,135,225,315) -->
+        <g stroke="#006400" stroke-width="1.6">
+          <line x1="350" y1="350" x2="534" y2="166"/>
+          <line x1="350" y1="350" x2="166" y2="166"/>
+          <line x1="350" y1="350" x2="166" y2="534"/>
+          <line x1="350" y1="350" x2="534" y2="534"/>
+        </g>
+        <!-- Blue spokes: pi/3 family (60,120,240,300) -->
+        <g stroke="#0055bb" stroke-width="1.6">
+          <line x1="350" y1="350" x2="480" y2="125"/>
+          <line x1="350" y1="350" x2="220" y2="125"/>
+          <line x1="350" y1="350" x2="220" y2="575"/>
+          <line x1="350" y1="350" x2="480" y2="575"/>
+        </g>
+
+        <!-- Dots: cardinals -->
+        <g fill="#222">
+          <circle cx="610" cy="350" r="5"/>
+          <circle cx="350" cy="90"  r="5"/>
+          <circle cx="90"  cy="350" r="5"/>
+          <circle cx="350" cy="610" r="5"/>
+        </g>
+        <!-- Dots: red -->
+        <g fill="#c00000">
+          <circle cx="575" cy="220" r="4"/><circle cx="125" cy="220" r="4"/>
+          <circle cx="125" cy="480" r="4"/><circle cx="575" cy="480" r="4"/>
+        </g>
+        <!-- Dots: green -->
+        <g fill="#006400">
+          <circle cx="534" cy="166" r="4"/><circle cx="166" cy="166" r="4"/>
+          <circle cx="166" cy="534" r="4"/><circle cx="534" cy="534" r="4"/>
+        </g>
+        <!-- Dots: blue -->
+        <g fill="#0055bb">
+          <circle cx="480" cy="125" r="4"/><circle cx="220" cy="125" r="4"/>
+          <circle cx="220" cy="575" r="4"/><circle cx="480" cy="575" r="4"/>
+        </g>
+
+        <g font-family="'Segoe UI',Tahoma,sans-serif" text-rendering="optimizeLegibility">
+          <!-- Cardinals -->
+          <text x="616" y="344" fill="#222" font-size="13" font-weight="bold">0, 2&#960;</text>
+          <text x="616" y="360" fill="#222" font-size="11">(1, 0)</text>
+          <text x="355" y="80"  fill="#222" font-size="13" font-weight="bold">&#960;/2</text>
+          <text x="355" y="95"  fill="#222" font-size="11">(0, 1)</text>
+          <text x="20"  y="344" fill="#222" font-size="13" font-weight="bold">&#960;</text>
+          <text x="6"   y="360" fill="#222" font-size="11">(&#8722;1, 0)</text>
+          <text x="355" y="626" fill="#222" font-size="13" font-weight="bold">3&#960;/2</text>
+          <text x="349" y="642" fill="#222" font-size="11">(0, &#8722;1)</text>
+          <!-- Red -->
+          <text x="580" y="213" fill="#c00000" font-size="12" font-weight="bold">&#960;/6</text>
+          <text x="580" y="228" fill="#c00000" font-size="11">(&#8730;3/2, 1/2)</text>
+          <text x="4"   y="213" fill="#c00000" font-size="12" font-weight="bold">5&#960;/6</text>
+          <text x="2"   y="228" fill="#c00000" font-size="11">(&#8722;&#8730;3/2, 1/2)</text>
+          <text x="4"   y="473" fill="#c00000" font-size="12" font-weight="bold">7&#960;/6</text>
+          <text x="2"   y="488" fill="#c00000" font-size="11">(&#8722;&#8730;3/2, &#8722;1/2)</text>
+          <text x="580" y="473" fill="#c00000" font-size="12" font-weight="bold">11&#960;/6</text>
+          <text x="580" y="488" fill="#c00000" font-size="11">(&#8730;3/2, &#8722;1/2)</text>
+          <!-- Green -->
+          <text x="539" y="158" fill="#006400" font-size="12" font-weight="bold">&#960;/4</text>
+          <text x="539" y="173" fill="#006400" font-size="11">(&#8730;2/2, &#8730;2/2)</text>
+          <text x="44"  y="158" fill="#006400" font-size="12" font-weight="bold">3&#960;/4</text>
+          <text x="2"   y="173" fill="#006400" font-size="11">(&#8722;&#8730;2/2, &#8730;2/2)</text>
+          <text x="36"  y="526" fill="#006400" font-size="12" font-weight="bold">5&#960;/4</text>
+          <text x="2"   y="541" fill="#006400" font-size="11">(&#8722;&#8730;2/2, &#8722;&#8730;2/2)</text>
+          <text x="539" y="526" fill="#006400" font-size="12" font-weight="bold">7&#960;/4</text>
+          <text x="539" y="541" fill="#006400" font-size="11">(&#8730;2/2, &#8722;&#8730;2/2)</text>
+          <!-- Blue -->
+          <text x="485" y="117" fill="#0055bb" font-size="12" font-weight="bold">&#960;/3</text>
+          <text x="485" y="132" fill="#0055bb" font-size="11">(1/2, &#8730;3/2)</text>
+          <text x="136" y="117" fill="#0055bb" font-size="12" font-weight="bold">2&#960;/3</text>
+          <text x="104" y="132" fill="#0055bb" font-size="11">(&#8722;1/2, &#8730;3/2)</text>
+          <text x="136" y="568" fill="#0055bb" font-size="12" font-weight="bold">4&#960;/3</text>
+          <text x="96"  y="583" fill="#0055bb" font-size="11">(&#8722;1/2, &#8722;&#8730;3/2)</text>
+          <text x="485" y="568" fill="#0055bb" font-size="12" font-weight="bold">5&#960;/3</text>
+          <text x="485" y="583" fill="#0055bb" font-size="11">(1/2, &#8722;&#8730;3/2)</text>
+        </g>
+
+        <!-- Legend -->
+        <g font-family="'Segoe UI',Tahoma,sans-serif" font-size="12">
+          <rect x="20"  y="658" width="12" height="12" fill="#c00000" rx="2" aria-hidden="true"/>
+          <text x="36"  y="669" fill="#333">&#960;/6 family (30&#176;)</text>
+          <rect x="190" y="658" width="12" height="12" fill="#006400" rx="2" aria-hidden="true"/>
+          <text x="206" y="669" fill="#333">&#960;/4 family (45&#176;)</text>
+          <rect x="360" y="658" width="12" height="12" fill="#0055bb" rx="2" aria-hidden="true"/>
+          <text x="376" y="669" fill="#333">&#960;/3 family (60&#176;)</text>
+        </g>
+      </svg>
+    </div>
+
+    <h3>Unit Circle Reference Table</h3>
+    <table>
+      <caption class="visually-hidden">Unit circle values: angle in radians and degrees with corresponding cosine and sine.</caption>
+      <thead>
+        <tr>
+          <th scope="col">Radians</th>
+          <th scope="col">Degrees</th>
+          <th scope="col">cos&#160;&#952;</th>
+          <th scope="col">sin&#160;&#952;</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>0</td>           <td>0&#176;</td>   <td>1</td>                  <td>0</td></tr>
+        <tr><td>&#960;/6</td>    <td>30&#176;</td>  <td>&#8730;3/2</td>         <td>1/2</td></tr>
+        <tr><td>&#960;/4</td>    <td>45&#176;</td>  <td>&#8730;2/2</td>         <td>&#8730;2/2</td></tr>
+        <tr><td>&#960;/3</td>    <td>60&#176;</td>  <td>1/2</td>                <td>&#8730;3/2</td></tr>
+        <tr><td>&#960;/2</td>    <td>90&#176;</td>  <td>0</td>                  <td>1</td></tr>
+        <tr><td>2&#960;/3</td>   <td>120&#176;</td> <td>&#8722;1/2</td>         <td>&#8730;3/2</td></tr>
+        <tr><td>3&#960;/4</td>   <td>135&#176;</td> <td>&#8722;&#8730;2/2</td>  <td>&#8730;2/2</td></tr>
+        <tr><td>5&#960;/6</td>   <td>150&#176;</td> <td>&#8722;&#8730;3/2</td>  <td>1/2</td></tr>
+        <tr><td>&#960;</td>      <td>180&#176;</td> <td>&#8722;1</td>           <td>0</td></tr>
+        <tr><td>7&#960;/6</td>   <td>210&#176;</td> <td>&#8722;&#8730;3/2</td>  <td>&#8722;1/2</td></tr>
+        <tr><td>5&#960;/4</td>   <td>225&#176;</td> <td>&#8722;&#8730;2/2</td>  <td>&#8722;&#8730;2/2</td></tr>
+        <tr><td>4&#960;/3</td>   <td>240&#176;</td> <td>&#8722;1/2</td>         <td>&#8722;&#8730;3/2</td></tr>
+        <tr><td>3&#960;/2</td>   <td>270&#176;</td> <td>0</td>                  <td>&#8722;1</td></tr>
+        <tr><td>5&#960;/3</td>   <td>300&#176;</td> <td>1/2</td>                <td>&#8722;&#8730;3/2</td></tr>
+        <tr><td>7&#960;/4</td>   <td>315&#176;</td> <td>&#8730;2/2</td>         <td>&#8722;&#8730;2/2</td></tr>
+        <tr><td>11&#960;/6</td>  <td>330&#176;</td> <td>&#8730;3/2</td>         <td>&#8722;1/2</td></tr>
+        <tr><td>2&#960;</td>     <td>360&#176;</td> <td>1</td>                  <td>0</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+</div>
+</main>
+
+<!-- Print button — bottom right, hidden in @media print -->
+<div class="print-bar">
+  <button class="print-btn" onclick="window.print()">
+    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+         fill="none" stroke="currentColor" stroke-width="2.2"
+         stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+      <polyline points="6 9 6 2 18 2 18 9"/>
+      <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
+      <rect x="6" y="14" width="12" height="8"/>
+    </svg>
+    Print 
+  </button>
+</div>
+
+<!-- TOC accordion -->
+<script>
+  document.querySelectorAll('.toc-chapter').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var expanded = this.getAttribute('aria-expanded') === 'true';
+      var menu = document.getElementById(this.getAttribute('aria-controls'));
+      if (!menu) return;
+      this.setAttribute('aria-expanded', String(!expanded));
+      menu.classList.toggle('open', !expanded);
+    });
+  });
+</script>
+
+</body>
+</html>

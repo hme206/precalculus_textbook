@@ -12,6 +12,7 @@
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link rel="stylesheet" href="styles.css">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;line-height:1.5;color:#333;background-color:#f9f9f9;margin-left:250px}
@@ -66,7 +67,14 @@ table tr:nth-child(even){background-color:#f9f9f9}
   .identity-grid p,.formula-list p{margin-bottom:0!important}  /* was no !important */
   .identity-grid{gap:0 8pt;margin-bottom:0}
   .divider{border-top-color:#bbb;margin:3pt 0}      /* was missing — inheriting 18px screen value */
-  .section-pair{break-inside:avoid;margin:2pt 0;gap:0 2rem}  /* was 5pt */
+.section-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 2rem;
+  break-inside: avoid;
+  margin: 2pt 0;
+  align-items: start; /* optional, keeps alignment like screen */
+}
   .section-full{break-inside:avoid;margin:2pt 0}             /* was 5pt */
   #unit-circle{break-before:page}
   .unit-circle-container{max-width:5.4in;margin:0.1in auto 0}
@@ -77,6 +85,28 @@ table tr:nth-child(even){background-color:#f9f9f9}
 }
 </style>
 </head>
+  <script>
+  fetch("toc.html")
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById("toc-placeholder").innerHTML = data;
+
+      // Re-attach TOC toggle behavior AFTER loading
+      document.querySelectorAll('.toc-chapter').forEach(function(btn, index) {
+        const submenu = btn.nextElementSibling;
+        const id = "submenu-" + index;
+        submenu.id = id;
+        btn.setAttribute("aria-controls", id);
+
+        btn.addEventListener('click', function() {
+          const expanded = this.getAttribute('aria-expanded') === 'true';
+          this.setAttribute('aria-expanded', !expanded);
+          submenu.classList.toggle('open');
+        });
+      });
+    })
+    .catch(error => console.error("Error loading TOC:", error));
+</script>
 <body>
 <div id="toc-placeholder"></div>
 <main id="main-content">

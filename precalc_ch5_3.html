@@ -27,7 +27,31 @@
         window.MathJax = { /* ... */ };
     </script>
     <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<styles>
+    /* Grid for exercises multi-column layout */
+.exercise-grid {
+    display: grid;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
 
+.exercise-grid.columns-2 {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.exercise-grid.columns-4 {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.exercise-grid ol {
+    padding-left: 1.2em;
+}
+
+.exercise-grid li {
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+}
+</styles>
 </head>
 <body> 
 <div id="toc-placeholder"></div>
@@ -267,160 +291,193 @@
   <li>\(\sin(\theta) = -\frac{3\sqrt{10}}{10}\)</li>
 </ol>
   </div>
-<!-- Example 4 : Angle of Inclination -->
+</section>
+<h2>Applications </h2>  
+    <p>It should come as no surprise by now that we have all of this information so we can solve real-world problems involving angles and triangles. </p>
+
+<p>The following example uses trigonometry as well as the concept of an `angle of inclination.'  The angle of inclination (or angle of elevation) of an object refers to the angle whose initial side is some kind of base-line (say, the ground), and whose terminal side is the line-of-sight to an object above the base-line.  This is represented schematically below.</p>
+
+            <figure>
+            <img src="images/5_3_5.png" alt="A right triangle with the right angle at the bottom right. The horizontal side is labeled 'Adjacent', the vertical side is labeled 'Opposite', and the hypotenuse slants upward to the left and is labeled 'Hypotenuse'. An angle θ is marked at the bottom left vertex with a small arc curving upward to the left." />
+        </figure>
+    
+    <!-- Example 4 : Angle of Inclination -->
 <section class="example" aria-labelledby="example-angle-inclination">
     <div class="example-problem">
         <h3 id="example-angle-inclination">Example 4</h3>
-        <p>Find the angle of inclination \( \theta \) for the line passing through the points \( (1,2) \) and \( (5,6) \).</p>
-        <figure>
-            <img src="images/5_3_5.png" alt="Line passing through points (1,2) and (5,6) on a coordinate plane" />
-        </figure>
-</div>
-        <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-angle-inclination">
+        <p>
+            The angle of inclination from a point on the ground 30 feet away to the top of 
+            Lakeland's Armington Clocktower is $60^{\circ}$. Find the height of the Clocktower 
+            to the nearest foot.
+        </p>
+    </div>
+
+    <button class="solution-header" onclick="toggleExample(this)" 
+            aria-expanded="false" 
+            aria-controls="solution-angle-inclination">
+        <span class="toggle-arrow">▼</span>
+        <span>Show Solution</span>
+    </button>
+
+    <div id="solution-angle-inclination" class="example-content">
+        <div class="solution">
+            <h4>Solution</h4>
+            <p>
+                We can represent the problem situation using a right triangle as shown below. 
+                Let $h$ denote the height of the Clocktower. Then we have:
+            </p>
+            <p>
+                \[
+                \tan\left(60^{\circ}\right) = \frac{h}{30}
+                \]
+            </p>
+            <p>
+                Solving for $h$ gives:
+            </p>
+            <p>
+                \[
+                h = 30 \cdot \tan\left(60^{\circ}\right) = 30 \sqrt{3} \approx 51.96
+                \]
+            </p>
+            <p>
+                Hence, the Clocktower is approximately 52 feet tall.
+            </p>
+
+            <figure>
+                <img src="images/5_3_6.png" 
+                     alt="Right triangle with right angle in the bottom right corner, base 30 feet, height h feet, and angle of inclination 60 degrees." />
+            </figure>
+        </div>
+    </div>
+</section>
+
+
+
+      <!-- Example 5 : Angle of Inclination 2 -->
+<section class="example" aria-labelledby="example-angle-inclination 2">
+    <div class="example-problem">
+        <h3 id="example-angle-inclination 2">Example 5</h3>
+<p> In order to determine the height of a California Redwood tree, two sightings from the ground, one 200 feet directly behind the other, are made.  If the angles of inclination were $45^{\circ}$ and $30^{\circ}$, respectively, how tall is the tree to the nearest foot?\\</p>
+    </div>
+<button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-angle-inclination 2">
             <span class="toggle-arrow">▼</span>
             <span>Show Solution</span>
         </button>
-
-        <div id="solution-angle-inclination" class="example-content">
+        <div id="solution-angle-inclination 2" class="example-content">
             <div class="solution">
                 <h4>Solution</h4>
-                <p>Use the slope formula \( m = \frac{y_2 - y_1}{x_2 - x_1} \):</p>
-                <p>\( m = \frac{6-2}{5-1} = \frac{4}{4} = 1 \)</p>
-                <p>The angle of inclination is \( \theta = \arctan(m) = \arctan(1) = 45^\circ \).</p>
+                <p> Sketching the problem situation below, we find ourselves with two unknowns: the height $h$ of the tree and the distance $x$ from the base of the tree to the first observation point. </p>
+<figure>
+ <img src="images/5_3_7.png" alt="Diagram representing the problem with two observation points and the tree" />
+</figure>  
+ <p>
+            We get a pair of equations: 
+            \(\tan\left(45^{\circ}\right) = \frac{h}{x}\) and 
+            \(\tan\left(30^{\circ}\right) = \frac{h}{x+200}\).  
+            Since \(\tan\left(45^{\circ}\right) = 1\), the first equation gives 
+            \(\frac{h}{x} = 1\), or \(x = h\).  
+            Substituting this into the second equation gives 
+            \(\frac{h}{h+200} = \tan\left(30^{\circ}\right) = \frac{\sqrt{3}}{3}\).  
+            Clearing fractions, we get \(3h = (h+200)\sqrt{3}\).  
+            This is a linear equation for \(h\), so we expand and gather terms:
+        </p>
+
+        <p>
+            \[
+            \begin{array}{rcl}
+            3h & = & (h+200)\sqrt{3} \\[3pt]
+            3h & = & h \sqrt{3} + 200 \sqrt{3} \\[3pt]
+            3h - h \sqrt{3} & = & 200 \sqrt{3} \\[3pt]
+            (3-\sqrt{3}) h & = & 200 \sqrt{3} \\[3pt]
+            h & = & \dfrac{200\sqrt{3}}{3-\sqrt{3}} \approx 273.20
+            \end{array}
+            \]
+        </p>
+
+        <p>Hence, the tree is approximately 273 feet tall.</p>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Example 5: Trigonometric values from given functions -->
-<section class="example" aria-labelledby="example-trig-values">
+<h2>Trigonometry of Any Angle </h2>
+<p>We've looked at trigonometry when we are using special angles or when given all of the sides to find the ratio. But, we haven't really explored the entire aspect of why trigonometry is important. It is important because it allows us to solve real life applications. As seen in the previous examples. However, trigonometry is so much more.</p>
+
+<p>Let's look at the first scenario. Perhaps we want to solve a right triangle but we were only given one angle and one side. Could we find the other two sides from that information? Absolutely. But first let's review some facts from geometry class. </p>
+
+<ol>
+  <li>Angles are capital letters and sides are lower case letters.</li>
+  <li>Side \(a\) is opposite Angle A, side \(b\) is opposite Angle B, and side \(c\) is opposite Angle C.</li>
+  <li>The shortest side is opposite the smallest angle.</li>
+  <li>The longest side is opposite the largest angle.</li>
+  <li>The sum of the interior angles of a triangle is equal to \(180^{\circ}\).</li>
+</ol>
+        
+
+    
+<!-- Example 6: Reference Angles -->
+<section class="example" aria-labelledby="example-6trigfcn">
     <div class="example-problem">
-        <h3 id="example-trig-values">Example 5</h3>
-        <p>Find the indicated values:</p>
-        <ol class="tight-list">
-            <li>\( \sec(60^\circ) \)</li>
-            <li>\( \csc(7\pi/4) \)</li>
-            <li>\( \cot(3) \)</li>
-            <li>\( \tan(\theta) \), where \( \theta \) is coterminal with \( 3\pi/2 \)</li>
-            <li>\( \cos(\theta) \), where \( \csc(\theta) = -\sqrt{5} \) and \( \theta \) is in Quadrant IV</li>
-            <li>\( \sin(\theta) \), where \( \tan(\theta) = 3 \) and \( \pi < \theta < 3\pi/2 \)</li>
-        </ol>
-</div>
-        <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-trig-values">
-            <span class="toggle-arrow">▼</span>
-            <span>Show Solution</span>
-        </button>
-
-        <div id="solution-trig-values" class="example-content">
-            <div class="solution">
-                <h4>Solution</h4>
-                <ol>
-                    <li>\( \sec(60^\circ) = \frac{1}{\cos(60^\circ)} = 2 \)</li>
-                    <li>\( \csc(7\pi/4) = \frac{1}{\sin(7\pi/4)} = -\sqrt{2} \)</li>
-                    <li>\( \cot(3) = \frac{\cos(3)}{\sin(3)} \approx -7.015 \)</li>
-                    <li>Undefined, since \( \tan(3\pi/2) = \frac{\sin(3\pi/2)}{\cos(3\pi/2)} = \frac{-1}{0} \)</li>
-                    <li>\( \cos(\theta) = \frac{2\sqrt{5}}{5} \)</li>
-                    <li>\( \sin(\theta) = -\frac{3\sqrt{10}}{10} \)</li>
-                </ol>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Example 6: Finding missing side using Pythagorean theorem -->
-<section class="example" aria-labelledby="example-missing-side">
-    <div class="example-problem">
-        <h3 id="example-missing-side">Example 6</h3>
-        <p>Find all six trigonometric functions for a triangle with sides 7, ?, 7√2.</p>
-        <figure>
-            <img src="images/5_3_6.png" alt="Right triangle with hypotenuse 7√2, one leg 7, unknown leg" />
-        </figure>
-</div>
-        <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-missing-side">
-            <span class="toggle-arrow">▼</span>
-            <span>Show Solution</span>
-        </button>
-
-        <div id="solution-missing-side" class="example-content">
-            <div class="solution">
-                <h4>Solution</h4>
-                <p>Using the Pythagorean theorem:</p>
-                <p>\( 7^2 + x^2 = (7\sqrt{2})^2 \)</p>
-                <p>\( 49 + x^2 = 98 \)</p>
-                <p>\( x^2 = 49 \)</p>
-                <p>\( x = 7 \)</p>
-
-                <table>
-                    <caption>Trigonometric functions for the triangle</caption>
-                    <tr>
-                        <td>\( \sin(\alpha) = \frac{7}{7\sqrt{2}} = \frac{\sqrt{2}}{2} \)</td>
-                        <td>\( \csc(\alpha) = \frac{7\sqrt{2}}{7} = \sqrt{2} \)</td>
-                    </tr>
-                    <tr>
-                        <td>\( \cos(\alpha) = \frac{7}{7\sqrt{2}} = \frac{\sqrt{2}}{2} \)</td>
-                        <td>\( \sec(\alpha) = \frac{7\sqrt{2}}{7} = \sqrt{2} \)</td>
-                    </tr>
-                    <tr>
-                        <td>\( \tan(\alpha) = \frac{7}{7} = 1 \)</td>
-                        <td>\( \cot(\alpha) = \frac{7}{7} = 1 \)</td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- Example 7: Reference Angles -->
-<section class="example" aria-labelledby="example-7trigfcn">
-    <div class="example-problem">
-        <h3 id="example-7trigfcn">Example 7</h3>
-        <p>Find all six trigonometric functions for the triangle below.</p>
-        <figure>
-            <img src="images/5_3_7.png" alt="Right triangle with sides labeled 2, 2√3, and 4 and angle α" />
-        </figure>
-</div>
-        <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-ref-angles">
-            <span class="toggle-arrow">▼</span>
-            <span>Show Solution</span>
-        </button>
-
-        <div id="solution-ref-angles" class="example-content">
-            <div class="solution">
-                <h4>Solution</h4>
-                <p>Identify the sides as opposite, adjacent, and hypotenuse:</p>
-                <figure>
+        <h3 id="example-6trigfcn">Example 6</h3>
+        <p>Solve the triangle below using trigonometry. </p>
+          <figure>
                     <img src="images/5_3_8.png" alt="Right triangle with sides color-coded: Opposite in red, Adjacent in purple, Hypotenuse in blue" />
                 </figure>
+      
+</div>
+        <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-6trigfcn">
+            <span class="toggle-arrow">▼</span>
+            <span>Show Solution</span>
+        </button>
 
-                <table>
-                    <caption>Trigonometric functions for angle \( \alpha \)</caption>
-                    <tr>
-                        <td>\( \sin(\alpha) = \frac{2}{4} = \frac{1}{2} \)</td>
-                        <td>\( \csc(\alpha) = \frac{4}{2} = 2 \)</td>
-                    </tr>
-                    <tr>
-                        <td>\( \cos(\alpha) = \frac{2\sqrt{3}}{4} = \frac{\sqrt{3}}{2} \)</td>
-                        <td>\( \sec(\alpha) = \frac{4}{2\sqrt{3}} = \frac{2}{\sqrt{3}} = \frac{2\sqrt{3}}{3} \)</td>
-                    </tr>
-                    <tr>
-                        <td>\( \tan(\alpha) = \frac{2}{2\sqrt{3}} = \frac{\sqrt{3}}{3} \)</td>
-                        <td>\( \cot(\alpha) = \frac{2\sqrt{3}}{2} = \sqrt{3} \)</td>
-                    </tr>
-                </table>
+        <div id="solution-6trigfcn" class="example-content">
+            <div class="solution">
+                <h4>Solution</h4>
+                <p>For this example we were given one angle and one side. That means we'd need to set up some trigonometric ratios to help us solve this triangle.To do that we're going to need to identify the opposite, adjacent, and hypotenuse for $\triangle ABC$</p>
+           <figure>
+            <img src="images/5_3_9.png" alt="Triangle ABC with labeled sides" />
+        </figure>
+        <p>We can see that we have the adjacent side and an angle, that means we can find the opposite side by using Tangent and the hypotenuse by using Cosine. Additionally we can find Angle C by $180^{\circ}-\angle A-\angle B=180^{\circ}-27^{\circ}-90^{\circ}=63^{\circ}$.Now we are ready to find our other two sides using our ratios.</p>
+<div style="display: flex; gap: 2rem; margin: 20px 0;">
+  <!-- Side b -->
+  <div style="flex: 1; min-width: 3in;">
+    <p><strong>Side \(b\)</strong></p>
+    <p>
+      \(\cos(27^{\circ}) = \frac{15}{b}\)<br>
+      \(b \cos(27^{\circ}) = 15\)<br>
+      \(b = \frac{15}{\cos(27^{\circ})}\)<br>
+      \(b \approx 16.83\)
+    </p>
+  </div>
 
-                <p>We often use the Pythagorean theorem \( a^2 + b^2 = c^2 \) to find missing sides.</p>
+  <!-- Side a -->
+  <div style="flex: 1; min-width: 3in;">
+    <p><strong>Side \(a\)</strong></p>
+    <p>
+      \(\tan(27^{\circ}) = \frac{a}{15}\)<br>
+      \(15 \tan(27^{\circ}) = a\)<br>
+      \(a \approx 7.64\)
+    </p>
+    </div>
+</div>
+<p>It is important to notice a few things once you've solved the question:</p>
+<ol>
+  <li>Our shortest side \(a \approx 7.64\) is opposite our smallest angle \(\angle A = 27^{\circ}\).</li>
+  <li>Our longest side \(b \approx 16.83\) is opposite our largest angle \(\angle C = 90^{\circ}\).</li>
+  <li>Our hypotenuse is always our longest side.</li>
+  <li>We use the approximate symbols because we have rounded our side values and in turn we've made an approximation of our lengths. The exact lengths would be those with the trigonometric piece still in them.</li>
+</ol>
+    <p>We can also use this idea to solve application problems. The trick to all of these types of problems is identifying the pieces you have and using them to help you derive a plan to find the pieces you need. Sometimes it can be helpful to create a "have" and "need" list. </p>
             </div>
         </div>
-    </div>
+    </div>  
 </section>
-
-<!-- Example 8: Angle of Inclination -->
-<section class="example" aria-labelledby="example-angle-inclination">
+<!-- Example 7: Angle of Inclination Airplane -->
+<section class="example" aria-labelledby="example-angle-inclination Airplane">
     <div class="example-problem">
-        <h3 id="example-angle-inclination">Example 8</h3>
-        <p>Find the angle of inclination \( \theta \) for the line passing through the points \( (1,2) \) and \( (5,6) \).</p>
-        <figure>
-            <img src="images/5_3_9.png" alt="Line passing through points (1,2) and (5,6) on a coordinate plane" />
-        </figure>
+        <h3 id="example-angle-inclination Airplane">Example 7</h3>
+        <p>An airplane makes its decent into a landing strip with an angle of elevation of $32^{\circ}$ with the ground. If the plane starts decending when it passes a tower that is $50$ feet from the center of the tower to the landing strip. How high in the air is the plane at the time of decent?</p>
+        
 </div>
         <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-angle-inclination">
             <span class="toggle-arrow">▼</span>
@@ -430,92 +487,138 @@
         <div id="solution-angle-inclination" class="example-content">
             <div class="solution">
                 <h4>Solution</h4>
-                <p>Use the slope formula \( m = \frac{y_2 - y_1}{x_2 - x_1} \):</p>
-                <p>\( m = \frac{6-2}{5-1} = \frac{4}{4} = 1 \)</p>
-                <p>The angle of inclination is \( \theta = \arctan(m) = \arctan(1) = 45^\circ \).</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Example 9: Trigonometric values from given functions -->
-<section class="example" aria-labelledby="example-trig-values">
-    <div class="example-problem">
-        <h3 id="example-trig-values">Example 9</h3>
-        <p>Find the indicated values:</p>
-        <ol>
-            <li>\( \sec(60^\circ) \)</li>
-            <li>\( \csc(7\pi/4) \)</li>
-            <li>\( \cot(3) \)</li>
-            <li>\( \tan(\theta) \), where \( \theta \) is coterminal with \( 3\pi/2 \)</li>
-            <li>\( \cos(\theta) \), where \( \csc(\theta) = -\sqrt{5} \) and \( \theta \) is in Quadrant IV</li>
-            <li>\( \sin(\theta) \), where \( \tan(\theta) = 3 \) and \( \pi < \theta < 3\pi/2 \)</li>
-        </ol>
-</div>
-        <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-trig-values">
-            <span class="toggle-arrow">▼</span>
-            <span>Show Solution</span>
-        </button>
-
-        <div id="solution-trig-values" class="example-content">
-            <div class="solution">
-                <h4>Solution</h4>
-                <ol>
-                    <li>\( \sec(60^\circ) = \frac{1}{\cos(60^\circ)} = 2 \)</li>
-                    <li>\( \csc(7\pi/4) = \frac{1}{\sin(7\pi/4)} = -\sqrt{2} \)</li>
-                    <li>\( \cot(3) = \frac{\cos(3)}{\sin(3)} \approx -7.015 \)</li>
-                    <li>Undefined, since \( \tan(3\pi/2) = \frac{\sin(3\pi/2)}{\cos(3\pi/2)} = \frac{-1}{0} \)</li>
-                    <li>\( \cos(\theta) = \frac{2\sqrt{5}}{5} \)</li>
-                    <li>\( \sin(\theta) = -\frac{3\sqrt{10}}{10} \)</li>
-                </ol>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Example 10: Finding missing side using Pythagorean theorem -->
-<section class="example" aria-labelledby="example-missing-side">
-    <div class="example-problem">
-        <h3 id="example-missing-side">Example 10</h3>
-        <p>Find all six trigonometric functions for a triangle with sides 7, ?, 7√2.</p>
-        <figure>
-            <img src="images/5_3_10.png" alt="Right triangle with hypotenuse 7√2, one leg 7, unknown leg" />
+                <p>Sometimes the best thing you can do is to create a picture. Now mind you I am no artist, and typically speaking my airplanes look like sharks.Therefore to save your eyes I will just use the word airplane instead of drawing one. </p>
+         <figure>
+            <img src="images/5_3_10.png" alt="Airplane descending with angle of elevation" />
         </figure>
-</div>
-        <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-missing-side">
-            <span class="toggle-arrow">▼</span>
-            <span>Show Solution</span>
-        </button>
-
-        <div id="solution-missing-side" class="example-content">
-            <div class="solution">
-                <h4>Solution</h4>
-                <p>Using the Pythagorean theorem:</p>
-                <p>\( 7^2 + x^2 = (7\sqrt{2})^2 \)</p>
-                <p>\( 49 + x^2 = 98 \)</p>
-                <p>\( x^2 = 49 \)</p>
-                <p>\( x = 7 \)</p>
-
-                <table>
-                    <caption>Trigonometric functions for the triangle</caption>
-                    <tr>
-                        <td>\( \sin(\alpha) = \frac{7}{7\sqrt{2}} = \frac{\sqrt{2}}{2} \)</td>
-                        <td>\( \csc(\alpha) = \frac{7\sqrt{2}}{7} = \sqrt{2} \)</td>
-                    </tr>
-                    <tr>
-                        <td>\( \cos(\alpha) = \frac{7}{7\sqrt{2}} = \frac{\sqrt{2}}{2} \)</td>
-                        <td>\( \sec(\alpha) = \frac{7\sqrt{2}}{7} = \sqrt{2} \)</td>
-                    </tr>
-                    <tr>
-                        <td>\( \tan(\alpha) = \frac{7}{7} = 1 \)</td>
-                        <td>\( \cot(\alpha) = \frac{7}{7} = 1 \)</td>
-                    </tr>
-                </table>
+        <p>This means that our airplane is at an altitude of 31.24 feet above the ground when it starts its decent into the runway. If we wanted to extend the information even further we could even say that it was decending at an angle of $180^{\circ}-32^{\circ}-90^{\circ}=58^{\circ}$, which is honestly a pretty steep decent if you think about it.</p>
             </div>
         </div>
     </div>
 </section>
+<section class="exercise" aria-labelledby="exercises-section">
+    <h2 id="exercises-section">Exercises</h2>
+    <p>In Exercises <a href="#circvaluefirst">1</a> - <a href="#circvaluelast">20</a>, find the exact value or state that it is undefined.</p>
 
+    <!-- First set of exercises (1-20) in 4-column layout -->
+    <div class="exercise-grid columns-4">
+        <ol start="1">
+            <li id="circvaluefirst">\( \tan\left(\dfrac{\pi}{4}\right) \)</li>
+            <li>\( \sec\left(\dfrac{\pi}{6}\right) \)</li>
+            <li>\( \csc\left(\dfrac{5\pi}{6}\right) \)</li>
+            <li>\( \cot\left(\dfrac{4\pi}{3}\right) \)</li>
+            <li>\( \tan\left(-\dfrac{11\pi}{6}\right) \)</li>
+            <li>\( \sec\left(-\dfrac{3\pi}{2}\right) \)</li>
+            <li>\( \csc\left(-\dfrac{\pi}{3}\right) \)</li>
+            <li>\( \cot\left(\dfrac{13\pi}{2}\right) \)</li>
+            <li>\( \tan(117\pi) \)</li>
+            <li>\( \sec\left(-\dfrac{5\pi}{3}\right) \)</li>
+            <li>\( \csc(3\pi) \)</li>
+            <li>\( \cot(-5\pi) \)</li>
+            <li>\( \tan\left(\dfrac{31\pi}{2}\right) \)</li>
+            <li>\( \sec\left(\dfrac{\pi}{4}\right) \)</li>
+            <li>\( \csc\left(-\dfrac{7\pi}{4}\right) \)</li>
+            <li>\( \cot\left(\dfrac{7\pi}{6}\right) \)</li>
+            <li>\( \tan\left(\dfrac{2\pi}{3}\right) \)</li>
+            <li>\( \sec(-7\pi) \)</li>
+            <li>\( \csc\left(\dfrac{\pi}{2}\right) \)</li>
+            <li id="circvaluelast">\( \cot\left(\dfrac{3\pi}{4}\right) \)</li>
+        </ol>
+    </div>
+
+    <p>In Exercises <a href="#findothercircfirst">21</a> - <a href="#findothercirclast">32</a>, use the given information to find the exact values of the remaining circular functions of \(\theta\).</p>
+
+    <!-- Exercises 21-32 in 2-column layout -->
+    <div class="exercise-grid columns-2">
+        <ol start="21">
+            <li id="findothercircfirst">\( \sin(\theta) = \dfrac{3}{5} \) with \( \theta \) in Quadrant II</li>
+            <li>\( \tan(\theta) = \dfrac{12}{5} \) with \( \theta \) in Quadrant III</li>
+            <li>\( \csc(\theta) = \dfrac{25}{24} \) with \( \theta \) in Quadrant I</li>
+            <li>\( \sec(\theta) = 7 \) with \( \theta \) in Quadrant IV</li>
+            <li>\( \csc(\theta) = -\dfrac{10\sqrt{91}}{91} \) with \( \theta \) in Quadrant III</li>
+            <li>\( \cot(\theta) = -23 \) with \( \theta \) in Quadrant II</li>
+            <li>\( \tan(\theta) = -2 \) with \( \theta \) in Quadrant IV</li>
+            <li>\( \sec(\theta) = -4 \) with \( \theta \) in Quadrant II</li>
+            <li>\( \cot(\theta) = \sqrt{5} \) with \( \theta \) in Quadrant III</li>
+            <li>\( \cos(\theta) = \dfrac{1}{3} \) with \( \theta \) in Quadrant I</li>
+            <li>\( \cot(\theta) = 2 \) with \( 0 < \theta < \dfrac{\pi}{2} \)</li>
+            <li>\( \csc(\theta) = 5 \) with \( \dfrac{\pi}{2} < \theta < \pi \)</li>
+            <li>\( \tan(\theta) = \sqrt{10} \) with \( \pi < \theta < \dfrac{3\pi}{2} \)</li>
+            <li id="findothercirclast">\( \sec(\theta) = 2\sqrt{5} \) with \( \dfrac{3\pi}{2} < \theta < 2\pi \)</li>
+        </ol>
+    </div>
+
+    <p>In Exercises <a href="#circcalcfirst">34</a> - <a href="#circcalclast">41</a>, use your calculator to approximate the given value to three decimal places. Make sure your calculator is in the proper angle measurement mode!</p>
+
+    <!-- Exercises 34-41 in 4-column layout -->
+    <div class="exercise-grid columns-4">
+        <ol start="34">
+            <li id="circcalcfirst">\( \csc(78.95^{\circ}) \)</li>
+            <li>\( \tan(-2.01) \)</li>
+            <li>\( \cot(392.994) \)</li>
+            <li>\( \sec(207^{\circ}) \)</li>
+            <li>\( \csc(5.902) \)</li>
+            <li>\( \tan(39.672^{\circ}) \)</li>
+            <li>\( \cot(3^{\circ}) \)</li>
+            <li id="circcalclast">\( \sec(0.45) \)</li>
+        </ol>
+    </div>
+
+    <p>In Exercises <a href="#circequanglefirst">43</a> - <a href="#circequanglelast">55</a>, find all of the angles which satisfy the equation.</p>
+
+    <!-- Exercises 43-55 in 4-column layout -->
+    <div class="exercise-grid columns-4">
+        <ol start="43">
+            <li id="circequanglefirst">\( \tan(\theta) = \sqrt{3} \)</li>
+            <li>\( \sec(\theta) = 2 \)</li>
+            <li>\( \csc(\theta) = -1 \)</li>
+            <li>\( \cot(\theta) = \dfrac{\sqrt{3}}{3} \)</li>
+            <li>\( \tan(\theta) = 0 \)</li>
+            <li>\( \sec(\theta) = 1 \)</li>
+            <li>\( \csc(\theta) = 2 \)</li>
+            <li>\( \cot(\theta) = 0 \)</li>
+            <li>\( \tan(\theta) = -1 \)</li>
+            <li>\( \sec(\theta) = 0 \)</li>
+            <li>\( \csc(\theta) = -\dfrac{1}{2} \)</li>
+            <li>\( \sec(\theta) = -1 \)</li>
+            <li>\( \tan(\theta) = -\sqrt{3} \)</li>
+            <li>\( \csc(\theta) = -2 \)</li>
+            <li id="circequanglelast">\( \cot(\theta) = -1 \)</li>
+        </ol>
+    </div>
+
+    <p>In Exercises <a href="#circequtfirst">57</a> - <a href="#circequtlast">64</a>, solve the equation for \(t\). Give exact values.</p>
+
+    <!-- Exercises 57-64 in 4-column layout -->
+    <div class="exercise-grid columns-4">
+        <ol start="57">
+            <li id="circequtfirst">\( \cot(t) = 1 \)</li>
+            <li>\( \tan(t) = \dfrac{\sqrt{3}}{3} \)</li>
+            <li>\( \sec(t) = -\dfrac{2\sqrt{3}}{3} \)</li>
+            <li>\( \csc(t) = 0 \)</li>
+            <li>\( \cot(t) = -\sqrt{3} \)</li>
+            <li>\( \tan(t) = -\dfrac{\sqrt{3}}{3} \)</li>
+            <li>\( \sec(t) = \dfrac{2\sqrt{3}}{3} \)</li>
+            <li id="circequtlast">\( \csc(t) = \dfrac{2\sqrt{3}}{3} \)</li>
+        </ol>
+    </div>
+
+    <!-- Word Problems (65-71) -->
+    <ol start="65">
+        <li>A tree standing vertically on level ground casts a 120 foot long shadow. The angle of elevation from the end of the shadow to the top of the tree is \(21.4^{\circ}\). Find the height of the tree to the nearest foot. With the help of your classmates, research the term <em>umbra versa</em> and see what it has to do with the shadow in this problem.</li>
+        <li>The broadcast tower for radio station WSAZ (Home of "Algebra in the Morning with Carl and Jeff") has two enormous flashing red lights on it: one at the very top and one a few feet below the top. From a point 5000 feet away from the base of the tower on level ground the angle of elevation to the top light is \(7.970^{\circ}\) and to the second light is \(7.125^{\circ}\). Find the distance between the lights to the nearest foot.</li>
+        <li>On page <span class="pageref">...</span> we defined the angle of inclination (also known as the angle of elevation) and in this exercise we introduce a related angle - the angle of depression (also known as the angle of declination). The angle of depression of an object refers to the angle whose initial side is a horizontal line above the object and whose terminal side is the line-of-sight to the object below the horizontal.
+            <ol>
+                <li>Show that if the horizontal is above and parallel to level ground then the angle of depression (from observer to object) and the angle of inclination (from object to observer) will be congruent because they are alternate interior angles.</li>
+                <li>From a firetower 200 feet above level ground in the Sasquatch National Forest, a ranger spots a fire off in the distance. The angle of depression to the fire is \(2.5^{\circ}\). How far away from the base of the tower is the fire?</li>
+                <li>The ranger in part 2 sees a Sasquatch running directly from the fire towards the firetower. The ranger takes two sightings. At the first sighting, the angle of depression from the tower to the Sasquatch is \(6^{\circ}\). The second sighting, taken just 10 seconds later, gives the angle of depression as \(6.5^{\circ}\). How far did the Sasquatch travel in those 10 seconds? How fast is it running in miles per hour? Round your answer to the nearest mile per hour. If the Sasquatch keeps up this pace, how long will it take for the Sasquatch to reach the firetower from his location at the second sighting?</li>
+            </ol>
+        </li>
+        <li>When I stand 30 feet away from a tree at home, the angle of elevation to the top of the tree is \(50^{\circ}\) and the angle of depression to the base of the tree is \(10^{\circ}\). What is the height of the tree? Round your answer to the nearest foot.</li>
+        <li>From the observation deck of the lighthouse at Sasquatch Point 50 feet above the surface of Lake Ippizuti, a lifeguard spots a boat out on the lake sailing directly toward the lighthouse. The first sighting had an angle of depression of \(8.2^{\circ}\) and the second sighting had an angle of \(25.9^{\circ}\). How far had the boat traveled between the sightings?</li>
+        <li>A guy wire 1000 feet long is attached to the top of a tower. When pulled taut it makes a \(43^{\circ}\) angle with the ground. How tall is the tower? How far away from the base of the tower does the wire hit the ground?</li>
+    </ol>
+</section>
 
 
 

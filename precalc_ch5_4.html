@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CH 5.4 – Graphing Trigonometric Functions</title>
+
+    <!-- MathJax configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)'], ['$', '$']],
+                displayMath: [['\\[', '\\]'], ['$$', '$$']]
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            },
+            loader: {
+                load: ['input/tex', 'output/chtml']
+            }
+        };
+    </script>
+    <script id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+
+    <link rel="stylesheet" href="styles1.css" />
+</head>
+<body>
+
+<div id="toc-placeholder"></div>
+
+<main class="container">
+
+<section id="graphing-trig-functions">
+    <h2>CH 5.4 – Graphing Trigonometric Functions</h2>
+
+    <p>As with any type of function, it should come as no surprise that trigonometric functions can be graphed. While graphing trigonometric functions is different from graphing a polynomial function, they still hold some similarities, such as taking a transformative approach to graphing them.</p>
+
+    <p>Both the Sine and Cosine functions are examples of <strong>periodic functions</strong>. A function is said to be periodic if there is a real number \(c\) such that \(f(t+c)=f(t)\). This suggests that there is some amount by which you could horizontally shift the graph and it would be the exact same graph that you started with. When it comes to graphing trigonometric functions, the use of the Unit Circle is essential. By using the Unit Circle we have provided the two basic graphs of the Sine and Cosine functions. It would be in your best interest to memorize these first initial five points.</p>
+
+    <!-- Fundamental Cycle of Sine -->
+    <h3>The Fundamental Cycle of Sine</h3>
+
+    <div class="diagram-row">
+        <div class="diagram">
+            <table>
+                <thead>
+                    <tr>
+                        <th scope="col">\(x\)</th>
+                        <th scope="col">\(\sin(x)\)</th>
+                        <th scope="col">\((x,\sin(x))\)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>\(0\)</td><td>\(0\)</td><td>\((0,0)\)</td></tr>
+                    <tr><td>\(\dfrac{\pi}{2}\)</td><td>\(1\)</td><td>\(\left(\dfrac{\pi}{2},1\right)\)</td></tr>
+                    <tr><td>\(\pi\)</td><td>\(0\)</td><td>\((\pi,0)\)</td></tr>
+                    <tr><td>\(\dfrac{3\pi}{2}\)</td><td>\(-1\)</td><td>\(\left(\dfrac{3\pi}{2},-1\right)\)</td></tr>
+                    <tr><td>\(2\pi\)</td><td>\(0\)</td><td>\((2\pi,0)\)</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="diagram">
+            <figure>
+                <img src="images/5_4_1.png" alt="Graph of the fundamental cycle of y equals sine of x, showing one full period from 0 to 2π highlighted in blue, with the repeating gray curve extending in both directions. Key points at (0,0), (π/2, 1), (π, 0), (3π/2, −1), and (2π, 0) are marked." />
+                <figcaption>Graph of \(y = \sin(x)\) — fundamental cycle highlighted in blue</figcaption>
+            </figure>
+        </div>
+    </div>
+
+    <p>If you were to work your way around the unit circle you'd find each of those values. Recall that we learned in the unit circle section that Sine values correspond to the \(y\)-coordinates.</p>
+
+    <!-- Fundamental Cycle of Cosine -->
+    <h3>The Fundamental Cycle of Cosine</h3>
+
+    <div class="diagram-row">
+        <div class="diagram">
+            <table>
+                <thead>
+                    <tr>
+                        <th scope="col">\(x\)</th>
+                        <th scope="col">\(\cos(x)\)</th>
+                        <th scope="col">\((x,\cos(x))\)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>\(0\)</td><td>\(1\)</td><td>\((0,1)\)</td></tr>
+                    <tr><td>\(\dfrac{\pi}{2}\)</td><td>\(0\)</td><td>\(\left(\dfrac{\pi}{2},0\right)\)</td></tr>
+                    <tr><td>\(\pi\)</td><td>\(-1\)</td><td>\((\pi,-1)\)</td></tr>
+                    <tr><td>\(\dfrac{3\pi}{2}\)</td><td>\(0\)</td><td>\(\left(\dfrac{3\pi}{2},0\right)\)</td></tr>
+                    <tr><td>\(2\pi\)</td><td>\(1\)</td><td>\((2\pi,1)\)</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="diagram">
+            <figure>
+                <img src="images/5_4_2.png" alt="Graph of the fundamental cycle of y equals cosine of x, showing one full period from 0 to 2π highlighted in blue, with the repeating gray curve extending in both directions. Key points at (0,1), (π/2, 0), (π, −1), (3π/2, 0), and (2π, 1) are marked." />
+                <figcaption>Graph of \(y = \cos(x)\) — fundamental cycle highlighted in blue</figcaption>
+            </figure>
+        </div>
+    </div>
+
+    <p>Now that we've looked at the basic graphs of both functions, it is important to note that both of these functions are <strong>cyclic</strong>. You should be able to notice that both functions have a range that alternates between \(-1 \le y \le 1\), meaning they cycle between those two values like a ball bouncing between two walls if gravity weren't an issue.</p>
+
+    <!-- Properties box -->
+    <div class="definition-box">
+        <h3>Properties of the Sine and Cosine Functions</h3>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div>
+                <p><strong>The Function \(f(x)=\sin(x)\)</strong></p>
+                <ul>
+                    <li>has domain \((-\infty,\infty)\)</li>
+                    <li>has range \([-1,1]\)</li>
+                    <li>is continuous and smooth</li>
+                    <li>is odd</li>
+                    <li>has a period of \(2\pi\)</li>
+                </ul>
+            </div>
+            <div>
+                <p><strong>The Function \(g(x)=\cos(x)\)</strong></p>
+                <ul>
+                    <li>has domain \((-\infty,\infty)\)</li>
+                    <li>has range \([-1,1]\)</li>
+                    <li>is continuous and smooth</li>
+                    <li>is even</li>
+                    <li>has a period of \(2\pi\)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <p>In Precalculus I, we discussed transformations of parent functions. We are going to extend that same idea into trigonometric functions. Each trigonometric function is made up of pieces that help us understand the behavior of the graph. Just like with parent functions, not all transformations are always present. But with trigonometric functions there are two characteristics that are always present in the graph.</p>
+
+    <p>The <strong>period</strong> and <strong>amplitude</strong> are two components that the Sine and Cosine functions will always have. The <strong>period</strong> is how long it takes our function to make one full rotation or one complete cycle of the graph. The <strong>amplitude</strong> is the height of the graph — how tall it is. Both are displayed in the figures below with respect to the Sine and Cosine functions.</p>
+
+    <div class="diagram-row">
+        <div class="diagram">
+            <figure>
+                <img src="images/5_4_3.png" alt="Graph of y equals sine of x with period labeled as a horizontal double-headed arrow spanning from 0 to 2π along the x-axis, and amplitude labeled as a vertical double-headed arrow from the x-axis up to the peak at y equals 1." />
+                <figcaption>\(y = \sin(x)\) with period and amplitude labeled</figcaption>
+            </figure>
+        </div>
+        <div class="diagram">
+            <figure>
+                <img src="images/5_4_4.png" alt="Graph of y equals cosine of x with period labeled as a horizontal double-headed arrow spanning from 0 to 2π along the x-axis, and amplitude labeled as a vertical double-headed arrow from the x-axis up to the peak at y equals 1." />
+                <figcaption>\(y = \cos(x)\) with period and amplitude labeled</figcaption>
+            </figure>
+        </div>
+    </div>
+
+    <p>The other transformations that a trigonometric function can undergo are a <strong>phase shift</strong> and a <strong>vertical shift</strong>. A <strong>phase shift</strong> is the equivalent of a horizontal translation. The graph below represents a Sine function that has undergone a phase shift of \(\dfrac{\pi}{2}\) to the right and a vertical shift of two.</p>
+
+    <figure>
+        <img src="images/5_4_5.png" alt="Two sine curves on the same axes: the original y equals sine of x in black, and a transformed version in blue shifted two units up and π/2 units to the right." />
+        <figcaption>Sine function with a phase shift of \(\dfrac{\pi}{2}\) right and a vertical shift of 2 (blue), compared to the original (black)</figcaption>
+    </figure>
+
+    <p>Notice how the blue line is now two units above where it was compared to the black line, and it is shifted to the right. Also notice how a horizontal shift of \(\dfrac{\pi}{2}\) units right has transformed our Sine function into a Cosine function.</p>
+
+    <p>Now that we see what it looks like graphically, let's talk about what this would look like in an equation.</p>
+
+    <!-- Function Characteristics box -->
+    <div class="definition-box">
+        <h3>Function Characteristics</h3>
+        <p style="text-align:center;">\(f(x)=A\sin(Bx-C)+D \quad \text{and} \quad g(x)=A\cos(Bx-C)+D\)</p>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 0.5rem;">
+            <ul>
+                <li>Period \(=\dfrac{2\pi}{B}\)</li>
+                <li>Amplitude \(=|A|\)</li>
+            </ul>
+            <ul>
+                <li>Phase Shift \(=\dfrac{C}{B}\)</li>
+                <li>Vertical Shift \(=D\)</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Example 1 -->
+    <section class="example" aria-labelledby="example-5-4-1">
+        <div class="example-problem">
+            <h3 id="example-5-4-1">Example 1</h3>
+            <p>Identify the amplitude, period, phase shift, and vertical shift of the following functions.</p>
+            <ol>
+                <li>\(y=2\cos\!\left(x-\dfrac{\pi}{2}\right)\)</li>
+                <li>\(y=-\dfrac{1}{2}\sin(3x+\pi)\)</li>
+                <li>\(y=\cos\!\left(\dfrac{x}{3}\right)+2\)</li>
+            </ol>
+        </div>
+
+        <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-5-4-1">
+            <span class="toggle-arrow">▼</span>
+            <span>Show Solution</span>
+        </button>
+
+        <div id="solution-5-4-1" class="example-content">
+            <div class="solution">
+                <h4>Solution</h4>
+
+                <p><strong>1.</strong> In \(y=2\cos\!\left(x-\dfrac{\pi}{2}\right)\), we first identify what each variable is, then use those to find each transformation.</p>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                    <div>
+                        <p>\(A=2\)</p>
+                        <p>\(B=1\)</p>
+                        <p>\(C=\dfrac{\pi}{2}\)</p>
+                        <p>\(D=0\)</p>
+                    </div>
+                    <div>
+                        <p>Amplitude: \(|A|=|2|=2\)</p>
+                        <p>Period: \(\dfrac{2\pi}{B}=\dfrac{2\pi}{1}=2\pi\)</p>
+                        <p>Phase Shift: \(\dfrac{C}{B}=\dfrac{\pi/2}{1}=\dfrac{\pi}{2}\) (right)</p>
+                        <p>Vertical Shift: \(D=0\) — there is no vertical shift.</p>
+                    </div>
+                </div>
+
+                <p><strong>2.</strong> In \(y=-\dfrac{1}{2}\sin(3x+\pi)\), we identify each variable and find each transformation.</p>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                    <div>
+                        <p>\(A=-\dfrac{1}{2}\)</p>
+                        <p>\(B=3\)</p>
+                        <p>\(C=-\pi\)</p>
+                        <p>\(D=0\)</p>
+                    </div>
+                    <div>
+                        <p>Amplitude: \(|A|=\left|-\dfrac{1}{2}\right|=\dfrac{1}{2}\)</p>
+                        <p>Period: \(\dfrac{2\pi}{B}=\dfrac{2\pi}{3}\)</p>
+                        <p>Phase Shift: \(\dfrac{C}{B}=\dfrac{-\pi}{3}\) (left)</p>
+                        <p>Vertical Shift: \(D=0\) — once again there is no vertical shift.</p>
+                    </div>
+                </div>
+
+                <p><strong>3.</strong> In \(y=\cos\!\left(\dfrac{x}{3}\right)+2\), we identify each variable and find each transformation.</p>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                    <div>
+                        <p>\(A=1\)</p>
+                        <p>\(B=\dfrac{1}{3}\)</p>
+                        <p>\(C=0\)</p>
+                        <p>\(D=2\)</p>
+                    </div>
+                    <div>
+                        <p>Amplitude: \(|A|=|1|=1\)</p>
+                        <p>Period: \(\dfrac{2\pi}{B}=\dfrac{2\pi}{1/3}=6\pi\)</p>
+                        <p>Phase Shift: \(\dfrac{C}{B}=\dfrac{0}{1/3}=0\) — there is no phase shift.</p>
+                        <p>Vertical Shift: \(D=2\) (up 2 units)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Graphing Transformed Sine and Cosine -->
+    <h2>Graphing Transformed Sine and Cosine Functions</h2>
+
+    <p>The way that this section is taught could differ from instructor to instructor, so please note that even though we are using one method in this section, your specific instructor may choose another approach. As always, the instructor is always correct — just do as they instruct.</p>
+
+    <p>We are going to start with the equation \(y=2\sin(2x)\). This equation is on the simpler side to begin with. As with the previous examples we need to first identify our amplitude, period, phase shift, and vertical translation. From looking at the equation we have no \(C\) and no \(D\), which tells us there is no phase shift and no vertical shift. But we can see that \(A=2\) and \(B=2\), meaning our amplitude is \(2\) and our period is \(\dfrac{2\pi}{2}=\pi\). That tells us that by the time we get to \(2\pi\), our Sine function will have made two full rotations.</p>
+
+    <p>So if it makes two full rotations, how often do we need to add a point? There are four points after the initial starting point of each graph. If you take your period and divide it by four, you'll find out how often you need to include a point: \(\dfrac{\pi}{4}\) would be how often we need to include the points.</p>
+
+    <p>Let's look at the changes we've made to the graph. The equation and points in black represent the original function \(y=\sin(x)\); the points in blue are the points of the function \(y=\sin(2x)\):</p>
+
+    <figure>
+        <img src="images/5_4_6.png" alt="Coordinate grid showing y equals sine of x in black and y equals sine of 2x in blue. The blue curve completes one full cycle in half the horizontal distance of the black curve. Five key points are marked on each: black at (0,0), (π/2,1), (π,0), (3π/2,−1), (2π,0); blue at (0,0), (π/4,1), (π/2,0), (3π/4,−1), (π,0)." />
+        <figcaption>Comparing \(y=\sin(x)\) (black) and \(y=\sin(2x)\) (blue)</figcaption>
+    </figure>
+
+    <p>One thing you should notice is that when you change the period, the amplitude did not change. Think of it like a slinky: when you pull it apart, the metal loops stay the same size — all that changes is the space between the spirals. When the period is less than \(2\pi\), it is the equivalent of compressing the slinky or a spring.</p>
+
+    <p>Now we are ready to change the amplitude. When you change the amplitude it has no effect on the zeros of the function — the places where the equation crosses the \(x\)-axis. All the amplitude does is stretch the peaks and valleys. So all of our points at \(1\) and \(-1\) will have their \(y\)-coordinate multiplied by \(2\). Applying that transformation to the blue graph gives us our final result, shown below in red.</p>
+
+    <figure>
+        <img src="images/5_4_7.png" alt="Coordinate grid showing y equals sine of 2x in blue and y equals 2 sine of 2x in red. The red curve has the same period as the blue but peaks at 2 and troughs at −2. Key points on the red curve are (0,0), (π/4,2), (π/2,0), (3π/4,−2), (π,0)." />
+        <figcaption>Adding the amplitude transformation: \(y=\sin(2x)\) (blue) and \(y=2\sin(2x)\) (red)</figcaption>
+    </figure>
+
+    <p>Now if we remove the blue graph we have our finished product:</p>
+
+    <figure>
+        <img src="images/5_4_8.png" alt="Coordinate grid showing only the final graph of y equals 2 sine of 2x in red. The curve oscillates between −2 and 2 with a period of π." />
+        <figcaption>Final graph of \(y=2\sin(2x)\)</figcaption>
+    </figure>
+
+    <p>It would be great if one example were enough to master graphing trigonometric functions — but it takes a lot of practice. Let's look at a few more examples.</p>
+
+    <!-- Example 2 -->
+    <section class="example" aria-labelledby="example-5-4-2">
+        <div class="example-problem">
+            <h3 id="example-5-4-2">Example 2</h3>
+            <p>Graph at least one full cycle of each function below using transformative graphing.</p>
+            <ol>
+                <li>\(g(x)=\sin\!\left(\dfrac{1}{3}x-\pi\right)+1\)</li>
+                <li>\(h(x)=-2\cos\!\left(x+\dfrac{\pi}{2}\right)\)</li>
+            </ol>
+        </div>
+
+        <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-5-4-2">
+            <span class="toggle-arrow">▼</span>
+            <span>Show Solution</span>
+        </button>
+
+        <div id="solution-5-4-2" class="example-content">
+            <div class="solution">
+                <h4>Solution</h4>
+
+                <p><strong>1.</strong> Let's look at \(g(x)=\sin\!\left(\dfrac{1}{3}x-\pi\right)+1\). This graph has a number of different transformations. Start by identifying the amplitude, period, phase shift, and vertical translation — this should <em>always</em> be your starting place.</p>
+
+                <ul>
+                    <li><strong>Amplitude:</strong> \(|A|=|1|=1\) — no change in height.</li>
+                    <li><strong>Period:</strong> \(\dfrac{2\pi}{B}=\dfrac{2\pi}{1/3}=6\pi\) — the graph makes one full rotation by \(6\pi\), which is three times around the unit circle.</li>
+                    <li><strong>Phase Shift:</strong> \(\dfrac{\pi}{1/3}=3\pi\) (right)</li>
+                    <li><strong>Vertical Shift:</strong> \(D=1\) — shift the entire graph up 1 unit.</li>
+                </ul>
+
+                <p>We always start with the original function \(y=\sin(x)\). Since the period is \(6\pi\), we need a point every \(\dfrac{6\pi}{4}=\dfrac{3\pi}{2}\). Using the applet below, move the slider to 1/3 for b, this is the variable that controls your period. </p>               
+                
+              
+                <p>Our next step is to take all of our individual points and move them \(3\pi\) to the right. Using the applet below take the slider for c and move it to \(\pi\).</p>
+                <p>Finally, we shift the entire graph up 1 unit. To accomplish that we use the slider for d. Move the slider for d to 1.</p> 
+                <p>Make sure you're taking notes at how the graph transforms through each step.</p>
+    
+<figure>
+  <iframe 
+    src="https://www.geogebra.org/material/iframe/id/ahqwzasj/width/700/height/500/border/888888/sfsb/true/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/false/rc/false/ld/false/sdz/true/ctl/false"
+    width="700"
+    height="500"
+    style="border:0;"
+    title="Interactive sine function applet showing the relationship between angle and sine value"
+    loading="lazy"
+    allowfullscreen>
+  </iframe>
+  <figcaption>
+    Interactive sine graph. If the applet does not load, visit 
+    <a href="https://www.geogebra.org/material/iframe/id/ahqwzasj" target="_blank">
+      this GeoGebra activity
+    </a>.
+  </figcaption>
+</figure>
+                
+                
+                
+
+
+               
+
+                <hr class="divider" role="separator" aria-hidden="true" />
+
+                <p><strong>2.</strong> Let's look at \(h(x)=-2\cos\!\left(x+\dfrac{\pi}{2}\right)\). Identify the transformations first:</p>
+
+                <ul>
+                    <li><strong>Amplitude:</strong> \(|A|=|-2|=2\). Note that the negative sign means a reflection over the \(x\)-axis and should not be ignored when graphing.</li>
+                    <li><strong>Period:</strong> No period change — the period is \(2\pi\).</li>
+                    <li><strong>Phase Shift:</strong> \(\dfrac{C}{B}=\dfrac{-\pi/2}{1}=-\dfrac{\pi}{2}\) (left)</li>
+                    <li><strong>Vertical Shift:</strong> None — there is no \(D\) term.</li>
+                </ul>
+
+                <p>We start by shifting all points of the original Cosine function \(\dfrac{\pi}{2}\) to the left. Transform the general Cosine function below by moving the appropriate slider. Take note of how the function changes are the different characteristics change.</p>
+
+                <figure>
+  <iframe 
+    src="https://www.geogebra.org/material/iframe/id/wukx2nas/width/700/height/500/border/888888/sfsb/true/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/true/rc/false/ld/false/sdz/true/ctl/false"
+    width="700"
+    height="500"
+    style="border:0;"
+    title="Interactive cosine function applet showing the relationship between angle and cosine value"
+    loading="lazy"
+    allowfullscreen>
+  </iframe>
+  <figcaption>
+    Interactive cosine graph. If the applet does not load, visit 
+    <a href="https://www.geogebra.org/material/iframe/id/wukx2nas" target="_blank">
+      this GeoGebra activity
+    </a>.
+  </figcaption>
+</figure>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider" role="separator" aria-hidden="true"></div>
+
+    <!-- Secant and Cosecant -->
+    <h2>Graphs of the Secant and Cosecant Functions</h2>
+
+    <p>We now turn our attention to graphing \(y = \sec(x)\). Since \(\sec(x) = \dfrac{1}{\cos(x)}\), we can use our table of values for \(y = \cos(x)\) and take reciprocals. The domain of \(y = \sec(x)\) excludes all odd multiples of \(\dfrac{\pi}{2}\), and we run into trouble at \(x = \dfrac{\pi}{2}\) and \(x = \dfrac{3\pi}{2}\) since \(\cos(x) = 0\) at these values. Below we graph a fundamental cycle of \(y = \sec(x)\) along with a more complete graph obtained by the usual copying and pasting.</p>
+
+    <div class="diagram-row">
+        <div class="diagram">
+            <table>
+                <thead>
+                    <tr>
+                        <th scope="col">\(x\)</th>
+                        <th scope="col">\(\cos(x)\)</th>
+                        <th scope="col">\(\sec(x)\)</th>
+                        <th scope="col">\((x,\sec(x))\)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>\(0\)</td><td>\(1\)</td><td>\(1\)</td><td>\((0,1)\)</td></tr>
+                    <tr><td>\(\dfrac{\pi}{4}\)</td><td>\(\dfrac{\sqrt{2}}{2}\)</td><td>\(\sqrt{2}\)</td><td>\(\left(\dfrac{\pi}{4},\sqrt{2}\right)\)</td></tr>
+                    <tr><td>\(\dfrac{\pi}{2}\)</td><td>\(0\)</td><td>undefined</td><td></td></tr>
+                    <tr><td>\(\dfrac{3\pi}{4}\)</td><td>\(-\dfrac{\sqrt{2}}{2}\)</td><td>\(-\sqrt{2}\)</td><td>\(\left(\dfrac{3\pi}{4},-\sqrt{2}\right)\)</td></tr>
+                    <tr><td>\(\pi\)</td><td>\(-1\)</td><td>\(-1\)</td><td>\((\pi,-1)\)</td></tr>
+                    <tr><td>\(\dfrac{5\pi}{4}\)</td><td>\(-\dfrac{\sqrt{2}}{2}\)</td><td>\(-\sqrt{2}\)</td><td>\(\left(\dfrac{5\pi}{4},-\sqrt{2}\right)\)</td></tr>
+                    <tr><td>\(\dfrac{3\pi}{2}\)</td><td>\(0\)</td><td>undefined</td><td></td></tr>
+                    <tr><td>\(\dfrac{7\pi}{4}\)</td><td>\(\dfrac{\sqrt{2}}{2}\)</td><td>\(\sqrt{2}\)</td><td>\(\left(\dfrac{7\pi}{4},\sqrt{2}\right)\)</td></tr>
+                    <tr><td>\(2\pi\)</td><td>\(1\)</td><td>\(1\)</td><td>\((2\pi,1)\)</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="diagram">
+            <figure>
+                <img src="images/5_4_sec.png" alt="Graph of y equals secant of x with vertical asymptotes shown as dashed red lines at x equals π/2 and 3π/2. The curve forms U-shaped arches opening upward near x equals 0 and 2π (touching y equals 1) and downward near x equals π (touching y equals negative 1). A dashed gray cosine curve is shown for reference." />
+                <figcaption>Graph of \(y = \sec(x)\) with the dashed reference curve \(y=\cos(x)\)</figcaption>
+            </figure>
+        </div>
+    </div>
+
+    <p>Please note that in the graph of the Secant function, the dashed graph of the Cosine function would not normally appear. It is shown here only to help set up the Secant function.</p>
+
+    <p>To graph \(y = \csc(x)\) we begin with \(y = \sin(x)\) and take reciprocals of the corresponding \(y\)-values. We encounter issues at \(x = 0\), \(x = \pi\), and \(x = 2\pi\). Below we graph the fundamental cycle of \(y = \csc(x)\) along with the dotted graph of \(y=\sin(x)\) for reference. Since \(y = \sin(x)\) and \(y = \cos(x)\) are merely phase shifts of each other, so too are \(y = \csc(x)\) and \(y = \sec(x)\).</p>
+
+    <div class="diagram-row">
+        <div class="diagram">
+            <table>
+                <thead>
+                    <tr>
+                        <th scope="col">\(x\)</th>
+                        <th scope="col">\(\sin(x)\)</th>
+                        <th scope="col">\(\csc(x)\)</th>
+                        <th scope="col">\((x,\csc(x))\)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>\(0\)</td><td>\(0\)</td><td>undefined</td><td></td></tr>
+                    <tr><td>\(\dfrac{\pi}{4}\)</td><td>\(\dfrac{\sqrt{2}}{2}\)</td><td>\(\sqrt{2}\)</td><td>\(\left(\dfrac{\pi}{4},\sqrt{2}\right)\)</td></tr>
+                    <tr><td>\(\dfrac{\pi}{2}\)</td><td>\(1\)</td><td>\(1\)</td><td>\(\left(\dfrac{\pi}{2},1\right)\)</td></tr>
+                    <tr><td>\(\dfrac{3\pi}{4}\)</td><td>\(\dfrac{\sqrt{2}}{2}\)</td><td>\(\sqrt{2}\)</td><td>\(\left(\dfrac{3\pi}{4},\sqrt{2}\right)\)</td></tr>
+                    <tr><td>\(\pi\)</td><td>\(0\)</td><td>undefined</td><td></td></tr>
+                    <tr><td>\(\dfrac{5\pi}{4}\)</td><td>\(-\dfrac{\sqrt{2}}{2}\)</td><td>\(-\sqrt{2}\)</td><td>\(\left(\dfrac{5\pi}{4},-\sqrt{2}\right)\)</td></tr>
+                    <tr><td>\(\dfrac{3\pi}{2}\)</td><td>\(-1\)</td><td>\(-1\)</td><td>\(\left(\dfrac{3\pi}{2},-1\right)\)</td></tr>
+                    <tr><td>\(\dfrac{7\pi}{4}\)</td><td>\(-\dfrac{\sqrt{2}}{2}\)</td><td>\(-\sqrt{2}\)</td><td>\(\left(\dfrac{7\pi}{4},-\sqrt{2}\right)\)</td></tr>
+                    <tr><td>\(2\pi\)</td><td>\(0\)</td><td>undefined</td><td></td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="diagram">
+            <figure>
+                <img src="images/5_4_csc.png" alt="Graph of y equals cosecant of x with vertical asymptotes shown as dashed red lines at x equals 0, π, and 2π. The curve forms U-shaped arches opening upward between 0 and π (touching y equals 1 at π/2) and downward between π and 2π (touching y equals negative 1 at 3π/2). A dashed gray sine curve is shown for reference." />
+                <figcaption>Graph of \(y = \csc(x)\) with the dashed reference curve \(y=\sin(x)\)</figcaption>
+            </figure>
+        </div>
+    </div>
+
+    <p>Note that on the intervals between the vertical asymptotes, both \(y = \sec(x)\) and \(y = \csc(x)\) are continuous and smooth on their domains.</p>
+
+    <!-- Example 3 -->
+    <section class="example" aria-labelledby="example-5-4-3">
+        <div class="example-problem">
+            <h3 id="example-5-4-3">Example 3</h3>
+            <p>Graph the following functions.</p>
+            <ol>
+                <li>\(y=\csc(2x-\pi)\)</li>
+                <li>\(y=-\dfrac{1}{2}\sec(x)\)</li>
+            </ol>
+        </div>
+
+        <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-5-4-3">
+            <span class="toggle-arrow">▼</span>
+            <span>Show Solution</span>
+        </button>
+
+        <div id="solution-5-4-3" class="example-content">
+            <div class="solution">
+                <h4>Solution</h4>
+
+                <p><strong>1.</strong> When graphing the Cosecant function, it is often easiest to graph the corresponding Sine function first and then "cut" and "flip" to make it Cosecant. So instead of graphing \(y=\csc(2x-\pi)\) directly, try graphing \(y=\sin(2x-\pi)\) first. From either function we can determine that the period is \(\dfrac{2\pi}{2}=\pi\), which means we need a point every \(\dfrac{\pi}{4}\). The phase shift is \(\dfrac{\pi}{2}\) to the right. Below, the original Sine function is in gray and the transformed Sine function is in red.</p>
+
+                <figure>
+                    <img src="images/5_4_16.png" alt="Coordinate grid showing y equals sine of x in gray and y equals sine of (2x minus π) in red. The red curve has half the period and is shifted π/2 to the right compared to the gray curve." />
+                    <figcaption>\(y=\sin(x)\) (gray) and \(y=\sin(2x-\pi)\) (red)</figcaption>
+                </figure>
+
+                <p>Now, placing a vertical asymptote everywhere the red function crosses the \(x\)-axis and "cutting" and "flipping" those segments gives us \(y=\csc(2x-\pi)\).</p>
+
+                <figure>
+                    <img src="images/5_4_17.png" alt="Coordinate grid showing the graph of y equals cosecant of (2x minus π). Dashed red vertical asymptotes appear every π/2 units. U-shaped arches open upward and downward alternately between each pair of consecutive asymptotes. The curve never crosses the x-axis." />
+                    <figcaption>Graph of \(y=\csc(2x-\pi)\)</figcaption>
+                </figure>
+
+                <hr class="divider" role="separator" aria-hidden="true" />
+
+                <p><strong>2.</strong> To graph \(y=-\dfrac{1}{2}\sec(x)\), we take a similar approach by transforming the Cosine function to \(y=-\dfrac{1}{2}\cos(x)\). There is no period change, no phase shift, and no vertical translation. The only changes are a reflection over the \(x\)-axis and an amplitude decrease to \(\dfrac{1}{2}\). Note that Secant functions do not technically have an amplitude, but the coefficient does change the depth of each "U" in the graph. Below, the original Cosine function is in gray and the transformed Cosine function is in red.</p>
+
+                <figure>
+                    <img src="images/5_4_18.png" alt="Coordinate grid showing y equals cosine of x in gray and y equals negative one-half cosine of x in red. The red curve is reflected over the x-axis and has half the height of the gray curve, with peaks at y equals 1/2 and troughs at y equals negative 1/2." />
+                    <figcaption>\(y=\cos(x)\) (gray) and \(y=-\dfrac{1}{2}\cos(x)\) (red)</figcaption>
+                </figure>
+
+                <p>Placing vertical asymptotes where the red function crosses the \(x\)-axis and cutting and flipping gives us \(y=-\dfrac{1}{2}\sec(x)\).</p>
+
+                <figure>
+                    <img src="images/5_4_19.png" alt="Coordinate grid showing the graph of y equals negative one-half secant of x. Dashed red vertical asymptotes appear at x equals π/2 and 3π/2. Near x equals 0 and 2π, downward-opening U-shapes reach a maximum of negative 1/2. Near x equals π, an upward-opening U-shape reaches a minimum of positive 1/2." />
+                    <figcaption>Graph of \(y=-\dfrac{1}{2}\sec(x)\)</figcaption>
+                </figure>
+            </div>
+        </div>
+    </section>
+
+    <p>Before moving on, note that it is possible to speak of the period, phase shift, and vertical shift of Secant and Cosecant graphs, and to use even/odd identities to put them in a form similar to the sinusoidal forms. Since these quantities match those of the corresponding Cosine and Sine curves, we do not spell this out explicitly. Finally, since the ranges of Secant and Cosecant are unbounded, there is no amplitude associated with these curves.</p>
+
+    <div class="divider" role="separator" aria-hidden="true"></div>
+
+    <!-- Tangent and Cotangent -->
+    <h2>Graphs of the Tangent and Cotangent Functions</h2>
+
+    <p>Finally, we turn our attention to the graphs of the tangent and cotangent functions. When constructing a table of values for the tangent function, we see that \(\tan(x)\) is undefined at \(x=\dfrac{\pi}{2}\) and \(x=\dfrac{3\pi}{2}\). As \(x \to \dfrac{\pi}{2}^{-}\), \(\sin(x) \to 1^{-}\) and \(\cos(x) \to 0^{+}\), so \(\tan(x) = \dfrac{\sin(x)}{\cos(x)} \to \infty\), producing a vertical asymptote at \(x=\dfrac{\pi}{2}\). Using a similar analysis, as \(x \to \dfrac{\pi}{2}^{+}\), \(\tan(x) \to -\infty\); as \(x \to \dfrac{3\pi}{2}^{-}\), \(\tan(x) \to \infty\); and as \(x \to \dfrac{3\pi}{2}^{+}\), \(\tan(x) \to -\infty\).</p>
+
+    <div class="diagram-row">
+        <div class="diagram">
+            <table>
+                <thead>
+                    <tr>
+                        <th scope="col">\(x\)</th>
+                        <th scope="col">\(\tan(x)\)</th>
+                        <th scope="col">\((x,\tan(x))\)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>\(0\)</td><td>\(0\)</td><td>\((0,0)\)</td></tr>
+                    <tr><td>\(\dfrac{\pi}{4}\)</td><td>\(1\)</td><td>\(\left(\dfrac{\pi}{4},1\right)\)</td></tr>
+                    <tr><td>\(\dfrac{\pi}{2}\)</td><td>undefined</td><td></td></tr>
+                    <tr><td>\(\dfrac{3\pi}{4}\)</td><td>\(-1\)</td><td>\(\left(\dfrac{3\pi}{4},-1\right)\)</td></tr>
+                    <tr><td>\(\pi\)</td><td>\(0\)</td><td>\((\pi,0)\)</td></tr>
+                    <tr><td>\(\dfrac{5\pi}{4}\)</td><td>\(1\)</td><td>\(\left(\dfrac{5\pi}{4},1\right)\)</td></tr>
+                    <tr><td>\(\dfrac{3\pi}{2}\)</td><td>undefined</td><td></td></tr>
+                    <tr><td>\(\dfrac{7\pi}{4}\)</td><td>\(-1\)</td><td>\(\left(\dfrac{7\pi}{4},-1\right)\)</td></tr>
+                    <tr><td>\(2\pi\)</td><td>\(0\)</td><td>\((2\pi,0)\)</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="diagram">
+            <figure>
+                <img src="images/5_4_tan.png" alt="Graph of y equals tangent of x with dashed red vertical asymptotes at x equals π/2, 3π/2, negative π/2, and negative 3π/2. Between each pair of asymptotes, the curve rises from negative infinity to positive infinity with an S-shape passing through zero at the midpoint." />
+                <figcaption>Graph of \(y = \tan(x)\)</figcaption>
+            </figure>
+        </div>
+    </div>
+
+    <p>From the graph, the tangent function appears to be periodic with period \(\pi\). To prove this, we use the sum formula for tangents:</p>
+    <p>\[ \tan(x+\pi) = \dfrac{\tan(x) + \tan(\pi)}{1 - \tan(x)\tan(\pi)} = \dfrac{\tan(x) + 0}{1 - (\tan(x))(0)} = \tan(x), \]</p>
+    <p>which confirms the period of \(\tan(x)\) is at most \(\pi\). To show it is exactly \(\pi\), suppose \(p\) is a positive real number such that \(\tan(x+p) = \tan(x)\) for all \(x\). For \(x=0\), we have \(\tan(p) = \tan(0) = 0\), which means \(p\) is a multiple of \(\pi\). The smallest positive multiple of \(\pi\) is \(\pi\) itself. We take as our fundamental cycle for \(y=\tan(x)\) the interval \(\left(-\dfrac{\pi}{2}, \dfrac{\pi}{2}\right)\), with quarter marks \(x = -\dfrac{\pi}{2},\, -\dfrac{\pi}{4},\, 0,\, \dfrac{\pi}{4},\, \dfrac{\pi}{2}\).</p>
+
+    <p>It should be no surprise that \(\cot(x)\) behaves similarly to \(\tan(x)\). Plotting \(\cot(x)\) over \([0,2\pi]\) results in the graph below.</p>
+
+    <div class="diagram-row">
+        <div class="diagram">
+            <table>
+                <thead>
+                    <tr>
+                        <th scope="col">\(x\)</th>
+                        <th scope="col">\(\cot(x)\)</th>
+                        <th scope="col">\((x,\cot(x))\)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>\(0\)</td><td>undefined</td><td></td></tr>
+                    <tr><td>\(\dfrac{\pi}{4}\)</td><td>\(1\)</td><td>\(\left(\dfrac{\pi}{4},1\right)\)</td></tr>
+                    <tr><td>\(\dfrac{\pi}{2}\)</td><td>\(0\)</td><td>\(\left(\dfrac{\pi}{2},0\right)\)</td></tr>
+                    <tr><td>\(\dfrac{3\pi}{4}\)</td><td>\(-1\)</td><td>\(\left(\dfrac{3\pi}{4},-1\right)\)</td></tr>
+                    <tr><td>\(\pi\)</td><td>undefined</td><td></td></tr>
+                    <tr><td>\(\dfrac{5\pi}{4}\)</td><td>\(1\)</td><td>\(\left(\dfrac{5\pi}{4},1\right)\)</td></tr>
+                    <tr><td>\(\dfrac{3\pi}{2}\)</td><td>\(0\)</td><td>\(\left(\dfrac{3\pi}{2},0\right)\)</td></tr>
+                    <tr><td>\(\dfrac{7\pi}{4}\)</td><td>\(-1\)</td><td>\(\left(\dfrac{7\pi}{4},-1\right)\)</td></tr>
+                    <tr><td>\(2\pi\)</td><td>undefined</td><td></td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="diagram">
+            <figure>
+                <img src="images/5_4_cot.png" alt="Graph of y equals cotangent of x with dashed red vertical asymptotes at x equals 0, π, 2π, negative π, and negative 2π. Between each pair of asymptotes, the curve falls from positive infinity to negative infinity with an S-shape passing through zero at the midpoint." />
+                <figcaption>Graph of \(y = \cot(x)\)</figcaption>
+            </figure>
+        </div>
+    </div>
+
+    <p>From these data, the period of \(\cot(x)\) is clearly \(\pi\). We take as one fundamental cycle the interval \((0,\pi)\) with quarter marks: \(x = 0,\, \dfrac{\pi}{4},\, \dfrac{\pi}{2},\, \dfrac{3\pi}{4},\, \pi\). The Cotangent function mimics the Tangent function — the asymptotes now occur where Cosine is zero, and the S-shape reflects horizontally.</p>
+
+    <!-- Example 4 -->
+    <section class="example" aria-labelledby="example-5-4-4">
+        <div class="example-problem">
+            <h3 id="example-5-4-4">Example 4</h3>
+            <p>Graph each of the following functions.</p>
+            <ol>
+                <li>\(y=\tan\!\left(x+\dfrac{\pi}{4}\right)\)</li>
+                <li>\(y=3\cot(2x)\)</li>
+            </ol>
+        </div>
+
+        <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-5-4-4">
+            <span class="toggle-arrow">▼</span>
+            <span>Show Solution</span>
+        </button>
+
+        <div id="solution-5-4-4" class="example-content">
+            <div class="solution">
+                <h4>Solution</h4>
+
+                <p><strong>1.</strong> To graph \(y=\tan\!\left(x+\dfrac{\pi}{4}\right)\), use transformative graphing. The only transformation present is a phase shift of \(\dfrac{\pi}{4}\) to the left — the entire graph moves left \(\dfrac{\pi}{4}\). Below, the original Tangent function is in gray and the transformed function in blue, with blue asymptotes.</p>
+
+                <figure>
+                    <img src="images/5_4_22.png" alt="Coordinate grid showing y equals tangent of x in gray with dashed red vertical asymptotes at x equals ±π/2 and ±3π/2." />
+                    <figcaption>Graph of \(y=\tan(x)\)</figcaption>
+                </figure>
+
+                <figure>
+                    <img src="images/5_4_23.png" alt="Coordinate grid showing y equals tangent of (x plus π/4) in blue with dashed blue vertical asymptotes shifted π/4 to the left compared to the original tangent function. The shape of the curve is unchanged; only the horizontal position has shifted." />
+                    <figcaption>Graph of \(y=\tan\!\left(x+\dfrac{\pi}{4}\right)\)</figcaption>
+                </figure>
+
+                <p>Notice how the shape did not change — all that changed is that the entire graph shifted left, including the asymptotes.</p>
+
+                <hr class="divider" role="separator" aria-hidden="true" />
+
+                <p><strong>2.</strong> To graph \(y=3\cot(2x)\), first note the period change: \(\dfrac{\pi}{B}=\dfrac{\pi}{2}\), meaning everything is cut in half. If we were to graph \(y=\cot(2x)\) it would look like:</p>
+
+                <figure>
+                    <img src="images/5_4_24.png" alt="Coordinate grid showing y equals cotangent of 2x in blue. Dashed red vertical asymptotes appear every π/2 units. Between each pair of asymptotes the curve falls from positive infinity to negative infinity." />
+                    <figcaption>Graph of \(y=\cot(2x)\)</figcaption>
+                </figure>
+
+                <p>Our next step is to scale each \(y\)-value by \(3\). The table below shows the updated key values:</p>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th scope="col">\(x\)</th>
+                            <th scope="col">\(3\cot(x)\)</th>
+                            <th scope="col">\((x, 3\cot(x))\)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>\(0\)</td><td>undefined</td><td></td></tr>
+                        <tr><td>\(\dfrac{\pi}{4}\)</td><td>\(3\)</td><td>\(\left(\dfrac{\pi}{4},3\right)\)</td></tr>
+                        <tr><td>\(\dfrac{\pi}{2}\)</td><td>\(0\)</td><td>\(\left(\dfrac{\pi}{2},0\right)\)</td></tr>
+                        <tr><td>\(\dfrac{3\pi}{4}\)</td><td>\(-3\)</td><td>\(\left(\dfrac{3\pi}{4},-3\right)\)</td></tr>
+                        <tr><td>\(\pi\)</td><td>undefined</td><td></td></tr>
+                    </tbody>
+                </table>
+
+                <figure>
+                    <img src="images/5_4_25.png" alt="Coordinate grid showing the final graph of y equals 3 cotangent of 2x in blue. The curve has the same period as cot(2x) but is stretched vertically so it passes through (π/4, 3) and (3π/4, −3). Dashed red asymptotes appear every π/2 units." />
+                    <figcaption>Final graph of \(y=3\cot(2x)\)</figcaption>
+                </figure>
+
+                <p>Notice how the graph didn't change dramatically, but it did get "stretched" vertically. Instead of a tight S-shape it now resembles more of a slanted line between each pair of asymptotes.</p>
+            </div>
+        </div>
+    </section>
+
+</section><!-- end #graphing-trig-functions -->
+
+</main>
+
+<!-- Toggle script -->
+<script>
+    function toggleExample(button) {
+        const content = button.nextElementSibling;
+        const arrow = button.querySelector('.toggle-arrow');
+
+        if (content.classList.contains('open')) {
+            content.classList.remove('open');
+            arrow.classList.remove('open');
+            button.querySelector('span:last-child').textContent = 'Show Solution';
+            button.setAttribute('aria-expanded', 'false');
+        } else {
+            content.classList.add('open');
+            arrow.classList.add('open');
+            button.querySelector('span:last-child').textContent = 'Hide Solution';
+            button.setAttribute('aria-expanded', 'true');
+        }
+    }
+</script>
+
+<!-- TOC loader -->
+<script>
+    fetch('toc.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('toc-placeholder').innerHTML = data;
+
+            const chapterButtons = document.querySelectorAll('.toc-chapter');
+            chapterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const expanded = button.getAttribute('aria-expanded') === 'true';
+                    button.setAttribute('aria-expanded', !expanded);
+                    const submenu = button.nextElementSibling;
+                    submenu.classList.toggle('open');
+                });
+            });
+        });
+</script>
+
+</body>
+</html>

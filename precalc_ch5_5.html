@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CH 5.5 – Inverse Trigonometric Functions</title>
+
+    <!-- MathJax configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)'], ['$', '$']],
+                displayMath: [['\\[', '\\]'], ['$$', '$$']]
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            },
+            loader: {
+                load: ['input/tex', 'output/chtml']
+            }
+        };
+    </script>
+    <script id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+
+    <link rel="stylesheet" href="styles1.css" />
+</head>
+<body>
+
+<div id="toc-placeholder"></div>
+
+<main class="container">
+
+<section id="inverse-trig-functions">
+    <h2>CH 5.5 – Inverse Trigonometric Functions</h2>
+
+    <p>As the title indicates, in this section we concern ourselves with finding inverses of the (circular) trigonometric functions. Our immediate problem is that, owing to their periodic nature, none of the six circular functions is one-to-one. To remedy this, we restrict the domains of the circular functions in the same way we restricted the domain of the quadratic function in Chapter 1 to obtain a one-to-one function. We first consider \(f(x) = \cos(x)\). Choosing the interval \([0,\pi]\) allows us to keep the range as \([-1,1]\) as well as the properties of being smooth and continuous.</p>
+
+    <figure>
+        <img src="images/5_5_1.png" alt="Graph of y equals cosine of x over the full real line, with the restricted portion on the interval from 0 to π highlighted in blue. The gray curve continues in both directions showing the periodic nature of cosine." />
+        <figcaption>The cosine function with the restricted domain \([0,\pi]\) highlighted in blue</figcaption>
+    </figure>
+
+    <p>Recall from Chapter 1 that the inverse of a function \(f\) is typically denoted \(f^{-1}\). For this reason, some textbooks use the notation \(f^{-1}(x) = \cos^{-1}(x)\) for the inverse of \(f(x) = \cos(x)\). The obvious pitfall here is our convention of writing \((\cos(x))^2\) as \(\cos^{2}(x)\), \((\cos(x))^3\) as \(\cos^{3}(x)\), and so on. It is far too easy to confuse \(\cos^{-1}(x)\) with \(\frac{1}{\cos(x)} = \sec(x)\), so we will not use this notation in our text. Instead, we use the notation \(f^{-1}(x) = \arccos(x)\), read "arc-cosine of \(x\)".</p>
+
+    <p>To understand the "arc" in "arccosine", recall that an inverse function, by definition, reverses the process of the original function. The function \(f(t) = \cos(t)\) takes a real number input \(t\), associates it with the angle \(\theta = t\) radians, and returns the value \(\cos(\theta)\). Digging deeper, \(\cos(\theta) = \cos(t)\) is the \(x\)-coordinate of the terminal point on the Unit Circle of an oriented arc of length \(|t|\) whose initial point is \((1, 0)\). Hence, we may view the inputs to \(f(t) = \cos(t)\) as oriented arcs and the outputs as \(x\)-coordinates on the Unit Circle. The function \(f^{-1}\) then takes \(x\)-coordinates on the Unit Circle and returns oriented arcs — hence the "arc" in arccosine.</p>
+
+    <p>Below are the graphs of \(f(x) = \cos(x)\) restricted to \([0,\pi]\) and its inverse \(f^{-1}(x) = \arccos(x)\), obtained by reflecting across the line \(y = x\).</p>
+
+    <div class="diagram-row">
+        <div class="diagram">
+            <figure>
+                <img src="images/5_5_2.png" alt="Graph of f of x equals cosine of x restricted to the interval from 0 to π, shown as a blue curve decreasing from (0,1) to (π,−1). The x-axis shows tick marks at π/2 and π; the y-axis is labeled from −3 to 3." />
+                <figcaption>\(f(x)=\cos(x),\; 0 \le x \le \pi\)</figcaption>
+            </figure>
+        </div>
+        <div class="diagram">
+            <figure>
+                <img src="images/5_5_3.png" alt="Graph of f inverse of x equals arccosine of x, shown as a blue curve increasing from (−1, π) to (1, 0). The y-axis shows tick marks at π/2 and π; the x-axis is labeled at −1 and 1." />
+                <figcaption>\(f^{-1}(x)=\arccos(x)\)</figcaption>
+            </figure>
+        </div>
+    </div>
+
+    <p>We restrict \(g(x) = \sin(x)\) in a similar manner, although the interval of choice is \(\left[-\dfrac{\pi}{2}, \dfrac{\pi}{2}\right]\).</p>
+
+    <figure>
+        <img src="images/5_5_4.png" alt="Graph of y equals sine of x over the full real line, with the restricted portion on the interval from −π/2 to π/2 highlighted in blue. The gray curve continues in both directions showing the periodic nature of sine." />
+        <figcaption>The sine function with the restricted domain \(\left[-\dfrac{\pi}{2},\dfrac{\pi}{2}\right]\) highlighted in blue</figcaption>
+    </figure>
+
+    <p>It should be no surprise that we call \(g^{-1}(x) = \arcsin(x)\), read "arc-sine of \(x\)".</p>
+
+    <div class="diagram-row">
+        <div class="diagram">
+            <figure>
+                <img src="images/5_5_5.png" alt="Graph of f of x equals sine of x restricted to the interval from −π/2 to π/2, shown as a blue S-shaped curve passing through (−π/2, −1), (0, 0), and (π/2, 1). The x-axis shows tick marks at ±π/2." />
+                <figcaption>\(f(x)=\sin(x),\; -\dfrac{\pi}{2} \le x \le \dfrac{\pi}{2}\)</figcaption>
+            </figure>
+        </div>
+        <div class="diagram">
+            <figure>
+                <img src="images/5_5_6.png" alt="Graph of f inverse of x equals arcsine of x, shown as a blue S-shaped curve passing through (−1, −π/2), (0, 0), and (1, π/2). The y-axis shows tick marks at ±π/2; the x-axis is labeled at −1 and 1." />
+                <figcaption>\(f^{-1}(x)=\arcsin(x)\)</figcaption>
+            </figure>
+        </div>
+    </div>
+
+    <!-- Properties of Arccosine and Arcsine -->
+    <div class="definition-box">
+        <h3>Properties of the Arccosine and Arcsine Functions</h3>
+
+        <p><strong>Properties of \(F(x) = \arccos(x)\)</strong></p>
+        <ul>
+            <li>Domain: \([-1,1]\)</li>
+            <li>Range: \([0,\pi]\)</li>
+            <li>\(\arccos(x) = t\) if and only if \(0 \leq t \leq \pi\) and \(\cos(t) = x\)</li>
+            <li>\(\cos(\arccos(x)) = x\) provided \(-1 \leq x \leq 1\)</li>
+            <li>\(\arccos(\cos(x)) = x\) provided \(0 \leq x \leq \pi\)</li>
+        </ul>
+
+        <p><strong>Properties of \(G(x) = \arcsin(x)\)</strong></p>
+        <ul>
+            <li>Domain: \([-1,1]\)</li>
+            <li>Range: \(\left[-\dfrac{\pi}{2}, \dfrac{\pi}{2}\right]\)</li>
+            <li>\(\arcsin(x) = t\) if and only if \(-\dfrac{\pi}{2} \leq t \leq \dfrac{\pi}{2}\) and \(\sin(t) = x\)</li>
+            <li>\(\sin(\arcsin(x)) = x\) provided \(-1 \leq x \leq 1\)</li>
+            <li>\(\arcsin(\sin(x)) = x\) provided \(-\dfrac{\pi}{2} \leq x \leq \dfrac{\pi}{2}\)</li>
+            <li>Additionally, arcsine is odd</li>
+        </ul>
+    </div>
+
+    <p>Everything above is a direct consequence of the facts that \(f(x) = \cos(x)\) for \(0 \leq x \leq \pi\) and \(F(x) = \arccos(x)\) are inverses of each other, as are \(g(x) = \sin(x)\) for \(-\dfrac{\pi}{2} \leq x \leq \dfrac{\pi}{2}\) and \(G(x) = \arcsin(x)\). It's about time for an example.</p>
+
+    <!-- Example 1 -->
+    <section class="example" aria-labelledby="example-5-5-1">
+        <div class="example-problem">
+            <h3 id="example-5-5-1">Example 1</h3>
+            <ol>
+                <li>
+                    <p>Find the exact values of the following.</p>
+                    <div class="exercise-grid columns-2">
+                        <ol type="a">
+                            <li>\(\arccos\!\left(\dfrac{1}{2}\right)\)</li>
+                            <li>\(\arcsin\!\left(\dfrac{\sqrt{2}}{2}\right)\)</li>
+                            <li>\(\arccos\!\left(-\dfrac{\sqrt{2}}{2}\right)\)</li>
+                            <li>\(\arcsin\!\left(-\dfrac{1}{2}\right)\)</li>
+                            <li>\(\arccos\!\left(\cos\!\left(\dfrac{\pi}{6}\right)\right)\)</li>
+                            <li>\(\arccos\!\left(\cos\!\left(\dfrac{11\pi}{6}\right)\right)\)</li>
+                            <li>\(\cos\!\left(\arccos\!\left(-\dfrac{3}{5}\right)\right)\)</li>
+                            <li>\(\sin\!\left(\arccos\!\left(-\dfrac{3}{5}\right)\right)\)</li>
+                        </ol>
+                    </div>
+                </li>
+                <li>
+                    <p>Rewrite the following as algebraic expressions of \(x\) and state the domain on which the equivalence is valid.</p>
+                    <div class="exercise-grid columns-2">
+                        <ol type="a">
+                            <li>\(\tan\!\left(\arccos(x)\right)\)</li>
+                            <li>\(\cos\!\left(2\arcsin(x)\right)\)</li>
+                        </ol>
+                    </div>
+                </li>
+            </ol>
+        </div>
+
+        <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-5-5-1">
+            <span class="toggle-arrow">▼</span>
+            <span>Show Solution</span>
+        </button>
+
+        <div id="solution-5-5-1" class="example-content">
+            <div class="solution">
+                <h4>Solution</h4>
+
+                <p><strong>1a.</strong> To find \(\arccos\!\left(\dfrac{1}{2}\right)\), we need the real number \(t\) with \(0 \leq t \leq \pi\) and \(\cos(t) = \dfrac{1}{2}\). We know \(t = \dfrac{\pi}{3}\) meets these criteria, so \(\arccos\!\left(\dfrac{1}{2}\right) = \dfrac{\pi}{3}\).</p>
+
+                <p><strong>1b.</strong> The value of \(\arcsin\!\left(\dfrac{\sqrt{2}}{2}\right)\) is the real number \(t\) between \(-\dfrac{\pi}{2}\) and \(\dfrac{\pi}{2}\) with \(\sin(t) = \dfrac{\sqrt{2}}{2}\). The number we seek is \(t = \dfrac{\pi}{4}\). Hence, \(\arcsin\!\left(\dfrac{\sqrt{2}}{2}\right) = \dfrac{\pi}{4}\).</p>
+
+                <p><strong>1c.</strong> The number \(t = \arccos\!\left(-\dfrac{\sqrt{2}}{2}\right)\) lies in \([0,\pi]\) with \(\cos(t) = -\dfrac{\sqrt{2}}{2}\). Our answer is \(\arccos\!\left(-\dfrac{\sqrt{2}}{2}\right) = \dfrac{3\pi}{4}\).</p>
+
+                <p><strong>1d.</strong> To find \(\arcsin\!\left(-\dfrac{1}{2}\right)\), we seek the number \(t\) in \(\left[-\dfrac{\pi}{2}, \dfrac{\pi}{2}\right]\) with \(\sin(t) = -\dfrac{1}{2}\). The answer is \(t = -\dfrac{\pi}{6}\), so \(\arcsin\!\left(-\dfrac{1}{2}\right) = -\dfrac{\pi}{6}\).</p>
+
+                <p><strong>1e.</strong> Since \(0 \leq \dfrac{\pi}{6} \leq \pi\), we could invoke the properties directly to get \(\arccos\!\left(\cos\!\left(\dfrac{\pi}{6}\right)\right) = \dfrac{\pi}{6}\). Working through using the definition: \(\arccos\!\left(\cos\!\left(\dfrac{\pi}{6}\right)\right) = \arccos\!\left(\dfrac{\sqrt{3}}{2}\right)\). Now \(\arccos\!\left(\dfrac{\sqrt{3}}{2}\right)\) is the real number \(t\) with \(0 \leq t \leq \pi\) and \(\cos(t) = \dfrac{\sqrt{3}}{2}\). We find \(t = \dfrac{\pi}{6}\), so \(\arccos\!\left(\cos\!\left(\dfrac{\pi}{6}\right)\right) = \dfrac{\pi}{6}\).</p>
+
+                <p><strong>1f.</strong> Since \(\dfrac{11\pi}{6}\) does not fall between \(0\) and \(\pi\), the properties do not apply directly. Working from the inside out: \(\arccos\!\left(\cos\!\left(\dfrac{11\pi}{6}\right)\right) = \arccos\!\left(\dfrac{\sqrt{3}}{2}\right)\). From the previous part, \(\arccos\!\left(\dfrac{\sqrt{3}}{2}\right) = \dfrac{\pi}{6}\). Hence, \(\arccos\!\left(\cos\!\left(\dfrac{11\pi}{6}\right)\right) = \dfrac{\pi}{6}\).</p>
+
+                <p><strong>1g.</strong> Since \(-\dfrac{3}{5}\) is between \(-1\) and \(1\), we can apply the properties directly: \(\cos\!\left(\arccos\!\left(-\dfrac{3}{5}\right)\right) = -\dfrac{3}{5}\). To understand why: let \(t = \arccos\!\left(-\dfrac{3}{5}\right)\). Then by definition \(\cos(t) = -\dfrac{3}{5}\), so \(\cos\!\left(\arccos\!\left(-\dfrac{3}{5}\right)\right) = \cos(t) = -\dfrac{3}{5}\).</p>
+
+                <p><strong>1h.</strong> Let \(t = \arccos\!\left(-\dfrac{3}{5}\right)\) so that \(\cos(t) = -\dfrac{3}{5}\) for some \(t\) with \(0 \leq t \leq \pi\). Since \(\cos(t) < 0\), we have \(\dfrac{\pi}{2} < t < \pi\), so \(t\) corresponds to a Quadrant II angle. Using the Pythagorean Identity \(\cos^{2}(t) + \sin^{2}(t) = 1\):
+                \[\left(-\frac{3}{5}\right)^2 + \sin^{2}(t) = 1 \implies \sin^2(t) = 1 - \frac{9}{25} = \frac{16}{25} \implies \sin(t) = \pm\frac{4}{5}\]
+                Since \(t\) is a Quadrant II angle, \(\sin(t) > 0\), so \(\sin(t) = \dfrac{4}{5}\). Hence, \(\sin\!\left(\arccos\!\left(-\dfrac{3}{5}\right)\right) = \dfrac{4}{5}\).</p>
+
+                <hr class="divider" role="separator" aria-hidden="true" />
+
+                <p><strong>2a.</strong> Let \(t = \arccos(x)\), so our goal is to express \(\tan\!\left(\arccos(x)\right) = \tan(t)\) in terms of \(x\). Since \(t = \arccos(x)\), we know \(\cos(t) = x\) where \(0 \leq t \leq \pi\). Since we need \(\tan(t)\), we must exclude \(t = \dfrac{\pi}{2}\). So either \(0 \leq t < \dfrac{\pi}{2}\) or \(\dfrac{\pi}{2} < t \leq \pi\), meaning \(t\) corresponds to a Quadrant I or Quadrant II angle.</p>
+
+                <p>Substituting \(\cos(t) = x\) into the Pythagorean Identity gives \(x^2 + \sin^{2}(t) = 1\), so \(\sin(t) = \pm\sqrt{1-x^2}\). Since \(t\) is in Quadrants I or II, \(\sin(t) \geq 0\), so \(\sin(t) = \sqrt{1-x^2}\). Thus:
+                \[\tan(t) = \frac{\sin(t)}{\cos(t)} = \frac{\sqrt{1-x^2}}{x}\]
+                Since we had to discard \(t = \dfrac{\pi}{2}\), we also discard \(x = \cos\!\left(\dfrac{\pi}{2}\right) = 0\). Hence \(\tan\!\left(\arccos(x)\right) = \dfrac{\sqrt{1-x^2}}{x}\) is valid for \(x \in [-1,0)\cup(0,1]\).</p>
+
+                <p><strong>2b.</strong> Let \(t = \arcsin(x)\), so \(t\) lies in \(\left[-\dfrac{\pi}{2}, \dfrac{\pi}{2}\right]\) with \(\sin(t) = x\). We aim to express \(\cos\!\left(2\arcsin(x)\right) = \cos(2t)\) in terms of \(x\). Since \(\cos(2t)\) is defined everywhere, there are no additional restrictions on \(t\). Using the double angle identity \(\cos(2t) = 1 - 2\sin^{2}(t)\) and substituting \(\sin(t) = x\):
+                \[\cos\!\left(2\arcsin(x)\right) = \cos(2t) = 1 - 2\sin^{2}(t) = 1 - 2x^2\]
+                Since \(\arcsin(x)\) is defined only for \(-1 \leq x \leq 1\), the equivalence \(\cos\!\left(2\arcsin(x)\right) = 1-2x^2\) is valid on \([-1,1]\).</p>
+            </div>
+        </div>
+    </section>
+
+    <p>A few remarks about parts (e) and (f) above are in order. Most common errors with inverse circular functions arise from the domain restrictions needed to make the original functions one-to-one. The fact that \(\arccos\!\left(\cos\!\left(\dfrac{11\pi}{6}\right)\right) = \dfrac{\pi}{6}\) rather than \(\dfrac{11\pi}{6}\) is the exact same phenomenon seen in Chapter 1 where \(\sqrt{(-2)^2} = 2\), not \(-2\).</p>
+
+    <p>Additionally, even though \(1-2x^2\) is defined for all real numbers, the equivalence \(\cos\!\left(2\arcsin(x)\right) = 1-2x^2\) is valid only for \(-1 \leq x \leq 1\). This is analogous to the fact that while \(x\) is defined for all real numbers, the equivalence \(\left(\sqrt{x}\right)^2 = x\) is valid only for \(x \geq 0\). It pays to be careful when determining the intervals where such equivalences hold.</p>
+
+    <div class="divider" role="separator" aria-hidden="true"></div>
+
+    <!-- Arctangent and Arccotangent -->
+    <h2>Arctangent and Arccotangent</h2>
+
+    <p>The next pair of functions we wish to discuss are the inverses of tangent and cotangent, named arctangent and arccotangent, respectively. First, we restrict \(f(x) = \tan(x)\) to its fundamental cycle on \(\left(-\dfrac{\pi}{2}, \dfrac{\pi}{2}\right)\) to obtain \(f^{-1}(x) = \arctan(x)\). Note that the <em>vertical</em> asymptotes \(x = -\dfrac{\pi}{2}\) and \(x = \dfrac{\pi}{2}\) of \(f(x) = \tan(x)\) become the <em>horizontal</em> asymptotes \(y = -\dfrac{\pi}{2}\) and \(y = \dfrac{\pi}{2}\) of \(f^{-1}(x) = \arctan(x)\).</p>
+
+    <div class="diagram-row">
+        <div class="diagram">
+            <figure>
+                <img src="images/5_5_7.png" alt="Graph of f of x equals tangent of x restricted to the open interval from −π/2 to π/2, shown as a blue S-shaped curve. Dashed red vertical asymptotes appear at x equals ±π/2. The curve passes through (0,0) and (π/4, 1)." />
+                <figcaption>\(f(x)=\tan(x),\; -\dfrac{\pi}{2} &lt; x &lt; \dfrac{\pi}{2}\)</figcaption>
+            </figure>
+        </div>
+        <div class="diagram">
+            <figure>
+                <img src="images/5_5_8.png" alt="Graph of f inverse of x equals arctangent of x, shown as a blue S-shaped curve that levels off toward horizontal asymptotes at y equals ±π/2 shown as dashed red lines. The curve passes through (0,0) and (1, π/4)." />
+                <figcaption>\(f^{-1}(x)=\arctan(x)\)</figcaption>
+            </figure>
+        </div>
+    </div>
+
+    <p>Next, we restrict \(g(x) = \cot(x)\) to its fundamental cycle on \((0,\pi)\) to obtain \(g^{-1}(x) = \text{arccot}(x)\). The vertical asymptotes \(x=0\) and \(x=\pi\) of \(g(x) = \cot(x)\) become the horizontal asymptotes \(y = 0\) and \(y = \pi\) of \(g^{-1}(x) = \text{arccot}(x)\).</p>
+
+    <div class="diagram-row">
+        <div class="diagram">
+            <figure>
+                <img src="images/5_5_9.png" alt="Graph of f of x equals cotangent of x restricted to the open interval from 0 to π, shown as a blue curve falling from positive infinity near x equals 0 to negative infinity near x equals π. Dashed red vertical asymptotes appear at x equals 0 and x equals π." />
+                <figcaption>\(f(x)=\cot(x),\; 0 &lt; x &lt; \pi\)</figcaption>
+            </figure>
+        </div>
+        <div class="diagram">
+            <figure>
+                <img src="images/5_5_10.png" alt="Graph of f inverse of x equals arccotangent of x, shown as a blue curve decreasing from near y equals π for large negative x down toward y equals 0 for large positive x. Dashed red horizontal asymptotes appear at y equals 0 and y equals π." />
+                <figcaption>\(f^{-1}(x)=\text{arccot}(x)\)</figcaption>
+            </figure>
+        </div>
+    </div>
+
+    <!-- Properties of Arctangent and Arccotangent -->
+    <div class="definition-box">
+        <h3>Properties of the Arctangent and Arccotangent Functions</h3>
+
+        <p><strong>Properties of \(F(x) = \arctan(x)\)</strong></p>
+        <ul>
+            <li>Domain: \((-\infty, \infty)\)</li>
+            <li>Range: \(\left(-\dfrac{\pi}{2}, \dfrac{\pi}{2}\right)\)</li>
+            <li>As \(x \to -\infty\), \(\arctan(x) \to -\dfrac{\pi}{2}^{+}\); as \(x \to \infty\), \(\arctan(x) \to \dfrac{\pi}{2}^{-}\)</li>
+            <li>\(\arctan(x) = t\) if and only if \(-\dfrac{\pi}{2} &lt; t &lt; \dfrac{\pi}{2}\) and \(\tan(t) = x\)</li>
+            <li>\(\arctan(x) = \text{arccot}\!\left(\dfrac{1}{x}\right)\) for \(x > 0\)</li>
+            <li>\(\tan\!\left(\arctan(x)\right) = x\) for all real numbers \(x\)</li>
+            <li>\(\arctan(\tan(x)) = x\) provided \(-\dfrac{\pi}{2} &lt; x &lt; \dfrac{\pi}{2}\)</li>
+            <li>Additionally, arctangent is odd</li>
+        </ul>
+
+        <p><strong>Properties of \(G(x) = \text{arccot}(x)\)</strong></p>
+        <ul>
+            <li>Domain: \((-\infty, \infty)\)</li>
+            <li>Range: \((0, \pi)\)</li>
+            <li>As \(x \to -\infty\), \(\text{arccot}(x) \to \pi^{-}\); as \(x \to \infty\), \(\text{arccot}(x) \to 0^{+}\)</li>
+            <li>\(\text{arccot}(x) = t\) if and only if \(0 &lt; t &lt; \pi\) and \(\cot(t) = x\)</li>
+            <li>\(\text{arccot}(x) = \arctan\!\left(\dfrac{1}{x}\right)\) for \(x > 0\)</li>
+            <li>\(\cot\!\left(\text{arccot}(x)\right) = x\) for all real numbers \(x\)</li>
+            <li>\(\text{arccot}(\cot(x)) = x\) provided \(0 &lt; x &lt; \pi\)</li>
+        </ul>
+    </div>
+
+    <!-- Example 2 -->
+    <section class="example" aria-labelledby="example-5-5-2">
+        <div class="example-problem">
+            <h3 id="example-5-5-2">Example 2</h3>
+            <ol>
+                <li>
+                    <p>Find the exact values of the following.</p>
+                    <div class="exercise-grid columns-2">
+                        <ol type="a">
+                            <li>\(\arctan(\sqrt{3})\)</li>
+                            <li>\(\text{arccot}(-\sqrt{3})\)</li>
+                            <li>\(\cot(\text{arccot}(-5))\)</li>
+                            <li>\(\sin\!\left(\arctan\!\left(-\dfrac{3}{4}\right)\right)\)</li>
+                        </ol>
+                    </div>
+                </li>
+                <li>
+                    <p>Rewrite the following as algebraic expressions of \(x\) and state the domain on which the equivalence is valid.</p>
+                    <div class="exercise-grid columns-2">
+                        <ol type="a">
+                            <li>\(\tan(2\arctan(x))\)</li>
+                            <li>\(\cos(\text{arccot}(2x))\)</li>
+                        </ol>
+                    </div>
+                </li>
+            </ol>
+        </div>
+
+        <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-5-5-2">
+            <span class="toggle-arrow">▼</span>
+            <span>Show Solution</span>
+        </button>
+
+        <div id="solution-5-5-2" class="example-content">
+            <div class="solution">
+                <h4>Solution</h4>
+
+                <p><strong>1a.</strong> We know \(\arctan(\sqrt{3})\) is the real number \(t\) between \(-\dfrac{\pi}{2}\) and \(\dfrac{\pi}{2}\) with \(\tan(t) = \sqrt{3}\). We find \(t = \dfrac{\pi}{3}\), so \(\arctan(\sqrt{3}) = \dfrac{\pi}{3}\).</p>
+
+                <p><strong>1b.</strong> The real number \(t = \text{arccot}(-\sqrt{3})\) lies in \((0,\pi)\) with \(\cot(t) = -\sqrt{3}\). We get \(\text{arccot}(-\sqrt{3}) = \dfrac{5\pi}{6}\).</p>
+
+                <p><strong>1c.</strong> We can apply the properties directly: \(\cot(\text{arccot}(-5)) = -5\). To see why: letting \(t = \text{arccot}(-5)\), we have \(t \in (0,\pi)\) and \(\cot(t) = -5\). Hence \(\cot(\text{arccot}(-5)) = \cot(t) = -5\).</p>
+
+                <p><strong>1d.</strong> Let \(t = \arctan\!\left(-\dfrac{3}{4}\right)\). Then \(\tan(t) = -\dfrac{3}{4}\) for some \(-\dfrac{\pi}{2} &lt; t &lt; \dfrac{\pi}{2}\). Since \(\tan(t) &lt; 0\), we know \(-\dfrac{\pi}{2} &lt; t &lt; 0\). Using the Pythagorean Identity \(1 + \cot^{2}(t) = \csc^{2}(t)\): from \(\tan(t) = -\dfrac{3}{4}\) we get \(\cot(t) = -\dfrac{4}{3}\). Substituting:
+                \[1 + \left(-\frac{4}{3}\right)^2 = \csc^{2}(t) \implies \csc^2(t) = \frac{25}{9} \implies \csc(t) = \pm\frac{5}{3}\]
+                Since \(-\dfrac{\pi}{2} &lt; t &lt; 0\), we choose \(\csc(t) = -\dfrac{5}{3}\), so \(\sin(t) = -\dfrac{3}{5}\). Hence \(\sin\!\left(\arctan\!\left(-\dfrac{3}{4}\right)\right) = -\dfrac{3}{5}\).</p>
+
+                <hr class="divider" role="separator" aria-hidden="true" />
+
+                <p><strong>2a.</strong> Let \(t = \arctan(x)\), so \(-\dfrac{\pi}{2} &lt; t &lt; \dfrac{\pi}{2}\) and \(\tan(t) = x\). We want to express \(\tan(2\arctan(x)) = \tan(2t)\) in terms of \(x\). Note that \(\tan(2t)\) is undefined when \(2t = \dfrac{\pi}{2} + \pi k\), i.e., when \(t = \dfrac{\pi}{4} + \dfrac{\pi}{2}k\). The only values of this form in \(\left(-\dfrac{\pi}{2}, \dfrac{\pi}{2}\right)\) are \(t = \pm\dfrac{\pi}{4}\). Using the double angle identity:
+                \[\tan(2\arctan(x)) = \tan(2t) = \frac{2\tan(t)}{1-\tan^{2}(t)} = \frac{2x}{1-x^2}\]
+                Since \(t = \pm\dfrac{\pi}{4}\) corresponds to \(x = \tan\!\left(\pm\dfrac{\pi}{4}\right) = \pm 1\), we must exclude \(x = \pm 1\). Hence the equivalence holds for all \(x \in (-\infty,-1)\cup(-1,1)\cup(1,\infty)\).</p>
+
+                <p><strong>2b.</strong> Let \(t = \text{arccot}(2x)\), so \(\cot(t) = 2x\) where \(0 &lt; t &lt; \pi\). We want to express \(\cos(\text{arccot}(2x)) = \cos(t)\) in terms of \(x\). Since \(\cos(t)\) is always defined, there are no additional restrictions. Using \(1 + \cot^{2}(t) = \csc^{2}(t)\) with \(\cot(t) = 2x\):
+                \[1 + (2x)^2 = \csc^{2}(t) \implies \csc(t) = \pm\sqrt{4x^2+1}\]
+                Since \(0 &lt; t &lt; \pi\), we have \(\csc(t) &gt; 0\), so \(\csc(t) = \sqrt{4x^2+1}\) and \(\sin(t) = \dfrac{1}{\sqrt{4x^2+1}}\). Therefore:
+                \[\cos(\text{arccot}(2x)) = \cos(t) = \cot(t)\sin(t) = \frac{2x}{\sqrt{4x^2+1}}\]
+                Since \(\text{arccot}(2x)\) is defined for all real \(x\) and no additional restrictions arose, this equivalence holds for all real numbers \(x\).</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider" role="separator" aria-hidden="true"></div>
+
+    <!-- Calculator approximations -->
+    <h2>Using a Calculator with Inverse Trigonometric Functions</h2>
+
+    <p>We can extend these ideas into what we were doing in the Right Triangle Trigonometry section. Previously we used an angle and a side to find the other missing sides and missing angle. But what if we need to find an angle when given two sides and no angles other than the right angle? Let's first practice using the calculator to find inverse trigonometric values.</p>
+
+    <!-- Example 3 -->
+    <section class="example" aria-labelledby="example-5-5-3">
+        <div class="example-problem">
+            <h3 id="example-5-5-3">Example 3</h3>
+            <ol>
+                <li>
+                    <p>Use a calculator to approximate the following values to four decimal places.</p>
+                    <div class="exercise-grid columns-2">
+                        <ol type="a">
+                            <li>\(\text{arccot}(2)\)</li>
+                            <li>\(\text{arcsec}(5)\)</li>
+                            <li>\(\text{arccot}(-2)\)</li>
+                            <li>\(\text{arccsc}\!\left(-\dfrac{3}{2}\right)\)</li>
+                        </ol>
+                    </div>
+                </li>
+                <li>
+                    <p>Find the domain and range of the following functions. Check your answers using a calculator.</p>
+                    <div class="exercise-grid columns-2">
+                        <ol type="a">
+                            <li>\(f(x) = \dfrac{\pi}{2} - \arccos\!\left(\dfrac{x}{5}\right)\)</li>
+                            <li>\(f(x) = 3\arctan(4x)\)</li>
+                        </ol>
+                    </div>
+                </li>
+            </ol>
+        </div>
+
+        <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-5-5-3">
+            <span class="toggle-arrow">▼</span>
+            <span>Show Solution</span>
+        </button>
+
+        <div id="solution-5-5-3" class="example-content">
+            <div class="solution">
+                <h4>Solution</h4>
+
+                <p><strong>1a.</strong> Since \(2 > 0\), we can use the properties to rewrite \(\text{arccot}(2) = \arctan\!\left(\dfrac{1}{2}\right)\). In radian mode: \(\text{arccot}(2) = \arctan\!\left(\dfrac{1}{2}\right) \approx 0.4636\).</p>
+
+                <p><strong>1b.</strong> Since \(5 \geq 1\), we use the properties to write \(\text{arcsec}(5) = \arccos\!\left(\dfrac{1}{5}\right) \approx 1.3694\).</p>
+
+                <p><strong>1c.</strong> Since the argument \(-2\) is negative, we cannot directly apply the properties. Let \(t = \text{arccot}(-2)\), so \(0 &lt; t &lt; \pi\) and \(\cot(t) = -2\). Since \(\cot(t) &lt; 0\), we know \(\dfrac{\pi}{2} &lt; t &lt; \pi\), so \(t\) corresponds to a Quadrant II angle.</p>
+                <p>Let \(\alpha\) be the reference angle for \(t\). Then \(0 &lt; \alpha &lt; \dfrac{\pi}{2}\) and \(\cot(\alpha) = 2\), so \(\alpha = \text{arccot}(2) = \arctan\!\left(\dfrac{1}{2}\right)\). Since \(t = \pi - \alpha\):
+                \[t = \pi - \arctan\!\left(\frac{1}{2}\right) \approx 2.6779\]
+                Hence \(\text{arccot}(-2) \approx 2.6779\).</p>
+
+                <p><strong>1d.</strong> If the range of arccosecant is \(\left[-\dfrac{\pi}{2}, 0\right) \cup \left(0, \dfrac{\pi}{2}\right]\), we get \(\text{arccsc}\!\left(-\dfrac{3}{2}\right) = \arcsin\!\left(-\dfrac{2}{3}\right) \approx -0.7297\).</p>
+                <p>If the range is taken to be \(\left(0, \dfrac{\pi}{2}\right] \cup \left(\pi, \dfrac{3\pi}{2}\right]\), let \(t = \text{arccsc}\!\left(-\dfrac{3}{2}\right)\). Since \(\csc(t) &lt; 0\), we have \(\pi &lt; t \leq \dfrac{3\pi}{2}\), so \(t\) corresponds to a Quadrant III angle. Let \(\alpha\) be its reference angle; then \(\csc(\alpha) = \dfrac{3}{2}\), so \(\alpha = \arcsin\!\left(\dfrac{2}{3}\right)\). Then:
+                \[t = \pi + \alpha = \pi + \arcsin\!\left(\frac{2}{3}\right) \approx 3.8713\]
+                Hence \(\text{arccsc}\!\left(-\dfrac{3}{2}\right) \approx 3.8713\).</p>
+
+                <hr class="divider" role="separator" aria-hidden="true" />
+
+                <p><strong>2a.</strong> The domain of \(F(x) = \arccos(x)\) is \([-1,1]\). For \(f(x) = \dfrac{\pi}{2} - \arccos\!\left(\dfrac{x}{5}\right)\), we set \(-1 \leq \dfrac{x}{5} \leq 1\), giving \(-5 \leq x \leq 5\). So the domain is \([-5,5]\).</p>
+                <p>Three key points on \(F(x) = \arccos(x)\) are \((-1,\pi)\), \(\left(0,\dfrac{\pi}{2}\right)\), and \((1,0)\). Tracking these through \(f\) gives \(\left(-5,-\dfrac{\pi}{2}\right)\), \((0,0)\), and \(\left(5,\dfrac{\pi}{2}\right)\). The range of \(f\) is \(\left[-\dfrac{\pi}{2},\dfrac{\pi}{2}\right]\).</p>
+
+                <p><strong>2b.</strong> Since the domain of \(F(x) = \arctan(x)\) is all real numbers, and \(4x\) is defined for all real \(x\), the domain of \(f(x) = 3\arctan(4x)\) is all real numbers.</p>
+                <p>The graph of \(f\) differs from \(F(x) = \arctan(x)\) by a horizontal compression by a factor of \(4\) and a vertical stretch by a factor of \(3\). The vertical stretch affects the range: the horizontal asymptotes \(y = \pm\dfrac{\pi}{2}\) of \(\arctan(x)\) become \(y = \pm\dfrac{3\pi}{2}\), so the range of \(f\) is \(\left(-\dfrac{3\pi}{2}, \dfrac{3\pi}{2}\right)\).</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider" role="separator" aria-hidden="true"></div>
+
+    <!-- Solving Triangles with Inverse Trig -->
+    <h2>Solving Triangles with Inverse Trigonometric Functions</h2>
+
+    <p>Inverse trigonometric functions allow us to find missing angles in a right triangle when we are given two sides. Let's look at a few examples.</p>
+
+    <!-- Example 4 -->
+    <section class="example" aria-labelledby="example-5-5-4">
+        <div class="example-problem">
+            <h3 id="example-5-5-4">Example 4</h3>
+            <p>Solve the triangles below by finding all missing sides and angles.</p>
+            <ol>
+                <li>\(\triangle ABC\) where \(a = 2\) in and \(b = 5\) in, with \(\angle C = 90^{\circ}\)</li>
+                <li>\(\triangle ABC\) where \(c = 12\) cm and \(b = 4\) cm, with \(\angle C = 90^{\circ}\)</li>
+            </ol>
+        </div>
+
+        <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-5-5-4">
+            <span class="toggle-arrow">▼</span>
+            <span>Show Solution</span>
+        </button>
+
+        <div id="solution-5-5-4" class="example-content">
+            <div class="solution">
+                <h4>Solution</h4>
+
+                <!-- Problem 1 -->
+                <p><strong>1.</strong> It is good practice to always draw the triangle and identify what we have and what we need.</p>
+
+                <div class="diagram-row">
+                    <div class="diagram">
+                        <figure>
+                            <img src="images/5_5_11.png" alt="Right triangle ABC with the right angle at vertex C in the bottom left. The horizontal leg from C to B is labeled a equals 2 inches. The vertical leg from C to A is labeled b equals 5 inches. The hypotenuse from A to B is unlabeled. A small square marks the right angle at C." />
+                            <figcaption>Triangle \(ABC\) with \(a=2\) in, \(b=5\) in, \(\angle C=90^{\circ}\)</figcaption>
+                        </figure>
+                    </div>
+                    <div class="diagram">
+                        <table>
+                            <caption>Have and Need — Triangle 1</caption>
+                            <thead>
+                                <tr>
+                                    <th scope="col">Have</th>
+                                    <th scope="col">Need</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>\(\angle C = 90^{\circ}\)</td><td>\(c\)</td></tr>
+                                <tr><td>\(b = 5\) in</td><td>\(\angle B\)</td></tr>
+                                <tr><td>\(a = 2\) in</td><td>\(\angle A\)</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <p>To find the missing side, apply the Pythagorean Theorem:</p>
+                \[a^2 + b^2 = c^2 \implies 2^2 + 5^2 = c^2 \implies 4 + 25 = c^2 \implies c = \sqrt{29}\]
+
+                <p>To find \(\angle B\): side \(b\) is opposite and side \(a\) is adjacent to \(\angle B\), so we use tangent:</p>
+                \[\tan(B) = \frac{5}{2} \implies \arctan(\tan(B)) = \arctan\!\left(\frac{5}{2}\right) \implies B \approx 68.2^{\circ}\]
+
+                <p>To find \(\angle A\): side \(a\) is opposite and side \(b\) is adjacent to \(\angle A\):</p>
+                \[\tan(A) = \frac{2}{5} \implies \arctan(\tan(A)) = \arctan\!\left(\frac{2}{5}\right) \implies A \approx 21.8^{\circ}\]
+
+                <p>Summary:</p>
+                <table>
+                    <caption>Solution — Triangle 1</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">Have</th>
+                            <th scope="col">Found</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>\(\angle C = 90^{\circ}\)</td><td>\(c = \sqrt{29} \approx 5.39\) in</td></tr>
+                        <tr><td>\(b = 5\) in</td><td>\(\angle B \approx 68.2^{\circ}\)</td></tr>
+                        <tr><td>\(a = 2\) in</td><td>\(\angle A \approx 21.8^{\circ}\)</td></tr>
+                    </tbody>
+                </table>
+
+                <hr class="divider" role="separator" aria-hidden="true" />
+
+                <!-- Problem 2 -->
+                <p><strong>2.</strong> Again, draw the triangle and identify what we have and need.</p>
+
+                <div class="diagram-row">
+                    <div class="diagram">
+                        <figure>
+                            <img src="images/5_5_12.png" alt="Right triangle ABC with the right angle at vertex C in the bottom left. The vertical leg from C to A is labeled b equals 4 cm. The hypotenuse from A to B is labeled c equals 12 cm. A small square marks the right angle at C." />
+                            <figcaption>Triangle \(ABC\) with \(b=4\) cm, \(c=12\) cm, \(\angle C=90^{\circ}\)</figcaption>
+                        </figure>
+                    </div>
+                    <div class="diagram">
+                        <table>
+                            <caption>Have and Need — Triangle 2</caption>
+                            <thead>
+                                <tr>
+                                    <th scope="col">Have</th>
+                                    <th scope="col">Need</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>\(\angle C = 90^{\circ}\)</td><td>\(a\)</td></tr>
+                                <tr><td>\(b = 4\) cm</td><td>\(\angle B\)</td></tr>
+                                <tr><td>\(c = 12\) cm</td><td>\(\angle A\)</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <p>Find the missing side:</p>
+                \[a^2 + b^2 = c^2 \implies a^2 + 16 = 144 \implies a^2 = 128 \implies a = 8\sqrt{2}\]
+
+                <p>To find \(\angle B\): side \(b\) is opposite and side \(c\) is the hypotenuse, so we use sine:</p>
+                \[\sin(B) = \frac{4}{12} \implies \arcsin(\sin(B)) = \arcsin\!\left(\frac{4}{12}\right) \implies B \approx 19.47^{\circ}\]
+
+                <p>To find \(\angle A\): side \(b\) is adjacent and side \(c\) is the hypotenuse, so we use cosine:</p>
+                \[\cos(A) = \frac{4}{12} \implies \arccos(\cos(A)) = \arccos\!\left(\frac{4}{12}\right) \implies A \approx 70.53^{\circ}\]
+
+                <p>Summary:</p>
+                <table>
+                    <caption>Solution — Triangle 2</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">Have</th>
+                            <th scope="col">Found</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>\(\angle C = 90^{\circ}\)</td><td>\(a = 8\sqrt{2} \approx 11.3\) cm</td></tr>
+                        <tr><td>\(b = 4\) cm</td><td>\(\angle B \approx 19.47^{\circ}\)</td></tr>
+                        <tr><td>\(c = 12\) cm</td><td>\(\angle A \approx 70.53^{\circ}\)</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <p>One may ask why we used trigonometry to find the second angle instead of simply subtracting from \(180^{\circ}\). While that approach is possible, we caution against it. It is almost always better to use the values you were originally given — since you know those are accurate — rather than values you derived, which may carry forward any errors you made. We are all human, and errors do occur.</p>
+
+    <div class="divider" role="separator" aria-hidden="true"></div>
+
+    <!-- Applications -->
+    <h2>Applications</h2>
+
+    <p>All of the steps and processes outlined in this section and previous sections come in very handy in real-world applications. Below is an example of how this may be applied in a building trades context.</p>
+
+    <!-- Example 5 -->
+    <section class="example" aria-labelledby="example-5-5-5">
+        <div class="example-problem">
+            <h3 id="example-5-5-5">Example 5</h3>
+            <p>The roof on the house below has a "6/12 pitch." This means that when viewed from the side, the roof line has a rise of 6 feet over a run of 12 feet. Find the angle of inclination from the bottom of the roof to the top of the roof. Express your answer in decimal degrees, rounded to the nearest hundredth of a degree.</p>
+
+            <div class="diagram-row">
+                <div class="diagram">
+                    <figure>
+                        <img src="images/5_5_13.png" alt="Front view of a simple house outline. A triangular roof sits on top of a rectangular wall. Two windows and a door are drawn on the front face. The label 'Front of House' appears below." />
+                        <figcaption>Front of House</figcaption>
+                    </figure>
+                </div>
+                <div class="diagram">
+                    <figure>
+                        <img src="images/5_5_14.png" alt="Side view of the same house. A triangular roof sits on top of a rectangular wall, showing the pitch of the roof as a slanted line. The label 'Side of House' appears below." />
+                        <figcaption>Side of House</figcaption>
+                    </figure>
+                </div>
+            </div>
+        </div>
+
+        <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-5-5-5">
+            <span class="toggle-arrow">▼</span>
+            <span>Show Solution</span>
+        </button>
+
+        <div id="solution-5-5-5" class="example-content">
+            <div class="solution">
+                <h4>Solution</h4>
+                <p>If we divide the side view of the house down the middle, we find that the roof line forms the hypotenuse of a right triangle with legs of length 6 feet and 12 feet. The angle of inclination \(\theta\) satisfies:
+                \[\tan(\theta) = \frac{6}{12} = \frac{1}{2}\]
+                Since \(\theta\) is an acute angle, we use the arctangent function:
+                \[\theta = \arctan\!\left(\frac{1}{2}\right) \approx 26.56^{\circ}\]
+                </p>
+
+                <figure>
+                    <img src="images/5_5_15.png" alt="Right triangle representing half of the roof cross-section. The horizontal base is labeled 12 feet, the vertical side is labeled 6 feet, and a small square marks the right angle at the bottom right. The angle θ is marked at the bottom left vertex." />
+                    <figcaption>Right triangle formed by the roof cross-section: base 12 ft, height 6 ft, angle of inclination \(\theta\)</figcaption>
+                </figure>
+            </div>
+        </div>
+    </section>
+
+</section><!-- end #inverse-trig-functions -->
+
+</main>
+
+<!-- Toggle script -->
+<script>
+    function toggleExample(button) {
+        const content = button.nextElementSibling;
+        const arrow = button.querySelector('.toggle-arrow');
+
+        if (content.classList.contains('open')) {
+            content.classList.remove('open');
+            arrow.classList.remove('open');
+            button.querySelector('span:last-child').textContent = 'Show Solution';
+            button.setAttribute('aria-expanded', 'false');
+        } else {
+            content.classList.add('open');
+            arrow.classList.add('open');
+            button.querySelector('span:last-child').textContent = 'Hide Solution';
+            button.setAttribute('aria-expanded', 'true');
+        }
+    }
+</script>
+
+<!-- TOC loader -->
+<script>
+    fetch('toc.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('toc-placeholder').innerHTML = data;
+
+            const chapterButtons = document.querySelectorAll('.toc-chapter');
+            chapterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const expanded = button.getAttribute('aria-expanded') === 'true';
+                    button.setAttribute('aria-expanded', !expanded);
+                    const submenu = button.nextElementSibling;
+                    submenu.classList.toggle('open');
+                });
+            });
+        });
+</script>
+
+</body>
+</html>

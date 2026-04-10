@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CH 5.5 – Inverse Trigonometric Functions</title>
+
+    <!-- MathJax configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)'], ['$', '$']],
+                displayMath: [['\\[', '\\]'], ['$$', '$$']]
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            },
+            loader: {
+                load: ['input/tex', 'output/chtml']
+            }
+        };
+    </script>
+    <script id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+
+    <link rel="stylesheet" href="styles1.css" />
+</head>
+<body>
+
+<div id="toc-placeholder"></div>
+
+<main class="container">
+
+<section id="acknowledgment">
+    <h2>Acknowledgments</h2>
+    <p>This book was created by Heather E. Umphlett; Dean of Academic Programs and Assistant Professor of Mathematics, Camp Community
+College, for use in all Precalculus I & IIcourses. A special thanks goes out to Camp Community
+College Adjunct Instructor Scott Graham and Former Mathematics Instructor Brent Ries;
+for their assistance with providing additional pairs of eyes. Lastly, an acknowledgment goes out to former student Celeste Hill who asssited with editing.</p>
+This text is licensed under a Creative Commons Attribution-Share Alike 3.0 United
+States License. To view a copy of this license, visit http://creativecommons.org/licenses/bysa/
+3.0/us/ or send a letter to Creative Commons, 171 Second Street, Suite 300, San Francisco,
+California, 94105, USA. You are free: to Share — to copy, distribute, display, and
+perform the work to Remix — to make derivative works Under the following conditions: Attribution.
+You must attribute the work in the manner specified by the author or licensor (but
+not in any way that suggests that they endorse you or your use of the work). Share Alike.
+If you alter, transform, or build upon this work, you may distribute the resulting work only
+under the same, similar or a compatible license. This book was written under OER commons.</p>
+<p>This book was based off of pacing and basic principals that are outlined in Precalculus,
+10E by Ron Larson. No copyright infringements were made.
+Other pieces of this book are attributed to Stitz-Zeager Open Source Precalculus 3E
+which can be found at https://www.stitz-zeager.com/.
+Lastly there are some questions that were pulled from OpenStax Precalculus. Those
+questions have a footnote, which will lead directly to their text, which is also a free OER
+resource.</p>
+</section>
+
+</main>
+
+<!-- Toggle script -->
+<script>
+    function toggleExample(button) {
+        const content = button.nextElementSibling;
+        const arrow = button.querySelector('.toggle-arrow');
+
+        if (content.classList.contains('open')) {
+            content.classList.remove('open');
+            arrow.classList.remove('open');
+            button.querySelector('span:last-child').textContent = 'Show Solution';
+            button.setAttribute('aria-expanded', 'false');
+        } else {
+            content.classList.add('open');
+            arrow.classList.add('open');
+            button.querySelector('span:last-child').textContent = 'Hide Solution';
+            button.setAttribute('aria-expanded', 'true');
+        }
+    }
+</script>
+
+<!-- TOC loader -->
+<script>
+    fetch('toc.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('toc-placeholder').innerHTML = data;
+
+            const chapterButtons = document.querySelectorAll('.toc-chapter');
+            chapterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const expanded = button.getAttribute('aria-expanded') === 'true';
+                    button.setAttribute('aria-expanded', !expanded);
+                    const submenu = button.nextElementSibling;
+                    submenu.classList.toggle('open');
+                });
+            });
+        });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CH 6.1 – Fundamental Identities</title>
+
+    <!-- MathJax configuration with cancel package -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)'], ['$', '$']],
+                displayMath: [['\\[', '\\]'], ['$$', '$$']],
+                packages: {'[+]': ['cancel', 'color']},
+                macros: {
+                    cancel: ['\\enclose{horizontalstrike}{#1}', 1]
+                }
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            },
+            loader: {
+                load: ['input/tex', 'output/chtml', '[tex]/cancel', '[tex]/color']
+            }
+        };
+    </script>
+    <script id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+
+    <link rel="stylesheet" href="styles.css" />
+
+    <style>
+        /* Two-column proof layout: math left, annotation right */
+        .proof-row {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 1.5rem;
+            align-items: center;
+            margin: 0.4rem 0;
+            padding: 0.3rem 0;
+        }
+
+        .proof-row .proof-math {
+            text-align: left;
+        }
+
+        .proof-row .proof-note {
+            color: #c0392b;
+            font-style: italic;
+            font-size: 0.92em;
+            white-space: nowrap;
+            min-width: 160px;
+            text-align: left;
+        }
+
+        /* Proof step table for side-by-side layout */
+        .proof-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        .proof-table td {
+            border: none;
+            padding: 0.4rem 0.5rem;
+            vertical-align: middle;
+            background: none;
+        }
+
+        .proof-table td:first-child {
+            width: 60%;
+        }
+
+        .proof-table td.annotation {
+            color: #c0392b;
+            font-style: italic;
+            font-size: 0.92em;
+            width: 40%;
+            border: none;
+            background: none;
+        }
+
+        /* Override table nth-child zebra striping inside proofs */
+        .solution .proof-table tr:nth-child(even) {
+            background-color: transparent;
+        }
+
+        .solution .proof-table tr {
+            background-color: transparent;
+        }
+
+        /* Collapsible exercises — same style as solution toggle */
+        .exercises-section {
+            margin: 25px 0;
+        }
+
+        .exercises-header {
+            background-color: #33AB2B;
+            color: white;
+            padding: 12px 20px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+            border-radius: 4px;
+            transition: background-color 0.2s ease;
+            border: none;
+            font-size: 1em;
+            width: 100%;
+        }
+
+        .exercises-header:hover {
+            background-color: #2a8922;
+        }
+
+        .exercises-content {
+            display: none;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-top: none;
+            border-radius: 0 0 6px 6px;
+            padding: 20px;
+        }
+
+        .exercises-content.open {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .proof-table td:first-child {
+                width: 100%;
+                display: block;
+            }
+            .proof-table td.annotation {
+                width: 100%;
+                display: block;
+                padding-top: 0;
+            }
+            .proof-row {
+                grid-template-columns: 1fr;
+            }
+            .proof-row .proof-note {
+                white-space: normal;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div id="toc-placeholder"></div>
+
+<main class="container">
+
+<section id="fundamental-identities">
+    <h2>CH 6.1 – Fundamental Identities</h2>
+
+    <p>In the Right Triangle Trigonometry section, we saw the utility of the Pythagorean Identities along with the Quotient and Reciprocal Identities. Not only did these identities help us compute the values of the circular functions for angles, they were also useful in simplifying expressions involving the circular functions. In this section, we introduce several collections of identities which have uses in this course and beyond. Our first set of identities is the <strong>Even/Odd Identities</strong>.</p>
+
+    <!-- Even / Odd Identities -->
+    <div class="definition-box">
+        <h3>Even / Odd Identities — For all applicable angles \(\theta\)</h3>
+        <div class="identity-grid grid-2x3">
+            <p>\(\cos(-\theta) = \cos(\theta)\)</p>
+            <p>\(\sec(-\theta) = \sec(\theta)\)</p>
+            <p>\(\sin(-\theta) = -\sin(\theta)\)</p>
+            <p>\(\csc(-\theta) = -\csc(\theta)\)</p>
+            <p>\(\tan(-\theta) = -\tan(\theta)\)</p>
+            <p>\(\cot(-\theta) = -\cot(\theta)\)</p>
+        </div>
+    </div>
+
+    <p>Some of these should come as no surprise, especially if you extend your knowledge from Chapter 1. In Chapter 1 you learned that a graph symmetric about the \(y\)-axis is <strong>even</strong>, meaning \(f(x) = f(-x)\). It was also discussed that if a function is <strong>odd</strong> then it is symmetric with respect to the origin, meaning \(f(-x) = -f(x)\). The identities above are just extensions of that pre-learned knowledge.</p>
+
+    <p>In addition to those identities, in this section we are also going to look at the <strong>Cofunction Identities</strong>.</p>
+
+    <!-- Cofunction Identities -->
+    <div class="definition-box">
+        <h3>Cofunction Identities — For all applicable angles \(\theta\)</h3>
+        <div class="identity-grid grid-2x3">
+            <p>\(\cos\!\left(\dfrac{\pi}{2} - \theta\right) = \sin(\theta)\)</p>
+            <p>\(\sin\!\left(\dfrac{\pi}{2} - \theta\right) = \cos(\theta)\)</p>
+            <p>\(\sec\!\left(\dfrac{\pi}{2} - \theta\right) = \csc(\theta)\)</p>
+            <p>\(\csc\!\left(\dfrac{\pi}{2} - \theta\right) = \sec(\theta)\)</p>
+            <p>\(\tan\!\left(\dfrac{\pi}{2} - \theta\right) = \cot(\theta)\)</p>
+            <p>\(\cot\!\left(\dfrac{\pi}{2} - \theta\right) = \tan(\theta)\)</p>
+        </div>
+    </div>
+
+    <p>We've mentioned the Reciprocal and Quotient Identities as well. Just in case we've forgotten what those are:</p>
+
+    <!-- Fundamental Trig Identities -->
+    <div class="definition-box">
+        <h3>Fundamental Trigonometric Identities</h3>
+
+        <p><strong>Reciprocal Identities</strong></p>
+        <div class="identity-grid grid-2x3">
+            <p>\(\sin\theta = \dfrac{1}{\csc\theta}\)</p>
+            <p>\(\cos\theta = \dfrac{1}{\sec\theta}\)</p>
+            <p>\(\tan\theta = \dfrac{1}{\cot\theta}\)</p>
+            <p>\(\csc\theta = \dfrac{1}{\sin\theta}\)</p>
+            <p>\(\sec\theta = \dfrac{1}{\cos\theta}\)</p>
+            <p>\(\cot\theta = \dfrac{1}{\tan\theta}\)</p>
+        </div>
+
+        <p><strong>Quotient Identities</strong></p>
+        <div class="identity-grid grid-1x2">
+            <p>\(\tan\theta = \dfrac{\sin\theta}{\cos\theta}\)</p>
+            <p>\(\cot\theta = \dfrac{\cos\theta}{\sin\theta}\)</p>
+        </div>
+
+        <p><strong>Pythagorean Identities</strong></p>
+        <div class="identity-grid grid-1x3">
+            <p>\(\sin^2(\theta) + \cos^2(\theta) = 1\)</p>
+            <p>\(1 + \tan^2(\theta) = \sec^2(\theta)\)</p>
+            <p>\(1 + \cot^2(\theta) = \csc^2(\theta)\)</p>
+        </div>
+    </div>
+
+    <p>We are going to use all of these identities to help us throughout this chapter, particularly in the simplification of trigonometric expressions.</p>
+
+    <!-- Example 1: Simplification -->
+    <section class="example" aria-labelledby="example-6-1-1">
+        <div class="example-problem">
+            <h3 id="example-6-1-1">Example 1</h3>
+            <p>Use your identities to simplify the following.</p>
+            <ol>
+                <li>\(\cos(x)\sin^2(x) - \cos(x)\)</li>
+                <li>\(\csc^2(x) - \cot(x) - 3\)</li>
+                <li>\(\cos(x) + \tan(x)\sin(x)\)</li>
+                <li>\(\dfrac{\sin(\theta)}{1+\cos(\theta)} + \dfrac{\cos(\theta)}{\sin(\theta)}\)</li>
+            </ol>
+        </div>
+
+        <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-6-1-1">
+            <span class="toggle-arrow">▼</span>
+            <span>Show Solution</span>
+        </button>
+
+        <div id="solution-6-1-1" class="example-content">
+            <div class="solution">
+                <h4>Solution</h4>
+
+                <p><strong>1.</strong> It is important to remember that the algebraic processes we learned in algebra class are still applicable even when involving trigonometric functions. Looking at this first expression, we can notice that \(\cos(x)\) appears in both terms, meaning we can factor it out:</p>
+                \[\cos(x)\sin^2(x) - \cos(x) = \cos(x)\!\left(\sin^2(x) - 1\right)\]
+                <p>From here we look for an identity that matches \(\sin^2(x) - 1\). While none of our identities directly match this, we can manipulate the Pythagorean identity \(\sin^2(x) + \cos^2(x) = 1\) by solving for \(\cos^2(x)\) to get \(\cos^2(x) = 1 - \sin^2(x)\), or equivalently \(\sin^2(x) - 1 = -\cos^2(x)\). Substituting:</p>
+                \[\cos(x)\!\left(-\cos^2(x)\right) = -\cos^3(x)\]
+
+                <hr class="divider" role="separator" aria-hidden="true" />
+
+                <p><strong>2.</strong> Any time you see a squared term, your mind should go to either a Pythagorean identity and/or factoring. From the Pythagorean Identity \(1 + \cot^2(x) = \csc^2(x)\), we can replace \(\csc^2(x)\) with \(1 + \cot^2(x)\):</p>
+                \[1 + \cot^2(x) - \cot(x) - 3 = \cot^2(x) - \cot(x) - 2\]
+                <p>Just as we factor trinomials in algebra, we can factor trigonometric expressions the same way:</p>
+                \[\cot^2(x) - \cot(x) - 2 = \left(\cot(x) - 2\right)\!\left(\cot(x) + 1\right)\]
+                <p>This is the most simplified form of the expression.</p>
+
+                <hr class="divider" role="separator" aria-hidden="true" />
+
+                <p><strong>3.</strong> This example requires replacing \(\tan(x)\) with its quotient identity \(\dfrac{\sin(x)}{\cos(x)}\):</p>
+                \[\cos(x) + \frac{\sin(x)}{\cos(x)}\cdot\sin(x)\]
+                <p>From here we simplify using algebra, finding a common denominator by multiplying the first term by \(\dfrac{\cos(x)}{\cos(x)}\):</p>
+
+                <table class="proof-table" role="presentation">
+                    <tbody>
+                        <tr>
+                            <td>\[\cos(x) + \dfrac{\sin^2(x)}{\cos(x)}\]</td>
+                            <td class="annotation">Multiply \(\sin(x)\cdot\sin(x)\)</td>
+                        </tr>
+                        <tr>
+                            <td>\[\dfrac{{\cos(x)}\cdot\cos(x)}{\cos(x)} + \dfrac{\sin^2(x)}{\cos(x)}\]</td>
+                            <td class="annotation">Get a common denominator</td>
+                        </tr>
+                        <tr>
+                            <td>\[\dfrac{\cos^2(x) + \sin^2(x)}{\cos(x)}\]</td>
+                            <td class="annotation">Combine fractions</td>
+                        </tr>
+                        <tr>
+                            <td>\[\dfrac{1}{\cos(x)}\]</td>
+                            <td class="annotation">Apply Pythagorean Identity</td>
+                        </tr>
+                        <tr>
+                            <td>\[\sec(x)\]</td>
+                            <td class="annotation">Apply Reciprocal Identity</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <hr class="divider" role="separator" aria-hidden="true" />
+
+                <p><strong>4.</strong> To add these fractions we must find a common denominator of \(\sin(\theta)(1+\cos(\theta))\).</p>
+
+                <table class="proof-table" role="presentation">
+                    <tbody>
+                        <tr>
+                            <td>\[\dfrac{\sin(\theta)}{1+\cos(\theta)} + \dfrac{\cos(\theta)}{\sin(\theta)}\]</td>
+                            <td class="annotation"></td>
+                        </tr>
+                        <tr>
+                            <td>\[\dfrac{\sin(\theta)\cdot\sin(\theta)}{\sin(\theta)(1+\cos(\theta))} + \dfrac{(1+\cos(\theta))\cdot\cos(\theta)}{\sin(\theta)(1+\cos(\theta))}\]</td>
+                            <td class="annotation">Multiply to get common denominator</td>
+                        </tr>
+                        <tr>
+                            <td>\[\dfrac{\sin^2(\theta)}{\sin(\theta)(1+\cos(\theta))} + \dfrac{\cos(\theta)+\cos^2(\theta)}{\sin(\theta)(1+\cos(\theta))}\]</td>
+                            <td class="annotation">Expand numerators</td>
+                        </tr>
+                        <tr>
+                            <td>\[\dfrac{\sin^2(\theta) + \cos^2(\theta) + \cos(\theta)}{\sin(\theta)(1+\cos(\theta))}\]</td>
+                            <td class="annotation">Combine fractions</td>
+                        </tr>
+                        <tr>
+                            <td>\[\dfrac{1 + \cos(\theta)}{\sin(\theta)(1+\cos(\theta))}\]</td>
+                            <td class="annotation">Apply Pythagorean Identity</td>
+                        </tr>
+                        <tr>
+                            <td>\[\dfrac{\cancel{1+\cos(\theta)}}{\sin(\theta)\cdot\cancel{(1+\cos(\theta))}}\]</td>
+                            <td class="annotation">Cancel common factor</td>
+                        </tr>
+                        <tr>
+                            <td>\[\dfrac{1}{\sin(\theta)} = \csc(\theta)\]</td>
+                            <td class="annotation">Apply Reciprocal Identity</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </section>
+
+    <p>Some questions will require more work than others to arrive at the most simplified version.</p>
+
+    <div class="divider" role="separator" aria-hidden="true"></div>
+
+    <!-- Verifying Identities -->
+    <h2>Verifying Identities</h2>
+
+    <p>We also use all of these identities to help us verify other identities. Verifying identities is a type of mathematical proof. When it comes to verifying identities there is more than one way to do so, but the following guidelines will help navigate the process.</p>
+
+    <div class="orange-box">
+        <h3>Guidelines for Proving Trigonometric Identities</h3>
+        <ol>
+            <li>Select one side of the equation to begin with.</li>
+            <li>Look to see if you can manipulate that side by factoring, addition, or squaring.</li>
+            <li>Look for chances to use your identities — try replacing terms with Sine or Cosine, or apply a Pythagorean identity.</li>
+            <li>Always try something. It is possible that what you try may not work — that is OK! Use a pencil, erase what you did, and begin again trying something else.</li>
+        </ol>
+    </div>
+
+    <!-- Example 2: Verifying Identities -->
+    <section class="example" aria-labelledby="example-6-1-2">
+        <div class="example-problem">
+            <h3 id="example-6-1-2">Example 2</h3>
+            <p>Verify the following identities.</p>
+            <ol>
+                <li>\(\dfrac{\csc^2(\theta)-1}{\csc^2(\theta)} = \cos^2(\theta)\)</li>
+                <li>\((\sec^2(x)-1)(\sin^2(x)-1) = -\sin^2(x)\)</li>
+                <li>\(\sec(x)+\tan(x) = \dfrac{\cos(x)}{1-\sin(x)}\)</li>
+            </ol>
+        </div>
+
+        <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-6-1-2">
+            <span class="toggle-arrow">▼</span>
+            <span>Show Solution</span>
+        </button>
+
+        <div id="solution-6-1-2" class="example-content">
+            <div class="solution">
+                <h4>Solution</h4>
+
+                <!-- Verification 1 -->
+                <p><strong>1.</strong> Starting on the left-hand side, we replace \(\csc^2(\theta) - 1\) using the Pythagorean identity \(1 + \cot^2(\theta) = \csc^2(\theta)\), which gives \(\csc^2(\theta) - 1 = \cot^2(\theta)\).</p>
+
+                <table class="proof-table" role="presentation">
+                    <tbody>
+                        <tr>
+                            <td>\[\dfrac{\csc^2(\theta)-1}{\csc^2(\theta)} = \cos^2(\theta)\]</td>
+                            <td class="annotation"></td>
+                        </tr>
+                        <tr>
+                            <td>\[\dfrac{\cot^2(\theta)}{\csc^2(\theta)}\]</td>
+                            <td class="annotation" style="color:#c0392b;">Apply Pythagorean Identity</td>
+                        </tr>
+                        <tr>
+                            <td>\[\dfrac{\dfrac{\cos^2(\theta)}{\sin^2(\theta)}}{\dfrac{1}{\sin^2(\theta)}}\]</td>
+                            <td class="annotation" style="color:#c0392b;">Replace with Sine and Cosine</td>
+                        </tr>
+                        <tr>
+                            <td>\[\dfrac{\cos^2(\theta)}{\require{cancel}\cancel{\sin^2(\theta)}} \cdot \dfrac{\cancel{\sin^2(\theta)}}{1}\]</td>
+                            <td class="annotation" style="color:#c0392b;">Simplify the complex fraction</td>
+                        </tr>
+                        <tr>
+                            <td>\[\dfrac{\cos^2(\theta)}{1} = \cos^2(\theta) \checkmark\]</td>
+                            <td class="annotation" style="color:#c0392b;">Simplified</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <hr class="divider" role="separator" aria-hidden="true" />
+
+                <!-- Verification 2 -->
+                <p><strong>2.</strong> Any time you see squared terms, look for Pythagorean identities first. We apply \(\sec^2(x) - 1 = \tan^2(x)\) and \(\sin^2(x) - 1 = -\cos^2(x)\) to the left-hand side.</p>
+
+                <table class="proof-table" role="presentation">
+                    <tbody>
+                        <tr>
+                            <td>\[(\sec^2(x)-1)(\sin^2(x)-1) = -\sin^2(x)\]</td>
+                            <td class="annotation"></td>
+                        </tr>
+                        <tr>
+                            <td>\[\left(\tan^2(x)\right)\!\left(-\cos^2(x)\right)\]</td>
+                            <td class="annotation" style="color:#c0392b;">Apply Pythagorean Identities</td>
+                        </tr>
+                        <tr>
+                            <td>\[\dfrac{\sin^2(x)}{\cos^2(x)}\cdot\left(-\cos^2(x)\right)\]</td>
+                            <td class="annotation" style="color:#c0392b;">Replace \(\tan^2(x)\) with Sine and Cosine</td>
+                        </tr>
+                        <tr>
+                            <td>\[\dfrac{\sin^2(x)}{\cancel{\cos^2(x)}}\cdot\left(-\cancel{\cos^2(x)}\right)\]</td>
+                            <td class="annotation" style="color:#c0392b;">Cancel common factors</td>
+                        </tr>
+                        <tr>
+                            <td>\[-\sin^2(x) \checkmark\]</td>
+                            <td class="annotation" style="color:#c0392b;">Simplified</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <hr class="divider" role="separator" aria-hidden="true" />
+
+                <!-- Verification 3 -->
+                <p><strong>3.</strong> In this last example we will manipulate both sides. We start with the left side, replacing \(\sec(x)\) and \(\tan(x)\) with Sine and Cosine.</p>
+
+                <table class="proof-table" role="presentation">
+                    <tbody>
+                        <tr>
+                            <td>\[\sec(x)+\tan(x) = \dfrac{\cos(x)}{1-\sin(x)}\]</td>
+                            <td class="annotation"></td>
+                        </tr>
+                        <tr>
+                            <td>\[\dfrac{1}{\cos(x)}+\dfrac{\sin(x)}{\cos(x)}\]</td>
+                            <td class="annotation" style="color:#c0392b;">Replace with Sine and Cosine</td>
+                        </tr>
+                        <tr>
+                            <td>\[\dfrac{1+\sin(x)}{\cos(x)}\]</td>
+                            <td class="annotation" style="color:#c0392b;">Add fractions</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p>Now we have \(\dfrac{1+\sin(x)}{\cos(x)}\) on the left and \(\dfrac{\cos(x)}{1-\sin(x)}\) on the right. We cross-multiply to verify equality:</p>
+
+                <table class="proof-table" role="presentation">
+                    <tbody>
+                        <tr>
+                            <td>\[\dfrac{1+\sin(x)}{\cos(x)} = \dfrac{\cos(x)}{1-\sin(x)}\]</td>
+                            <td class="annotation"></td>
+                        </tr>
+                        <tr>
+                            <td>\[\cos^2(x) = (1+\sin(x))(1-\sin(x))\]</td>
+                            <td class="annotation" style="color:#c0392b;">Cross multiply</td>
+                        </tr>
+                        <tr>
+                            <td>\[\cos^2(x) = 1 - \sin^2(x)\]</td>
+                            <td class="annotation" style="color:#c0392b;">Expand right side</td>
+                        </tr>
+                        <tr>
+                            <td>\[\cos^2(x) = \cos^2(x) \checkmark\]</td>
+                            <td class="annotation" style="color:#c0392b;">Pythagorean Identity</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </section>
+
+    <p>Once again, let us reiterate that there is more than one way to arrive at the same answer. It doesn't make one person wrong and another right — if both used valid ("street legal") methods to arrive at their answers, then both would be correct. Just try not to get frustrated in the process.</p>
+
+    <div class="divider" role="separator" aria-hidden="true"></div>
+
+    <!-- Exercises Section -->
+    <section class="exercises-section" aria-labelledby="exercises-6-1-heading">
+        <h2 id="exercises-6-1-heading" class="subsection-title">Exercises</h2>
+
+        <button class="exercises-header" onclick="toggleExercises(this)" aria-expanded="false" aria-controls="exercises-6-1-content">
+            <span class="toggle-arrow">▼</span>
+            <span>Show Exercises</span>
+        </button>
+
+        <div id="exercises-6-1-content" class="exercises-content" role="region" aria-labelledby="exercises-6-1-heading">
+
+            <p>In Exercises 1–8, use the fundamental identities to simplify each expression.</p>
+
+            <div class="exercise-grid columns-2">
+                <ol start="1">
+                    <li>\(\sec x \cos x\)</li>
+                    <li>\(\cot^2 x - \csc^2 x\)</li>
+                    <li>\(\cos x(1 + \tan^2 x)\)</li>
+                    <li>\(\sin\beta\tan\beta + \cos\beta\)</li>
+                    <li>\(\dfrac{1-\sin^2 x}{\csc^2 x - 1}\)</li>
+                    <li>\(3\sin^2\theta - 5\sin\theta - 2\)</li>
+                    <li>\(\cot^2 x + \csc x - 1\)</li>
+                    <li>\(\dfrac{\sin x}{1+\cos x} + \dfrac{\sin x}{1-\cos x}\)</li>
+                </ol>
+            </div>
+
+            <p>In Exercises 9–16, verify each of the following trigonometric identities.</p>
+
+            <div class="exercise-grid columns-2">
+                <ol start="9">
+                    <li>\((1+\sin\alpha)(1-\sin\alpha) = \cos^2\alpha\)</li>
+                    <li>\(\cos^2\beta - \sin^2\beta = 2\cos^2\beta - 1\)</li>
+                    <li>\(\dfrac{1}{\tan x} + \dfrac{1}{\cot x} = \tan x + \cot x\)</li>
+                    <li>\(\dfrac{\cos\theta\cot\theta}{1-\sin\theta} - 1 = \csc\theta\)</li>
+                    <li>\(\sec\beta - \cos\beta = \sin\beta\tan\beta\)</li>
+                    <li>\(\cot x - \tan x = \sec x(\csc x - 2\sin x)\)</li>
+                    <li>\(\dfrac{\sec\theta - 1}{1 - \cos\theta} = \sec\theta\)</li>
+                    <li>\(\tan\!\left(\dfrac{\pi}{2}-\theta\right)\tan\theta = 1\)</li>
+                </ol>
+            </div>
+
+        </div><!-- end exercises-content -->
+    </section>
+
+</section><!-- end #fundamental-identities -->
+
+</main>
+
+<!-- Toggle scripts -->
+<script>
+    function toggleExample(button) {
+        const content = button.nextElementSibling;
+        const arrow = button.querySelector('.toggle-arrow');
+
+        if (content.classList.contains('open')) {
+            content.classList.remove('open');
+            arrow.classList.remove('open');
+            button.querySelector('span:last-child').textContent = 'Show Solution';
+            button.setAttribute('aria-expanded', 'false');
+        } else {
+            content.classList.add('open');
+            arrow.classList.add('open');
+            button.querySelector('span:last-child').textContent = 'Hide Solution';
+            button.setAttribute('aria-expanded', 'true');
+        }
+    }
+
+    function toggleExercises(button) {
+        const content = document.getElementById(button.getAttribute('aria-controls'));
+        const arrow = button.querySelector('.toggle-arrow');
+
+        if (content.classList.contains('open')) {
+            content.classList.remove('open');
+            arrow.classList.remove('open');
+            button.querySelector('span:last-child').textContent = 'Show Exercises';
+            button.setAttribute('aria-expanded', 'false');
+        } else {
+            content.classList.add('open');
+            arrow.classList.add('open');
+            button.querySelector('span:last-child').textContent = 'Hide Exercises';
+            button.setAttribute('aria-expanded', 'true');
+        }
+    }
+</script>
+
+<!-- TOC loader -->
+<script>
+    fetch('toc.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('toc-placeholder').innerHTML = data;
+
+            const chapterButtons = document.querySelectorAll('.toc-chapter');
+            chapterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const expanded = button.getAttribute('aria-expanded') === 'true';
+                    button.setAttribute('aria-expanded', !expanded);
+                    const submenu = button.nextElementSibling;
+                    submenu.classList.toggle('open');
+                });
+            });
+        });
+</script>
+
+</body>
+</html>

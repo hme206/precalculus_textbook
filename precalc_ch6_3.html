@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CH 6.3 – Solving Trigonometric Equations</title>
+
+    <!-- MathJax configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)'], ['$', '$']],
+                displayMath: [['\\[', '\\]'], ['$$', '$$']],
+                packages: {'[+]': ['cancel', 'color']},
+                macros: {
+                    cancel: ['\\enclose{horizontalstrike}{#1}', 1]
+                }
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            },
+            loader: {
+                load: ['input/tex', 'output/chtml', '[tex]/cancel', '[tex]/color']
+            }
+        };
+    </script>
+    <script id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+
+    <link rel="stylesheet" href="styles.css" />
+
+    <style>
+        /* Collapsible exercises — same style as solution toggle */
+        .exercises-section {
+            margin: 25px 0;
+        }
+
+        .exercises-header {
+            background-color: #33AB2B;
+            color: white;
+            padding: 12px 20px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+            border-radius: 4px;
+            transition: background-color 0.2s ease;
+            border: none;
+            font-size: 1em;
+            width: 100%;
+        }
+
+        .exercises-header:hover {
+            background-color: #2a8922;
+        }
+
+        .exercises-content {
+            display: none;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-top: none;
+            border-radius: 0 0 6px 6px;
+            padding: 20px;
+        }
+
+        .exercises-content.open {
+            display: block;
+        }
+
+        /* Proof / annotation table */
+        .proof-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        .proof-table td {
+            border: none;
+            padding: 0.4rem 0.5rem;
+            vertical-align: middle;
+            background: none;
+        }
+
+        .proof-table td:first-child {
+            width: 60%;
+        }
+
+        .proof-table td.annotation {
+            color: #c0392b;
+            font-style: italic;
+            font-size: 0.92em;
+            width: 40%;
+            border: none;
+            background: none;
+        }
+
+        .solution .proof-table tr:nth-child(even) {
+            background-color: transparent;
+        }
+
+        .solution .proof-table tr {
+            background-color: transparent;
+        }
+
+        @media (max-width: 768px) {
+            .proof-table td:first-child {
+                width: 100%;
+                display: block;
+            }
+            .proof-table td.annotation {
+                width: 100%;
+                display: block;
+                padding-top: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div id="toc-placeholder"></div>
+
+<main class="container">
+
+<section id="solving-trig-equations">
+    <h1>CH 6.3 – Solving Trigonometric Equations</h1>
+
+    <p>
+        In previous sections we solved some basic equations involving the trigonometric functions.
+        Below we summarize the techniques we've employed thus far. Note that we use the neutral
+        letter \(u\) as the argument of each circular function for generality.
+    </p>
+
+    <!-- Strategies box (replaces TikZ rectangle) -->
+    <div class="definition-box">
+        <h3>Strategies for Solving Basic Equations Involving Trigonometric Functions</h3>
+        <ul>
+            <li>
+                To solve \(\cos(u) = c\) or \(\sin(u) = c\) for \(-1 \leq c \leq 1\), first solve
+                for \(u\) in the interval \([0, 2\pi)\) and add integer multiples of the period
+                \(2\pi\). If \(c &lt; -1\) or \(c &gt; 1\), there are no real solutions.
+            </li>
+            <li>
+                To solve \(\sec(u) = c\) or \(\csc(u) = c\) for \(c \leq -1\) or \(c \geq 1\),
+                convert to cosine or sine, respectively, and solve as above. If \(-1 &lt; c &lt; 1\),
+                there are no real solutions.
+            </li>
+            <li>
+                To solve \(\tan(u) = c\) for any real number \(c\), first solve for \(u\) in the
+                interval \(\left(-\dfrac{\pi}{2}, \dfrac{\pi}{2}\right)\) and add integer multiples
+                of the period \(\pi\).
+            </li>
+            <li>
+                To solve \(\cot(u) = c\) for \(c \neq 0\), convert to tangent and solve as above.
+                If \(c = 0\), the solution to \(\cot(u) = 0\) is \(u = \dfrac{\pi}{2} + \pi k\)
+                for integers \(k\).
+            </li>
+        </ul>
+    </div>
+
+    <p>
+        Using the above guidelines, we can comfortably solve \(\sin(x) = \frac{1}{2}\) and find
+        the solution \(x = \frac{\pi}{6} + 2\pi k\) or \(x = \frac{5\pi}{6} + 2\pi k\) for
+        integers \(k\). How do we solve something like \(\sin(3x) = \frac{1}{2}\)? Since this
+        equation has the <em>form</em> \(\sin(u) = \frac{1}{2}\), we know the solutions take the
+        form \(u = \frac{\pi}{6} + 2\pi k\) or \(u = \frac{5\pi}{6} + 2\pi k\) for integers \(k\).
+        Since the argument of sine here is \(3x\), we have
+        \(3x = \frac{\pi}{6} + 2\pi k\) or \(3x = \frac{5\pi}{6} + 2\pi k\) for integers \(k\).
+        To solve for \(x\), we divide both sides of these equations by \(3\), and obtain
+        \(x = \frac{\pi}{18} + \frac{2\pi}{3} k\) or \(x = \frac{5\pi}{18} + \frac{2\pi}{3}k\)
+        for integers \(k\). This is the technique employed in the example below.
+    </p>
+
+    <!-- Example 1 -->
+    <section class="example" aria-labelledby="example-6-3-1">
+        <div class="example-problem">
+            <h3 id="example-6-3-1">Example 1</h3>
+            <p>
+                Solve the following equations and check your answers analytically. List the
+                solutions which lie in the interval \([0, 2\pi)\).
+            </p>
+            <div class="exercise-grid columns-2">
+                <ol>
+                    <li>\(\cos(2x) = -\dfrac{\sqrt{3}}{2}\)</li>
+                    <li>\(\csc\!\left(\dfrac{1}{3}x - \pi\right) = \sqrt{2}\)</li>
+                    <li>\(\cot(3x) = 0\)</li>
+                    <li>\(\sec^{2}(x) = 4\)</li>
+                    <li>\(\tan\!\left(\dfrac{x}{2}\right) = -3\)</li>
+                    <li>\(\sin(2x) = 0.87\)</li>
+                </ol>
+            </div>
+        </div>
+
+        <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-6-3-1">
+            <span class="toggle-arrow">▼</span>
+            <span>Show Solution</span>
+        </button>
+
+        <div id="solution-6-3-1" class="example-content">
+            <div class="solution">
+                <h4>Solution</h4>
+
+                <!-- Part 1 -->
+                <p><strong>1.</strong> The solutions to \(\cos(u) = -\dfrac{\sqrt{3}}{2}\) are
+                \(u = \dfrac{5\pi}{6} + 2\pi k\) or \(u = \dfrac{7\pi}{6} + 2\pi k\) for integers
+                \(k\). Since the argument of cosine here is \(2x\), this means
+                \(2x = \dfrac{5\pi}{6} + 2\pi k\) or \(2x = \dfrac{7\pi}{6} + 2\pi k\) for
+                integers \(k\). Solving for \(x\) gives
+                \(x = \dfrac{5\pi}{12} + \pi k\) or \(x = \dfrac{7\pi}{12} + \pi k\) for
+                integers \(k\). To check these answers analytically, we substitute them into
+                the original equation. For any integer \(k\) we have</p>
+
+                \[
+                \begin{array}{rclr}
+                \cos\!\left(2\!\left[\dfrac{5\pi}{12} + \pi k\right]\right)
+                    &=& \cos\!\left(\dfrac{5\pi}{6} + 2\pi k\right) & \\[6pt]
+                    &=& \cos\!\left(\dfrac{5\pi}{6}\right)
+                        & \text{(the period of cosine is } 2\pi\text{)} \\[6pt]
+                    &=& -\dfrac{\sqrt{3}}{2} &
+                \end{array}
+                \]
+
+                <p>Similarly, we find
+                \(\cos\!\left(2\!\left[\dfrac{7\pi}{12} + \pi k\right]\right)
+                = \cos\!\left(\dfrac{7\pi}{6} + 2\pi k\right)
+                = \cos\!\left(\dfrac{7\pi}{6}\right) = -\dfrac{\sqrt{3}}{2}\).
+                To determine which of our solutions lie in \([0,2\pi)\), we substitute integer
+                values for \(k\). The solutions we keep come from the values of \(k = 0\) and
+                \(k = 1\) and are
+                \(x = \dfrac{5\pi}{12}\), \(\dfrac{7\pi}{12}\), \(\dfrac{17\pi}{12}\) and
+                \(\dfrac{19\pi}{12}\).</p>
+
+                <hr class="divider" role="separator" aria-hidden="true" />
+
+                <!-- Part 2 -->
+                <p><strong>2.</strong> Since this equation has the form \(\csc(u) = \sqrt{2}\),
+                we rewrite this as \(\sin(u) = \dfrac{\sqrt{2}}{2}\) and find
+                \(u = \dfrac{\pi}{4} + 2\pi k\) or \(u = \dfrac{3\pi}{4} + 2\pi k\) for integers
+                \(k\). Since the argument of cosecant here is \(\left(\dfrac{1}{3}x - \pi\right)\),</p>
+
+                \[
+                \frac{1}{3}x - \pi = \frac{\pi}{4} + 2\pi k
+                \qquad \text{or} \qquad
+                \frac{1}{3}x - \pi = \frac{3\pi}{4} + 2\pi k
+                \]
+
+                <p>To solve \(\dfrac{1}{3}x - \pi = \dfrac{\pi}{4} + 2\pi k\), we first add
+                \(\pi\) to both sides:</p>
+
+                \[
+                \frac{1}{3}x = \frac{\pi}{4} + 2\pi k + \pi
+                \]
+
+                <p>A common error is to treat the \(2\pi k\) and \(\pi\) terms as "like" terms
+                and try to combine them when they are not. We can, however, combine the \(\pi\)
+                and \(\dfrac{\pi}{4}\) terms to get</p>
+
+                \[
+                \frac{1}{3}x = \frac{5\pi}{4} + 2\pi k
+                \]
+
+                <p>We now finish by multiplying both sides by \(3\) to get</p>
+
+                \[
+                x = 3\!\left(\frac{5\pi}{4} + 2\pi k\right) = \frac{15\pi}{4} + 6\pi k
+                \]
+
+                <p>Solving the other equation, \(\dfrac{1}{3}x - \pi = \dfrac{3\pi}{4} + 2\pi k\),
+                produces \(x = \dfrac{21\pi}{4} + 6\pi k\) for integers \(k\). To check the
+                first family of answers, we substitute, combine like terms, and simplify:</p>
+
+                \[
+                \begin{array}{rclr}
+                \csc\!\left(\dfrac{1}{3}\!\left[\dfrac{15\pi}{4} + 6\pi k\right] - \pi\right)
+                    &=& \csc\!\left(\dfrac{5\pi}{4} + 2\pi k - \pi\right) & \\[6pt]
+                    &=& \csc\!\left(\dfrac{\pi}{4} + 2\pi k\right) & \\[6pt]
+                    &=& \csc\!\left(\dfrac{\pi}{4}\right)
+                        & \text{(the period of cosecant is } 2\pi\text{)} \\[4pt]
+                    &=& \sqrt{2} &
+                \end{array}
+                \]
+
+                <p>The family \(x = \dfrac{21\pi}{4} + 6\pi k\) checks similarly. Despite having
+                infinitely many solutions, we find that <em>none</em> of them lie in \([0,2\pi)\).
+                To verify this graphically, we use a reciprocal identity to rewrite the cosecant
+                as a sine and we find that \(y = \dfrac{1}{\sin\!\left(\frac{1}{3}x - \pi\right)}\)
+                and \(y = \sqrt{2}\) do not intersect at all over the interval \([0,2\pi)\).</p>
+
+                <hr class="divider" role="separator" aria-hidden="true" />
+
+                <!-- Part 3 -->
+                <p><strong>3.</strong> Since \(\cot(3x) = 0\) has the form \(\cot(u) = 0\), we
+                know \(u = \dfrac{\pi}{2} + \pi k\), so, in this case,
+                \(3x = \dfrac{\pi}{2} + \pi k\) for integers \(k\). Solving for \(x\) yields
+                \(x = \dfrac{\pi}{6} + \dfrac{\pi}{3}k\). Checking our answers, we get</p>
+
+                \[
+                \begin{array}{rclr}
+                \cot\!\left(3\!\left[\dfrac{\pi}{6} + \dfrac{\pi}{3}k\right]\right)
+                    &=& \cot\!\left(\dfrac{\pi}{2} + \pi k\right) & \\[6pt]
+                    &=& \cot\!\left(\dfrac{\pi}{2}\right)
+                        & \text{(the period of cotangent is } \pi\text{)} \\[6pt]
+                    &=& 0 &
+                \end{array}
+                \]
+
+                <p>As \(k\) runs through the integers, we obtain six answers corresponding to
+                \(k = 0\) through \(k = 5\), which lie in \([0,2\pi)\):
+                \(x = \dfrac{\pi}{6}\), \(\dfrac{\pi}{2}\), \(\dfrac{5\pi}{6}\),
+                \(\dfrac{7\pi}{6}\), \(\dfrac{3\pi}{2}\) and \(\dfrac{11\pi}{6}\).
+                To confirm these graphically, we must be careful. On many calculators, there is
+                no function button for cotangent. We choose to use the quotient identity
+                \(\cot(3x) = \dfrac{\cos(3x)}{\sin(3x)}\).</p>
+
+                <hr class="divider" role="separator" aria-hidden="true" />
+
+                <!-- Part 4 -->
+                <p><strong>4.</strong> The complication in solving an equation like
+                \(\sec^{2}(x) = 4\) comes not from the argument of secant, which is just \(x\),
+                but rather the fact that secant is being squared. To get this equation to look
+                like one of the standard forms, we extract square roots to get
+                \(\sec(x) = \pm 2\). Converting to cosines, we have
+                \(\cos(x) = \pm\dfrac{1}{2}\).</p>
+
+                <p>For \(\cos(x) = \dfrac{1}{2}\), we get
+                \(x = \dfrac{\pi}{3} + 2\pi k\) or \(x = \dfrac{5\pi}{3} + 2\pi k\) for
+                integers \(k\). For \(\cos(x) = -\dfrac{1}{2}\), we get
+                \(x = \dfrac{2\pi}{3} + 2\pi k\) or \(x = \dfrac{4\pi}{3} + 2\pi k\) for
+                integers \(k\).</p>
+
+                <p>If we take a step back and think of these families of solutions geometrically,
+                we see we are finding the measures of all angles with a reference angle of
+                \(\dfrac{\pi}{3}\). As a result, these solutions can be combined and we may write
+                our solutions as \(x = \dfrac{\pi}{3} + \pi k\) and
+                \(x = \dfrac{2\pi}{3} + \pi k\) for integers \(k\). To check the first family of
+                solutions, we note that, depending on the integer \(k\),
+                \(\sec\!\left(\dfrac{\pi}{3} + \pi k\right)\) doesn't always equal
+                \(\sec\!\left(\dfrac{\pi}{3}\right)\). However, it is true that for all integers
+                \(k\),
+                \(\sec\!\left(\dfrac{\pi}{3} + \pi k\right) = \pm\sec\!\left(\dfrac{\pi}{3}\right)
+                = \pm 2\). As a result,</p>
+
+                \[
+                \begin{array}{rclr}
+                \sec^{2}\!\left(\dfrac{\pi}{3} + \pi k\right)
+                    &=& \left(\pm\sec\!\left(\dfrac{\pi}{3}\right)\right)^{2} & \\[6pt]
+                    &=& (\pm 2)^{2} & \\[6pt]
+                    &=& 4 &
+                \end{array}
+                \]
+
+                <p>The same holds for the family \(x = \dfrac{2\pi}{3} + \pi k\). The solutions
+                which lie in \([0,2\pi)\) come from the values \(k = 0\) and \(k = 1\), namely
+                \(x = \dfrac{\pi}{3}\), \(\dfrac{2\pi}{3}\), \(\dfrac{4\pi}{3}\) and
+                \(\dfrac{5\pi}{3}\).</p>
+
+                <hr class="divider" role="separator" aria-hidden="true" />
+
+                <!-- Part 5 -->
+                <p><strong>5.</strong> The equation \(\tan\!\left(\dfrac{x}{2}\right) = -3\) has
+                the form \(\tan(u) = -3\), whose solution is \(u = \arctan(-3) + \pi k\). Hence,
+                \(\dfrac{x}{2} = \arctan(-3) + \pi k\), so \(x = 2\arctan(-3) + 2\pi k\) for
+                integers \(k\). To check, we note</p>
+
+                \[
+                \begin{array}{rclr}
+                \tan\!\left(\dfrac{2\arctan(-3) + 2\pi k}{2}\right)
+                    &=& \tan\!\left(\arctan(-3) + \pi k\right) & \\[6pt]
+                    &=& \tan\!\left(\arctan(-3)\right)
+                        & \text{(the period of tangent is } \pi\text{)} \\[6pt]
+                    &=& -3 &
+                \end{array}
+                \]
+
+                <p>To determine which of our answers lie in the interval \([0,2\pi)\), we first
+                need to get an idea of the value of \(2\arctan(-3)\). Since \(-3 &lt; 0\), it
+                follows that \(-\dfrac{\pi}{2} &lt; \arctan(-3) &lt; 0\). Multiplying through by
+                \(2\) gives \(-\pi &lt; 2\arctan(-3) &lt; 0\). We are now in a position to argue
+                which of the solutions \(x = 2\arctan(-3) + 2\pi k\) lie in \([0,2\pi)\).</p>
+
+                <p>For \(k = 0\), we get \(x = 2\arctan(-3) &lt; 0\), so we discard this answer
+                and all answers \(x = 2\arctan(-3) + 2\pi k\) where \(k &lt; 0\).</p>
+
+                <p>Next, we turn our attention to \(k = 1\) and get
+                \(x = 2\arctan(-3) + 2\pi\). Starting with the inequality
+                \(-\pi &lt; 2\arctan(-3) &lt; 0\), we add \(2\pi\) and get
+                \(\pi &lt; 2\arctan(-3) + 2\pi &lt; 2\pi\). This means
+                \(x = 2\arctan(-3) + 2\pi\) lies in \([0,2\pi)\). Advancing \(k\) to \(2\)
+                produces \(x = 2\arctan(-3) + 4\pi\). Once again, we get from
+                \(-\pi &lt; 2\arctan(-3) &lt; 0\) that
+                \(3\pi &lt; 2\arctan(-3) + 4\pi &lt; 4\pi\). Since this is outside the interval
+                \([0,2\pi)\), we discard \(x = 2\arctan(-3) + 4\pi\) and all solutions of the
+                form \(x = 2\arctan(-3) + 2\pi k\) for \(k &gt; 2\).</p>
+
+                <hr class="divider" role="separator" aria-hidden="true" />
+
+                <!-- Part 6 -->
+                <p><strong>6.</strong> To solve \(\sin(2x) = 0.87\), we first note that it has
+                the form \(\sin(u) = 0.87\), which has the family of solutions
+                \(u = \arcsin(0.87) + 2\pi k\) or
+                \(u = \pi - \arcsin(0.87) + 2\pi k\) for integers \(k\). Since the argument of
+                sine here is \(2x\), we get
+                \(2x = \arcsin(0.87) + 2\pi k\) or
+                \(2x = \pi - \arcsin(0.87) + 2\pi k\), which gives
+                \(x = \dfrac{1}{2}\arcsin(0.87) + \pi k\) or
+                \(x = \dfrac{\pi}{2} - \dfrac{1}{2}\arcsin(0.87) + \pi k\) for integers \(k\).
+                To check,</p>
+
+                \[
+                \begin{array}{rclr}
+                \sin\!\left(2\!\left[\dfrac{1}{2}\arcsin(0.87) + \pi k\right]\right)
+                    &=& \sin\!\left(\arcsin(0.87) + 2\pi k\right) & \\[6pt]
+                    &=& \sin\!\left(\arcsin(0.87)\right)
+                        & \text{(the period of sine is } 2\pi\text{)} \\[6pt]
+                    &=& 0.87 &
+                \end{array}
+                \]
+
+                <p>For the family \(x = \dfrac{\pi}{2} - \dfrac{1}{2}\arcsin(0.87) + \pi k\),
+                we get</p>
+
+                \[
+                \begin{array}{rclr}
+                \sin\!\left(2\!\left[\dfrac{\pi}{2} - \dfrac{1}{2}\arcsin(0.87) + \pi k\right]\right)
+                    &=& \sin\!\left(\pi - \arcsin(0.87) + 2\pi k\right) & \\[6pt]
+                    &=& \sin\!\left(\pi - \arcsin(0.87)\right)
+                        & \text{(the period of sine is } 2\pi\text{)} \\[6pt]
+                    &=& \sin\!\left(\arcsin(0.87)\right)
+                        & \text{(\(\sin(\pi - t) = \sin(t)\))} \\[6pt]
+                    &=& 0.87 &
+                \end{array}
+                \]
+
+                <p>To determine which of these solutions lie in \([0,2\pi)\), we first need to
+                get an idea of the value of \(x = \dfrac{1}{2}\arcsin(0.87)\). By definition,
+                \(0 &lt; \arcsin(0.87) &lt; \dfrac{\pi}{2}\) so that multiplying through by
+                \(\dfrac{1}{2}\) gives us
+                \(0 &lt; \dfrac{1}{2}\arcsin(0.87) &lt; \dfrac{\pi}{4}\). Starting with the
+                family of solutions \(x = \dfrac{1}{2}\arcsin(0.87) + \pi k\), we use the same
+                kind of arguments as above and find only the solutions corresponding to \(k = 0\)
+                and \(k = 1\) lie in \([0,2\pi)\):
+                \(x = \dfrac{1}{2}\arcsin(0.87)\) and
+                \(x = \dfrac{1}{2}\arcsin(0.87) + \pi\).</p>
+
+                <p>Next, we move to the family
+                \(x = \dfrac{\pi}{2} - \dfrac{1}{2}\arcsin(0.87) + \pi k\) for integers \(k\).
+                Here, we need to get a better estimate of
+                \(\dfrac{\pi}{2} - \dfrac{1}{2}\arcsin(0.87)\).</p>
+
+                <p>From the inequality
+                \(0 &lt; \dfrac{1}{2}\arcsin(0.87) &lt; \dfrac{\pi}{4}\), we first multiply
+                through by \(-1\) and then add \(\dfrac{\pi}{2}\) to get
+                \(\dfrac{\pi}{2} &gt; \dfrac{\pi}{2} - \dfrac{1}{2}\arcsin(0.87) &gt; \dfrac{\pi}{4}\),
+                or
+                \(\dfrac{\pi}{4} &lt; \dfrac{\pi}{2} - \dfrac{1}{2}\arcsin(0.87) &lt; \dfrac{\pi}{2}\).
+                Proceeding with the usual arguments, we find the only solutions which lie in
+                \([0,2\pi)\) correspond to \(k = 0\) and \(k = 1\), namely
+                \(x = \dfrac{\pi}{2} - \dfrac{1}{2}\arcsin(0.87)\) and
+                \(x = \dfrac{3\pi}{2} - \dfrac{1}{2}\arcsin(0.87)\).</p>
+
+                <p>All told, we have found four solutions to \(\sin(2x) = 0.87\) in \([0,2\pi)\):
+                \(x = \dfrac{1}{2}\arcsin(0.87)\),
+                \(x = \dfrac{1}{2}\arcsin(0.87) + \pi\),
+                \(x = \dfrac{\pi}{2} - \dfrac{1}{2}\arcsin(0.87)\) and
+                \(x = \dfrac{3\pi}{2} - \dfrac{1}{2}\arcsin(0.87)\).</p>
+
+            </div><!-- end solution -->
+        </div><!-- end example-content -->
+    </section><!-- end example 1 -->
+
+    <!-- Bridge paragraph -->
+    <p>
+        Each of the problems in the above example featured one trigonometric function. If an
+        equation involves two different trigonometric functions or if the equation contains the
+        same trigonometric function but with different arguments, we will need to use identities
+        and algebra to reduce the equation to the same form as those given in the strategies box
+        above.
+    </p>
+
+    <!-- Example 2 -->
+    <section class="example" aria-labelledby="example-6-3-2">
+        <div class="example-problem">
+            <h3 id="example-6-3-2">Example 2</h3>
+            <p>
+                Solve the following equations and list the solutions which lie in the interval
+                \([0, 2\pi)\).
+            </p>
+            <div class="exercise-grid columns-2">
+                <ol>
+                    <li>\(3\sin^{3}(x) = \sin^{2}(x)\)</li>
+                    <li>\(\sec^{2}(x) = \tan(x) + 3\)</li>
+                    <li>\(\cos(2x) = 3\cos(x) - 2\)</li>
+                    <li>\(\cos(3x) = 2 - \cos(x)\)</li>
+                    <li>\(\cos(3x) = \cos(5x)\)</li>
+                    <li>\(\sin(2x) = \sqrt{3}\cos(x)\)</li>
+                    <li>\(\sin(x)\cos\!\left(\dfrac{x}{2}\right) + \cos(x)\sin\!\left(\dfrac{x}{2}\right) = 1\)</li>
+                    <li>\(\cos(x) - \sqrt{3}\sin(x) = 2\)</li>
+                </ol>
+            </div>
+        </div>
+
+        <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-6-3-2">
+            <span class="toggle-arrow">▼</span>
+            <span>Show Solution</span>
+        </button>
+
+        <div id="solution-6-3-2" class="example-content">
+            <div class="solution">
+                <h4>Solution</h4>
+
+                <!-- Part 1 -->
+                <p><strong>1.</strong> We resist the temptation to divide both sides of
+                \(3\sin^{3}(x) = \sin^{2}(x)\) by \(\sin^{2}(x)\) and instead gather all of
+                the terms to one side of the equation and factor.</p>
+
+                \[
+                \begin{array}{rclr}
+                3\sin^{3}(x) &=& \sin^{2}(x) & \\
+                3\sin^{3}(x) - \sin^{2}(x) &=& 0 & \\
+                \sin^{2}(x)\!\left(3\sin(x) - 1\right) &=& 0
+                    & \text{Factor out } \sin^{2}(x). \\
+                \end{array}
+                \]
+
+                <p>We get \(\sin^{2}(x) = 0\) or \(3\sin(x) - 1 = 0\). Solving for \(\sin(x)\),
+                we find \(\sin(x) = 0\) or \(\sin(x) = \dfrac{1}{3}\). The solution to the first
+                equation is \(x = \pi k\), with \(x = 0\) and \(x = \pi\) being the two solutions
+                which lie in \([0,2\pi)\). To solve \(\sin(x) = \dfrac{1}{3}\), we use the
+                arcsine function to get \(x = \arcsin\!\left(\dfrac{1}{3}\right) + 2\pi k\) or
+                \(x = \pi - \arcsin\!\left(\dfrac{1}{3}\right) + 2\pi k\) for integers \(k\). We
+                find the two solutions here which lie in \([0,2\pi)\) to be
+                \(x = \arcsin\!\left(\dfrac{1}{3}\right)\) and
+                \(x = \pi - \arcsin\!\left(\dfrac{1}{3}\right)\).</p>
+
+                <hr class="divider" role="separator" aria-hidden="true" />
+
+                <!-- Part 2 -->
+                <p><strong>2.</strong> Analysis of \(\sec^{2}(x) = \tan(x) + 3\) reveals two
+                different trigonometric functions, so an identity is in order. Since
+                \(\sec^{2}(x) = 1 + \tan^{2}(x)\), we get</p>
+
+                \[
+                \begin{array}{rclr}
+                \sec^{2}(x) &=& \tan(x) + 3 & \\
+                1 + \tan^{2}(x) &=& \tan(x) + 3
+                    & \text{(Since } \sec^{2}(x) = 1 + \tan^{2}(x)\text{.)} \\
+                \tan^{2}(x) - \tan(x) - 2 &=& 0 & \\
+                u^{2} - u - 2 &=& 0 & \text{Let } u = \tan(x)\text{.} \\
+                (u + 1)(u - 2) &=& 0 & \\
+                \end{array}
+                \]
+
+                <p>This gives \(u = -1\) or \(u = 2\). Since \(u = \tan(x)\), we have
+                \(\tan(x) = -1\) or \(\tan(x) = 2\). From \(\tan(x) = -1\), we get
+                \(x = -\dfrac{\pi}{4} + \pi k\) for integers \(k\). To solve \(\tan(x) = 2\),
+                we employ the arctangent function and get \(x = \arctan(2) + \pi k\) for integers
+                \(k\). From the first set of solutions, we get \(x = \dfrac{3\pi}{4}\) and
+                \(x = \dfrac{5\pi}{4}\) as our answers which lie in \([0,2\pi)\). We get
+                \(x = \arctan(2)\) and \(x = \pi + \arctan(2)\) as answers from our second set
+                of solutions which lie in \([0,2\pi)\). Using a reciprocal identity, we rewrite
+                the secant as a cosine and graph \(y = \dfrac{1}{(\cos(x))^{2}}\) and
+                \(y = \tan(x) + 3\) to find the \(x\)-values of the points where they
+                intersect.</p>
+
+                <hr class="divider" role="separator" aria-hidden="true" />
+
+                <!-- Part 3 -->
+                <p><strong>3.</strong> In the equation \(\cos(2x) = 3\cos(x) - 2\), we have the
+                same circular function, namely cosine, on both sides but the arguments differ.
+                Using the identity \(\cos(2x) = 2\cos^{2}(x) - 1\), we obtain a "quadratic in
+                disguise" and proceed as we have done in the past.</p>
+
+                \[
+                \begin{array}{rclr}
+                \cos(2x) &=& 3\cos(x) - 2 & \\
+                2\cos^{2}(x) - 1 &=& 3\cos(x) - 2
+                    & \text{(Since } \cos(2x) = 2\cos^{2}(x) - 1\text{.)} \\
+                2\cos^{2}(x) - 3\cos(x) + 1 &=& 0 & \\
+                2u^{2} - 3u + 1 &=& 0 & \text{Let } u = \cos(x)\text{.} \\
+                (2u - 1)(u - 1) &=& 0 & \\
+                \end{array}
+                \]
+
+                <p>This gives \(u = \dfrac{1}{2}\) or \(u = 1\). Since \(u = \cos(x)\), we get
+                \(\cos(x) = \dfrac{1}{2}\) or \(\cos(x) = 1\). Solving \(\cos(x) = \dfrac{1}{2}\),
+                we get \(x = \dfrac{\pi}{3} + 2\pi k\) or \(x = \dfrac{5\pi}{3} + 2\pi k\) for
+                integers \(k\). From \(\cos(x) = 1\), we get \(x = 2\pi k\) for integers \(k\).
+                The answers which lie in \([0,2\pi)\) are \(x = 0\), \(\dfrac{\pi}{3}\), and
+                \(\dfrac{5\pi}{3}\).</p>
+
+                <hr class="divider" role="separator" aria-hidden="true" />
+
+                <!-- Part 4 -->
+                <p><strong>4.</strong> To solve \(\cos(3x) = 2 - \cos(x)\), we use the same
+                technique as in the previous problem. We know that
+                \(\cos(3x) = 4\cos^{3}(x) - 3\cos(x)\). This transforms the equation into a
+                polynomial in terms of \(\cos(x)\).</p>
+
+                \[
+                \begin{array}{rclr}
+                \cos(3x) &=& 2 - \cos(x) & \\
+                4\cos^{3}(x) - 3\cos(x) &=& 2 - \cos(x) & \\
+                4\cos^{3}(x) - 2\cos(x) - 2 &=& 0 & \\
+                4u^{3} - 2u - 2 &=& 0 & \text{Let } u = \cos(x)\text{.} \\
+                \end{array}
+                \]
+
+                <p>To solve \(4u^{3} - 2u - 2 = 0\), we factor \(4u^{3} - 2u - 2\) into
+                \((u - 1)(4u^{2} + 4u + 2)\). We get either \(u - 1 = 0\) or
+                \(4u^{2} + 4u + 2 = 0\), and since the discriminant of the latter is negative,
+                the only real solution to \(4u^{3} - 2u - 2 = 0\) is \(u = 1\). Since
+                \(u = \cos(x)\), we get \(\cos(x) = 1\), so \(x = 2\pi k\) for integers \(k\).
+                The only solution which lies in \([0,2\pi)\) is \(x = 0\).</p>
+
+                <hr class="divider" role="separator" aria-hidden="true" />
+
+                <!-- Part 5 -->
+                <p><strong>5.</strong> While we could approach \(\cos(3x) = \cos(5x)\) in the
+                same manner as we did the previous two problems, we choose instead to showcase the
+                utility of the Sum to Product Identities. From \(\cos(3x) = \cos(5x)\), we get
+                \(\cos(5x) - \cos(3x) = 0\), and it is the presence of \(0\) on the right-hand
+                side that indicates a switch to a product would be a good move. Using our Sum to
+                Product identities, we have that</p>
+
+                \[
+                \cos(5x) - \cos(3x)
+                = -2\sin\!\left(\frac{5x+3x}{2}\right)\sin\!\left(\frac{5x-3x}{2}\right)
+                = -2\sin(4x)\sin(x)
+                \]
+
+                <p>Hence, the equation \(\cos(5x) = \cos(3x)\) is equivalent to
+                \(-2\sin(4x)\sin(x) = 0\). From this, we get \(\sin(4x) = 0\) or
+                \(\sin(x) = 0\).</p>
+
+                <p>Solving \(\sin(4x) = 0\) gives \(x = \dfrac{\pi}{4}k\) for integers \(k\),
+                and the solution to \(\sin(x) = 0\) is \(x = \pi k\) for integers \(k\). The
+                second set of solutions is contained in the first set of solutions, so our final
+                solution to \(\cos(5x) = \cos(3x)\) is \(x = \dfrac{\pi}{4}k\) for integers
+                \(k\). There are eight of these answers which lie in \([0,2\pi)\):
+                \(x = 0\), \(\dfrac{\pi}{4}\), \(\dfrac{\pi}{2}\), \(\dfrac{3\pi}{4}\),
+                \(\pi\), \(\dfrac{5\pi}{4}\), \(\dfrac{3\pi}{2}\) and \(\dfrac{7\pi}{4}\).</p>
+
+                <hr class="divider" role="separator" aria-hidden="true" />
+
+                <!-- Part 6 -->
+                <p><strong>6.</strong> In examining the equation \(\sin(2x) = \sqrt{3}\cos(x)\),
+                not only do we have different circular functions involved, namely sine and cosine,
+                we also have different arguments to contend with, namely \(2x\) and \(x\). Using
+                the identity \(\sin(2x) = 2\sin(x)\cos(x)\) makes all of the arguments the same
+                and we proceed as we would solving any nonlinear equation — gather all of the
+                nonzero terms on one side of the equation and factor.</p>
+
+                \[
+                \begin{array}{rclr}
+                \sin(2x) &=& \sqrt{3}\cos(x) & \\
+                2\sin(x)\cos(x) &=& \sqrt{3}\cos(x)
+                    & \text{(Since } \sin(2x) = 2\sin(x)\cos(x)\text{.)} \\
+                2\sin(x)\cos(x) - \sqrt{3}\cos(x) &=& 0 & \\
+                \cos(x)\!\left(2\sin(x) - \sqrt{3}\right) &=& 0 & \\
+                \end{array}
+                \]
+
+                <p>From which we get \(\cos(x) = 0\) or \(\sin(x) = \dfrac{\sqrt{3}}{2}\). From
+                \(\cos(x) = 0\), we obtain \(x = \dfrac{\pi}{2} + \pi k\) for integers \(k\).
+                From \(\sin(x) = \dfrac{\sqrt{3}}{2}\), we get
+                \(x = \dfrac{\pi}{3} + 2\pi k\) or \(x = \dfrac{2\pi}{3} + 2\pi k\) for
+                integers \(k\). The answers which lie in \([0,2\pi)\) are
+                \(x = \dfrac{\pi}{2}\), \(\dfrac{3\pi}{2}\), \(\dfrac{\pi}{3}\) and
+                \(\dfrac{2\pi}{3}\). We graph \(y = \sin(2x)\) and \(y = \sqrt{3}\cos(x)\) and,
+                after some careful zooming, verify our answers.</p>
+
+                <hr class="divider" role="separator" aria-hidden="true" />
+
+                <!-- Part 7 -->
+                <p><strong>7.</strong> Unlike the previous problem, there seems to be no quick
+                way to get the circular functions or their arguments to match in the equation
+                \(\sin(x)\cos\!\left(\dfrac{x}{2}\right) + \cos(x)\sin\!\left(\dfrac{x}{2}\right) = 1\).
+                If we stare at it long enough, however, we realize that the left-hand side is the
+                expanded form of the sum formula for
+                \(\sin\!\left(x + \dfrac{x}{2}\right)\). Hence, our original equation is
+                equivalent to \(\sin\!\left(\dfrac{3}{2}x\right) = 1\). Solving, we find
+                \(x = \dfrac{\pi}{3} + \dfrac{4\pi}{3}k\) for integers \(k\). Two of these
+                solutions lie in \([0,2\pi)\): \(x = \dfrac{\pi}{3}\) and
+                \(x = \dfrac{5\pi}{3}\).</p>
+
+                <hr class="divider" role="separator" aria-hidden="true" />
+
+                <!-- Part 8 -->
+                <p><strong>8.</strong> With the absence of double angles or squares, there
+                doesn't seem to be much we can do. However, since the arguments of the cosine and
+                sine are the same, we can rewrite the left-hand side of this equation as a
+                sinusoid. To fit \(f(x) = \cos(x) - \sqrt{3}\sin(x)\) to the form
+                \(A\sin(\omega t + \phi) + B\), we find \(A = 2\), \(B = 0\), \(\omega = 1\) and
+                \(\phi = \dfrac{5\pi}{6}\). Hence, we can rewrite the equation
+                \(\cos(x) - \sqrt{3}\sin(x) = 2\) as
+                \(2\sin\!\left(x + \dfrac{5\pi}{6}\right) = 2\), or
+                \(\sin\!\left(x + \dfrac{5\pi}{6}\right) = 1\). Solving the latter, we get
+                \(x = -\dfrac{\pi}{3} + 2\pi k\) for integers \(k\). Only one of these solutions,
+                \(x = \dfrac{5\pi}{3}\), which corresponds to \(k = 1\), lies in
+                \([0,2\pi)\).</p>
+
+            </div><!-- end solution -->
+        </div><!-- end example-content -->
+    </section><!-- end example 2 -->
+
+    <p>
+        We repeat here the advice given when solving systems of nonlinear equations — when it
+        comes to solving equations involving the trigonometric functions, it helps to just try
+        something.
+    </p>
+
+    <!-- Exercises Section -->
+    <section class="exercises-section" aria-labelledby="exercises-6-3-heading">
+        <h2 id="exercises-6-3-heading" class="subsection-title">Exercises</h2>
+
+        <button class="exercises-header" onclick="toggleExercises(this)" aria-expanded="false" aria-controls="exercises-6-3-content">
+            <span class="toggle-arrow">▼</span>
+            <span>Show Exercises</span>
+        </button>
+
+        <div id="exercises-6-3-content" class="exercises-content" role="region" aria-labelledby="exercises-6-3-heading">
+
+            <p>In Exercises 1–18, find <strong>all</strong> of the exact solutions of the equation and then list those solutions which are in the interval \([0, 2\pi)\).</p>
+
+            <div class="exercise-grid columns-2">
+                <ol>
+                    <li>\(\sin(5x) = 0\)</li>
+                    <li>\(\cos(3x) = \dfrac{1}{2}\)</li>
+                    <li>\(\sin(-2x) = \dfrac{\sqrt{3}}{2}\)</li>
+                    <li>\(\tan(6x) = 1\)</li>
+                    <li>\(\csc(4x) = -1\)</li>
+                    <li>\(\sec(3x) = \sqrt{2}\)</li>
+                    <li>\(\cot(2x) = -\dfrac{\sqrt{3}}{3}\)</li>
+                    <li>\(\cos(9x) = 9\)</li>
+                    <li>\(\sin\!\left(\dfrac{x}{3}\right) = \dfrac{\sqrt{2}}{2}\)</li>
+                    <li>\(\cos\!\left(x + \dfrac{5\pi}{6}\right) = 0\)</li>
+                    <li>\(\sin\!\left(2x - \dfrac{\pi}{3}\right) = -\dfrac{1}{2}\)</li>
+                    <li>\(2\cos\!\left(x + \dfrac{7\pi}{4}\right) = \sqrt{3}\)</li>
+                    <li>\(\csc(x) = 0\)</li>
+                    <li>\(\tan(2x - \pi) = 1\)</li>
+                    <li>\(\tan^{2}(x) = 3\)</li>
+                    <li>\(\sec^{2}(x) = \dfrac{4}{3}\)</li>
+                    <li>\(\cos^{2}(x) = \dfrac{1}{2}\)</li>
+                    <li>\(\sin^{2}(x) = \dfrac{3}{4}\)</li>
+                </ol>
+            </div>
+
+            <p>In Exercises 19–42, solve the equation, giving the exact solutions which lie in \([0, 2\pi)\).</p>
+
+            <div class="exercise-grid columns-2">
+                <ol start="19">
+                    <li>\(\sin(x) = \cos(x)\)</li>
+                    <li>\(\sin(2x) = \sin(x)\)</li>
+                    <li>\(\sin(2x) = \cos(x)\)</li>
+                    <li>\(\cos(2x) = \sin(x)\)</li>
+                    <li>\(\cos(2x) = \cos(x)\)</li>
+                    <li>\(\cos(2x) = 2 - 5\cos(x)\)</li>
+                    <li>\(3\cos(2x) + \cos(x) + 2 = 0\)</li>
+                    <li>\(\cos(2x) = 5\sin(x) - 2\)</li>
+                    <li>\(3\cos(2x) = \sin(x) + 2\)</li>
+                    <li>\(2\sec^{2}(x) = 3 - \tan(x)\)</li>
+                    <li>\(\tan^{2}(x) = 1 - \sec(x)\)</li>
+                    <li>\(\cot^{2}(x) = 3\csc(x) - 3\)</li>
+                    <li>\(\sec(x) = 2\csc(x)\)</li>
+                    <li>\(\cos(x)\csc(x)\cot(x) = 6 - \cot^{2}(x)\)</li>
+                    <li>\(\sin(2x) = \tan(x)\)</li>
+                    <li>\(\cot^{4}(x) = 4\csc^{2}(x) - 7\)</li>
+                    <li>\(\cos(2x) + \csc^{2}(x) = 0\)</li>
+                    <li>\(\tan^{3}(x) = 3\tan(x)\)</li>
+                    <li>\(\tan^{2}(x) = \dfrac{3}{2}\sec(x)\)</li>
+                    <li>\(\cos^{3}(x) = -\cos(x)\)</li>
+                    <li>\(\tan(2x) - 2\cos(x) = 0\)</li>
+                    <li>\(\csc^{3}(x) + \csc^{2}(x) = 4\csc(x) + 4\)</li>
+                    <li>\(2\tan(x) = 1 - \tan^{2}(x)\)</li>
+                    <li>\(\tan(x) = \sec(x)\)</li>
+                </ol>
+            </div>
+
+            <p>In Exercises 43–58, solve the equation, giving the exact solutions which lie in \([0, 2\pi)\).</p>
+
+            <div class="exercise-grid columns-2">
+                <ol start="43">
+                    <li>\(\sin(6x)\cos(x) = -\cos(6x)\sin(x)\)</li>
+                    <li>\(\sin(3x)\cos(x) = \cos(3x)\sin(x)\)</li>
+                    <li>\(\cos(2x)\cos(x) + \sin(2x)\sin(x) = 1\)</li>
+                    <li>\(\cos(5x)\cos(3x) - \sin(5x)\sin(3x) = \dfrac{\sqrt{3}}{2}\)</li>
+                    <li>\(\sin(x) + \cos(x) = 1\)</li>
+                    <li>\(\sin(x) + \sqrt{3}\cos(x) = 1\)</li>
+                    <li>\(\sqrt{2}\cos(x) - \sqrt{2}\sin(x) = 1\)</li>
+                    <li>\(\sqrt{3}\sin(2x) + \cos(2x) = 1\)</li>
+                    <li>\(\cos(2x) - \sqrt{3}\sin(2x) = \sqrt{2}\)</li>
+                    <li>\(3\sqrt{3}\sin(3x) - 3\cos(3x) = 3\sqrt{3}\)</li>
+                    <li>\(\cos(3x) = \cos(5x)\)</li>
+                    <li>\(\cos(4x) = \cos(2x)\)</li>
+                    <li>\(\sin(5x) = \sin(3x)\)</li>
+                    <li>\(\cos(5x) = -\cos(2x)\)</li>
+                    <li>\(\sin(6x) + \sin(x) = 0\)</li>
+                    <li>\(\tan(x) = \cos(x)\)</li>
+                </ol>
+            </div>
+
+        </div><!-- end exercises-content -->
+    </section>
+
+</section><!-- end #solving-trig-equations -->
+
+</main>
+
+<!-- Toggle scripts -->
+<script>
+    function toggleExample(button) {
+        const content = button.nextElementSibling;
+        const arrow = button.querySelector('.toggle-arrow');
+
+        if (content.classList.contains('open')) {
+            content.classList.remove('open');
+            arrow.classList.remove('open');
+            button.querySelector('span:last-child').textContent = 'Show Solution';
+            button.setAttribute('aria-expanded', 'false');
+        } else {
+            content.classList.add('open');
+            arrow.classList.add('open');
+            button.querySelector('span:last-child').textContent = 'Hide Solution';
+            button.setAttribute('aria-expanded', 'true');
+        }
+    }
+
+    function toggleExercises(button) {
+        const content = document.getElementById(button.getAttribute('aria-controls'));
+        const arrow = button.querySelector('.toggle-arrow');
+
+        if (content.classList.contains('open')) {
+            content.classList.remove('open');
+            arrow.classList.remove('open');
+            button.querySelector('span:last-child').textContent = 'Show Exercises';
+            button.setAttribute('aria-expanded', 'false');
+        } else {
+            content.classList.add('open');
+            arrow.classList.add('open');
+            button.querySelector('span:last-child').textContent = 'Hide Exercises';
+            button.setAttribute('aria-expanded', 'true');
+        }
+    }
+</script>
+
+<!-- TOC loader -->
+<script>
+    fetch('toc.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('toc-placeholder').innerHTML = data;
+
+            const chapterButtons = document.querySelectorAll('.toc-chapter');
+            chapterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const expanded = button.getAttribute('aria-expanded') === 'true';
+                    button.setAttribute('aria-expanded', !expanded);
+                    const submenu = button.nextElementSibling;
+                    submenu.classList.toggle('open');
+                });
+            });
+        });
+</script>
+
+</body>
+</html>

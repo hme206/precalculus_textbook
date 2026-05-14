@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CH 6.4 – Law of Sines</title>
+
+    <!-- MathJax configuration with cancel package -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)'], ['$', '$']],
+                displayMath: [['\\[', '\\]'], ['$$', '$$']],
+                packages: {'[+]': ['cancel', 'color']},
+                macros: {
+                    cancel: ['\\enclose{horizontalstrike}{#1}', 1]
+                }
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            },
+            loader: {
+                load: ['input/tex', 'output/chtml', '[tex]/cancel', '[tex]/color']
+            }
+        };
+    </script>
+    <script id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+
+    <link rel="stylesheet" href="styles.css" />
+
+    <style>
+        /* Two-column proof layout: math left, annotation right */
+        .proof-row {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 1.5rem;
+            align-items: center;
+            margin: 0.4rem 0;
+            padding: 0.3rem 0;
+        }
+
+        .proof-row .proof-math {
+            text-align: left;
+        }
+
+        .proof-row .proof-note {
+            color: #c0392b;
+            font-style: italic;
+            font-size: 0.92em;
+            white-space: nowrap;
+            min-width: 160px;
+            text-align: left;
+        }
+
+        /* Proof step table for side-by-side layout */
+        .proof-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        .proof-table td {
+            border: none;
+            padding: 0.4rem 0.5rem;
+            vertical-align: middle;
+            background: none;
+        }
+
+        .proof-table td:first-child {
+            width: 60%;
+        }
+
+        .proof-table td.annotation {
+            color: #c0392b;
+            font-style: italic;
+            font-size: 0.92em;
+            width: 40%;
+            border: none;
+            background: none;
+        }
+
+        /* Override table nth-child zebra striping inside proofs */
+        .solution .proof-table tr:nth-child(even) {
+            background-color: transparent;
+        }
+
+        .solution .proof-table tr {
+            background-color: transparent;
+        }
+
+        /* Collapsible exercises — same style as solution toggle */
+        .exercises-section {
+            margin: 25px 0;
+        }
+
+        .exercises-header {
+            background-color: #33AB2B;
+            color: white;
+            padding: 12px 20px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+            border-radius: 4px;
+            transition: background-color 0.2s ease;
+            border: none;
+            font-size: 1em;
+            width: 100%;
+        }
+
+        .exercises-header:hover {
+            background-color: #2a8922;
+        }
+
+        .exercises-content {
+            display: none;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-top: none;
+            border-radius: 0 0 6px 6px;
+            padding: 20px;
+        }
+
+        .exercises-content.open {
+            display: block;
+        }
+
+        /* Side-by-side case layout */
+        .case-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 1rem 0;
+        }
+
+        .case-grid h4 {
+            margin-top: 0;
+        }
+
+        @media (max-width: 768px) {
+            .proof-table td:first-child {
+                width: 100%;
+                display: block;
+            }
+            .proof-table td.annotation {
+                width: 100%;
+                display: block;
+                padding-top: 0;
+            }
+            .proof-row {
+                grid-template-columns: 1fr;
+            }
+            .proof-row .proof-note {
+                white-space: normal;
+            }
+            .case-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div id="toc-placeholder"></div>
+
+<main class="container">
+
+<section id="law-of-sines">
+    <h1>CH 6.4 – Law of Sines</h1>
+
+    <p>Trigonometry literally means "measuring triangles" and with the earlier chapters under our belts, we are more than prepared to do just that. The main goal of this section and the next is to develop theorems which allow us to "solve" triangles — that is, find the length of each side of a triangle and the measure of each of its angles. In previous sections, we've had some experience solving right triangles. The following example reviews what we know.</p>
+
+    <!-- Introductory Example: Right Triangle Review -->
+    <section class="example" aria-labelledby="example-6-4-intro">
+        <div class="example-problem">
+            <h3 id="example-6-4-intro">Example</h3>
+            <p>Given a right triangle with a hypotenuse of length \(7\) units and one leg of length \(4\) units, find the length of the remaining side and the measures of the remaining angles. Express the angles in decimal degrees, rounded to the nearest hundredth of a degree.</p>
+        </div>
+
+        <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-6-4-intro">
+            <span class="toggle-arrow">▼</span>
+            <span>Show Solution</span>
+        </button>
+
+        <div id="solution-6-4-intro" class="example-content">
+            <div class="solution">
+                <h4>Solution</h4>
+
+                <p>For definitiveness, we label the triangle below.</p>
+
+                <div class="diagram-row">
+                    <div class="diagram">
+                        <figure role="group" aria-labelledby="fig-6-4-1-caption">
+                            <img
+                                src="images/6_4_1.png"
+                                alt="Right triangle with vertices labeled A (bottom left), C (bottom right), and B (top right). The right angle is at C. The side from A to C along the bottom is labeled b = 4, the hypotenuse from A to B is labeled c = 7, and the vertical side from C to B is labeled a. The angle at A is labeled alpha and the angle at B is labeled beta."
+                            />
+                            <figcaption id="fig-6-4-1-caption" class="visually-hidden">Right triangle showing hypotenuse of 7 and leg of 4, with angles alpha at vertex A and beta at vertex B.</figcaption>
+                        </figure>
+                    </div>
+                </div>
+
+                <p>To find the length of the missing side \(a\), we use the Pythagorean Theorem to get \(a^2 + 4^2 = 7^2\) which then yields \(a = \sqrt{33}\) units. Now that all three sides of the triangle are known, there are several ways we can find \(\alpha\) using the inverse trigonometric functions. To decrease the chances of propagating error, however, we stick to using the data given to us in the problem. In this case, the lengths \(4\) and \(7\) were given, so we want to relate these to \(\alpha\). Remember, \(\cos(\alpha) = \frac{4}{7}\). Since \(\alpha\) is an acute angle, \(\alpha = \arccos\left(\frac{4}{7}\right)\) radians. Converting to degrees, we find \(\alpha \approx 55.15^{\circ}\). Now that we have the measure of angle \(\alpha\), we could find the measure of angle \(\beta\) using the fact that \(\alpha\) and \(\beta\) are complements so \(\alpha + \beta = 90^{\circ}\). Once again, we opt to use the data given to us in the problem. We have that \(\sin(\beta) = \frac{4}{7}\) so \(\beta = \arcsin\left(\frac{4}{7}\right)\) radians and we have \(\beta \approx 34.85^{\circ}\).</p>
+            </div>
+        </div>
+    </section>
+
+    <p>A few remarks about the example above are in order. First, we adhere to the convention that a lower case Greek letter denotes an angle and the corresponding lowercase English letter represents the side opposite that angle. Thus, \(a\) is the side opposite \(\alpha\), \(b\) is the side opposite \(\beta\) and \(c\) is the side opposite \(\gamma\). Taken together, the pairs \((\alpha, a)\), \((\beta, b)\) and \((\gamma, c)\) are called <strong><span class="blue-text">angle-side opposite pairs</span></strong>. Second, as mentioned earlier, we will strive to solve for quantities using the original data given in the problem whenever possible. While this is not always the easiest or fastest way to proceed, it minimizes the chances of propagated error. Third, since many of the applications which require solving triangles "in the wild" rely on degree measure, we shall adopt this convention for the time being. The Pythagorean Theorem along with our other theorems, formulas and identities allow us to easily handle any given right triangle problem, but what if the triangle isn't a right triangle? In certain cases, we can use the <strong><span class="blue-text">Law of Sines</span></strong> to help.</p>
+
+    <!-- Law of Sines Definition Box -->
+    <div class="definition-box">
+        <h3>Law of Sines</h3>
+        <p>Given a triangle with angle-side opposite pairs \((\alpha, a)\), \((\beta, b)\), and \((\gamma, c)\), the following ratios hold:</p>
+        \[
+            \frac{\sin(\alpha)}{a} = \frac{\sin(\beta)}{b} = \frac{\sin(\gamma)}{c}
+        \]
+        <p>or, equivalently,</p>
+        \[
+            \frac{a}{\sin(\alpha)} = \frac{b}{\sin(\beta)} = \frac{c}{\sin(\gamma)}
+        \]
+    </div>
+
+    <!-- Example: ASA / AAS with Law of Sines -->
+    <section class="example" aria-labelledby="example-6-4-asa">
+        <div class="example-problem">
+            <h3 id="example-6-4-asa">Example</h3>
+            <p>Solve the triangle using the Law of Sines. Round all answers to two decimal places.</p>
+            <p>\(C = 120^{\circ}\), \(B = 45^{\circ}\), and \(c = 7\) feet.</p>
+        </div>
+
+        <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-6-4-asa">
+            <span class="toggle-arrow">▼</span>
+            <span>Show Solution</span>
+        </button>
+
+        <div id="solution-6-4-asa" class="example-content">
+            <div class="solution">
+                <h4>Solution</h4>
+
+                <p>Very similar to previous chapters and sections, to solve this triangle we should first draw a picture.</p>
+
+                <div class="diagram-row">
+                    <div class="diagram">
+                        <figure role="group" aria-labelledby="fig-6-4-2-caption">
+                            <img
+                                src="images/6_4_2.png"
+                                alt="Triangle with vertices A (bottom left), B (bottom right), and C (top). The angle at C is labeled 120 degrees, the side from B to C is labeled 7 feet, and the angle at B is labeled 45 degrees."
+                            />
+                            <figcaption id="fig-6-4-2-caption" class="visually-hidden">Triangle showing angle C = 120 degrees at the top, angle B = 45 degrees at the bottom right, and the side opposite angle A labeled 7 feet.</figcaption>
+                        </figure>
+                    </div>
+                </div>
+
+                <p>With the Law of Sines we need angles that correspond to sides, so since we have side \(a\) that means we'd need angle \(A\). Now, while we don't have that angle we can find it, since the sum of the interior angles of a triangle are equal to \(180^{\circ}\), thus:</p>
+
+                \[
+                    \angle A = 180^{\circ} - 120^{\circ} - 45^{\circ} = 15^{\circ}
+                \]
+
+                <p>This allows us to now set up and solve one of our proportions:</p>
+
+                \[
+                \begin{array}{rcl}
+                \dfrac{\sin(15^{\circ})}{7} & = & \dfrac{\sin(120^{\circ})}{c} \\[10pt]
+                7\sin(120^{\circ}) & = & c\sin(15^{\circ}) \\[10pt]
+                \dfrac{7\sin(120^{\circ})}{\sin(15^{\circ})} & = & c \\[10pt]
+                23.42 \text{ feet} & \approx & c
+                \end{array}
+                \]
+
+                <p>Now we can find the last missing side by once again applying the Law of Sines. It is important to make note that you cannot use the Pythagorean Theorem here. Remember that is only for right triangles, and this is an obtuse triangle.</p>
+
+                \[
+                \begin{array}{rcl}
+                \dfrac{\sin(15^{\circ})}{7} & = & \dfrac{\sin(45^{\circ})}{b} \\[10pt]
+                7\sin(45^{\circ}) & = & b\sin(15^{\circ}) \\[10pt]
+                \dfrac{7\sin(45^{\circ})}{\sin(15^{\circ})} & = & b \\[10pt]
+                19.12 \text{ feet} & \approx & b
+                \end{array}
+                \]
+
+                <p>If you put it all together our triangle would look like:</p>
+
+                <div class="diagram-row">
+                    <div class="diagram">
+                        <figure role="group" aria-labelledby="fig-6-4-3-caption">
+                            <img
+                                src="images/6_4_3.png"
+                                alt="Completed triangle with vertices A (bottom left, angle 15 degrees), B (bottom right, angle 45 degrees), and C (top, angle 120 degrees). Side from A to B along the bottom is labeled 23.42 feet, side from A to C on the left is labeled 19.12 feet, and side from B to C on the right is labeled 7 feet."
+                            />
+                            <figcaption id="fig-6-4-3-caption" class="visually-hidden">Completed triangle with all angles and sides labeled: angle A = 15 degrees, angle B = 45 degrees, angle C = 120 degrees, side c = 23.42 feet, side b = 19.12 feet, side a = 7 feet.</figcaption>
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ambiguous Case Section -->
+    <section id="ambiguous-case">
+        <h2>The Ambiguous Case (SSA)</h2>
+
+        <p>The above example is an example of how to use the Law of Sines when you have Angle-Side-Angle (ASA) or Angle-Angle-Side (AAS). However, not all triangles will be ASA or AAS. Some may be Side-Side-Angle (SSA). This type of case we have to approach with caution. We have to remember that the sine function is positive in both Quadrant I and Quadrant II. That means that when finding an angle using the Law of Sines, the angle could be \(30^{\circ}\) or it could be \(120^{\circ}\). When we don't know what the triangle looks like, we have to proceed with caution. This is why we call SSA the <strong><span class="blue-text">ambiguous case</span></strong>. There are three cases that this approach will fall under:</p>
+
+        <ol>
+            <li>One Solution</li>
+            <li>Two Solutions</li>
+            <li>No Solution</li>
+        </ol>
+
+        <!-- Ambiguous Case Definition Box -->
+        <div class="definition-box">
+            <h3>The Ambiguous Case (SSA)</h3>
+        
+
+          
+                <div class="diagram">
+                    <figure role="group" aria-labelledby="fig-6-4-4-caption">
+                        <img
+                            src="images/6_4_4.png"
+                            alt="A composite diagram showing all six sub-cases of the SSA ambiguous case, divided into two groups. The top group is labeled 'When angle A is Acute' and contains four sub-cases arranged left to right: (1) Angle A is at the left with side b extending up and to the right; side a is shorter than the height h so it does not reach the base line — labeled 'If a is less than h, no solution.' (2) Side a equals the height h exactly, forming one right triangle — labeled 'If a equals h, one solution.' (3) Side a is greater than or equal to side b, so the arc from the tip of b crosses the base line once — labeled 'If a is greater than or equal to b, one solution.' (4) Side a is strictly between h and b, so the arc crosses the base line in two places forming two distinct triangles — labeled 'If h is less than a is less than b, two solutions.' The bottom group is labeled 'When angle A is Obtuse' and contains two sub-cases: (5) Angle A is obtuse with side b extending up and to the left; side a is less than or equal to b so no valid triangle forms — labeled 'If a is less than or equal to b, no solution.' (6) Side a is greater than b, so the arc from the tip of b crosses the opposite side once — labeled 'If a is greater than b, one solution.'"
+                        />
+                        <figcaption id="fig-6-4-4-caption" class="visually-hidden">Composite diagram illustrating all six sub-cases of the SSA ambiguous case. When angle A is acute: (1) If side a is less than height h, the triangle cannot be formed and there is no solution. (2) If side a equals height h exactly, one right triangle is formed and there is one solution. (3) If side a is greater than or equal to side b, the arc from the tip of b crosses the base line once and there is one solution. (4) If side a is strictly between h and b, the arc crosses the base line in two places forming two distinct triangles and there are two solutions. When angle A is obtuse: (5) If side a is less than or equal to side b, no valid triangle can be formed and there is no solution. (6) If side a is greater than side b, the arc from the tip of b crosses the base line once and there is one solution.</figcaption>
+                    </figure>
+                </div>
+                    </div>
+
+        <p>As you can see there are a number of different things that can happen with the ambiguous case. Let's look at some examples to see how we can determine which circumstance it is.</p>
+
+        <!-- Ambiguous Case Examples -->
+        <section class="example" aria-labelledby="example-6-4-ambiguous">
+            <div class="example-problem">
+                <h3 id="example-6-4-ambiguous">Example</h3>
+                <p>Solve each of the triangles given below. Round to two decimal places when applicable.</p>
+                <ol>
+                    <li>\(A = 31^{\circ}\), \(a = 12\) cm, and \(b = 5\) cm</li>
+                    <li>\(A = 60^{\circ}\), \(a = 4\) m, and \(b = 14\) m</li>
+                    <li>\(A = 58^{\circ}\), \(a = 4.5\) in, and \(b = 5\) in</li>
+                </ol>
+            </div>
+
+            <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-6-4-ambiguous">
+                <span class="toggle-arrow">▼</span>
+                <span>Show Solution</span>
+            </button>
+
+            <div id="solution-6-4-ambiguous" class="example-content">
+                <div class="solution">
+                    <h4>Solution</h4>
+
+                    <!-- Part 1 -->
+                    <p><strong>1.</strong> As with all problems, begin with drawing the anticipated triangle.</p>
+
+                    <div class="diagram-row">
+                        <div class="diagram">
+                            <figure role="group" aria-labelledby="fig-6-4-10-caption">
+                                <img
+                                    src="images/6_4_5.png"
+                                    alt="Triangle with vertex A at the bottom left labeled with angle 31 degrees, vertex B at the bottom right, and vertex C at the top. The side from A to C (left side) is labeled 5 cm, the side from B to C (right side) is labeled 12 cm, and the base from A to B is labeled c."
+                                />
+                                <figcaption id="fig-6-4-5-caption" class="visually-hidden">Triangle for part 1: angle A = 31 degrees, side b = 5 cm (opposite B), side a = 12 cm (opposite A), base c unknown.</figcaption>
+                            </figure>
+                        </div>
+                    </div>
+
+                    <p>Looking at the picture it is important to note that \(a > b\) and \(\angle A\) is acute, which means that we should have only one solution to this triangle. The first piece you can find is \(\angle B\), since that is the angle that corresponds to the other given side. Remember that you cannot use the Pythagorean Theorem once again, because it is not a right triangle. Or at this point we don't know if it is a right triangle.</p>
+
+                    \[
+                    \begin{array}{rcl}
+                    \dfrac{\sin(31^{\circ})}{12} & = & \dfrac{\sin(B)}{5} \\[10pt]
+                    5\sin(31^{\circ}) & = & 12\sin(B) \\[10pt]
+                    \dfrac{5\sin(31^{\circ})}{12} & = & \sin(B) \\[10pt]
+                    \arcsin\!\left(\dfrac{5\sin(31^{\circ})}{12}\right) & = & B \\[10pt]
+                    12.39^{\circ} & \approx & B
+                    \end{array}
+                    \]
+
+                    <p>Using our newfound information we can find \(\angle C = 180^{\circ} - 31^{\circ} - 12.39^{\circ} = 136.61^{\circ}\). Now to find the last side we can set up a proportion again and solve for \(c\).</p>
+
+                    \[
+                    \begin{array}{rcl}
+                    \dfrac{\sin(31^{\circ})}{12} & = & \dfrac{\sin(136.61^{\circ})}{c} \\[10pt]
+                    c\sin(31^{\circ}) & = & 12\sin(136.61^{\circ}) \\[10pt]
+                    c & = & \dfrac{12\sin(136.61^{\circ})}{\sin(31^{\circ})} \\[10pt]
+                    c & \approx & 16.01 \text{ cm}
+                    \end{array}
+                    \]
+
+                    <hr class="divider" role="separator" aria-hidden="true" />
+
+                    <!-- Part 2 -->
+                    <p><strong>2.</strong> Once again start by drawing the triangle. Remember you don't actually know what the triangle looks like; this drawing is simply to help you get a picture or visual of it.</p>
+
+                    <div class="diagram-row">
+                        <div class="diagram">
+                            <figure role="group" aria-labelledby="fig-6-4-11-caption">
+                                <img
+                                    src="images/6_4_6.png"
+                                    alt="Triangle with vertex A at the bottom left labeled with angle 60 degrees, vertex B at the bottom right, and vertex C at the top. The side from A to C (left side) is labeled 14 m, the side from B to C (right side) is labeled 4 m, and the base from A to B is labeled c."
+                                />
+                                <figcaption id="fig-6-4-6-caption" class="visually-hidden">Triangle for part 2: angle A = 60 degrees, side b = 14 m (opposite B), side a = 4 m (opposite A), base c unknown.</figcaption>
+                            </figure>
+                        </div>
+                    </div>
+
+                    <p>Note how in this triangle \(a &lt; b\) which means that we could have two solutions or no solutions. The only way to find out is to set up our proportion.</p>
+
+                    \[
+                    \begin{array}{rcl}
+                    \dfrac{\sin(60^{\circ})}{4} & = & \dfrac{\sin(B)}{14} \\[10pt]
+                    14\sin(60^{\circ}) & = & 4\sin(B) \\[10pt]
+                    \dfrac{14\sin(60^{\circ})}{4} & = & \sin(B) \\[10pt]
+                    3.03 & \approx & \sin(B)
+                    \end{array}
+                    \]
+
+                    <p>With this example notice how \(\sin(B) = 3.03\). By this point in the course you should know that that isn't possible, since the value of sine is always between \(\pm 1\). This tells us that this triangle has <strong>no solution</strong>. Meaning it would be impossible to build a triangle with those given dimensions.</p>
+
+                    <hr class="divider" role="separator" aria-hidden="true" />
+
+                    <!-- Part 3 -->
+                    <p><strong>3.</strong> Looking at \(a &lt; b\) just ever so slightly in this case, we once again know that it could be no solution or two solutions. Obviously we just did a no solution example, so this must be the two solution example. So, let's begin like we've done each of the last few, with a picture. Then work through your proportion.</p>
+
+                    <div class="diagram-row">
+                        <div class="diagram">
+                            <figure role="group" aria-labelledby="fig-6-4-12-caption">
+                                <img
+                                    src="images/6_4_7.png"
+                                    alt="Triangle with vertex A at the bottom left labeled with angle 58 degrees, vertex B at the bottom right, and vertex C at the top. The side from A to C (left side) is labeled 5 in, the side from B to C (right side) is labeled 4.5 in, and the base from A to B is labeled c."
+                                />
+                                <figcaption id="fig-6-4-7-caption" class="visually-hidden">Triangle for part 3: angle A = 58 degrees, side b = 5 in (opposite B), side a = 4.5 in (opposite A), base c unknown.</figcaption>
+                            </figure>
+                        </div>
+                    </div>
+
+                    \[
+                    \begin{array}{rcl}
+                    \dfrac{\sin(58^{\circ})}{4.5} & = & \dfrac{\sin(B)}{5} \\[10pt]
+                    5\sin(58^{\circ}) & = & 4.5\sin(B) \\[10pt]
+                    \dfrac{5\sin(58^{\circ})}{4.5} & = & \sin(B) \\[10pt]
+                    \arcsin\!\left(\dfrac{5\sin(58^{\circ})}{4.5}\right) & = & B \\[10pt]
+                    70.44^{\circ} & \approx & B
+                    \end{array}
+                    \]
+
+                    <p>Now, as we previously discussed, this is the two solution example so this is our first angle for \(B\). To find the next one: \(180^{\circ} - 70.44^{\circ} = 109.56^{\circ}\). So now we have to break this up into two possible solutions — one for \(B_1 = 70.44^{\circ}\) and one for \(B_2 = 109.56^{\circ}\).</p>
+
+                    <div class="case-grid">
+                        <div>
+                            <h4>Case I: \(B_1\)</h4>
+                            <p>\(C = 180^{\circ} - 70.44^{\circ} - 58^{\circ} = 51.56^{\circ}\)</p>
+                            \[
+                            \begin{array}{rcl}
+                            \dfrac{\sin(58^{\circ})}{4.5} & = & \dfrac{\sin(51.56^{\circ})}{c} \\[10pt]
+                            c\sin(58^{\circ}) & = & 4.5\sin(51.56^{\circ}) \\[10pt]
+                            c & = & \dfrac{4.5\sin(51.56^{\circ})}{\sin(58^{\circ})} \\[10pt]
+                            c & \approx & 4.16 \text{ in}
+                            \end{array}
+                            \]
+                        </div>
+                        <div>
+                            <h4>Case II: \(B_2\)</h4>
+                            <p>\(C = 180^{\circ} - 109.56^{\circ} - 58^{\circ} = 12.44^{\circ}\)</p>
+                            \[
+                            \begin{array}{rcl}
+                            \dfrac{\sin(58^{\circ})}{4.5} & = & \dfrac{\sin(12.44^{\circ})}{c} \\[10pt]
+                            c\sin(58^{\circ}) & = & 4.5\sin(12.44^{\circ}) \\[10pt]
+                            c & = & \dfrac{4.5\sin(12.44^{\circ})}{\sin(58^{\circ})} \\[10pt]
+                            c & \approx & 1.14 \text{ in}
+                            \end{array}
+                            \]
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <p>One last comment before we use the Law of Sines to solve an application problem. In the Angle-Side-Side case, if you are given an obtuse angle to begin with then it is impossible to have the two triangle case.</p>
+
+    </section><!-- end #ambiguous-case -->
+
+    <!-- Application Example: Sasquatch Island -->
+    <section id="application-example">
+        <h2>Application: Law of Sines</h2>
+
+        <section class="example" aria-labelledby="example-6-4-sasquatch">
+            <div class="example-problem">
+                <h3 id="example-6-4-sasquatch">Example</h3>
+                <p>Sasquatch Island lies off the coast of Ippizuti Lake. Two sightings, taken 5 miles apart, are made to the island. The angle between the shore and the island at the first observation point is \(30^{\circ}\) and at the second point the angle is \(45^{\circ}\). Assuming a straight coastline, find the distance from the second observation point to the island. What point on the shore is closest to the island? How far is the island from this point?</p>
+            </div>
+
+            <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-6-4-sasquatch">
+                <span class="toggle-arrow">▼</span>
+                <span>Show Solution</span>
+            </button>
+
+            <div id="solution-6-4-sasquatch" class="example-content">
+                <div class="solution">
+                    <h4>Solution</h4>
+
+                    <p>We sketch the problem below with the first observation point labeled as \(P\) and the second as \(Q\). In order to use the Law of Sines to find the distance \(d\) from \(Q\) to the island, we first need to find the measure of \(\beta\) which is the angle opposite the side of length 5 miles. To that end, we note that the angles \(\gamma\) and \(45^{\circ}\) are supplemental, so that \(\gamma = 180^{\circ} - 45^{\circ} = 135^{\circ}\). We can now find \(\beta = 180^{\circ} - 30^{\circ} - \gamma = 180^{\circ} - 30^{\circ} - 135^{\circ} = 15^{\circ}\). By the Law of Sines, we have:</p>
+
+                    \[
+                        \frac{d}{\sin(30^{\circ})} = \frac{5}{\sin(15^{\circ})}
+                    \]
+
+                    <p>which gives \(d = \dfrac{5\sin(30^{\circ})}{\sin(15^{\circ})} \approx 9.66\) miles.</p>
+
+                    <div class="diagram-row">
+                        <div class="diagram">
+                            <figure role="group" aria-labelledby="fig-6-4-13-caption">
+                                <img
+                                    src="images/6_4_8.png"
+                                    alt="Diagram of Sasquatch Island problem. A horizontal coastline runs across the bottom. Point P is on the left of the coast and point Q is to its right, 5 miles away. Sasquatch Island is above and to the right. A line from P to the island makes a 30-degree angle with the coast. A line from Q to the island makes a 45-degree angle with the coast. The angle at the island labeled beta and the supplementary angle labeled gamma are shown. The distance d from Q to the island is approximately 9.66 miles. A dashed perpendicular line drops from the island to point C on the coast, with horizontal distance x from Q to C and vertical distance y from C to the island."
+                                />
+                                <figcaption id="fig-6-4-8-caption" class="visually-hidden">Diagram showing two observation points P and Q on a coastline 5 miles apart, with Sasquatch Island above. Angles of 30 degrees (at P) and 45 degrees (at Q) are shown, along with distance d approximately 9.66 miles from Q to the island and perpendicular distance y to nearest shore point C.</figcaption>
+                            </figure>
+                        </div>
+                    </div>
+
+                    <p>Next, to find the point on the coast closest to the island, which we've labeled as \(C\), we need to find the perpendicular distance from the island to the coast. Let \(x\) denote the distance from the second observation point \(Q\) to the point \(C\) and let \(y\) denote the distance from \(C\) to the island. We get \(\sin(45^{\circ}) = \dfrac{y}{d}\). After some rearranging, we find:</p>
+
+                    \[
+                        y = d\sin(45^{\circ}) \approx 9.66\left(\frac{\sqrt{2}}{2}\right) \approx 6.83 \text{ miles}
+                    \]
+
+                    <p>Hence, the island is approximately \(6.83\) miles from the coast. To find the distance from \(Q\) to \(C\), we note that \(\beta = 180^{\circ} - 90^{\circ} - 45^{\circ} = 45^{\circ}\) so by symmetry, we get \(x = y \approx 6.83\) miles. Hence, the point on the shore closest to the island is approximately \(6.83\) miles down the coast from the second observation point.</p>
+
+                </div>
+            </div>
+        </section>
+    </section><!-- end #application-example -->
+
+    <!-- Area Formula Section -->
+    <section id="area-formula">
+        <h2>Area of a Triangle Using the Law of Sines</h2>
+
+        <p>As young students you probably learned to find the area of a triangle using the formula \(A = \frac{1}{2}bh\). But this formula only works if you have a right triangle, and as we know this whole chapter is on trigonometry for non-right triangles. Which leads us to this new area formula.</p>
+
+        <div class="definition-box">
+            <h3>Area of a Triangle</h3>
+            <p>Suppose \((\alpha, a)\), \((\beta, b)\) and \((\gamma, c)\) are the angle-side opposite pairs of a triangle. Then the area \(A\) enclosed by the triangle is given by:</p>
+            \[
+                A = \frac{1}{2}bc\sin(\alpha) = \frac{1}{2}ac\sin(\beta) = \frac{1}{2}ab\sin(\gamma)
+            \]
+        </div>
+
+        <!-- Area Example -->
+        <section class="example" aria-labelledby="example-6-4-area">
+            <div class="example-problem">
+                <h3 id="example-6-4-area">Example</h3>
+                <p>Find the area of the triangle where \(\alpha = 120^{\circ}\), \(a = 7\) units and \(\beta = 45^{\circ}\).</p>
+            </div>
+
+            <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-6-4-area">
+                <span class="toggle-arrow">▼</span>
+                <span>Show Solution</span>
+            </button>
+
+            <div id="solution-6-4-area" class="example-content">
+                <div class="solution">
+                    <h4>Solution</h4>
+
+                    <p>Using a little bit of work we could have all three angles and all three sides to work with. However, to minimize propagated error, we choose \(A = \frac{1}{2}ac\sin(\beta)\). We are given \(a = 7\) and \(\beta = 45^{\circ}\), and we can calculate:</p>
+
+                    \[
+                        c = \frac{7\sin(15^{\circ})}{\sin(120^{\circ})}
+                    \]
+
+                    <p>Using these values, we find:</p>
+
+                    \[
+                        A = \frac{1}{2}(7)\left(\frac{7\sin(15^{\circ})}{\sin(120^{\circ})}\right)\sin(45^{\circ}) \approx 5.18 \text{ square units}
+                    \]
+
+                </div>
+            </div>
+        </section>
+
+    </section><!-- end #area-formula -->
+
+</section><!-- end #law-of-sines -->
+<!-- Exercises Section -->
+    <section class="exercises-section" aria-labelledby="exercises-6-3-heading">
+        <h2 id="exercises-6-3-heading" class="subsection-title">Exercises</h2>
+
+        <button class="exercises-header" onclick="toggleExercises(this)" aria-expanded="false" aria-controls="exercises-6-4-content">
+            <span class="toggle-arrow">▼</span>
+            <span>Show Exercises</span>
+        </button>
+ 
+        <div id="exercises-6-4-content" class="exercises-content" role="region" aria-labelledby="exercises-6-3-heading">
+           <p>Exercises to be added at a later date.</p>
+            </div>
+            </section>
+
+</main>
+
+<!-- Toggle scripts -->
+<script>
+    function toggleExample(button) {
+        const content = button.nextElementSibling;
+        const arrow = button.querySelector('.toggle-arrow');
+
+        if (content.classList.contains('open')) {
+            content.classList.remove('open');
+            arrow.classList.remove('open');
+            button.querySelector('span:last-child').textContent = 'Show Solution';
+            button.setAttribute('aria-expanded', 'false');
+        } else {
+            content.classList.add('open');
+            arrow.classList.add('open');
+            button.querySelector('span:last-child').textContent = 'Hide Solution';
+            button.setAttribute('aria-expanded', 'true');
+        }
+    }
+
+    function toggleExercises(button) {
+        const content = document.getElementById(button.getAttribute('aria-controls'));
+        const arrow = button.querySelector('.toggle-arrow');
+
+        if (content.classList.contains('open')) {
+            content.classList.remove('open');
+            arrow.classList.remove('open');
+            button.querySelector('span:last-child').textContent = 'Show Exercises';
+            button.setAttribute('aria-expanded', 'false');
+        } else {
+            content.classList.add('open');
+            arrow.classList.add('open');
+            button.querySelector('span:last-child').textContent = 'Hide Exercises';
+            button.setAttribute('aria-expanded', 'true');
+        }
+    }
+</script>
+
+<!-- TOC loader -->
+<script>
+    fetch('toc.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('toc-placeholder').innerHTML = data;
+
+            const chapterButtons = document.querySelectorAll('.toc-chapter');
+            chapterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const expanded = button.getAttribute('aria-expanded') === 'true';
+                    button.setAttribute('aria-expanded', !expanded);
+                    const submenu = button.nextElementSibling;
+                    submenu.classList.toggle('open');
+                });
+            });
+        });
+</script>
+
+</body>
+</html>

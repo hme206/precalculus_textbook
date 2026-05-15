@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CH 7.3 – Ellipses</title>
+
+    <!-- MathJax configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)'], ['$', '$']],
+                displayMath: [['\\[', '\\]'], ['$$', '$$']],
+                packages: {'[+]': ['cancel', 'color']},
+                macros: {
+                    cancel: ['\\enclose{horizontalstrike}{#1}', 1]
+                }
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            },
+            loader: {
+                load: ['input/tex', 'output/chtml', '[tex]/cancel', '[tex]/color']
+            }
+        };
+    </script>
+    <script id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+
+    <link rel="stylesheet" href="styles.css" />
+
+    <style>
+        /* Proof/annotation two-column table */
+        .proof-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        .proof-table td {
+            border: none;
+            padding: 0.4rem 0.5rem;
+            vertical-align: middle;
+            background: none;
+        }
+
+        .proof-table td:first-child {
+            width: 60%;
+        }
+
+        .proof-table td.annotation {
+            color: #c0392b;
+            font-style: italic;
+            font-size: 0.92em;
+            width: 40%;
+            border: none;
+            background: none;
+        }
+
+        /* Override zebra striping inside proof tables */
+        .solution .proof-table tr:nth-child(even),
+        .solution .proof-table tr {
+            background-color: transparent;
+        }
+
+        /* Collapsible exercises */
+        .exercises-section {
+            margin: 25px 0;
+        }
+
+        .exercises-header {
+            background-color: #33AB2B;
+            color: white;
+            padding: 12px 20px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+            border-radius: 4px;
+            transition: background-color 0.2s ease;
+            border: none;
+            font-size: 1em;
+            width: 100%;
+        }
+
+        .exercises-header:hover {
+            background-color: #2a8922;
+        }
+
+        .exercises-content {
+            display: none;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-top: none;
+            border-radius: 0 0 6px 6px;
+            padding: 20px;
+        }
+
+        .exercises-content.open {
+            display: block;
+        }
+
+        /* Standard equation two-column definition box layout */
+        .def-two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .def-two-col .col h4 {
+            color: #33AB2B;
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+            font-size: 1em;
+        }
+
+        .def-two-col .col p {
+            margin-bottom: 0.4rem;
+        }
+
+        .def-two-col .col .red-text {
+            color: #c0392b;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .proof-table td:first-child,
+            .proof-table td.annotation {
+                width: 100%;
+                display: block;
+            }
+            .proof-table td.annotation {
+                padding-top: 0;
+            }
+            .def-two-col {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div id="toc-placeholder"></div>
+
+<main class="container">
+
+<section id="ellipses">
+    <h1>CH 7.3 – Ellipses</h1>
+
+    <p>In the definition of a circle, we fixed a point called the <strong>center</strong> and considered all of the points which were a fixed distance \(r\) from that one point. For our next conic section, the ellipse, we fix two distinct points and a distance \(d\) to use in our definition.</p>
+
+    <!-- Definition: Ellipse -->
+    <div class="definition-box">
+        <h3>Definition of an Ellipse</h3>
+        <p>Given two distinct points \(F_1\) and \(F_2\) in the plane and a fixed distance \(d\), an <strong>ellipse</strong> is the set of all points \((x, y)\) in the plane such that the sum of each of the distances from \(F_1\) and \(F_2\) to \((x, y)\) is \(d\). The points \(F_1\) and \(F_2\) are called the <strong>foci</strong>, of which the singular would be <em>focus</em>.</p>
+    </div>
+
+    <!-- Image 7_3_1 -->
+    <div class="diagram">
+        <img
+            src="images/7_3_1.png"
+            alt="Diagram of an ellipse with two foci F1 and F2 marked inside the curve. A point (x,y) on the ellipse is connected to each focus by dashed lines labeled d1 and d2. The label below reads: d1 plus d2 equals d for all (x,y) on the ellipse."
+            style="max-width:100%; height:auto; display:block; margin: 1rem auto;"
+        />
+    </div>
+
+    <p>We may imagine taking a length of string and anchoring it to two points on a piece of paper. The curve traced out by taking a pencil and moving it so the string is always taut is an ellipse.</p>
+
+    <p>The <strong>center</strong> of the ellipse is the midpoint of the line segment connecting the two foci. The <strong>major axis</strong> of the ellipse is the line segment connecting two opposite ends of the ellipse which also contains the center and foci. The <strong>minor axis</strong> of the ellipse is the line segment connecting two opposite ends of the ellipse which contains the center but is perpendicular to the major axis. The <strong>vertices</strong> of an ellipse are the points of the ellipse which lie on the major axis. Notice that the center is also the midpoint of the major axis, hence it is the midpoint of the vertices. In pictures we have,</p>
+
+    <!-- Image 7_3_2 -->
+    <div class="diagram">
+        <img
+            src="images/7_3_2.png"
+            alt="Diagram of a horizontal ellipse with center C, foci F1 and F2 on either side of the center, and vertices V1 and V2 at the ends of the major axis. The major axis is shown as a dotted horizontal line and the minor axis as a dotted vertical line through the center. The label below reads: An ellipse with center C, foci F1 and F2, and vertices V1 and V2."
+            style="max-width:100%; height:auto; display:block; margin: 1rem auto;"
+        />
+    </div>
+
+    <p>Note that the major axis is the longer of the two axes through the center, and likewise, the minor axis is the shorter of the two. In order to derive the standard equation of an ellipse, we assume that the ellipse has its center at \((0,0)\), its major axis along the \(x\)-axis, and has foci \((c,0)\) and \((-c,0)\) and vertices \((-a,0)\) and \((a,0)\). We will label the \(y\)-intercepts of the ellipse as \((0,b)\) and \((0,-b)\). (We assume \(a\), \(b\), and \(c\) are all positive numbers.) Schematically,</p>
+
+    <!-- Image 7_3_3 -->
+    <div class="diagram">
+        <img
+            src="images/7_3_3.png"
+            alt="Coordinate plane showing a horizontal ellipse centered at the origin. The vertices are labeled (negative a, 0) and (a, 0) on the x-axis, the foci are labeled (negative c, 0) and (c, 0), and the y-intercepts are labeled (0, b) and (0, negative b). A point (x,y) on the ellipse is connected by dashed lines to each focus."
+            style="max-width:100%; height:auto; display:block; margin: 1rem auto;"
+        />
+    </div>
+
+    <p>Note that since \((a,0)\) is on the ellipse, it must satisfy the conditions of the definition of an ellipse. That is, the distance from \((-c,0)\) to \((a,0)\) plus the distance from \((c,0)\) to \((a,0)\) must equal the fixed distance \(d\). But, all of this is if the ellipse is centered at the origin. That is not always the case, just like with circles.</p>
+
+    <!-- Standard Equation of an Ellipse -->
+    <div class="definition-box">
+        <h3>Standard Equation of an Ellipse</h3>
+        <p>For positive unequal numbers \(a\) and \(b\), the equation of an ellipse with center \((h,k)\) is:</p>
+        <div class="def-two-col">
+            <div class="col">
+                <h4>Horizontal Major Axis</h4>
+                <p>\(\dfrac{(x-h)^2}{a^2} + \dfrac{(y-k)^2}{b^2} = 1\)</p>
+                <p><span class="red-text">Vertices:</span> \((h \pm a,\ k)\)</p>
+                <p><span class="red-text">Foci:</span> \((h \pm c,\ k)\)</p>
+                <p>Where \(c^2 = a^2 - b^2\)</p>
+            </div>
+            <div class="col">
+                <h4>Vertical Major Axis</h4>
+                <p>\(\dfrac{(x-h)^2}{b^2} + \dfrac{(y-k)^2}{a^2} = 1\)</p>
+                <p><span class="red-text">Vertices:</span> \((h,\ k \pm a)\)</p>
+                <p><span class="red-text">Foci:</span> \((h,\ k \pm c)\)</p>
+                <p>Where \(c^2 = a^2 - b^2\)</p>
+            </div>
+        </div>
+        <p style="margin-top:1rem;"><em>Note: '\(a\)' will always be the larger number in an ellipse.</em></p>
+    </div>
+
+    <!-- Images 7_3_4 and 7_3_5 side by side -->
+    <div class="diagram-row" role="group" aria-label="Diagrams illustrating ellipses with horizontal and vertical major axes">
+        <div class="diagram">
+            <img
+                src="images/7_3_4.png"
+                alt="Graph of a horizontal ellipse centered at (h, k) with vertices labeled (h minus a, k) and (h plus a, k) in blue, and foci labeled (h minus c, k) and (h plus c, k) in red. The center (h, k) is marked in black. A green bracket between the center and the right focus is labeled c. The title reads Horizontal Major Axis."
+            />
+        </div>
+        <div class="diagram">
+            <img
+                src="images/7_3_5.png"
+                alt="Graph of a vertical ellipse centered at (h, k) with vertices labeled (h, k minus a) and (h, k plus a) in blue, and foci labeled (h, k minus c) and (h, k plus c) in red. The center (h, k) is marked in black. A green bracket between the center and the upper focus is labeled c. The title reads Vertical Major Axis."
+            />
+        </div>
+    </div>
+
+    <p>It is important to note that regardless of whether the major axis is horizontal or vertical, the distance between the vertices is always \(2a\), and the short distance across the ellipse that passes through the center is always \(2b\). This can roughly be broken down to suggest that the length from the center \((h,k)\) to one vertex is \(a\).</p>
+
+    <!-- Example 1 -->
+    <section class="example" aria-labelledby="example-7-3-1">
+        <div class="example-problem">
+            <h3 id="example-7-3-1">Example</h3>
+            <ol>
+                <li>Graph \(\dfrac{(x+1)^2}{9} + \dfrac{(y-2)^2}{25} = 1\). Find the center, the lines which contain the major and minor axes, the vertices, the endpoints of the minor axis, and the foci.</li>
+                <li>Find the equation of the ellipse with foci \((2,1)\) and \((4,1)\) and vertex \((0,1)\).</li>
+            </ol>
+        </div>
+
+        <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-7-3-1">
+            <span class="toggle-arrow">▼</span>
+            <span>Show Solution</span>
+        </button>
+
+        <div id="solution-7-3-1" class="example-content">
+            <div class="solution">
+                <h4>Solution</h4>
+
+                <!-- Part 1 -->
+                <p><strong>1.</strong> We see that this equation is in the standard form. Here \(x - h\) is \(x + 1\) so \(h = -1\), and \(y - k\) is \(y - 2\) so \(k = 2\). Hence, our ellipse is centered at \((-1, 2)\). We see that \(a^2 = 9\) so \(a = 3\), and \(b^2 = 25\) so \(b = 5\). This means that we move \(3\) units left and right from the center and \(5\) units up and down from the center to arrive at points on the ellipse. As an aid to sketching, we draw a rectangle matching this description, called a <strong>guide rectangle</strong>, and sketch the ellipse inside this rectangle as seen below on the left.</p>
+
+                <!-- Images 7_3_6 and 7_3_7 side by side -->
+                <div class="diagram-row" role="group" aria-label="Two-step graphing process for the ellipse centered at (-1,2)">
+                    <div class="diagram">
+                        <img
+                            src="images/7_3_6.png"
+                            alt="Coordinate plane showing the ellipse centered at (-1, 2) drawn inside a dotted guide rectangle. The four corners of the guide rectangle at (-4, negative 3), (2, negative 3), (-4, 7), and (2, 7) correspond to the endpoints of the major and minor axes. The center is marked with an x."
+                        />
+                    </div>
+                    <div class="diagram">
+                        <img
+                            src="images/7_3_7.png"
+                            alt="Coordinate plane showing the completed graph of the ellipse centered at (-1, 2). The vertices at (-1, 7) and (-1, negative 3) are marked in black, the endpoints of the minor axis at (-4, 2) and (2, 2) are also marked. The two foci at (-1, negative 2) and (-1, 6) are marked in blue. Dashed lines show the major and minor axes through the center marked with an x."
+                        />
+                    </div>
+                </div>
+
+                <p>Since we moved farther in the \(y\) direction than in the \(x\) direction, the major axis will lie along the vertical line \(x = -1\), which means the minor axis lies along the horizontal line \(y = 2\). The vertices are the points on the ellipse which lie along the major axis so in this case, they are the points \((-1, 7)\) and \((-1, -3)\), and the endpoints of the minor axis are \((-4, 2)\) and \((2, 2)\). (Notice these points are the four points we used to draw the guide rectangle.) To find the foci, we find \(c = \sqrt{25 - 9} = \sqrt{16} = 4\), which means the foci lie \(4\) units from the center. Since the major axis is vertical, the foci lie \(4\) units above and below the center, at \((-1, -2)\) and \((-1, 6)\). Plotting all this information gives the graph seen above on the right.</p>
+
+                <hr class="divider" role="separator" aria-hidden="true" />
+
+                <!-- Part 2 -->
+                <p><strong>2.</strong> Plotting the data given to us, we have</p>
+
+                <!-- Image 7_3_8 -->
+                <div class="diagram">
+                    <img
+                        src="images/7_3_8.png"
+                        alt="Coordinate plane showing the two foci at (2, 1) and (4, 1) marked with asterisks, and the vertex at (0, 1) marked with a filled dot, all on the horizontal line y equals 1."
+                        style="max-width:100%; height:auto; display:block; margin: 1rem auto;"
+                    />
+                </div>
+
+                <p>From this sketch, we know that the major axis is horizontal, meaning \(a &gt; b\). Since the center is the midpoint of the foci, we know it is \((3, 1)\). Since one vertex is \((0, 1)\) we have that \(a = 3\), so \(a^2 = 9\). All that remains is to find \(b^2\). Since the foci are \(1\) unit away from the center, we know \(c = 1\). Since \(a &gt; b\), we have \(c = \sqrt{a^2 - b^2}\), or \(1 = \sqrt{9 - b^2}\), so \(b^2 = 8\). Substituting all of our findings into the equation \(\dfrac{(x-h)^2}{a^2} + \dfrac{(y-k)^2}{b^2} = 1\), we get our final answer to be</p>
+
+                \[
+                    \frac{(x-3)^2}{9} + \frac{(y-1)^2}{8} = 1
+                \]
+
+            </div>
+        </div>
+    </section>
+
+    <p>As with circles and parabolas, an equation may be given which is an ellipse, but isn't in standard form. In those cases, as with circles and parabolas before, we will need to massage the given equation into the standard form.</p>
+
+    <!-- Steps: Writing Equation of an Ellipse in Standard Form -->
+    <div class="definition-box">
+        <h3>To Write the Equation of an Ellipse in Standard Form</h3>
+        <ol>
+            <li>Group the same variables together on one side of the equation and position the constant on the other side.</li>
+            <li>Complete the square in both variables as needed.</li>
+            <li>Divide both sides by the constant term so that the constant on the other side of the equation becomes \(1\).</li>
+        </ol>
+    </div>
+
+    <!-- Example 2: Complete the square for ellipse -->
+    <section class="example" aria-labelledby="example-7-3-2">
+        <div class="example-problem">
+            <h3 id="example-7-3-2">Example</h3>
+            <p>Graph \(x^2 + 4y^2 - 2x + 24y + 33 = 0\). Find the center, the lines which contain the major and minor axes, the vertices, the endpoints of the minor axis, and the foci.</p>
+        </div>
+
+        <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-7-3-2">
+            <span class="toggle-arrow">▼</span>
+            <span>Show Solution</span>
+        </button>
+
+        <div id="solution-7-3-2" class="example-content">
+            <div class="solution">
+                <h4>Solution</h4>
+
+                <p>Since we have a sum of squares and the squared terms have unequal coefficients, it's a good bet we have an ellipse on our hands. We need to complete both squares, and then divide, if necessary, to get the right-hand side equal to \(1\).</p>
+
+                \[
+                \begin{array}{rclr}
+                x^2 + 4y^2 - 2x + 24y + 33 &=& 0 & \\[6pt]
+                x^2 - 2x + 4y^2 + 24y &=& -33 & \\[6pt]
+                x^2 - 2x + 4\left(y^2 + 6y\right) &=& -33 & \\[6pt]
+                \left(x^2 - 2x + 1\right) + 4\left(y^2 + 6y + 9\right) &=& -33 + 1 + 4(9) & \\[6pt]
+                (x-1)^2 + 4(y+3)^2 &=& 4 & \\[10pt]
+                \dfrac{(x-1)^2 + 4(y+3)^2}{4} &=& \dfrac{4}{4} & \\[10pt]
+                \dfrac{(x-1)^2}{4} + (y+3)^2 &=& 1 & \\[10pt]
+                \dfrac{(x-1)^2}{4} + \dfrac{(y+3)^2}{1} &=& 1 &
+                \end{array}
+                \]
+
+                <p>Now that this equation is in standard form, we see that \(x - h\) is \(x - 1\) so \(h = 1\), and \(y - k\) is \(y + 3\) so \(k = -3\). Hence, our ellipse is centered at \((1, -3)\). We see that \(a^2 = 4\) so \(a = 2\), and \(b^2 = 1\) so \(b = 1\). This means we move \(2\) units left and right from the center and \(1\) unit up and down from the center to arrive at points on the ellipse. Since we moved farther in the \(x\) direction than in the \(y\) direction, the major axis will lie along the horizontal line \(y = -3\), which means the minor axis lies along the vertical line \(x = 1\).</p>
+
+                <p>The vertices are the points on the ellipse which lie along the major axis so in this case, they are the points \((-1, -3)\) and \((3, -3)\), and the endpoints of the minor axis are \((1, -2)\) and \((1, -4)\). To find the foci, we find \(c = \sqrt{4 - 1} = \sqrt{3}\), which means the foci lie \(\sqrt{3}\) units from the center. Since the major axis is horizontal, the foci lie \(\sqrt{3}\) units to the left and right of the center, at \((1 - \sqrt{3},\ -3)\) and \((1 + \sqrt{3},\ -3)\). Plotting all of this information gives</p>
+
+                <!-- Image 7_3_9 -->
+                <div class="diagram">
+                    <img
+                        src="images/7_3_9.png"
+                        alt="Coordinate plane showing the ellipse centered at (1, negative 3) with a horizontal major axis. The vertices at (negative 1, negative 3) and (3, negative 3) are marked with filled dots, the foci at (1 minus square root of 3, negative 3) and (1 plus square root of 3, negative 3) are marked with asterisks, the center is marked with an x, and the endpoints of the minor axis are connected by dotted lines through the center."
+                        style="max-width:100%; height:auto; display:block; margin: 1rem auto;"
+                    />
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Eccentricity -->
+    <p>As you come across ellipses in the homework exercises and in the wild, you'll notice they come in all shapes and sizes. Compare the two ellipses below.</p>
+
+    <!-- Image 7_3_10 -->
+    <div class="diagram">
+        <img
+            src="images/7_3_10.png"
+            alt="Two ellipses shown side by side for comparison. The ellipse on the left is very flat and elongated, while the ellipse on the right is more rounded and closer to circular in shape."
+            style="max-width:100%; height:auto; display:block; margin: 1rem auto;"
+        />
+    </div>
+
+    <p>Certainly, one ellipse is more round than the other. This notion of "roundness" is quantified below.</p>
+
+    <!-- Definition: Eccentricity -->
+    <div class="definition-box">
+        <h3>Eccentricity of an Ellipse</h3>
+        <p>The <strong>eccentricity</strong> of an ellipse, denoted \(e\), is the following ratio:</p>
+        \[
+            e = \frac{\text{distance from the center to a focus}}{\text{distance from the center to a vertex}}
+        \]
+    </div>
+
+    <p>In an ellipse, the foci are closer to the center than the vertices, so \(0 &lt; e &lt; 1\). The ellipse above on the left has eccentricity \(e \approx 0.98\); for the ellipse above on the right, \(e \approx 0.66\). In general, the closer the eccentricity is to \(0\), the more "circular" the ellipse; the closer the eccentricity is to \(1\), the more "eccentric" the ellipse.</p>
+
+    <!-- Example 3: Eccentricity -->
+    <section class="example" aria-labelledby="example-7-3-3">
+        <div class="example-problem">
+            <h3 id="example-7-3-3">Example</h3>
+            <p>Find the equation of the ellipse whose vertices are \((\pm 5, 0)\) with eccentricity \(e = \dfrac{1}{4}\).</p>
+        </div>
+
+        <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-7-3-3">
+            <span class="toggle-arrow">▼</span>
+            <span>Show Solution</span>
+        </button>
+
+        <div id="solution-7-3-3" class="example-content">
+            <div class="solution">
+                <h4>Solution</h4>
+
+                <p>As before, we plot the data given to us.</p>
+
+                <!-- Image 7_3_11 -->
+                <div class="diagram">
+                    <img
+                        src="images/7_3_11.png"
+                        alt="Coordinate plane showing two filled dots at the vertices (5, 0) and (negative 5, 0) on the x-axis, indicating a horizontal major axis centered at the origin."
+                        style="max-width:100%; height:auto; display:block; margin: 1rem auto;"
+                    />
+                </div>
+
+                <p>From this sketch, we know that the major axis is horizontal, meaning \(a &gt; b\). With the vertices located at \((\pm 5, 0)\), we get \(a = 5\) so \(a^2 = 25\). We also know that the center is \((0, 0)\) because the center is the midpoint of the vertices. All that remains is to find \(b^2\). To that end, we use the fact that the eccentricity \(e = \dfrac{1}{4}\) which means</p>
+
+                \[
+                    e = \frac{\text{distance from the center to a focus}}{\text{distance from the center to a vertex}} = \frac{c}{a} = \frac{c}{5} = \frac{1}{4}
+                \]
+
+                <p>from which we get \(c = \dfrac{5}{4}\). To get \(b^2\), we use the fact that \(c = \sqrt{a^2 - b^2}\), so \(\dfrac{5}{4} = \sqrt{25 - b^2}\) from which we get \(b^2 = \dfrac{375}{16}\). Substituting all of our findings into the equation \(\dfrac{(x-h)^2}{a^2} + \dfrac{(y-k)^2}{b^2} = 1\), yields our final answer</p>
+
+                \[
+                    \frac{x^2}{25} + \frac{16y^2}{375} = 1
+                \]
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Reflective Property -->
+    <p>As with parabolas, ellipses have a reflective property. If we imagine the dashed lines below representing sound waves, then the waves emanating from one focus reflect off the top of the ellipse and head towards the other focus.</p>
+
+    <!-- Image 7_3_12 -->
+    <div class="diagram">
+        <img
+            src="images/7_3_12.png"
+            alt="Diagram of the upper half of a horizontal ellipse illustrating its reflective property. Two foci F1 and F2 are marked inside the ellipse. A point on the upper arc of the ellipse is shown connected by dashed lines to both foci, illustrating that a sound wave from one focus reflects off the ellipse and travels to the other focus."
+            style="max-width:100%; height:auto; display:block; margin: 1rem auto;"
+        />
+    </div>
+
+    <p>Such geometry is exploited in the construction of so-called "Whispering Galleries." If a person whispers at one focus, a person standing at the other focus will hear the first person as if they were standing right next to them. We explore the Whispering Galleries in our last example.</p>
+
+    <!-- Example 4: Whispering Gallery application -->
+    <section class="example" aria-labelledby="example-7-3-4">
+        <div class="example-problem">
+            <h3 id="example-7-3-4">Example</h3>
+            <p>Jamie and Jason want to exchange secrets (terrible secrets) from across a crowded whispering gallery. Recall that a whispering gallery is a room which, in cross section, is half of an ellipse. If the room is \(40\) feet high at the center and \(100\) feet wide at the floor, how far from the outer wall should each of them stand so that they will be positioned at the foci of the ellipse?</p>
+        </div>
+
+        <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-7-3-4">
+            <span class="toggle-arrow">▼</span>
+            <span>Show Solution</span>
+        </button>
+
+        <div id="solution-7-3-4" class="example-content">
+            <div class="solution">
+                <h4>Solution</h4>
+
+                <p>Graphing the data yields</p>
+
+                <!-- Image 7_3_13 -->
+                <div class="diagram">
+                    <img
+                        src="images/7_3_13.png"
+                        alt="Coordinate plane showing the upper half of an ellipse representing the cross-section of a whispering gallery. A blue double-headed arrow along the y-axis is labeled 40 units tall, and a green double-headed arrow along the x-axis is labeled 100 units wide. The arc spans from negative 4 to positive 4 on the x-axis."
+                        style="max-width:100%; height:auto; display:block; margin: 1rem auto;"
+                    />
+                </div>
+
+                <p>It's most convenient to imagine this ellipse centered at \((0, 0)\). Since the ellipse is \(100\) units wide and \(40\) units tall, we get \(a = 50\) and \(b = 40\). Hence, our ellipse has the equation</p>
+
+                \[
+                    \frac{x^2}{50^2} + \frac{y^2}{40^2} = 1
+                \]
+
+                <p>We're looking for the foci, and we get \(c = \sqrt{50^2 - 40^2} = \sqrt{900} = 30\), so that the foci are \(30\) units from the center. That means they are \(50 - 30 = 20\) units from the vertices. Hence, Jason and Jamie should stand \(20\) feet from opposite ends of the gallery.</p>
+
+            </div>
+        </div>
+    </section>
+
+</section><!-- end #ellipses -->
+
+<!-- Exercises Section -->
+<section class="exercises-section" aria-labelledby="exercises-7-3-heading">
+    <h2 id="exercises-7-3-heading" class="subsection-title">Exercises</h2>
+
+    <button class="exercises-header" onclick="toggleExercises(this)" aria-expanded="false" aria-controls="exercises-7-3-content">
+        <span class="toggle-arrow">▼</span>
+        <span>Show Exercises</span>
+    </button>
+
+    <div id="exercises-7-3-content" class="exercises-content" role="region" aria-labelledby="exercises-7-3-heading">
+        <p>Exercises to be added at a later date.</p>
+    </div>
+</section>
+
+</main>
+
+<!-- Toggle scripts -->
+<script>
+    function toggleExample(button) {
+        const content = button.nextElementSibling;
+        const arrow = button.querySelector('.toggle-arrow');
+
+        if (content.classList.contains('open')) {
+            content.classList.remove('open');
+            arrow.classList.remove('open');
+            button.querySelector('span:last-child').textContent = 'Show Solution';
+            button.setAttribute('aria-expanded', 'false');
+        } else {
+            content.classList.add('open');
+            arrow.classList.add('open');
+            button.querySelector('span:last-child').textContent = 'Hide Solution';
+            button.setAttribute('aria-expanded', 'true');
+        }
+    }
+
+    function toggleExercises(button) {
+        const content = document.getElementById(button.getAttribute('aria-controls'));
+        const arrow = button.querySelector('.toggle-arrow');
+
+        if (content.classList.contains('open')) {
+            content.classList.remove('open');
+            arrow.classList.remove('open');
+            button.querySelector('span:last-child').textContent = 'Show Exercises';
+            button.setAttribute('aria-expanded', 'false');
+        } else {
+            content.classList.add('open');
+            arrow.classList.add('open');
+            button.querySelector('span:last-child').textContent = 'Hide Exercises';
+            button.setAttribute('aria-expanded', 'true');
+        }
+    }
+</script>
+
+<!-- TOC loader -->
+<script>
+    fetch('toc.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('toc-placeholder').innerHTML = data;
+
+            const chapterButtons = document.querySelectorAll('.toc-chapter');
+            chapterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const expanded = button.getAttribute('aria-expanded') === 'true';
+                    button.setAttribute('aria-expanded', !expanded);
+                    const submenu = button.nextElementSibling;
+                    submenu.classList.toggle('open');
+                });
+            });
+        });
+</script>
+
+</body>
+</html>

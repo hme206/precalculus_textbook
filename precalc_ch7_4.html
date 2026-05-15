@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CH 7.4 – Hyperbolas</title>
+
+    <!-- MathJax configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)'], ['$', '$']],
+                displayMath: [['\\[', '\\]'], ['$$', '$$']],
+                packages: {'[+]': ['cancel', 'color']},
+                macros: {
+                    cancel: ['\\enclose{horizontalstrike}{#1}', 1]
+                }
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            },
+            loader: {
+                load: ['input/tex', 'output/chtml', '[tex]/cancel', '[tex]/color']
+            }
+        };
+    </script>
+    <script id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+
+    <link rel="stylesheet" href="styles.css" />
+
+    <style>
+        /* Proof/annotation two-column table */
+        .proof-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        .proof-table td {
+            border: none;
+            padding: 0.4rem 0.5rem;
+            vertical-align: middle;
+            background: none;
+        }
+
+        .proof-table td:first-child {
+            width: 60%;
+        }
+
+        .proof-table td.annotation {
+            color: #c0392b;
+            font-style: italic;
+            font-size: 0.92em;
+            width: 40%;
+            border: none;
+            background: none;
+        }
+
+        /* Override zebra striping inside proof tables */
+        .solution .proof-table tr:nth-child(even),
+        .solution .proof-table tr {
+            background-color: transparent;
+        }
+
+        /* Collapsible exercises */
+        .exercises-section {
+            margin: 25px 0;
+        }
+
+        .exercises-header {
+            background-color: #33AB2B;
+            color: white;
+            padding: 12px 20px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+            border-radius: 4px;
+            transition: background-color 0.2s ease;
+            border: none;
+            font-size: 1em;
+            width: 100%;
+        }
+
+        .exercises-header:hover {
+            background-color: #2a8922;
+        }
+
+        .exercises-content {
+            display: none;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-top: none;
+            border-radius: 0 0 6px 6px;
+            padding: 20px;
+        }
+
+        .exercises-content.open {
+            display: block;
+        }
+
+        /* Standard equation two-column definition box layout */
+        .def-two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .def-two-col .col h4 {
+            color: #33AB2B;
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+            font-size: 1em;
+        }
+
+        .def-two-col .col p {
+            margin-bottom: 0.4rem;
+        }
+
+        .def-two-col .col .red-text {
+            color: #c0392b;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .proof-table td:first-child,
+            .proof-table td.annotation {
+                width: 100%;
+                display: block;
+            }
+            .proof-table td.annotation {
+                padding-top: 0;
+            }
+            .def-two-col {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div id="toc-placeholder"></div>
+
+<main class="container">
+
+<section id="hyperbolas">
+    <h1>CH 7.4 – Hyperbolas</h1>
+
+    <p>In the definition of an ellipse, we fixed two points called foci and looked at points whose distances to the foci always <strong>added</strong> to a constant distance \(d\). Those prone to syntactical tinkering may wonder what, if any, curve we'd generate if we replaced <strong>added</strong> with <strong>subtracted</strong>. The answer is a hyperbola.</p>
+
+    <!-- Definition: Hyperbola -->
+    <div class="definition-box">
+        <h3>Definition of a Hyperbola</h3>
+        <p>Given two distinct points \(F_1\) and \(F_2\) in the plane and a fixed distance \(d\), a <strong>hyperbola</strong> is the set of all points \((x, y)\) in the plane such that the absolute value of the difference of each of the distances from \(F_1\) and \(F_2\) to \((x, y)\) is \(d\). The points \(F_1\) and \(F_2\) are called the <strong>foci</strong> of the hyperbola.</p>
+    </div>
+
+    <!-- Image 7_4_1 -->
+    <div class="diagram">
+        <img
+            src="images/7_4_1.png"
+            alt="Diagram of a hyperbola with two branches opening left and right. Foci F1 and F2 are marked inside the curve. A point (x1, y1) on the right branch and a point (x2, y2) on the left branch are each connected by dashed lines to both foci, illustrating that the absolute difference of the two distances equals the fixed distance d."
+            style="max-width:100%; height:auto; display:block; margin: 1rem auto;"
+        />
+    </div>
+
+    <p>In the figure above:</p>
+
+    \[
+        \text{the distance from } F_1 \text{ to } (x_1, y_1) - \text{the distance from } F_2 \text{ to } (x_1, y_1) = d
+    \]
+
+    <p>and</p>
+
+    \[
+        \text{the distance from } F_2 \text{ to } (x_2, y_2) - \text{the distance from } F_1 \text{ to } (x_2, y_2) = d
+    \]
+
+    <p>Note that the hyperbola has two parts, called <strong>branches</strong>. The <strong>center</strong> of the hyperbola is the midpoint of the line segment connecting the two foci. The <strong>transverse axis</strong> of the hyperbola is the line segment connecting two opposite ends of the hyperbola which also contains the center and foci. The <strong>vertices</strong> of a hyperbola are the points of the hyperbola which lie on the transverse axis. In addition, we will show momentarily that there are lines called <strong>asymptotes</strong> which the branches of the hyperbola approach for large \(x\) and \(y\) values. They serve as guides to the graph. In pictures,</p>
+
+    <!-- Image 7_4_2 -->
+    <div class="diagram">
+        <img
+            src="images/7_4_2.png"
+            alt="Diagram of a hyperbola with two branches opening left and right. The center C, foci F1 and F2, and vertices V1 and V2 are labeled. The transverse axis is shown as a dotted horizontal segment connecting the vertices through the center. Two dashed lines represent the asymptotes passing through the center. The caption reads: A hyperbola with center C, foci F1 and F2, and vertices V1 and V2. The dashed lines are the asymptotes and the dotted line is the transverse axis."
+            style="max-width:100%; height:auto; display:block; margin: 1rem auto;"
+        />
+    </div>
+
+    <p>Before we derive the standard equation of the hyperbola, we need to discuss one further parameter, the <strong>conjugate axis</strong> of the hyperbola. The conjugate axis of a hyperbola is the line segment through the center which is perpendicular to the transverse axis and has the same length as the line segment through a vertex which connects the asymptotes. In pictures we have, where the red dotted line is the conjugate axis</p>
+
+    <!-- Image 7_4_3 -->
+    <div class="diagram">
+        <img
+            src="images/7_4_3.png"
+            alt="Diagram of the same hyperbola with center C, foci F1 and F2, vertices V1 and V2, and asymptotes shown as dashed lines. A dotted guide rectangle is drawn with its sides parallel to the axes, its corners touching the asymptotes. A red dotted vertical segment through the center represents the conjugate axis, perpendicular to the transverse axis."
+            style="max-width:100%; height:auto; display:block; margin: 1rem auto;"
+        />
+    </div>
+
+    <p>Note that in the diagram, we can construct a rectangle using line segments with lengths equal to the lengths of the transverse and conjugate axes whose center is the center of the hyperbola and whose diagonals are contained in the asymptotes. This <strong>guide rectangle</strong>, much akin to the one we saw in Section 7.3 to help us graph ellipses, will aid us in graphing hyperbolas.</p>
+
+    <p>Suppose we wish to derive the equation of a hyperbola. For simplicity, we shall assume that the center is \((0,0)\), the vertices are \((a,0)\) and \((-a,0)\) and the foci are \((c,0)\) and \((-c,0)\). We label the endpoints of the conjugate axis \((0,b)\) and \((0,-b)\). (Although \(b\) does not enter into our derivation, we will have to justify this choice as you shall see later.) As before, we assume \(a\), \(b\), and \(c\) are all positive numbers.</p>
+
+    <p>Since \((a,0)\) is on the hyperbola, it must satisfy the conditions as outlined by the definition of a hyperbola. That is, the distance from \((-c,0)\) to \((a,0)\) minus the distance from \((c,0)\) to \((a,0)\) must equal the fixed distance \(d\). Since all these points lie on the \(x\)-axis, we get</p>
+
+    \[
+    \begin{array}{rclr}
+    \text{distance from } (-c,0) \text{ to } (a,0) - \text{distance from } (c,0) \text{ to } (a,0) &=& d & \\[6pt]
+    (a+c) - (c-a) &=& d & \\[6pt]
+    2a &=& d &
+    \end{array}
+    \]
+
+    <p>In other words, the fixed distance \(d\) from the definition of the hyperbola is actually the length of the transverse axis! (Where have we seen that type of coincidence before?) Now consider a point \((x,y)\) on the hyperbola. Using the definition of a hyperbola we get</p>
+
+    \[
+    \begin{array}{rclr}
+    \text{distance from } (-c,0) \text{ to } (x,y) - \text{distance from } (c,0) \text{ to } (x,y) &=& 2a & \\[6pt]
+    \sqrt{(x-(-c))^2+(y-0)^2} - \sqrt{(x-c)^2+(y-0)^2} &=& 2a & \\[6pt]
+    \sqrt{(x+c)^2+y^2} - \sqrt{(x-c)^2+y^2} &=& 2a &
+    \end{array}
+    \]
+
+    <p>Using the same arsenal of Intermediate Algebra weaponry we used in deriving the standard formula of an ellipse, we arrive at the following.</p>
+
+    \[
+        \left(a^2 - c^2\right)x^2 + a^2 y^2 = a^2\left(a^2 - c^2\right)
+    \]
+
+    <p>What remains is to determine the relationship between \(a\), \(b\) and \(c\). To that end, we note that since \(a\) and \(c\) are both positive numbers with \(a &lt; c\), we get \(a^2 &lt; c^2\) so that \(a^2 - c^2\) is a negative number. Hence, \(c^2 - a^2\) is a positive number. For reasons which will become clear soon, we re-write the equation by solving for \(y^2/x^2\) to get</p>
+
+    \[
+    \begin{array}{rclr}
+    \left(a^2 - c^2\right)x^2 + a^2 y^2 &=& a^2\left(a^2 - c^2\right) & \\[6pt]
+    -\left(c^2 - a^2\right)x^2 + a^2 y^2 &=& -a^2\left(c^2 - a^2\right) & \\[6pt]
+    a^2 y^2 &=& \left(c^2 - a^2\right)x^2 - a^2\left(c^2 - a^2\right) & \\[6pt]
+    \dfrac{y^2}{x^2} &=& \dfrac{\left(c^2 - a^2\right)}{a^2} - \dfrac{\left(c^2 - a^2\right)}{x^2} &
+    \end{array}
+    \]
+
+    <p>As \(x\) and \(y\) attain very large values, the quantity \(\dfrac{(c^2-a^2)}{x^2} \rightarrow 0\) so that \(\dfrac{y^2}{x^2} \rightarrow \dfrac{(c^2-a^2)}{a^2}\). By setting \(b^2 = c^2 - a^2\) we get \(\dfrac{y^2}{x^2} \rightarrow \dfrac{b^2}{a^2}\). This shows that \(y \rightarrow \pm\dfrac{b}{a}x\) as \(|x|\) grows large. Thus \(y = \pm\dfrac{b}{a}x\) are the asymptotes to the graph as predicted and our choice of labels for the endpoints of the conjugate axis is justified. In our equation of the hyperbola we can substitute \(a^2 - c^2 = -b^2\) which yields</p>
+
+    \[
+    \begin{array}{rclr}
+    \left(a^2 - c^2\right)x^2 + a^2 y^2 &=& a^2\left(a^2 - c^2\right) & \\[6pt]
+    -b^2 x^2 + a^2 y^2 &=& -a^2 b^2 & \\[6pt]
+    \dfrac{x^2}{a^2} - \dfrac{y^2}{b^2} &=& 1 &
+    \end{array}
+    \]
+
+    <p>The equation above is for a hyperbola whose center is the origin and which opens to the left and right. If the hyperbola were centered at a point \((h,k)\), we would get the following.</p>
+
+    <!-- Standard Equation of a Hyperbola -->
+    <div class="definition-box">
+        <h3>Standard Equation of a Hyperbola</h3>
+        <p>For positive numbers \(a\) and \(b\), the equation of a hyperbola with center \((h,k)\) is:</p>
+        <div class="def-two-col">
+            <div class="col">
+                <h4>Horizontal Transverse Axis</h4>
+                <p>\(\dfrac{(x-h)^2}{a^2} - \dfrac{(y-k)^2}{b^2} = 1\)</p>
+                <p><span class="red-text">Vertices:</span> \((h \pm a,\ k)\)</p>
+                <p><span class="red-text">Foci:</span> \((h \pm c,\ k)\)</p>
+                <p>Where \(c^2 = a^2 + b^2\)</p>
+            </div>
+            <div class="col">
+                <h4>Vertical Transverse Axis</h4>
+                <p>\(\dfrac{(y-k)^2}{b^2} - \dfrac{(x-h)^2}{a^2} = 1\)</p>
+                <p><span class="red-text">Vertices:</span> \((h,\ k \pm a)\)</p>
+                <p><span class="red-text">Foci:</span> \((h,\ k \pm c)\)</p>
+                <p>Where \(c^2 = a^2 + b^2\)</p>
+            </div>
+        </div>
+    </div>
+
+    <p>The values of \(a\) and \(b\) determine how far in the \(x\) and \(y\) directions, respectively, one counts from the center to determine the rectangle through which the asymptotes pass. In both cases, the distance from the center to the foci, \(c\), as seen in the derivation, can be found by the formula \(c = \sqrt{a^2 + b^2}\). Lastly, note that we can quickly distinguish the equation of a hyperbola from that of a circle or ellipse because the hyperbola formula involves a <strong>difference</strong> of squares where the circle and ellipse formulas both involve the <strong>sum</strong> of squares.</p>
+
+    <!-- Example 1 -->
+    <section class="example" aria-labelledby="example-7-4-1">
+        <div class="example-problem">
+            <h3 id="example-7-4-1">Example</h3>
+            <ol>
+                <li>Graph the equation \(\dfrac{(x-2)^2}{4} - \dfrac{y^2}{25} = 1\). Find the center, the lines which contain the transverse and conjugate axes, the vertices, the foci, and the equations of the asymptotes.</li>
+                <li>Find the equation of the hyperbola with asymptotes \(y = \pm 2x\) and vertices \((\pm 5, 0)\).</li>
+            </ol>
+        </div>
+
+        <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-7-4-1">
+            <span class="toggle-arrow">▼</span>
+            <span>Show Solution</span>
+        </button>
+
+        <div id="solution-7-4-1" class="example-content">
+            <div class="solution">
+                <h4>Solution</h4>
+
+                <!-- Part 1 -->
+                <p><strong>1.</strong> We first see that this equation is given to us in the standard form. Here \(x - h\) is \(x - 2\) so \(h = 2\), and \(y - k\) is \(y\) so \(k = 0\). Hence, our hyperbola is centered at \((2, 0)\). We see that \(a^2 = 4\) so \(a = 2\), and \(b^2 = 25\) so \(b = 5\). This means we move \(2\) units to the left and right of the center and \(5\) units up and down from the center to arrive at points on the guide rectangle. The asymptotes pass through the center of the hyperbola as well as the corners of the rectangle. This yields the following set up.</p>
+
+                <!-- Image 7_4_4 -->
+                <div class="diagram">
+                    <img
+                        src="images/7_4_4.png"
+                        alt="Coordinate plane showing the guide rectangle setup for the hyperbola centered at (2, 0) with a equals 2 and b equals 5. The dotted rectangle extends 2 units left and right and 5 units up and down from the center. Two dashed lines through the center and the corners of the rectangle represent the asymptotes. The center is marked with a filled dot."
+                        style="max-width:100%; height:auto; display:block; margin: 1rem auto;"
+                    />
+                </div>
+
+                <p>Since the \(y^2\) term is being subtracted from the \(x^2\) term, we know that the branches of the hyperbola open to the left and right. This means that the transverse axis lies along the \(x\)-axis. Hence, the conjugate axis lies along the vertical line \(x = 2\). Since the vertices of the hyperbola are where the hyperbola intersects the transverse axis, we get that the vertices are \(2\) units to the left and right of \((2,0)\) at \((0,0)\) and \((4,0)\). To find the foci, we need \(c = \sqrt{a^2 + b^2} = \sqrt{4 + 25} = \sqrt{29}\). Since the foci lie on the transverse axis, we move \(\sqrt{29}\) units to the left and right of \((2,0)\) to arrive at \((2 - \sqrt{29},\ 0)\) (approximately \((-3.39,\ 0)\)) and \((2 + \sqrt{29},\ 0)\) (approximately \((7.39,\ 0)\)). To determine the equations of the asymptotes, recall that the asymptotes go through the center of the hyperbola, \((2,0)\), as well as the corners of the guide rectangle, so they have slopes of \(\pm\dfrac{b}{a} = \pm\dfrac{5}{2}\). Using the point-slope equation of a line, yields \(y - 0 = \pm\dfrac{5}{2}(x-2)\), so we get \(y = \dfrac{5}{2}x - 5\) and \(y = -\dfrac{5}{2}x + 5\). Putting it all together, we get</p>
+
+                <!-- Image 7_4_5 -->
+                <div class="diagram">
+                    <img
+                        src="images/7_4_5.png"
+                        alt="Completed graph of the hyperbola (x minus 2) squared over 4 minus y squared over 25 equals 1. The two branches open left and right. The center at (2, 0), the vertices at (0, 0) and (4, 0), and the foci at approximately (negative 3.39, 0) and (7.39, 0) are all marked. The dotted guide rectangle and dashed asymptotes are shown."
+                        style="max-width:100%; height:auto; display:block; margin: 1rem auto;"
+                    />
+                </div>
+
+                <hr class="divider" role="separator" aria-hidden="true" />
+
+                <!-- Part 2 -->
+                <p><strong>2.</strong> Plotting the data given to us, we have</p>
+
+                <!-- Image 7_4_6 -->
+                <div class="diagram">
+                    <img
+                        src="images/7_4_6.png"
+                        alt="Coordinate plane showing the two vertices at (5, 0) and (negative 5, 0) marked with filled dots, and the two asymptotes y equals 2x and y equals negative 2x drawn as dashed lines through the origin."
+                        style="max-width:100%; height:auto; display:block; margin: 1rem auto;"
+                    />
+                </div>
+
+                <p>This graph not only tells us that the branches of the hyperbola open to the left and to the right, it also tells us that the center is \((0,0)\). Hence, our standard form is \(\dfrac{x^2}{a^2} - \dfrac{y^2}{b^2} = 1\). Since the vertices are \((\pm 5,\ 0)\), we have \(a = 5\) so \(a^2 = 25\). In order to determine \(b^2\), we recall that the slopes of the asymptotes are \(\pm\dfrac{b}{a}\). Since \(a = 5\) and the slope of the line \(y = 2x\) is \(2\), we have that \(\dfrac{b}{5} = 2\), so \(b = 10\). Hence, \(b^2 = 100\) and our final answer is</p>
+
+                \[
+                    \frac{x^2}{25} - \frac{y^2}{100} = 1
+                \]
+
+            </div>
+        </div>
+    </section>
+
+    <p>As with the other conic sections, an equation whose graph is a hyperbola may not be given in either of the standard forms. To rectify that, we have the following.</p>
+
+    <!-- Steps: Writing Equation of a Hyperbola in Standard Form -->
+    <div class="definition-box">
+        <h3>To Write the Equation of a Hyperbola in Standard Form</h3>
+        <ol>
+            <li>Group the same variables together on one side of the equation and position the constant on the other side.</li>
+            <li>Complete the square in both variables as needed.</li>
+            <li>Divide both sides by the constant term so that the constant on the other side of the equation becomes \(1\).</li>
+        </ol>
+    </div>
+
+    <!-- Example 2 -->
+    <section class="example" aria-labelledby="example-7-4-2">
+        <div class="example-problem">
+            <h3 id="example-7-4-2">Example</h3>
+            <ol>
+                <li>Consider the equation \(9y^2 - x^2 - 6x = 10\). Put this equation into standard form and graph. Find the center, the lines which contain the transverse and conjugate axes, the vertices, the foci, and the equations of the asymptotes.</li>
+                <li>Jeff is stationed \(10\) miles due west of Carl in an otherwise empty forest in an attempt to locate an elusive Sasquatch. At the stroke of midnight, Jeff records a Sasquatch call \(9\) seconds earlier than Carl. If the speed of sound that night is \(760\) miles per hour, determine a hyperbolic path along which Sasquatch must be located.</li>
+                <li>By a stroke of luck, Kai was also camping in the woods during the events of the previous example. He was located \(6\) miles due north of Jeff and heard the Sasquatch call \(18\) seconds after Jeff did. Use this added information to locate Sasquatch.</li>
+            </ol>
+        </div>
+
+        <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-7-4-2">
+            <span class="toggle-arrow">▼</span>
+            <span>Show Solution</span>
+        </button>
+
+        <div id="solution-7-4-2" class="example-content">
+            <div class="solution">
+                <h4>Solution</h4>
+
+                <!-- Part 1 -->
+                <p><strong>1.</strong> We need only complete the square on \(x\):</p>
+
+                \[
+                \begin{array}{rclr}
+                9y^2 - x^2 - 6x &=& 10 & \\[5pt]
+                9y^2 - 1\left(x^2 + 6x\right) &=& 10 & \\[5pt]
+                9y^2 - \left(x^2 + 6x + 9\right) &=& 10 - 1(9) & \\[5pt]
+                9y^2 - (x+3)^2 &=& 1 & \\[5pt]
+                \dfrac{y^2}{\frac{1}{9}} - \dfrac{(x+3)^2}{1} &=& 1 &
+                \end{array}
+                \]
+
+                <p>Now that this equation is in standard form, we see that \(x - h\) is \(x + 3\) so \(h = -3\), and \(y - k\) is \(y\) so \(k = 0\). Hence, our hyperbola is centered at \((-3,\ 0)\). We find that \(a^2 = 1\) so \(a = 1\), and \(b^2 = \dfrac{1}{9}\) so \(b = \dfrac{1}{3}\). This means that we move \(1\) unit to the left and right of the center and \(\dfrac{1}{3}\) units up and down from the center to arrive at points on the guide rectangle. Since the \(x^2\) term is being subtracted from the \(y^2\) term, we know the branches of the hyperbola open upwards and downwards. This means the transverse axis lies along the vertical line \(x = -3\) and the conjugate axis lies along the \(x\)-axis. Since the vertices of the hyperbola are where the hyperbola intersects the transverse axis, we get that the vertices are \(\dfrac{1}{3}\) of a unit above and below \((-3,\ 0)\) at \(\left(-3,\ \dfrac{1}{3}\right)\) and \(\left(-3,\ -\dfrac{1}{3}\right)\). To find the foci, we use</p>
+
+                \[
+                    c = \sqrt{a^2 + b^2} = \sqrt{\frac{1}{9} + 1} = \frac{\sqrt{10}}{3}
+                \]
+
+                <p>Since the foci lie on the transverse axis, we move \(\dfrac{\sqrt{10}}{3}\) units above and below \((-3,\ 0)\) to arrive at \(\left(-3,\ \dfrac{\sqrt{10}}{3}\right)\) and \(\left(-3,\ -\dfrac{\sqrt{10}}{3}\right)\). To determine the asymptotes, recall that the asymptotes go through the center of the hyperbola, \((-3,0)\), as well as the corners of the guide rectangle, so they have slopes of \(\pm\dfrac{b}{a} = \pm\dfrac{1}{3}\). Using the point-slope equation of a line, we get \(y = \dfrac{1}{3}x + 1\) and \(y = -\dfrac{1}{3}x - 1\). Putting it all together, we get</p>
+
+                <!-- Image 7_4_7 -->
+                <div class="diagram">
+                    <img
+                        src="images/7_4_7.png"
+                        alt="Completed graph of the hyperbola 9y squared minus x squared minus 6x equals 10, rewritten in standard form, centered at (negative 3, 0) with a vertical transverse axis. The two branches open upward and downward. The vertices at (negative 3, one-third) and (negative 3, negative one-third), the foci in blue at (negative 3, square root of 10 over 3) and (negative 3, negative square root of 10 over 3), the dotted guide rectangle, and the dashed asymptotes are all shown."
+                        style="max-width:100%; height:auto; display:block; margin: 1rem auto;"
+                    />
+                </div>
+
+                <hr class="divider" role="separator" aria-hidden="true" />
+
+                <!-- Part 2 -->
+                <p><strong>2.</strong> Since Jeff hears Sasquatch sooner, it is closer to Jeff than it is to Carl. Since the speed of sound is \(760\) miles per hour, we can determine how much closer Sasquatch is to Jeff by multiplying</p>
+
+                \[
+                    760\,\frac{\text{miles}}{\text{hour}} \times \frac{1\,\text{hour}}{3600\,\text{seconds}} \times 9\,\text{seconds} = 1.9\,\text{miles}
+                \]
+
+                <p>This means that Sasquatch is \(1.9\) miles closer to Jeff than it is to Carl. In other words, Sasquatch must lie on a path where</p>
+
+                \[
+                    \text{(the distance to Carl)} - \text{(the distance to Jeff)} = 1.9
+                \]
+
+                <p>This is exactly the situation in the definition of a hyperbola. In this case, Jeff and Carl are located at the foci, and our fixed distance \(d\) is \(1.9\). For simplicity, we assume the hyperbola is centered at \((0,0)\) with its foci at \((-5,\ 0)\) and \((5,\ 0)\). Schematically, we have</p>
+
+                <!-- Image 7_4_8 -->
+                <div class="diagram">
+                    <img
+                        src="images/7_4_8.png"
+                        alt="Coordinate plane showing Jeff at the focus (negative 5, 0) and Carl at the focus (5, 0), with the center of the hyperbola at the origin. The two branches of the hyperbola open left and right, with the western branch closer to Jeff and the eastern branch closer to Carl."
+                        style="max-width:100%; height:auto; display:block; margin: 1rem auto;"
+                    />
+                </div>
+
+                <p>We are seeking a curve of the form \(\dfrac{x^2}{a^2} - \dfrac{y^2}{b^2} = 1\) in which the distance from the center to each focus is \(c = 5\). As we saw in the derivation of the standard equation of the hyperbola, \(d = 2a\), so that \(2a = 1.9\), or \(a = 0.95\) and \(a^2 = 0.9025\). All that remains is to find \(b^2\). To that end, we recall that \(a^2 + b^2 = c^2\) so \(b^2 = c^2 - a^2 = 25 - 0.9025 = 24.0975\). Since Sasquatch is closer to Jeff than it is to Carl, it must be on the western (left hand) branch of</p>
+
+                \[
+                    \frac{x^2}{0.9025} - \frac{y^2}{24.0975} = 1
+                \]
+
+                <hr class="divider" role="separator" aria-hidden="true" />
+
+                <!-- Part 3 -->
+                <p><strong>3.</strong> Kai and Jeff are now the foci of a second hyperbola where the fixed distance \(d\) can be determined as before</p>
+
+                \[
+                    760\,\frac{\text{miles}}{\text{hour}} \times \frac{1\,\text{hour}}{3600\,\text{seconds}} \times 18\,\text{seconds} = 3.8\,\text{miles}
+                \]
+
+                <p>Since Jeff was positioned at \((-5,\ 0)\), we place Kai at \((-5,\ 6)\). This puts the center of the new hyperbola at \((-5,\ 3)\). Plotting Kai's position and the new center gives us the diagram below on the left. The second hyperbola is vertical, so it must be of the form \(\dfrac{(y-3)^2}{b^2} - \dfrac{(x+5)^2}{a^2} = 1\). As before, the distance \(d\) is the length of the major axis, which in this case is \(2b\). We get \(2b = 3.8\) so that \(b = 1.9\) and \(b^2 = 3.61\). With Kai \(6\) miles due north of Jeff, we have that the distance from the center to the focus is \(c = 3\). Since \(a^2 + b^2 = c^2\), we get \(a^2 = c^2 - b^2 = 9 - 3.61 = 5.39\). Kai heard the Sasquatch call after Jeff, so Kai is farther from Sasquatch than Jeff. Thus Sasquatch must lie on the southern branch of the hyperbola</p>
+
+                \[
+                    \frac{(y-3)^2}{3.61} - \frac{(x+5)^2}{5.39} = 1
+                \]
+
+                <p>Looking at the western branch of the hyperbola determined by Jeff and Carl along with the southern branch of the hyperbola determined by Kai and Jeff, we see that there is exactly one point in common, and this is where Sasquatch must have been when it called.</p>
+
+                <!-- Images 7_4_9 and 7_4_10 side by side -->
+                <div class="diagram-row" role="group" aria-label="Two-step diagram locating Sasquatch using two hyperbolas">
+                    <div class="diagram">
+                        <img
+                            src="images/7_4_9.png"
+                            alt="Coordinate plane showing Jeff at (negative 5, 0), Carl at (5, 0), and Kai at (negative 5, 6) marked with an asterisk. The center of the second hyperbola is marked with an x at (negative 5, 3). The first hyperbola (Jeff and Carl) is shown as dotted branches opening left and right. The second hyperbola (Kai and Jeff) is shown as solid branches opening upward and downward, centered at (negative 5, 3)."
+                        />
+                    </div>
+                    <div class="diagram">
+                        <img
+                            src="images/7_4_10.png"
+                            alt="Coordinate plane showing the western branch of the first hyperbola and the southern branch of the second hyperbola. Jeff at (negative 5, 0), Carl at (5, 0), and Kai at (negative 5, 6) are labeled. A red filled dot marks the single intersection point of the two branches at approximately (negative 0.96, negative 0.81), which is the location of Sasquatch."
+                        />
+                    </div>
+                </div>
+
+                <p>To determine the coordinates of this point of intersection exactly, we would need techniques for solving systems of non-linear equations. Doing so, we get Sasquatch is approximately at \((-0.9629,\ -0.8113)\).</p>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Identifying Conic Sections -->
+    <p>Each of the conic sections we have studied in this chapter result from graphing equations of the form \(Ax^2 + Cy^2 + Dx + Ey + F = 0\) for different choices of \(A\), \(C\), \(D\), \(E\), and \(F\). While we've seen examples demonstrate <em>how</em> to convert an equation from this general form to one of the standard forms, we close this chapter with some advice about <em>which</em> standard form to choose.</p>
+
+    <!-- Strategies for Identifying Conic Sections -->
+    <div class="definition-box">
+        <h3>Strategies for Identifying Conic Sections</h3>
+        <p>Suppose the graph of the equation \(Ax^2 + Cy^2 + Dx + Ey + F = 0\) is a non-degenerate conic section.</p>
+        <ul>
+            <li>If just <em>one</em> variable is squared, the graph is a <strong>parabola</strong>. Put the equation in the standard form for a parabola.</li>
+        </ul>
+        <p>If <em>both</em> variables are squared, look at the coefficients of \(x^2\) and \(y^2\), \(A\) and \(C\).</p>
+        <ul>
+            <li>If \(A = C\), the graph is a <strong>circle</strong>. Put the equation in standard form.</li>
+            <li>If \(A \neq C\) but \(A\) and \(C\) have the <em>same sign</em>, the graph is an <strong>ellipse</strong>. Put the equation in standard form.</li>
+            <li>If \(A\) and \(C\) have <em>different signs</em>, the graph is a <strong>hyperbola</strong>. Put the equation in standard form.</li>
+        </ul>
+    </div>
+
+</section><!-- end #hyperbolas -->
+
+<!-- Exercises Section -->
+<section class="exercises-section" aria-labelledby="exercises-7-4-heading">
+    <h2 id="exercises-7-4-heading" class="subsection-title">Exercises</h2>
+
+    <button class="exercises-header" onclick="toggleExercises(this)" aria-expanded="false" aria-controls="exercises-7-4-content">
+        <span class="toggle-arrow">▼</span>
+        <span>Show Exercises</span>
+    </button>
+
+    <div id="exercises-7-4-content" class="exercises-content" role="region" aria-labelledby="exercises-7-4-heading">
+        <p>Exercises to be added at a later date.</p>
+    </div>
+</section>
+
+</main>
+
+<!-- Toggle scripts -->
+<script>
+    function toggleExample(button) {
+        const content = button.nextElementSibling;
+        const arrow = button.querySelector('.toggle-arrow');
+
+        if (content.classList.contains('open')) {
+            content.classList.remove('open');
+            arrow.classList.remove('open');
+            button.querySelector('span:last-child').textContent = 'Show Solution';
+            button.setAttribute('aria-expanded', 'false');
+        } else {
+            content.classList.add('open');
+            arrow.classList.add('open');
+            button.querySelector('span:last-child').textContent = 'Hide Solution';
+            button.setAttribute('aria-expanded', 'true');
+        }
+    }
+
+    function toggleExercises(button) {
+        const content = document.getElementById(button.getAttribute('aria-controls'));
+        const arrow = button.querySelector('.toggle-arrow');
+
+        if (content.classList.contains('open')) {
+            content.classList.remove('open');
+            arrow.classList.remove('open');
+            button.querySelector('span:last-child').textContent = 'Show Exercises';
+            button.setAttribute('aria-expanded', 'false');
+        } else {
+            content.classList.add('open');
+            arrow.classList.add('open');
+            button.querySelector('span:last-child').textContent = 'Hide Exercises';
+            button.setAttribute('aria-expanded', 'true');
+        }
+    }
+</script>
+
+<!-- TOC loader -->
+<script>
+    fetch('toc.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('toc-placeholder').innerHTML = data;
+
+            const chapterButtons = document.querySelectorAll('.toc-chapter');
+            chapterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const expanded = button.getAttribute('aria-expanded') === 'true';
+                    button.setAttribute('aria-expanded', !expanded);
+                    const submenu = button.nextElementSibling;
+                    submenu.classList.toggle('open');
+                });
+            });
+        });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CH 7.1 – Introduction to Conics &amp; Circles</title>
+
+    <!-- MathJax configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)'], ['$', '$']],
+                displayMath: [['\\[', '\\]'], ['$$', '$$']],
+                packages: {'[+]': ['cancel', 'color']},
+                macros: {
+                    cancel: ['\\enclose{horizontalstrike}{#1}', 1]
+                }
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            },
+            loader: {
+                load: ['input/tex', 'output/chtml', '[tex]/cancel', '[tex]/color']
+            }
+        };
+    </script>
+    <script id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+
+    <link rel="stylesheet" href="styles.css" />
+
+    <style>
+        /* Two-column proof/annotation layout */
+        .proof-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        .proof-table td {
+            border: none;
+            padding: 0.4rem 0.5rem;
+            vertical-align: middle;
+            background: none;
+        }
+
+        .proof-table td:first-child {
+            width: 60%;
+        }
+
+        .proof-table td.annotation {
+            color: #c0392b;
+            font-style: italic;
+            font-size: 0.92em;
+            width: 40%;
+            border: none;
+            background: none;
+        }
+
+        /* Override zebra striping inside proof tables */
+        .solution .proof-table tr:nth-child(even),
+        .solution .proof-table tr {
+            background-color: transparent;
+        }
+
+        /* Collapsible exercises */
+        .exercises-section {
+            margin: 25px 0;
+        }
+
+        .exercises-header {
+            background-color: #33AB2B;
+            color: white;
+            padding: 12px 20px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+            border-radius: 4px;
+            transition: background-color 0.2s ease;
+            border: none;
+            font-size: 1em;
+            width: 100%;
+        }
+
+        .exercises-header:hover {
+            background-color: #2a8922;
+        }
+
+        .exercises-content {
+            display: none;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-top: none;
+            border-radius: 0 0 6px 6px;
+            padding: 20px;
+        }
+
+        .exercises-content.open {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .proof-table td:first-child,
+            .proof-table td.annotation {
+                width: 100%;
+                display: block;
+            }
+            .proof-table td.annotation {
+                padding-top: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div id="toc-placeholder"></div>
+
+<main class="container">
+
+<section id="intro-conics-circles">
+    <h1>CH 7.1 – Introduction to Conics &amp; Circles</h1>
+
+    <p>In this chapter, we study the <strong>Conic Sections</strong> — literally "sections of a cone." Imagine a double-napped cone as seen below being "sliced" by a plane. If we slice the cone with a horizontal plane the resulting curve is a <strong><span class="blue-text">circle</span></strong>. The image will come later... Please ask your instructor for one.</p>
+
+    <!-- Definition: Circle -->
+    <div class="definition-box">
+        <h3>Definition of a Circle</h3>
+        <p>A <strong>circle</strong> with center \((h,k)\) and radius \(r &gt; 0\) is the set of all points \((x, y)\) in the plane whose distance to \((h,k)\) is \(r\).</p>
+    </div>
+
+    <!-- Image 7_1_1: Circle diagram showing center (h,k), point (x,y), and radius r -->
+
+    
+                        <div class="diagram">
+                            <figure role="group" aria-labelledby="fig-7-1-1-caption">
+                                <img
+                                    src="images/7_1_1.png"
+                                    alt="Diagram of a circle with center labeled (h,k), a point on the circle labeled (x,y), and the radius r drawn between them."
+                                />
+                                <figcaption id="fig-7-1-1-caption" class="visually-hidden">
+                        </div>
+                    </div>
+  
+
+    <p>From this picture, we see that a point \((x,y)\) is on the circle if and only if its distance to \((h,k)\) is \(r\). We express this relationship algebraically using the distance formula:</p>
+
+    \[
+        r = \sqrt{(x-h)^2 + (y-k)^2}
+    \]
+
+    <p>By squaring both sides of this equation, we get an equivalent equation (since \(r &gt; 0\)) which gives us the standard equation of a circle.</p>
+
+    <!-- Standard Equation of a Circle -->
+    <div class="definition-box">
+        <h3>The Standard Equation of a Circle</h3>
+        <p>The equation of a circle with center \((h,k)\) and radius \(r &gt; 0\) is</p>
+        \[
+            (x-h)^2 + (y-k)^2 = r^2.
+        \]
+    </div>
+
+    <!-- Example 1: Write equation / Graph circle -->
+    <section class="example" aria-labelledby="example-7-1-1">
+        <div class="example-problem">
+            <h3 id="example-7-1-1">Example</h3>
+            <ol>
+                <li>Write the standard equation of the circle with center \((-2,3)\) and radius \(5\).</li>
+                <li>Graph \((x+2)^2+(y-1)^2 = 4\). Find the center and radius.</li>
+            </ol>
+        </div>
+
+        <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-7-1-1">
+            <span class="toggle-arrow">▼</span>
+            <span>Show Solution</span>
+        </button>
+
+        <div id="solution-7-1-1" class="example-content">
+            <div class="solution">
+                <h4>Solution</h4>
+
+                <p><strong>1.</strong> Here, \((h,k) = (-2,3)\) and \(r = 5\), so we get</p>
+
+                \[
+                \begin{array}{rcl}
+                (x-(-2))^2+(y-3)^2 &=& (5)^2 \\[6pt]
+                (x+2)^2+(y-3)^2 &=& 25
+                \end{array}
+                \]
+
+                <p><strong>2.</strong> From the standard form of a circle, we have that \(x + 2\) is \(x - h\), so \(h = -2\) and \(y - 1\) is \(y - k\) so \(k = 1\). This tells us that our center is \((-2,1)\). Furthermore, \(r^2 = 4\), so \(r = 2\). Thus we have a circle centered at \((-2,1)\) with a radius of \(2\). Graphing gives us</p>
+
+                <!-- Image 7_1_2: Graph of (x+2)^2 + (y-1)^2 = 4 -->
+                 <div class="diagram">
+                            <figure role="group" aria-labelledby="fig-7-1-2-caption">
+                                <img
+                                    src="images/7_1_2.png"
+                                    alt="Graph of the circle (x+2)^2 plus (y-1)^2 equals 4, centered at (-2,1) with radius 2, shown on a coordinate plane."
+                                />
+                                <figcaption id="fig-7-1-2-caption" class="visually-hidden">
+                        </div>
+                    </div>
+                
+
+            </div>
+        </div>
+    </section>
+
+    <p>If we were to expand the equation in the previous example and gather up like terms, instead of the easily recognizable \((x+2)^2 + (y-1)^2 = 4\), we'd be contending with \(x^2 + 4x + y^2 - 2y + 1 = 0.\) If we're given such an equation, we can complete the square in each of the variables to see if it fits the standard form of a circle by following the steps given below.</p>
+
+    <!-- Steps: Writing Equation of a Circle in Standard Form -->
+    <div class="definition-box">
+        <h3>To Write the Equation of a Circle in Standard Form</h3>
+        <ol>
+            <li>Group the same variables together on one side of the equation and position the constant on the other side.</li>
+            <li>Complete the square on both variables as needed.</li>
+            <li>Divide both sides by the coefficient of the squares.</li>
+        </ol>
+    </div>
+
+    <!-- Example 2: Complete the square -->
+    <section class="example" aria-labelledby="example-7-1-2">
+        <div class="example-problem">
+            <h3 id="example-7-1-2">Example</h3>
+            <p>Complete the square to find the center and radius of \(3x^2 - 6x + 3y^2 + 4y - 4 = 0\).</p>
+        </div>
+
+        <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-7-1-2">
+            <span class="toggle-arrow">▼</span>
+            <span>Show Solution</span>
+        </button>
+
+        <div id="solution-7-1-2" class="example-content">
+            <div class="solution">
+                <h4>Solution</h4>
+
+                <p>To find the solution we first need to start by completing the square to put the equation into our standard form:</p>
+
+                \[
+                \begin{array}{rclr}
+                3x^2 - 6x + 3y^2 + 4y - 4 &=& 0 & \\[6pt]
+                3x^2 - 6x + 3y^2 + 4y &=& 4 & \text{add } 4 \text{ to both sides} \\[6pt]
+                3\left(x^2 - 2x\right) + 3\left(y^2 + \dfrac{4}{3}y\right) &=& 4 & \text{factor out leading coefficients} \\[10pt]
+                3\left(x^2 - 2x + \underline{1}\right) + 3\left(y^2 + \dfrac{4}{3}y + \underline{\underline{\dfrac{4}{9}}}\right) &=& 4 + 3\underline{(1)} + 3\underline{\underline{\left(\dfrac{4}{9}\right)}} & \text{complete the square in } x, y \\[10pt]
+                3(x-1)^2 + 3\left(y + \dfrac{2}{3}\right)^2 &=& \dfrac{25}{3} & \text{factor} \\[10pt]
+                (x-1)^2 + \left(y + \dfrac{2}{3}\right)^2 &=& \dfrac{25}{9} & \text{divide both sides by } 3
+                \end{array}
+                \]
+
+                <p>Using the standard form of a circle, we identify \(x - 1\) as \(x - h\), so \(h = 1\), and \(y + \frac{2}{3}\) as \(y - k\), so \(k = -\frac{2}{3}\). Hence, the center is \((h,k) = \left(1, -\frac{2}{3}\right)\). Furthermore, we see that \(r^2 = \frac{25}{9}\) so the radius is \(r = \frac{5}{3}\).</p>
+
+            </div>
+        </div>
+    </section>
+
+    <p>It is possible to obtain equations like \((x-3)^2 + (y+1)^2 = 0\) or \((x-3)^2 + (y+1)^2 = -1\), neither of which describes a circle. (Do you see why not?) The reader is encouraged to think about what, if any, points lie on the graphs of these two equations. The next example uses the Midpoint Formula \(\left(\dfrac{x_1+x_2}{2},\dfrac{y_1+y_2}{2}\right)\), in conjunction with the ideas presented so far in this section.</p>
+
+    <!-- Example 3: Diameter endpoints -->
+    <section class="example" aria-labelledby="example-7-1-3">
+        <div class="example-problem">
+            <h3 id="example-7-1-3">Example</h3>
+            <p>Write the standard equation of the circle which has \((-1,3)\) and \((2,4)\) as the endpoints of a diameter.</p>
+        </div>
+
+        <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-7-1-3">
+            <span class="toggle-arrow">▼</span>
+            <span>Show Solution</span>
+        </button>
+
+        <div id="solution-7-1-3" class="example-content">
+            <div class="solution">
+                <h4>Solution</h4>
+
+                <p>We recall that a diameter of a circle is a line segment containing the center and two points on the circle. Plotting the given data yields</p>
+
+                <!-- Image 7_1_3: Graph for diameter endpoints (-1,3) and (2,4) -->
+                    <div class="diagram">
+                            <figure role="group" aria-labelledby="fig-7-1-3-caption">
+                                <img
+                                    src="images/7_1_3.png"
+                                    alt="Coordinate plane showing the points (-1,3) and (2,4) as endpoints of a diameter, with the center (h,k) marked at their midpoint and a dashed circle drawn through both points."
+                                />
+                                <figcaption id="fig-7-1-3-caption" class="visually-hidden">
+                        </div>
+                    </div>
+                
+
+                <p>Since the given points are endpoints of a diameter, we know their midpoint \((h, k)\) is the center of the circle. Using the midpoint formula gives us</p>
+
+                \[
+                \begin{array}{rcl}
+                (h,k) &=& \left(\dfrac{x_1 + x_2}{2},\ \dfrac{y_1 + y_2}{2}\right) \\[10pt]
+                &=& \left(\dfrac{-1+2}{2},\ \dfrac{3+4}{2}\right) \\[10pt]
+                &=& \left(\dfrac{1}{2},\ \dfrac{7}{2}\right)
+                \end{array}
+                \]
+
+                <p>The diameter of the circle is the distance between the given points, so we know that half of the distance is the radius. Thus,</p>
+
+                \[
+                \begin{array}{rcl}
+                r &=& \dfrac{1}{2}\sqrt{\left(x_2 - x_1\right)^2+\left(y_2 - y_1\right)^2} \\[10pt]
+                  &=& \dfrac{1}{2}\sqrt{(2-(-1))^2+(4-3)^2} \\[10pt]
+                  &=& \dfrac{1}{2}\sqrt{3^2+1^2} \\[10pt]
+                  &=& \dfrac{\sqrt{10}}{2}
+                \end{array}
+                \]
+
+                <p>Finally, since \(\left(\dfrac{\sqrt{10}}{2}\right)^2 = \dfrac{10}{4}\), our answer becomes</p>
+
+                \[
+                    \left(x - \dfrac{1}{2}\right)^2 + \left(y - \dfrac{7}{2}\right)^2 = \dfrac{10}{4}
+                \]
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Unit Circle -->
+    <p>We close this section with the most important circle in all of mathematics: the <strong>Unit Circle</strong>.</p>
+
+    <div class="definition-box">
+        <h3>The Unit Circle</h3>
+        <p>The <strong>Unit Circle</strong> is the circle centered at \((0,0)\) with a radius of \(1\). The standard equation of the Unit Circle is</p>
+        \[
+            x^2 + y^2 = 1.
+        \]
+    </div>
+
+    <!-- Example 4: Points on the unit circle -->
+    <section class="example" aria-labelledby="example-7-1-4">
+        <div class="example-problem">
+            <h3 id="example-7-1-4">Example</h3>
+            <p>Find the points on the unit circle with \(y\)-coordinate \(\dfrac{\sqrt{3}}{2}\).</p>
+        </div>
+
+        <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-7-1-4">
+            <span class="toggle-arrow">▼</span>
+            <span>Show Solution</span>
+        </button>
+
+        <div id="solution-7-1-4" class="example-content">
+            <div class="solution">
+                <h4>Solution</h4>
+
+                <p>We replace \(y\) with \(\dfrac{\sqrt{3}}{2}\) in the equation \(x^2 + y^2 = 1\) to get</p>
+
+                \[
+                \begin{array}{rcl}
+                x^2 + y^2 &=& 1 \\[6pt]
+                x^2 + \left(\dfrac{\sqrt{3}}{2}\right)^2 &=& 1 \\[13pt]
+                \dfrac{3}{4} + x^2 &=& 1 \\[6pt]
+                x^2 &=& \dfrac{1}{4} \\[6pt]
+                x &=& \pm\sqrt{\dfrac{1}{4}} \\[7pt]
+                x &=& \pm\dfrac{1}{2}
+                \end{array}
+                \]
+
+                <p>Our final answers are \(\left(\dfrac{1}{2},\ \dfrac{\sqrt{3}}{2}\right)\) and \(\left(-\dfrac{1}{2},\ \dfrac{\sqrt{3}}{2}\right)\).</p>
+
+            </div>
+        </div>
+    </section>
+
+</section><!-- end #intro-conics-circles -->
+
+<!-- Exercises Section -->
+<section class="exercises-section" aria-labelledby="exercises-7-1-heading">
+    <h2 id="exercises-7-1-heading" class="subsection-title">Exercises</h2>
+
+    <button class="exercises-header" onclick="toggleExercises(this)" aria-expanded="false" aria-controls="exercises-7-1-content">
+        <span class="toggle-arrow">▼</span>
+        <span>Show Exercises</span>
+    </button>
+
+    <div id="exercises-7-1-content" class="exercises-content" role="region" aria-labelledby="exercises-7-1-heading">
+        <p>Exercises to be added at a later date.</p>
+    </div>
+</section>
+
+</main>
+
+<!-- Toggle scripts -->
+<script>
+    function toggleExample(button) {
+        const content = button.nextElementSibling;
+        const arrow = button.querySelector('.toggle-arrow');
+
+        if (content.classList.contains('open')) {
+            content.classList.remove('open');
+            arrow.classList.remove('open');
+            button.querySelector('span:last-child').textContent = 'Show Solution';
+            button.setAttribute('aria-expanded', 'false');
+        } else {
+            content.classList.add('open');
+            arrow.classList.add('open');
+            button.querySelector('span:last-child').textContent = 'Hide Solution';
+            button.setAttribute('aria-expanded', 'true');
+        }
+    }
+
+    function toggleExercises(button) {
+        const content = document.getElementById(button.getAttribute('aria-controls'));
+        const arrow = button.querySelector('.toggle-arrow');
+
+        if (content.classList.contains('open')) {
+            content.classList.remove('open');
+            arrow.classList.remove('open');
+            button.querySelector('span:last-child').textContent = 'Show Exercises';
+            button.setAttribute('aria-expanded', 'false');
+        } else {
+            content.classList.add('open');
+            arrow.classList.add('open');
+            button.querySelector('span:last-child').textContent = 'Hide Exercises';
+            button.setAttribute('aria-expanded', 'true');
+        }
+    }
+</script>
+
+<!-- TOC loader -->
+<script>
+    fetch('toc.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('toc-placeholder').innerHTML = data;
+
+            const chapterButtons = document.querySelectorAll('.toc-chapter');
+            chapterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const expanded = button.getAttribute('aria-expanded') === 'true';
+                    button.setAttribute('aria-expanded', !expanded);
+                    const submenu = button.nextElementSibling;
+                    submenu.classList.toggle('open');
+                });
+            });
+        });
+</script>
+
+</body>
+</html>

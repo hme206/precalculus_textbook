@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CH 7.2 – Parabolas</title>
+
+    <!-- MathJax configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)'], ['$', '$']],
+                displayMath: [['\\[', '\\]'], ['$$', '$$']],
+                packages: {'[+]': ['cancel', 'color']},
+                macros: {
+                    cancel: ['\\enclose{horizontalstrike}{#1}', 1]
+                }
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            },
+            loader: {
+                load: ['input/tex', 'output/chtml', '[tex]/cancel', '[tex]/color']
+            }
+        };
+    </script>
+    <script id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+
+    <link rel="stylesheet" href="styles.css" />
+
+    <style>
+        /* Proof/annotation two-column table */
+        .proof-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        .proof-table td {
+            border: none;
+            padding: 0.4rem 0.5rem;
+            vertical-align: middle;
+            background: none;
+        }
+
+        .proof-table td:first-child {
+            width: 60%;
+        }
+
+        .proof-table td.annotation {
+            color: #c0392b;
+            font-style: italic;
+            font-size: 0.92em;
+            width: 40%;
+            border: none;
+            background: none;
+        }
+
+        /* Override zebra striping inside proof tables */
+        .solution .proof-table tr:nth-child(even),
+        .solution .proof-table tr {
+            background-color: transparent;
+        }
+
+        /* Collapsible exercises */
+        .exercises-section {
+            margin: 25px 0;
+        }
+
+        .exercises-header {
+            background-color: #33AB2B;
+            color: white;
+            padding: 12px 20px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+            border-radius: 4px;
+            transition: background-color 0.2s ease;
+            border: none;
+            font-size: 1em;
+            width: 100%;
+        }
+
+        .exercises-header:hover {
+            background-color: #2a8922;
+        }
+
+        .exercises-content {
+            display: none;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-top: none;
+            border-radius: 0 0 6px 6px;
+            padding: 20px;
+        }
+
+        .exercises-content.open {
+            display: block;
+        }
+
+        /* Standard equation two-column definition box layout */
+        .def-two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .def-two-col .col h4 {
+            color: #33AB2B;
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+            font-size: 1em;
+        }
+
+        .def-two-col .col p {
+            margin-bottom: 0.4rem;
+        }
+
+        .def-two-col .col .red-text {
+            color: #c0392b;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .proof-table td:first-child,
+            .proof-table td.annotation {
+                width: 100%;
+                display: block;
+            }
+            .proof-table td.annotation {
+                padding-top: 0;
+            }
+            .def-two-col {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div id="toc-placeholder"></div>
+
+<main class="container">
+
+<section id="parabolas">
+    <h1>CH 7.2 – Parabolas</h1>
+
+    <p>In Section 7.1 we learned that when a conic is cut by a plane, it creates a circle. When a conic is cut by a plane on an angle such that it only intersects the top or bottom half of the conic it creates a <strong><span class="blue-text">parabola</span></strong>.</p>
+
+    <p>We have already learned that the graph of a quadratic function \(f(x) = ax^2 + bx + c\) (\(a \neq 0\)) is called a <strong>parabola</strong>, which we discussed ever so briefly in Chapter 2. However, now we are going to define it slightly differently.</p>
+
+    <!-- Definition: Parabola -->
+    <div class="definition-box">
+        <h3>Definition of a Parabola</h3>
+        <p>Let \(F\) be a point in the plane and \(D\) be a line not containing \(F\). A <strong>parabola</strong> is the set of all points equidistant from \(F\) and \(D\). The point \(F\) is called the <strong>focus</strong> of the parabola and the line \(D\) is called the <strong>directrix</strong> of the parabola.</p>
+    </div>
+
+    <p>Schematically, we have the following.</p>
+
+    <!-- Image 7_2_1 -->
+    <div class="diagram">
+        <img
+            src="images/7_2_1.png"
+            alt="Schematic diagram of a parabola opening upward. The directrix D is a horizontal line below the curve. The focus F and vertex V are labeled on the axis of symmetry. Dashed lines from several points on the parabola show equal distances to the focus F and to the directrix D."
+            style="max-width:100%; height:auto; display:block; margin: 1rem auto;"
+        />
+    </div>
+
+    <p>Each dashed line from the point \(F\) (focus) to a point on the curve has the same length as the dashed line from the point on the curve to the line \(D\) (directrix). The point suggestively labeled \(V\) is, as you should expect, the <strong><span class="blue-text">vertex</span></strong>. The vertex is the point on the parabola closest to the focus.</p>
+
+    <p>We want to use only the distance definition of parabola to derive the equation of a parabola and, if all is right with the universe, we should get an expression much like those studied in Chapter 2. Let \(p\) denote the directed distance from the vertex to the focus, which by definition is the same as the distance from the vertex to the directrix. For simplicity, assume that the vertex is \((0,0)\) and that the parabola opens upwards. Hence, the focus is \((0,p)\) and the directrix is the line \(y = -p\). Our picture becomes</p>
+
+    <!-- Image 7_2_2 -->
+    <div class="diagram">
+        <img
+            src="images/7_2_2.png"
+            alt="Coordinate plane with a parabola opening upward, vertex at the origin (0,0), focus labeled (0,p) on the y-axis, and directrix y equals negative p as a horizontal line below the x-axis. A point (x,y) on the parabola and its projection (x, negative p) on the directrix are shown connected by dashed lines to the focus, both labeled d1 to illustrate equal distances."
+            style="max-width:100%; height:auto; display:block; margin: 1rem auto;"
+        />
+    </div>
+
+    <p>From the definition of parabola, we know the distance from \((0,p)\) to \((x,y)\) is the same as the distance from \((x,-p)\) to \((x,y)\). Using the Distance Formula, we get</p>
+
+    \[
+    \begin{array}{rclr}
+    \sqrt{(x-0)^2+(y-p)^2} &=& \sqrt{(x-x)^2+(y-(-p))^2} & \\[6pt]
+    \sqrt{x^2+(y-p)^2} &=& \sqrt{(y+p)^2} & \\[6pt]
+    x^2+(y-p)^2 &=& (y+p)^2 & \text{square both sides} \\[6pt]
+    x^2+y^2-2py+p^2 &=& y^2+2py+p^2 & \text{expand quantities} \\[6pt]
+    x^2 &=& 4py & \text{gather like terms}
+    \end{array}
+    \]
+
+    <p>Solving for \(y\) yields \(y = \dfrac{x^2}{4p}\), which is a quadratic function in standard form with \(a = \dfrac{1}{4p}\) and vertex \((0,0)\).</p>
+
+    <p>We know from previous experience that if the coefficient of \(x^2\) is negative, the parabola opens downwards. In the equation \(y = \dfrac{x^2}{4p}\) this happens when \(p &lt; 0\). In our formulation, we say that \(p\) is a "directed distance" from the vertex to the focus: if \(p &gt; 0\), the focus is above the vertex; if \(p &lt; 0\), the focus is below the vertex. The <strong><span class="blue-text">focal length</span></strong> of a parabola is \(|p|\).</p>
+
+    <p>If we choose to place the vertex at an arbitrary point \((h,k)\), we arrive at the following formula:</p>
+
+    <!-- Standard Equation of a Parabola definition box -->
+    <div class="definition-box">
+        <h3>The Standard Equation of a Parabola</h3>
+        <p>The equation of a parabola with vertex \((h,k)\) and focal length \(|p|\) is:</p>
+        <div class="def-two-col">
+            <div class="col">
+                <h4>Vertical Axis</h4>
+                <p>\((x-h)^2 = 4p(y-k)\)</p>
+                <p><span class="red-text">Directrix:</span> \(y = k - p\)</p>
+                <p><span class="red-text">Focus:</span> \((h,\ k+p)\)</p>
+            </div>
+            <div class="col">
+                <h4>Horizontal Axis</h4>
+                <p>\((y-k)^2 = 4p(x-h)\)</p>
+                <p><span class="red-text">Directrix:</span> \(x = h - p\)</p>
+                <p><span class="red-text">Focus:</span> \((h+p,\ k)\)</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Vertical Axis diagrams (7_2_3 and 7_2_4 side by side) -->
+    <h3>Vertical Axis</h3>
+    <div class="diagram-row" role="group" aria-label="Diagrams illustrating parabolas with a vertical axis of symmetry">
+        <div class="diagram">
+            <img
+                src="images/7_2_3.png"
+                alt="Graph of the parabola (x plus 2) squared equals 4 times one-quarter times (y minus 1), where p equals one-quarter. Since p is greater than 0, the parabola opens upward. The vertical axis of symmetry is shown as a dashed red line at x equals negative 2. The focus is marked in blue above the vertex, and the directrix is a blue horizontal line below the vertex."
+            />
+        </div>
+        <div class="diagram">
+            <img
+                src="images/7_2_4.png"
+                alt="Graph of the parabola (x plus 2) squared equals 4 times negative one-quarter times (y minus 1), where p equals negative one-quarter. Since p is less than 0, the parabola opens downward. The vertical axis of symmetry is shown as a dashed red line at x equals negative 2. The focus is marked in blue below the vertex, and the directrix is a blue horizontal line above the vertex."
+            />
+        </div>
+    </div>
+
+    <!-- Horizontal Axis diagrams (7_2_5 and 7_2_6 side by side) -->
+    <h3>Horizontal Axis</h3>
+    <div class="diagram-row" role="group" aria-label="Diagrams illustrating parabolas with a horizontal axis of symmetry">
+        <div class="diagram">
+            <img
+                src="images/7_2_5.png"
+                alt="Graph of the parabola (y minus 2) squared equals 4 times one-quarter times (x minus 1), where p equals one-quarter. Since p is greater than 0, the parabola opens to the right. The horizontal axis of symmetry is shown as a dashed red line at y equals 2. The focus is marked in blue to the right of the vertex, and the directrix is a blue vertical line to the left of the vertex."
+            />
+        </div>
+        <div class="diagram">
+            <img
+                src="images/7_2_6.png"
+                alt="Graph of the parabola (y minus 1) squared equals 4 times negative one-quarter times (x plus 2), where p equals negative one-quarter. Since p is less than 0, the parabola opens to the left. The horizontal axis of symmetry is shown as a dashed red line at y equals negative 2. The focus is marked in blue to the left of the vertex, and the directrix is a blue vertical line to the right of the vertex."
+            />
+        </div>
+    </div>
+
+    <p>Notice that in the standard equation of the parabola above, only one of the variables is squared. This is a quick way to distinguish an equation of a parabola from that of a circle because in the equation of a circle, both variables are squared. It is also how you can distinguish between a vertical or horizontal axis of symmetry.</p>
+
+    <!-- Example 1: Graph two parabolas in standard form -->
+    <section class="example" aria-labelledby="example-7-2-1">
+        <div class="example-problem">
+            <h3 id="example-7-2-1">Example</h3>
+            <ol>
+                <li>Graph \((x+1)^2 = -8(y-3)\). Find the vertex, focus, and directrix.</li>
+                <li>Graph \((y-2)^2 = 12(x+1)\). Find the vertex, focus, and directrix.</li>
+            </ol>
+        </div>
+
+        <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-7-2-1">
+            <span class="toggle-arrow">▼</span>
+            <span>Show Solution</span>
+        </button>
+
+        <div id="solution-7-2-1" class="example-content">
+            <div class="solution">
+                <h4>Solution</h4>
+
+                <p><strong>1.</strong> We recognize that the equation is already in standard form. Here, \(x - h\) is \(x + 1\) so \(h = -1\), and \(y - k\) is \(y - 3\) so \(k = 3\). Hence, the vertex is \((-1, 3)\). We also see that \(4p = -8\) so \(p = -2\). Since \(p &lt; 0\), the focus will be below the vertex and the parabola will open downwards.</p>
+
+                <!-- Image 7_2_7 -->
+                <div class="diagram">
+                    <img
+                        src="images/7_2_7.png"
+                        alt="Graph of the parabola (x plus 1) squared equals negative 8 times (y minus 3) on a coordinate plane. The parabola opens downward with vertex at (negative 1, 3). The focus is marked at (negative 1, 1) and the directrix is the horizontal line y equals 5."
+                        style="max-width:100%; height:auto; display:block; margin: 1rem auto;"
+                    />
+                </div>
+
+                <p>The distance from the vertex to the focus is \(|p| = 2\), which means the focus is \(2\) units below the vertex. From \((-1, 3)\), we move down \(2\) units and find the focus at \((-1, 1)\). The directrix, then, is \(2\) units above the vertex, so it is the line \(y = 5\).</p>
+
+                <p><strong>2.</strong> We recognize this equation is already in standard form. Here, \(x - h\) is \(x + 1\) so \(h = -1\), and \(y - k\) is \(y - 2\) so \(k = 2\). Hence, the vertex is \((-1, 2)\). We also see that \(4p = 12\) so \(p = 3\). Since \(p &gt; 0\), the focus will be to the right of the vertex and the parabola will open to the right. The distance from the vertex to the focus is \(|p| = 3\), which means the focus is \(3\) units to the right. If we start at \((-1, 2)\) and move right \(3\) units, we arrive at the focus \((2, 2)\). The directrix, then, is \(3\) units to the left of the vertex and if we move left \(3\) units from \((-1, 2)\), we'd be on the vertical line \(x = -4\). Since the focal diameter is \(|4p| = 12\), the parabola is \(12\) units wide at the focus, and thus there are points \(6\) units above and below the focus on the parabola.</p>
+
+                <!-- Image 7_2_8 -->
+                <div class="diagram">
+                    <img
+                        src="images/7_2_8.png"
+                        alt="Graph of the parabola (y minus 2) squared equals 12 times (x plus 1) on a coordinate plane. The parabola opens to the right with vertex at (negative 1, 2). The focus is marked at (2, 2) and the directrix is the vertical line x equals negative 4."
+                        style="max-width:100%; height:auto; display:block; margin: 1rem auto;"
+                    />
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Latus Rectum / Focal Diameter -->
+    <p>Of all of the information requested in the previous example, only the vertex is part of the graph of the parabola. So in order to get a sense of the actual shape of the graph, we need some more information. While we could plot a few points randomly, a more useful measure of how wide a parabola opens is the length of the parabola's latus rectum. The <strong>latus rectum</strong> of a parabola is the line segment parallel to the directrix which contains the focus. The endpoints of the latus rectum are, then, two points on "opposite" sides of the parabola. Graphically, we have the following.</p>
+
+    <!-- Image 7_2_9 -->
+    <div class="diagram">
+        <img
+            src="images/7_2_9.png"
+            alt="Diagram of a parabola opening upward with vertex V at the origin, focus F above the vertex, and directrix D as a horizontal line below. A dashed horizontal segment through the focus labeled Latus Rectum connects two points on the parabola, one on each side of the axis of symmetry."
+            style="max-width:100%; height:auto; display:block; margin: 1rem auto;"
+        />
+    </div>
+
+    <p>It turns out that the length of the latus rectum, called the <strong>focal diameter</strong> of the parabola is \(|4p|\), which, in light of the standard form of a parabola, is easy to find. In our last example, for instance, when graphing \((x+1)^2 = -8(y-3)\), we can use the fact that the focal diameter is \(|-8| = 8\), which means the parabola is \(8\) units wide at the focus, to help generate a more accurate graph by plotting points \(4\) units to the left and right of the focus.</p>
+
+    <!-- Example 2: Find standard form from focus and directrix -->
+    <section class="example" aria-labelledby="example-7-2-2">
+        <div class="example-problem">
+            <h3 id="example-7-2-2">Example</h3>
+            <p>Find the standard form of the parabola with focus \((2,1)\) and directrix \(y = -4\).</p>
+        </div>
+
+        <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-7-2-2">
+            <span class="toggle-arrow">▼</span>
+            <span>Show Solution</span>
+        </button>
+
+        <div id="solution-7-2-2" class="example-content">
+            <div class="solution">
+                <h4>Solution</h4>
+
+                <p>Sketching the data yields,</p>
+
+                <!-- Image 7_2_10 -->
+                <div class="diagram">
+                    <img
+                        src="images/7_2_10.png"
+                        alt="Coordinate plane showing the focus at (2, 1) and the directrix as the horizontal line y equals negative 4. A dashed vertical segment connects the focus to the directrix. A green dot marks the midpoint at (2, negative 3 halves), labeled as the vertex lying midway between the focus and directrix."
+                        style="max-width:100%; height:auto; display:block; margin: 1rem auto;"
+                    />
+                </div>
+
+                <p>From the diagram, we see the parabola opens upwards. (Take a moment to think about it if you don't see that immediately.) Hence, the vertex lies below the focus and has an \(x\)-coordinate of \(2\). To find the \(y\)-coordinate, we note that the distance from the focus to the directrix is \(1 - (-4) = 5\), which means the vertex lies \(\frac{5}{2}\) units (halfway) below the focus. Starting at \((2, 1)\) and moving down \(\frac{5}{2}\) units leaves us at \(\left(2, -\frac{3}{2}\right)\), which is our vertex. Since the parabola opens upwards, we know \(p\) is positive. Thus \(p = \frac{5}{2}\). Plugging all of this data into the standard form of the equation gives us</p>
+
+                \[
+                \begin{array}{rcl}
+                (x-2)^2 &=& 4\left(\dfrac{5}{2}\right)\left(y - \left(-\dfrac{3}{2}\right)\right) \\[10pt]
+                (x-2)^2 &=& 10\left(y + \dfrac{3}{2}\right)
+                \end{array}
+                \]
+
+            </div>
+        </div>
+    </section>
+
+    <p>As with circles, not all parabolas will come to us in the standard forms. If we encounter an equation with two variables in which exactly one variable is squared, we can attempt to put the equation into a standard form using the following steps.</p>
+
+    <!-- Steps: Writing Equation of a Parabola in Standard Form -->
+    <div class="definition-box">
+        <h3>To Write the Equation of a Parabola in Standard Form</h3>
+        <ol>
+            <li>Group the variable which is squared on one side of the equation and position the non-squared variable and the constant on the other side.</li>
+            <li>Complete the square if necessary and divide by the coefficient of the perfect square.</li>
+            <li>Factor out the coefficient of the non-squared variable from it and the constant.</li>
+        </ol>
+    </div>
+
+    <!-- Example 3: Convert to standard form and graph -->
+    <section class="example" aria-labelledby="example-7-2-3">
+        <div class="example-problem">
+            <h3 id="example-7-2-3">Example</h3>
+            <p>Consider the equation \(y^2 + 4y + 8x = 4\). Put this equation into standard form and graph the parabola. Find the vertex, focus, and directrix.</p>
+        </div>
+
+        <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-7-2-3">
+            <span class="toggle-arrow">▼</span>
+            <span>Show Solution</span>
+        </button>
+
+        <div id="solution-7-2-3" class="example-content">
+            <div class="solution">
+                <h4>Solution</h4>
+
+                <p>We need a perfect square (in this case, using \(y\)) on the left-hand side of the equation and factor out the coefficient of the non-squared variable (in this case, the \(x\)) on the other.</p>
+
+                \[
+                \begin{array}{rclr}
+                y^2 + 4y + 8x &=& 4 & \\[6pt]
+                y^2 + 4y &=& -8x + 4 & \\[6pt]
+                y^2 + 4y + 4 &=& -8x + 4 + 4 & \text{complete the square in } y \text{ only} \\[6pt]
+                (y+2)^2 &=& -8x + 8 & \text{factor} \\[6pt]
+                (y+2)^2 &=& -8(x-1) &
+                \end{array}
+                \]
+
+                <p>Now that the equation is in standard form, we see that \(x - h\) is \(x - 1\) so \(h = 1\), and \(y - k\) is \(y + 2\) so \(k = -2\). Hence, the vertex is \((1, -2)\). We also see that \(4p = -8\) so that \(p = -2\). Since \(p &lt; 0\), the focus will be to the left of the vertex and the parabola will open to the left. The distance from the vertex to the focus is \(|p| = 2\), which means the focus is \(2\) units to the left of \(1\), so if we start at \((1, -2)\) and move left \(2\) units, we arrive at the focus \((-1, -2)\). The directrix, then, is \(2\) units to the right of the vertex, so if we move right \(2\) units from \((1, -2)\), we'd be on the vertical line \(x = 3\). Since the focal diameter \(|4p|\) is \(8\), the parabola is \(8\) units wide at the focus, so there are points \(4\) units above and below the focus on the parabola.</p>
+
+                <!-- Image 7_2_11 -->
+                <div class="diagram">
+                    <img
+                        src="images/7_2_11.png"
+                        alt="Graph of the parabola (y plus 2) squared equals negative 8 times (x minus 1) on a coordinate plane. The parabola opens to the left with vertex at (1, negative 2). The focus is marked at (negative 1, negative 2), the directrix is the vertical line x equals 3, and two additional points 4 units above and below the focus are plotted on the parabola."
+                        style="max-width:100%; height:auto; display:block; margin: 1rem auto;"
+                    />
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Reflective Property -->
+    <p>In studying quadratic functions, we have seen parabolas used to model physical phenomena such as the trajectories of projectiles. Other applications of the parabola concern its <em>reflective property</em> which necessitates knowing about the focus of a parabola. For example, many satellite dishes are formed in the shape of a paraboloid of revolution.</p>
+
+    <p>Every cross section through the vertex of the paraboloid is a parabola with the same focus. To see why this is important, imagine the dashed lines below as electromagnetic waves heading towards a parabolic dish. It turns out that the waves reflect off the parabola and concentrate at the focus which then becomes the optimal place for the receiver. If, on the other hand, we imagine the dashed lines as emanating from the focus, we see that the waves are reflected off the parabola in a coherent fashion as in the case in a flashlight. Here, the bulb is placed at the focus and the light rays are reflected off a parabolic mirror to give directional light.</p>
+
+    <!-- Image 7_2_12 -->
+    <div class="diagram">
+        <img
+            src="images/7_2_12.png"
+            alt="Diagram of a parabola opening upward illustrating its reflective property. Dashed lines travel vertically downward from above and reflect off the parabola, all converging at the focus point F on the axis of symmetry. This demonstrates how a parabolic dish concentrates incoming waves at the focus."
+            style="max-width:100%; height:auto; display:block; margin: 1rem auto;"
+        />
+    </div>
+
+    <!-- Example 4: Satellite dish application -->
+    <section class="example" aria-labelledby="example-7-2-4">
+        <div class="example-problem">
+            <h3 id="example-7-2-4">Example</h3>
+            <p>A satellite dish is to be constructed in the shape of a paraboloid of revolution. If the receiver placed at the focus is located \(2\) ft above the vertex of the dish, and the dish is to be \(12\) feet wide, how deep will the dish be?</p>
+        </div>
+
+        <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-7-2-4">
+            <span class="toggle-arrow">▼</span>
+            <span>Show Solution</span>
+        </button>
+
+        <div id="solution-7-2-4" class="example-content">
+            <div class="solution">
+                <h4>Solution</h4>
+
+                <p>One way to approach this problem is to determine the equation of the parabola suggested to us by this data. For simplicity, we'll assume the vertex is \((0,0)\) and the parabola opens upwards. Our standard form for such a parabola is \(x^2 = 4py\). Since the focus is \(2\) units above the vertex, we know \(p = 2\), so we have \(x^2 = 8y\). Visually,</p>
+
+                <!-- Image 7_2_13 -->
+                <div class="diagram">
+                    <img
+                        src="images/7_2_13.png"
+                        alt="Graph of the parabola x squared equals 8y on a coordinate plane, opening upward with vertex at the origin. The parabola is 12 units wide at a certain height. The points (negative 6, 4.5) and (6, 4.5) are marked on the curve. A dashed horizontal segment labeled 12 units wide connects them, and a dashed vertical segment on the right side indicates the unknown depth with a question mark."
+                        style="max-width:100%; height:auto; display:block; margin: 1rem auto;"
+                    />
+                </div>
+
+                <p>Since the parabola is \(12\) feet wide, we know the edge is \(6\) feet from the vertex. To find the depth, we are looking for the \(y\) value when \(x = 6\). Substituting \(x = 6\) into the equation of the parabola yields \(6^2 = 8y\) or \(y = \dfrac{36}{8} = \dfrac{9}{2} = 4.5\). Hence, the dish will be \(4.5\) feet deep.</p>
+
+            </div>
+        </div>
+    </section>
+
+</section><!-- end #parabolas -->
+
+<!-- Exercises Section -->
+<section class="exercises-section" aria-labelledby="exercises-7-2-heading">
+    <h2 id="exercises-7-2-heading" class="subsection-title">Exercises</h2>
+
+    <button class="exercises-header" onclick="toggleExercises(this)" aria-expanded="false" aria-controls="exercises-7-2-content">
+        <span class="toggle-arrow">▼</span>
+        <span>Show Exercises</span>
+    </button>
+
+    <div id="exercises-7-2-content" class="exercises-content" role="region" aria-labelledby="exercises-7-2-heading">
+        <p>Exercises to be added at a later date.</p>
+    </div>
+</section>
+
+</main>
+
+<!-- Toggle scripts -->
+<script>
+    function toggleExample(button) {
+        const content = button.nextElementSibling;
+        const arrow = button.querySelector('.toggle-arrow');
+
+        if (content.classList.contains('open')) {
+            content.classList.remove('open');
+            arrow.classList.remove('open');
+            button.querySelector('span:last-child').textContent = 'Show Solution';
+            button.setAttribute('aria-expanded', 'false');
+        } else {
+            content.classList.add('open');
+            arrow.classList.add('open');
+            button.querySelector('span:last-child').textContent = 'Hide Solution';
+            button.setAttribute('aria-expanded', 'true');
+        }
+    }
+
+    function toggleExercises(button) {
+        const content = document.getElementById(button.getAttribute('aria-controls'));
+        const arrow = button.querySelector('.toggle-arrow');
+
+        if (content.classList.contains('open')) {
+            content.classList.remove('open');
+            arrow.classList.remove('open');
+            button.querySelector('span:last-child').textContent = 'Show Exercises';
+            button.setAttribute('aria-expanded', 'false');
+        } else {
+            content.classList.add('open');
+            arrow.classList.add('open');
+            button.querySelector('span:last-child').textContent = 'Hide Exercises';
+            button.setAttribute('aria-expanded', 'true');
+        }
+    }
+</script>
+
+<!-- TOC loader -->
+<script>
+    fetch('toc.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('toc-placeholder').innerHTML = data;
+
+            const chapterButtons = document.querySelectorAll('.toc-chapter');
+            chapterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const expanded = button.getAttribute('aria-expanded') === 'true';
+                    button.setAttribute('aria-expanded', !expanded);
+                    const submenu = button.nextElementSibling;
+                    submenu.classList.toggle('open');
+                });
+            });
+        });
+</script>
+
+</body>
+</html>

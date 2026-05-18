@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CH 8.2 – Summation Notation</title>
+
+    <!-- MathJax configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)'], ['$', '$']],
+                displayMath: [['\\[', '\\]'], ['$$', '$$']],
+                packages: {'[+]': ['cancel', 'color']},
+                macros: {
+                    cancel: ['\\enclose{horizontalstrike}{#1}', 1]
+                }
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            },
+            loader: {
+                load: ['input/tex', 'output/chtml', '[tex]/cancel', '[tex]/color']
+            }
+        };
+    </script>
+    <script id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<div id="toc-placeholder"></div>
+
+<main class="container">
+
+<section id="summation-notation" aria-labelledby="summation-heading">
+    <h1 id="summation-heading">CH 8.2 – Summation Notation</h1>
+
+    <p>In the previous section, we introduced sequences and now we shall present notation and theorems concerning the sum of terms of a sequence. We begin with a definition, which, while intimidating, is meant to make our lives easier.</p>
+
+    <!-- Definition: Summation Notation -->
+    <div class="definition-box">
+        <h3>Definition of Summation Notation</h3>
+        <p>Given a sequence \(\left\{ a_n \right\}_{n=k}^{\infty}\) and numbers \(m\) and \(p\) satisfying \(k \leq m \leq p\), the <strong>summation from \(m\) to \(p\)</strong> of the sequence \(\left\{ a_n \right\}\) is written</p>
+        \[
+            \sum_{n=m}^{p} a_n = a_m + a_{m+1} + \ldots + a_p
+        \]
+        <p>The variable \(n\) is called the <strong>index of summation</strong>. The number \(m\) is called the <strong>lower limit of summation</strong> while the number \(p\) is called the <strong>upper limit of summation</strong>.</p>
+    </div>
+
+    <p>In English, the definition above is simply defining a short-hand notation for adding up the terms of the sequence \(\left\{ a_n \right\}_{n=k}^{\infty}\) from \(a_m\) through \(a_p\). The symbol \(\Sigma\) is the capital Greek letter sigma and is shorthand for "sum." The lower and upper limits of the summation tell us which term to start with and which term to end with, respectively. For example, using the sequence \(a_n = 2n - 1\) for \(n \geq 1\), we can write the sum \(a_3 + a_4 + a_5 + a_6\) as</p>
+
+    \[
+    \begin{array}{rcl}
+        \displaystyle{\sum_{n=3}^{6}(2n-1)} &=& (2(3)-1) + (2(4)-1) + (2(5)-1) + (2(6)-1) \\[6pt]
+        &=& 5 + 7 + 9 + 11 \\[6pt]
+        &=& 32
+    \end{array}
+    \]
+
+    <p>The index variable is considered a "dummy variable" in the sense that it may be changed to any letter without affecting the value of the summation. For instance,</p>
+
+    \[
+        \sum_{n=3}^{6}(2n-1) = \sum_{k=3}^{6}(2k-1) = \sum_{j=3}^{6}(2j-1)
+    \]
+
+    <p>One place you may encounter summation notation is in mathematical definitions. For example, summation notation allows us to define polynomials as functions of the form</p>
+
+    \[
+        f(x) = \sum_{k=0}^{n} a_k x^k
+    \]
+
+    <p>for real numbers \(a_k\), \(k = 0, 1, \ldots, n\). Summation notation is particularly useful when talking about matrix operations. For example, we can write the product of the \(i\)th row \(R_i\) of a matrix \(A = [a_{ij}]_{m \times n}\) and the \(j\)th column \(C_j\) of a matrix \(B = [b_{ij}]_{n \times r}\) as</p>
+
+    \[
+        R_i \cdot C_j = \sum_{k=1}^{n} a_{ik} b_{kj}
+    \]
+
+    <p>Our next example gives us practice with this new notation.</p>
+
+    <!-- Example 1 -->
+    <section class="example" aria-labelledby="example-8-2-1">
+        <div class="example-problem">
+            <h3 id="example-8-2-1">Example</h3>
+            <ol>
+                <li>
+                    <p>Find the following sums.</p>
+                    <div class="exercise-grid columns-2">
+                        <ol type="a">
+                            <li>\(\displaystyle{\sum_{k=1}^{4} \dfrac{13}{100^k}}\)</li>
+                            <li>\(\displaystyle{\sum_{n=0}^{4} \dfrac{n!}{2}}\)</li>
+                        </ol>
+                        <ol type="a" start="3">
+                            <li>\(\displaystyle{\sum_{n=1}^{5} \dfrac{(-1)^{n+1}}{n}(x-1)^n}\)</li>
+                        </ol>
+                    </div>
+                </li>
+                <li>
+                    <p>Write the following sums using summation notation.</p>
+                    <ol type="a">
+                        <li>\(1 + 3 + 5 + \ldots + 117\)</li>
+                        <li>\(1 - \dfrac{1}{2} + \dfrac{1}{3} - \dfrac{1}{4} + - \ldots + \dfrac{1}{117}\)</li>
+                        <li>\(0.9 + 0.09 + 0.009 + \ldots + 0.\!\!\!\!\underbrace{0 \cdots 0}_{n-1 \text{ zeros}}\!\!\!\!9\)</li>
+                    </ol>
+                </li>
+            </ol>
+        </div>
+
+        <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-8-2-1">
+            <span class="toggle-arrow">▼</span>
+            <span>Show Solution</span>
+        </button>
+
+        <div id="solution-8-2-1" class="example-content">
+            <div class="solution">
+                <h4>Solution</h4>
+
+                <p><strong>1a.</strong> We substitute \(k = 1\) into the formula \(\frac{13}{100^k}\) and add successive terms until we reach \(k = 4\).</p>
+
+                \[
+                \begin{array}{rcl}
+                    \displaystyle{\sum_{k=1}^{4} \dfrac{13}{100^k}} &=& \dfrac{13}{100^1} + \dfrac{13}{100^2} + \dfrac{13}{100^3} + \dfrac{13}{100^4} \\[10pt]
+                    &=& 0.13 + 0.0013 + 0.000013 + 0.00000013 \\[6pt]
+                    &=& 0.13131313
+                \end{array}
+                \]
+
+                <hr class="divider" role="separator" aria-hidden="true" />
+
+                <p><strong>1b.</strong> Proceeding as in (a), we replace every occurrence of \(n\) with the values \(0\) through \(4\). Recalling the definition of \(n!\), we get:</p>
+
+                \[
+                \begin{array}{rcl}
+                    \displaystyle{\sum_{n=0}^{4} \dfrac{n!}{2}} &=& \dfrac{0!}{2} + \dfrac{1!}{2} + \dfrac{2!}{2} + \dfrac{3!}{2} + \dfrac{4!}{2} \\[10pt]
+                    &=& \dfrac{1}{2} + \dfrac{1}{2} + \dfrac{2 \cdot 1}{2} + \dfrac{3 \cdot 2 \cdot 1}{2} + \dfrac{4 \cdot 3 \cdot 2 \cdot 1}{2} \\[10pt]
+                    &=& \dfrac{1}{2} + \dfrac{1}{2} + 1 + 3 + 12 \\[6pt]
+                    &=& 17
+                \end{array}
+                \]
+
+                <hr class="divider" role="separator" aria-hidden="true" />
+
+                <p><strong>1c.</strong> We proceed as before, replacing the index \(n\), but <em>not</em> the variable \(x\), with the values \(1\) through \(5\) and adding the resulting terms.</p>
+
+                \[
+                \begin{array}{rcl}
+                    \displaystyle{\sum_{n=1}^{5} \dfrac{(-1)^{n+1}}{n}(x-1)^n}
+                    &=& \dfrac{(-1)^{1+1}}{1}(x-1)^1 + \dfrac{(-1)^{2+1}}{2}(x-1)^2 + \dfrac{(-1)^{3+1}}{3}(x-1)^3 \\[10pt]
+                    && +\ \dfrac{(-1)^{4+1}}{4}(x-1)^4 + \dfrac{(-1)^{5+1}}{5}(x-1)^5 \\[10pt]
+                    &=& (x-1) - \dfrac{(x-1)^2}{2} + \dfrac{(x-1)^3}{3} - \dfrac{(x-1)^4}{4} + \dfrac{(x-1)^5}{5}
+                \end{array}
+                \]
+
+                <hr class="divider" role="separator" aria-hidden="true" />
+
+                <p><strong>2.</strong> The key to writing these sums with summation notation is to find the pattern of the terms. To that end, we make good use of the techniques presented in the previous section.</p>
+
+                <p><strong>2a.</strong> The terms of the sum \(1, 3, 5, \ldots\) form an arithmetic sequence with first term \(a = 1\) and common difference \(d = 2\). We get a formula for the \(n\)th term using the arithmetic sequence formula to get \(a_n = 1 + (n-1)2 = 2n - 1\), \(n \geq 1\). At this stage, we have the formula for the terms, namely \(2n - 1\), and the lower limit of the summation, \(n = 1\). To finish the problem, we need to determine the upper limit of the summation. In other words, we need to determine which value of \(n\) produces the term \(117\). Setting \(a_n = 117\), we get \(2n - 1 = 117\) or \(n = 59\). Our final answer is</p>
+
+                \[
+                    1 + 3 + 5 + \ldots + 117 = \sum_{n=1}^{59}(2n-1)
+                \]
+
+                <p><strong>2b.</strong> We rewrite all of the terms as fractions, the subtraction as addition, and associate the negatives "\(-\)" with the numerators to get</p>
+
+                \[
+                    \frac{1}{1} + \frac{-1}{2} + \frac{1}{3} + \frac{-1}{4} + \ldots + \frac{1}{117}
+                \]
+
+                <p>The numerators, \(1, -1, \ldots\) can be described by the geometric sequence<sup>1</sup> \(c_n = (-1)^{n-1}\) for \(n \geq 1\), while the denominators are given by the arithmetic sequence<sup>2</sup> \(d_n = n\) for \(n \geq 1\). Hence, we get the formula \(a_n = \frac{(-1)^{n-1}}{n}\) for our terms, and we find the lower and upper limits of summation to be \(n = 1\) and \(n = 117\), respectively. Thus</p>
+
+                \[
+                    1 - \frac{1}{2} + \frac{1}{3} - \frac{1}{4} + - \ldots + \frac{1}{117} = \sum_{n=1}^{117} \frac{(-1)^{n-1}}{n}
+                \]
+
+                <p><small><sup>1</sup>This is indeed a geometric sequence with first term \(a = 1\) and common ratio \(r = -1\).</small><br />
+                <small><sup>2</sup>It is an arithmetic sequence with first term \(a = 1\) and common difference \(d = 1\).</small></p>
+
+                <p><strong>2c.</strong> From the previous section, we know that one formula for the \(n\)th term is \(a_n = \frac{9}{10^n}\) for \(n \geq 1\). This gives us a formula for the summation as well as a lower limit of summation. To determine the upper limit of summation, we note that to produce the \(n - 1\) zeros to the right of the decimal point before the \(9\), we need a denominator of \(10^n\). Hence, \(n\) is the upper limit of summation. Since \(n\) is used in the limits of the summation, we need to choose a different letter for the index of summation.<sup>3</sup> We choose \(k\) and get</p>
+
+                \[
+                    0.9 + 0.09 + 0.009 + \ldots + 0.\!\!\!\!\underbrace{0 \cdots 0}_{n-1 \text{ zeros}}\!\!\!\!9
+                    = \sum_{k=1}^{n} \frac{9}{10^k}
+                \]
+
+                <p><small><sup>3</sup>To see why, try writing the summation using "\(n\)" as the index.</small></p>
+
+            </div>
+        </div>
+    </section>
+
+    <p>The following theorem presents some general properties of summation notation. While we shall not have much need of these properties in Algebra, they do play a great role in Calculus. Moreover, there is much to be learned by thinking about why the properties hold. We invite the reader to prove these results. To get started, remember, "When in doubt, write it out!"</p>
+
+    <!-- Theorem: Properties of Summation Notation -->
+    <div class="definition-box">
+        <h3>Properties of Summation Notation</h3>
+        <p>Suppose \(\left\{ a_n \right\}\) and \(\left\{ b_n \right\}\) are sequences so that the following sums are defined.</p>
+        <ul>
+            <li>
+                \(\displaystyle{\sum_{n=m}^{p}\left(a_n \pm b_n\right) = \sum_{n=m}^{p} a_n \pm \sum_{n=m}^{p} b_n}\)
+            </li>
+            <li>
+                \(\displaystyle{\sum_{n=m}^{p} c\, a_n = c \sum_{n=m}^{p} a_n}\), for any real number \(c\).
+            </li>
+            <li>
+                \(\displaystyle{\sum_{n=m}^{p} a_n = \sum_{n=m}^{j} a_n + \sum_{n=j+1}^{p} a_n}\), for any natural number \(m \leq j < j+1 \leq p\).
+            </li>
+            <li>
+                \(\displaystyle{\sum_{n=m}^{p} a_n = \sum_{n=m+r}^{p+r} a_{n-r}}\), for any whole number \(r\).
+            </li>
+        </ul>
+    </div>
+
+    <p>We now turn our attention to the sums involving arithmetic and geometric sequences. Given an arithmetic sequence \(a_k = a + (k-1)d\) for \(k \geq 1\), we let \(S\) denote the sum of the first \(n\) terms. To derive a formula for \(S\), we write it out in two different ways:</p>
+
+    \[
+    \begin{array}{ccccccccccc}
+        S &=& a &+& (a+d) &+& \ldots &+& (a+(n-2)d) &+& (a+(n-1)d) \\
+        S &=& (a+(n-1)d) &+& (a+(n-2)d) &+& \ldots &+& (a+d) &+& a
+    \end{array}
+    \]
+
+    <p>If we add these two equations and combine the terms which are aligned vertically, we get</p>
+
+    \[
+        2S = (2a+(n-1)d) + (2a+(n-1)d) + \ldots + (2a+(n-1)d) + (2a+(n-1)d)
+    \]
+
+    <p>The right hand side of this equation contains \(n\) terms, all of which are equal to \((2a + (n-1)d)\), so we get \(2S = n(2a + (n-1)d)\). Dividing both sides of this equation by \(2\), we obtain the formula</p>
+
+    \[
+        S = \frac{n}{2}(2a + (n-1)d)
+    \]
+
+    <p>If we rewrite the quantity \(2a + (n-1)d\) as \(a + (a + (n-1)d) = a_1 + a_n\), we get the formula</p>
+
+    \[
+        S = n\left(\frac{a_1 + a_n}{2}\right)
+    \]
+
+    <p>A helpful way to remember this last formula is to recognize that we have expressed the sum as the product of the number of terms \(n\) and the <em>average</em> of the first and \(n\)th terms.</p>
+
+    <p>To derive the formula for the geometric sum, we start with a geometric sequence \(a_k = ar^{k-1}\), \(k \geq 1\), and let \(S\) once again denote the sum of the first \(n\) terms. Comparing \(S\) and \(rS\), we get</p>
+
+    \[
+    \begin{array}{ccccccccccccccc}
+        S &=& a &+& ar &+& ar^2 &+& \ldots &+& ar^{n-2} &+& ar^{n-1} & & \\
+        rS &=& & & ar &+& ar^2 &+& \ldots &+& ar^{n-2} &+& ar^{n-1} &+& ar^n
+    \end{array}
+    \]
+
+    <p>Subtracting the second equation from the first forces all of the terms except \(a\) and \(ar^n\) to cancel out and we get \(S - rS = a - ar^n\). Factoring, we get \(S(1-r) = a\left(1 - r^n\right)\). Assuming \(r \neq 1\), we can divide both sides by the quantity \((1-r)\) to obtain</p>
+
+    \[
+        S = a\left(\frac{1 - r^n}{1 - r}\right)
+    \]
+
+    <p>If we distribute \(a\) through the numerator, we get \(a - ar^n = a_1 - a_{n+1}\), which yields the formula</p>
+
+    \[
+        S = \frac{a_1 - a_{n+1}}{1 - r}
+    \]
+
+    <p>In the case when \(r = 1\), we get the formula</p>
+
+    \[
+        S = \underbrace{a + a + \ldots + a}_{n \text{ times}} = na
+    \]
+
+    <p>Our results are summarized below.</p>
+
+    <!-- Equation Box: Sums of Arithmetic and Geometric Sequences -->
+    <div class="definition-box">
+        <h3>Sums of Arithmetic and Geometric Sequences</h3>
+        <p><strong>Arithmetic:</strong> The sum \(S\) of the first \(n\) terms of an arithmetic sequence \(a_k = a + (k-1)d\) for \(k \geq 1\) is</p>
+        \[
+            S = \sum_{k=1}^{n} a_k = n\left(\frac{a_1 + a_n}{2}\right) = \frac{n}{2}(2a + (n-1)d)
+        \]
+        <p><strong>Geometric:</strong> The sum \(S\) of the first \(n\) terms of a geometric sequence \(a_k = ar^{k-1}\) for \(k \geq 1\) is</p>
+        <ol>
+            <li>
+                \(S = \displaystyle{\sum_{k=1}^{n} a_k} = \dfrac{a_1 - a_{n+1}}{1-r} = a\left(\dfrac{1-r^n}{1-r}\right)\), if \(r \neq 1\).
+            </li>
+            <li>
+                \(S = \displaystyle{\sum_{k=1}^{n} a_k = \sum_{k=1}^{n} a = na}\), if \(r = 1\).
+            </li>
+        </ol>
+    </div>
+
+    <p>While we have made an honest effort to derive the formulas above, formal proofs require the machinery of mathematical induction. An application of the arithmetic sum formula which proves useful in Calculus results in a formula for the sum of the first \(n\) natural numbers. The natural numbers themselves are a sequence<sup>4</sup> \(1, 2, 3, \ldots\) which is arithmetic with \(a = d = 1\). Applying the arithmetic sum formula,</p>
+
+    <p><small><sup>4</sup>This is the identity function on the natural numbers!</small></p>
+
+    \[
+        1 + 2 + 3 + \ldots + n = \frac{n(n+1)}{2}
+    \]
+
+    <p>So, for example, the sum of the first \(100\) natural numbers<sup>5</sup> is \(\frac{100(101)}{2} = 5050\).</p>
+
+    <p><small><sup>5</sup>There is an interesting anecdote which says that the famous mathematician Carl Friedrich Gauss was given this problem in primary school and devised a very clever solution.</small></p>
+
+    <p>An important application of the geometric sum formula is the investment plan called an <strong>annuity</strong>. Annuities differ from the kind of investments we studied in earlier sections in that payments are deposited into the account on an on-going basis, and this complicates the mathematics a little. Suppose you have an account with annual interest rate \(r\) which is compounded \(n\) times per year. We let \(i = \frac{r}{n}\) denote the interest rate per period. Suppose we wish to make ongoing deposits of \(P\) dollars at the <em>end</em> of each compounding period. Let \(A_k\) denote the amount in the account after \(k\) compounding periods. Then \(A_1 = P\), because we have made our first deposit at the <em>end</em> of the first compounding period and no interest has been earned. During the second compounding period, we earn interest on \(A_1\) so that our initial investment has grown to \(A_1(1+i) = P(1+i)\). When we add our second payment at the end of the second period, we get</p>
+
+    \[
+        A_2 = A_1(1+i) + P = P(1+i) + P = P(1+i)\left(1 + \frac{1}{1+i}\right)
+    \]
+
+    <p>The reason for factoring out the \(P(1+i)\) will become apparent in short order. During the third compounding period, we earn interest on \(A_2\) which then grows to \(A_2(1+i)\). We add our third payment at the end of the third compounding period to obtain</p>
+
+    \[
+        A_3 = A_2(1+i) + P = P(1+i)\left(1 + \frac{1}{1+i}\right)(1+i) + P = P(1+i)^2\left(1 + \frac{1}{1+i} + \frac{1}{(1+i)^2}\right)
+    \]
+
+    <p>During the fourth compounding period, \(A_3\) grows to \(A_3(1+i)\), and when we add the fourth payment, we factor out \(P(1+i)^3\) to get</p>
+
+    \[
+        A_4 = P(1+i)^3\left(1 + \frac{1}{1+i} + \frac{1}{(1+i)^2} + \frac{1}{(1+i)^3}\right)
+    \]
+
+    <p>This pattern continues so that at the end of the \(k\)th compounding, we get</p>
+
+    \[
+        A_k = P(1+i)^{k-1}\left(1 + \frac{1}{1+i} + \frac{1}{(1+i)^2} + \ldots + \frac{1}{(1+i)^{k-1}}\right)
+    \]
+
+    <p>The sum in the parentheses above is the sum of the first \(k\) terms of a geometric sequence with \(a = 1\) and \(r = \frac{1}{1+i}\). Using the geometric sum formula, we get</p>
+
+    \[
+        1 + \frac{1}{1+i} + \frac{1}{(1+i)^2} + \ldots + \frac{1}{(1+i)^{k-1}}
+        = 1\left(\frac{1 - \dfrac{1}{(1+i)^k}}{1 - \dfrac{1}{1+i}}\right)
+        = \frac{(1+i)\left(1 - (1+i)^{-k}\right)}{i}
+    \]
+
+    <p>Hence, we get</p>
+
+    \[
+        A_k = P(1+i)^{k-1}\left(\frac{(1+i)\left(1-(1+i)^{-k}\right)}{i}\right) = \frac{P\left((1+i)^k - 1\right)}{i}
+    \]
+
+    <p>If we let \(t\) be the number of years this investment strategy is followed, then \(k = nt\), and we get the formula for the future value of an <strong>ordinary annuity</strong>.</p>
+
+    <!-- Equation Box: Future Value of an Ordinary Annuity -->
+    <div class="definition-box">
+        <h3>Future Value of an Ordinary Annuity</h3>
+        <p>Suppose an annuity offers an annual interest rate \(r\) compounded \(n\) times per year. Let \(i = \frac{r}{n}\) be the interest rate per compounding period. If a deposit \(P\) is made at the end of each compounding period, the amount \(A\) in the account after \(t\) years is given by</p>
+        \[
+            A = \frac{P\left((1+i)^{nt} - 1\right)}{i}
+        \]
+    </div>
+
+    <p>The reader is encouraged to substitute \(i = \frac{r}{n}\) into the formula above and simplify. Some familiar equations arise which are cause for pause and meditation. One last note: if the deposit \(P\) is made at the <em>beginning</em> of the compounding period instead of at the end, the annuity is called an <strong>annuity-due</strong>. We leave the derivation of the formula for the future value of an annuity-due as an exercise for the reader.</p>
+
+    <!-- Example 2 -->
+    <section class="example" aria-labelledby="example-8-2-2">
+        <div class="example-problem">
+            <h3 id="example-8-2-2">Example</h3>
+            <p>An ordinary annuity offers a \(6\%\) annual interest rate, compounded monthly.</p>
+            <ol>
+                <li>If monthly payments of \(\$50\) are made, find the value of the annuity in \(30\) years.</li>
+                <li>How many years will it take for the annuity to grow to \(\$100{,}000\)?</li>
+            </ol>
+        </div>
+
+        <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-8-2-2">
+            <span class="toggle-arrow">▼</span>
+            <span>Show Solution</span>
+        </button>
+
+        <div id="solution-8-2-2" class="example-content">
+            <div class="solution">
+                <h4>Solution</h4>
+
+                <p><strong>1.</strong> We have \(r = 0.06\) and \(n = 12\) so that \(i = \frac{r}{n} = \frac{0.06}{12} = 0.005\). With \(P = 50\) and \(t = 30\),</p>
+
+                \[
+                    A = \frac{50\left((1+0.005)^{(12)(30)} - 1\right)}{0.005} \approx 50225.75
+                \]
+
+                <p>Our final answer is \(\$50{,}225.75\).</p>
+
+                <hr class="divider" role="separator" aria-hidden="true" />
+
+                <p><strong>2.</strong> To find how long it will take for the annuity to grow to \(\$100{,}000\), we set \(A = 100000\) and solve for \(t\). We isolate the exponential and take natural logs of both sides of the equation.</p>
+
+                \[
+                \begin{array}{rcl}
+                    100000 &=& \dfrac{50\left((1+0.005)^{12t} - 1\right)}{0.005} \\[10pt]
+                    10 &=& (1.005)^{12t} - 1 \\[6pt]
+                    (1.005)^{12t} &=& 11 \\[6pt]
+                    \ln\!\left((1.005)^{12t}\right) &=& \ln(11) \\[6pt]
+                    12t\ln(1.005) &=& \ln(11) \\[6pt]
+                    t &=& \dfrac{\ln(11)}{12\ln(1.005)} \approx 40.06
+                \end{array}
+                \]
+
+                <p>This means that it takes just over \(40\) years for the investment to grow to \(\$100{,}000\). Comparing this with our answer to part 1, we see that in just \(10\) additional years, the value of the annuity nearly doubles. This is a lesson worth remembering.</p>
+
+            </div>
+        </div>
+    </section>
+
+    <p>We close this section with a peek into Calculus by considering <em>infinite</em> sums, called <strong>series</strong>. Consider the number \(0.\overline{9}\). We can write this number as</p>
+
+    \[
+        0.\overline{9} = 0.9999\ldots = 0.9 + 0.09 + 0.009 + 0.0009 + \ldots
+    \]
+
+    <p>From the first example in this section, we know we can write the sum of the first \(n\) of these terms as</p>
+
+    \[
+        0.\underbrace{9 \cdots 9}_{n \text{ nines}} = 0.9 + 0.09 + 0.009 + \ldots + 0.\!\!\!\!\underbrace{0 \cdots 0}_{n-1 \text{ zeros}}\!\!\!\!9 = \sum_{k=1}^{n} \frac{9}{10^k}
+    \]
+
+    <p>Using the geometric sum formula, we have</p>
+
+    \[
+        \sum_{k=1}^{n} \frac{9}{10^k} = \frac{9}{10}\left(\frac{1 - \dfrac{1}{10^{n+1}}}{1 - \dfrac{1}{10}}\right) = 1 - \frac{1}{10^{n+1}}
+    \]
+
+    <p>It stands to reason that \(0.\overline{9}\) is the same value as \(1 - \frac{1}{10^{n+1}}\) as \(n \rightarrow \infty\). Our knowledge of exponential expressions tells us that \(\frac{1}{10^{n+1}} \rightarrow 0\) as \(n \rightarrow \infty\), so \(1 - \frac{1}{10^{n+1}} \rightarrow 1\). We have just argued that \(0.\overline{9} = 1\), which may cause some distress for some readers.<sup>6</sup> Any non-terminating decimal can be thought of as an infinite sum whose denominators are the powers of \(10\), so the phenomenon of adding up infinitely many terms and arriving at a finite number is not as foreign a concept as it may appear. We end this section with a theorem concerning geometric series.</p>
+
+    <p><small><sup>6</sup>To make this more palatable, it is usually accepted that \(0.\overline{3} = \frac{1}{3}\) so that \(0.\overline{9} = 3\!\left(0.\overline{3}\right) = 3\!\left(\frac{1}{3}\right) = 1\). Feel better?</small></p>
+
+    <!-- Theorem: Geometric Series -->
+    <div class="definition-box">
+        <h3>Geometric Series</h3>
+        <p>Given the sequence \(a_k = ar^{k-1}\) for \(k \geq 1\), where \(|r| < 1\),</p>
+        \[
+            a + ar + ar^2 + \ldots = \sum_{k=1}^{\infty} ar^{k-1} = \frac{a}{1-r}
+        \]
+        <p>If \(|r| \geq 1\), the sum \(a + ar + ar^2 + \ldots\) is not defined.</p>
+    </div>
+
+    <p>The justification of this result comes from taking the formula for the sum of the first \(n\) terms of a geometric sequence and examining the formula as \(n \rightarrow \infty\). Assuming \(|r| < 1\) means \(-1 < r < 1\), so \(r^n \rightarrow 0\) as \(n \rightarrow \infty\). Hence as \(n \rightarrow \infty\),</p>
+
+    \[
+        \sum_{k=1}^{n} ar^{k-1} = a\left(\frac{1 - r^n}{1 - r}\right) \rightarrow \frac{a}{1-r}
+    \]
+
+    <p>As to what goes wrong when \(|r| \geq 1\), we leave that to Calculus as well, but will explore some cases in the exercises.</p>
+
+</section><!-- end #summation-notation -->
+
+<!-- Exercises Section -->
+<section class="exercises-section" aria-labelledby="exercises-8-2-heading">
+    <h2 id="exercises-8-2-heading" class="subsection-title">Exercises</h2>
+
+    <button class="exercises-header" onclick="toggleExercises(this)" aria-expanded="false" aria-controls="exercises-8-2-content">
+        <span class="toggle-arrow">▼</span>
+        <span>Show Exercises</span>
+    </button>
+
+    <div id="exercises-8-2-content" class="exercises-content" role="region" aria-labelledby="exercises-8-2-heading">
+        <p>Exercises to be added at a later date.</p>
+    </div>
+</section>
+
+</main>
+
+<!-- Toggle scripts -->
+<script>
+    function toggleExample(button) {
+        const content = button.nextElementSibling;
+        const arrow = button.querySelector('.toggle-arrow');
+
+        if (content.classList.contains('open')) {
+            content.classList.remove('open');
+            arrow.classList.remove('open');
+            button.querySelector('span:last-child').textContent = 'Show Solution';
+            button.setAttribute('aria-expanded', 'false');
+        } else {
+            content.classList.add('open');
+            arrow.classList.add('open');
+            button.querySelector('span:last-child').textContent = 'Hide Solution';
+            button.setAttribute('aria-expanded', 'true');
+        }
+    }
+
+    function toggleExercises(button) {
+        const content = document.getElementById(button.getAttribute('aria-controls'));
+        const arrow = button.querySelector('.toggle-arrow');
+
+        if (content.classList.contains('open')) {
+            content.classList.remove('open');
+            arrow.classList.remove('open');
+            button.querySelector('span:last-child').textContent = 'Show Exercises';
+            button.setAttribute('aria-expanded', 'false');
+        } else {
+            content.classList.add('open');
+            arrow.classList.add('open');
+            button.querySelector('span:last-child').textContent = 'Hide Exercises';
+            button.setAttribute('aria-expanded', 'true');
+        }
+    }
+</script>
+
+<!-- TOC loader -->
+<script>
+    fetch('toc.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('toc-placeholder').innerHTML = data;
+
+            const chapterButtons = document.querySelectorAll('.toc-chapter');
+            chapterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const expanded = button.getAttribute('aria-expanded') === 'true';
+                    button.setAttribute('aria-expanded', !expanded);
+                    const submenu = button.nextElementSibling;
+                    submenu.classList.toggle('open');
+                });
+            });
+        });
+</script>
+
+</body>
+</html>

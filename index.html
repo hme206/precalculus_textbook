@@ -1,44 +1,161 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Precalculus </title>
+
     <link rel="stylesheet" href="styles.css">
-    
+
     <!-- MathJax configuration -->
     <script>
-        window.MathJax = { /* ... */ };
+        window.MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)']],
+                displayMath: [['\\[', '\\]']]
+            }
+        };
     </script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <script
+        id="MathJax-script"
+        async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+    <style>
+.hero-image-section {
+    width: 100%;
+    text-align: center;
+    margin: 2rem auto 4rem auto;
+}
+
+.hero-math-image {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+
+    margin: 0 auto;
+
+    border-radius: 12px;
+    object-fit: contain;
+}
+</style>
 </head>
+
 <body>
-    <div id="toc-placeholder"></div>
-    
-    <div class="container">
-        <!-- Your page content here -->
-    </div>
+
+    <!-- Sidebar Table of Contents -->
+    <aside id="toc-placeholder"></aside>
+
+    <!-- Main Textbook Content -->
+    <main class="container textbook-layout">
+
+        <!-- Textbook Cover/Header -->
+        <header class="textbook-header">
+
+            <h1 class="textbook-title">
+                Precalculus 
+            </h1>
+
+            <div class="textbook-author">
+                <p>Written by: Heather Umphlett 
+            </div>
+        
+        </header>
+<figure class="hero-image-section">
+
+    <img
+        src="images/precalccover.png"
+        alt="Mathematics textbook banner featuring equations and graphs"
+        class="hero-math-image"
+    >
+
+    <figcaption>
+        Exploring mathematics through modeling, visualization, and application.
+    </figcaption>
+
+</figure>
+        <!-- Welcome Section -->
+        <section class="front-matter">
+
+            <h2>Welcome</h2>
+            This course is designed to match the required curriculum for the Virginia Community College Systems (VCCS) MTH 161, MTH 162, and MTH 167 curriculums. A MyOpenMath Support course can also be found with homework assignments, quizzes, and tests. Additionally, it also contains supplemental corequisite material to help fill gaps in student knowledge. This textbook is covered under CC-BY_SA 4.0. Please see the Acknowledgment page for more information. 
+
+
+        </section>
+
+        <!-- Course Topics -->
+        <section class="chapter-overview">
+
+            <h2>Topics Covered</h2>
+
+            <nav aria-label="Chapter Overview">
+
+                <ol class="chapter-list">
+
+                    <li>Functions & Graphs</li>
+                    <li>Polynomials & Rational Functions</li>
+                    <li>Exponential & Logarithmic Functions</li>
+                    <li>Systems of Equations</li>
+                    <li>Trigonometric Equations</li>
+                    <li>Analytic Trigonometry</li>
+                    <li>Conics</li>
+                    <li>Supplemental Information</li>
+
+                </ol>
+
+            </nav>
+
+        </section>
+
+    </main>
 
     <script>
+
         // Load TOC
         fetch('toc.html')
             .then(response => response.text())
             .then(data => {
+
                 document.getElementById('toc-placeholder').innerHTML = data;
-                
+
                 // Initialize chapter buttons
-                const chapterButtons = document.querySelectorAll(".toc-chapter");
+                const chapterButtons =
+                    document.querySelectorAll(".toc-chapter");
+
                 chapterButtons.forEach(button => {
+
                     button.addEventListener("click", () => {
-                        const expanded = button.getAttribute("aria-expanded") === "true";
+
+                        const expanded =
+                            button.getAttribute("aria-expanded") === "true";
+
                         button.setAttribute("aria-expanded", !expanded);
+
                         const submenu = button.nextElementSibling;
+
                         submenu.classList.toggle("open");
+
                     });
+
                 });
+
             });
-        
-        // Your toggleExample function
+
+        // Example toggle function
         function toggleExample(button) {
-            /* ... */
+
+            const content =
+                button.nextElementSibling;
+
+            content.classList.toggle("open");
+
         }
+
     </script>
+
 </body>
 </html>

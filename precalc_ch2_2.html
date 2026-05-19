@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CH 2.2 – Polynomial Functions</title>
+
+    <!-- MathJax configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)'], ['$', '$']],
+                displayMath: [['\\[', '\\]'], ['$$', '$$']],
+                packages: {'[+]': ['cancel', 'color']},
+                macros: {
+                    cancel: ['\\enclose{horizontalstrike}{#1}', 1]
+                }
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            },
+            loader: {
+                load: ['input/tex', 'output/chtml', '[tex]/cancel', '[tex]/color']
+            }
+        };
+    </script>
+    <script id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+
+    <link rel="stylesheet" href="styles.css" />
+
+    <style>
+        /* ── Collapsible exercises ── */
+        .exercises-section { margin: 25px 0; }
+
+        .exercises-header {
+            background-color: #33AB2B;
+            color: white;
+            padding: 12px 20px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+            border-radius: 4px;
+            transition: background-color 0.2s ease;
+            border: none;
+            font-size: 1em;
+            width: 100%;
+        }
+        .exercises-header:hover { background-color: #2a8922; }
+
+        .exercises-content {
+            display: none;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-top: none;
+            border-radius: 0 0 6px 6px;
+            padding: 20px;
+        }
+        .exercises-content.open { display: block; }
+
+        /* ── Utility text colours ── */
+        .blue-text  { color: #0066cc; }
+        .red-text   { color: #c0392b; font-weight: bold; }
+        .green-text { color: #33AB2B; font-weight: bold; }
+
+        /* ── Step labels ── */
+        .step-label {
+            color: #0066cc;
+            font-weight: bold;
+        }
+
+        /* ── Centered display math ── */
+        .display-math {
+            text-align: center;
+            margin: 1rem 0;
+        }
+
+        /* ── Synthetic / long division layout ── */
+
+        /* Outer wrapper: note box with red side-note */
+        .division-wrap {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: start;
+            margin: 1.5rem 0;
+        }
+        .division-wrap.single {
+            grid-template-columns: 1fr;
+        }
+        @media (max-width: 640px) {
+            .division-wrap { grid-template-columns: 1fr; }
+        }
+
+        .division-note {
+            color: #c0392b;
+            font-weight: bold;
+            font-style: italic;
+            line-height: 1.6;
+            padding: 0.5rem 0;
+        }
+
+        /* Synthetic division table */
+        .syn-div {
+            border-collapse: collapse;
+            margin: 0.5rem auto;
+            font-size: 1em;
+        }
+        .syn-div td {
+            padding: 6px 14px;
+            text-align: center;
+            border: none;
+            min-width: 2.5rem;
+        }
+        /* Top row of coefficients */
+        .syn-div .coeff-row td {
+            border-bottom: 2px solid #333;
+        }
+        /* Divisor cell (first column) */
+        .syn-div .divisor {
+            border-right: 2px solid #333;
+            font-weight: bold;
+        }
+        /* Result row in blue */
+        .syn-div .result-row td {
+            color: #0066cc;
+            font-weight: bold;
+        }
+        /* Multiply row (the carried-down numbers) */
+        .syn-div .mult-row td {
+            color: #c0392b;
+            font-size: 0.9em;
+        }
+
+        /* Long division display area */
+        .long-div-display {
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 1.2rem 1.5rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+
+        /* Algorithm result display */
+        .algorithm-box {
+            background: #f0f8ed;
+            border-left: 4px solid #33AB2B;
+            padding: 1rem 1.2rem;
+            margin: 1rem 0;
+            border-radius: 0 6px 6px 0;
+        }
+
+        /* Conjugate list in 3 columns */
+        .conjugate-list {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.5rem 1rem;
+            list-style: none;
+            padding: 0;
+            margin: 0.8rem 0;
+        }
+        .conjugate-list li {
+            counter-increment: conj-counter;
+            margin: 0;
+        }
+        .conjugate-list li::before {
+            content: counter(conj-counter) ". ";
+            font-weight: bold;
+        }
+        .conjugate-list { counter-reset: conj-counter; }
+        @media (max-width: 600px) {
+            .conjugate-list { grid-template-columns: 1fr; }
+        }
+
+        /* Center text utility */
+        .center-text {
+            text-align: center;
+            margin: 1rem 0;
+        }
+    </style>
+</head>
+<body>
+
+<div id="toc-placeholder"></div>
+
+<main class="container">
+
+<section id="polynomial-functions" aria-labelledby="section-heading">
+    <h1 id="section-heading">CH 2.2 – Polynomial Functions</h1>
+
+    <p>
+        So far we've discussed a number of different functions. Of those we've discussed the <em>linear</em> and
+        <em>quadratic</em> functions. Both of these functions fit into the family that we are going to discuss next,
+        which are <strong class="blue-text">polynomial functions</strong>.
+    </p>
+
+    <!-- ── Definition Box: Polynomial Functions ── -->
+    <div class="definition-box" role="note" aria-label="Definition: Polynomial Functions">
+        <h3>Polynomial Functions</h3>
+        <p>A <strong>polynomial function</strong> \(f\) is given by:</p>
+        <div class="display-math">
+            <!-- TYPO CORRECTED: a_{n-2}x^{n-1} → a_{n-1}x^{n-1} -->
+            \[f(x) = a_n x^n + a_{n-1}x^{n-1} + \cdots + a_2 x^2 + a_1 x + a_0\]
+        </div>
+        <p>where \(a_n \neq 0\) and \(a_0, a_1, \ldots, a_n\) are all real numbers. Then:</p>
+        <ul>
+            <li>The polynomial function \(f(x)\) is of <strong>degree</strong> "\(n\)".</li>
+            <li>The term \(a_n\) is called the <strong>leading coefficient</strong> of \(f(x)\).</li>
+            <li>The real number \(a_0\) is called the <strong>constant term</strong> of \(f(x)\).</li>
+        </ul>
+        <p>A polynomial has more than one term, where \(n\) is any natural number.</p>
+    </div>
+
+    <p>
+        Polynomials are continuous functions that have smooth, rounded turns. Some polynomials will have multiple
+        \(x\)-intercepts and some could possibly have no \(x\)-intercepts. When the graph of a polynomial crosses
+        through the \(x\)-axis or touches it, we call those <strong class="blue-text">Real Zeros</strong> of the
+        polynomial.
+    </p>
+
+    <p>
+        A polynomial function is a product of its factors \((x - a)\) where \(a\) could be any zero, either real
+        or imaginary. When it comes to imaginary or irrational factors we have to remember that we always need the
+        <strong class="blue-text">conjugate pair</strong> to the given factor.
+    </p>
+
+    <!-- ── Example: Conjugate Pairs ── -->
+    <section class="example" aria-labelledby="example-2-2-1">
+        <div class="example-problem">
+            <h3 id="example-2-2-1">Example</h3>
+            <p>What are the conjugate pairs to the factors given below?</p>
+            <ol class="conjugate-list" aria-label="List of factors requiring conjugate pairs">
+                <li>\((x - 3i)\)</li>
+                <li>\((x + \sqrt{5})\)</li>
+                <li>\((x - 3 + 4i)\)</li>
+            </ol>
+        </div>
+
+        <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-2-2-1">
+            <span class="toggle-arrow">▼</span>
+            <span>Show Solution</span>
+        </button>
+
+        <div id="solution-2-2-1" class="example-content">
+            <div class="solution">
+                <h4>Solution</h4>
+                <ol>
+                    <li>The conjugate to \((x - 3i)\) would be \((x + 3i)\).</li>
+                    <li>The conjugate to \((x + \sqrt{5})\) would be \((x - \sqrt{5})\).</li>
+                    <li>
+                        The conjugate to \((x - 3 + 4i)\) would be \((x - 3 - 4i)\). Notice how you did
+                        not negate the real part of the complex number — only the imaginary part.
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </section>
+
+    <p>
+        The reason that our irrational factors and our complex factors come in conjugate pairs is because when you
+        multiply two conjugate pairs together you end up eliminating the imaginary parts or the irrational parts,
+        since they create a difference of two squares.
+    </p>
+
+    <hr class="divider" role="separator" aria-hidden="true" />
+
+    <!-- ══════════════════════════════════════════
+         WRITING POLYNOMIALS
+    ══════════════════════════════════════════ -->
+    <section aria-labelledby="writing-polynomials-heading">
+        <h2 id="writing-polynomials-heading">Writing Polynomials</h2>
+
+        <p>
+            Before we get into how to solve a polynomial function, we first need to understand how to make a polynomial
+            function. Recall that a polynomial is the product of its factors. In order to find the factors of a polynomial
+            we need to know the zeros of it first. This is where knowing a few basic properties of polynomials is useful.
+        </p>
+
+        <!-- ── Definition Box: Properties of Real Zeros ── -->
+        <div class="definition-box" role="note" aria-label="Properties of Real Zeros for Polynomial Functions">
+            <h3>Properties of Real Zeros for Polynomial Functions</h3>
+            <p>
+                Allow \(f(x)\) to be a polynomial function of degree <strong>\(n\)</strong>, where \(a\) is a real
+                number. Then the following properties are true:
+            </p>
+            <ol>
+                <li>\(x = a\) is a <em>zero</em> of the function \(f(x)\).</li>
+                <li>When \(f(x) = 0\) then \(x = a\) is a <em>solution</em> to the equation.</li>
+                <li>\((x - a)\) is a <em>factor</em> of \(f(x)\).</li>
+                <li>The \(x\)-intercept of \(f(x)\) is the coordinate \((a, 0)\).</li>
+            </ol>
+        </div>
+
+        <p>
+            The equation of a polynomial can tell us a lot of information. The degree of the polynomial <strong>\(n\)</strong>
+            tells us the number of real zeros the polynomial could possibly have.
+        </p>
+
+        <!-- ── Example: Write polynomial from real zeros ── -->
+        <section class="example" aria-labelledby="example-2-2-2">
+            <div class="example-problem">
+                <h3 id="example-2-2-2">Example</h3>
+                <p>Write the polynomial of least degree that has zeros at \(x = 4, -2, 1\).</p>
+            </div>
+
+            <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-2-2-2">
+                <span class="toggle-arrow">▼</span>
+                <span>Show Solution</span>
+            </button>
+
+            <div id="solution-2-2-2" class="example-content">
+                <div class="solution">
+                    <h4>Solution</h4>
+
+                    <p>
+                        To write the polynomial function of least degree we first write the factors from our zeros.
+                        That means we'd have:
+                    </p>
+                    \[
+                        \textcolor{blue}{f(x) = (x-4)(x-(-2))(x-1) = (x-4)(x+2)(x-1)}
+                    \]
+                    <p>
+                        Next we multiply all of the factors out. It doesn't matter which two binomials you begin with,
+                        as long as you eventually multiply them all.
+                    </p>
+                    \[
+                        f(x) = (x-4)(x+2)(x-1)
+                    \]
+                    \[
+                        = (x^2 - 2x - 8)(x - 1)
+                    \]
+                    \[
+                        = x^3 - 3x^2 - 6x + 8
+                    \]
+
+                    <p>
+                        Notice how we had three real zeros and our polynomial is of degree three. Looking at the graph
+                        of \(f(x)\) below, we can see that the graph crosses the \(x\)-axis in three places:
+                        \(x = 4, -2, 1\).
+                    </p>
+
+                    <img
+                        src="images/2_2_1.png"
+                        alt="Coordinate grid from negative 5 to 5 on both axes showing a blue cubic curve of f of x equals x cubed minus 3x squared minus 6x plus 8. The curve crosses the x-axis at three points: x equals negative 2 on the left, x equals 1 near the center, and x equals 4 on the right. The curve descends from the upper left, rises through negative 2, dips back down through 1, then rises again through 4 and continues upward to the right, with arrows on both ends."
+                        style="max-width:100%; height:auto; display:block; margin: 1rem auto;"
+                    />
+
+                    <p>
+                        Remember that not all polynomial functions will cross the \(x\)-axis. These types of polynomials
+                        have complex solutions.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── Example: Write polynomial from real + complex zeros ── -->
+        <section class="example" aria-labelledby="example-2-2-3">
+            <div class="example-problem">
+                <h3 id="example-2-2-3">Example</h3>
+                <p>
+                    Write the polynomial of least degree that has rational zeros of \(x = -1, 1\) and a complex zero
+                    of \(x = -3i\).
+                </p>
+            </div>
+
+            <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-2-2-3">
+                <span class="toggle-arrow">▼</span>
+                <span>Show Solution</span>
+            </button>
+
+            <div id="solution-2-2-3" class="example-content">
+                <div class="solution">
+                    <h4>Solution</h4>
+
+                    <p>
+                        Remember that since we have the complex zero of \(x = -3i\), we also have the zero of
+                        <span class="blue-text">\(x = 3i\)</span> because they are conjugate pairs. Thus the
+                        polynomial as a product of its factors is:
+                    </p>
+                    \[
+                        \textcolor{blue}{f(x) = (x-(-1))(x-1)(x-(-3i))(x-3i) = (x+1)(x-1)(x+3i)(x-3i)}
+                    \]
+
+                    <p>
+                        It still doesn't matter which two binomials you multiply together first, but it will be much
+                        easier if you multiply the conjugate pairs together and then the other two together.
+                    </p>
+                    \[
+                        f(x) = \textcolor{red}{(x+1)(x-1)} \cdot \textcolor{green}{(x-3i)(x+3i)}
+                    \]
+                    \[
+                        = \textcolor{red}{(x^2 - 1)} \cdot \textcolor{green}{(x^2 + 9)}
+                    \]
+                    \[
+                        = x^4 + 8x^2 - 9
+                    \]
+
+                    <p>
+                        Notice how once we multiplied the conjugate pairs together we eliminated the \(i\). This happens
+                        because when you multiply out \((x - 3i)(x + 3i)\) you get
+                        \(x^2 - 3xi + 3xi - 9i^2\). The \(xi\) terms reduce out, and since \(i^2 = -1\) we have
+                        \(-9 \cdot (-1) = 9\), leaving the polynomial shown in green above.
+                    </p>
+
+                    <p>
+                        If we look at the graph of this function, we'd expect it to cross the \(x\)-axis in 4 places.
+                        However, since two of our zeros are complex roots, our graph will only cross the \(x\)-axis at
+                        our two real zeros.
+                    </p>
+
+                    <img
+                        src="images/2_2_2.png"
+                        alt="Coordinate grid from negative 5 to 5 on both axes showing a blue degree-4 polynomial curve of f of x equals x to the fourth plus 8x squared minus 9. The curve has a W-like shape, touching or crossing the x-axis only at x equals negative 1 and x equals 1. The two complex roots produce no additional real crossings. Both ends of the curve rise steeply upward with arrows."
+                        style="max-width:100%; height:auto; display:block; margin: 1rem auto;"
+                    />
+                </div>
+            </div>
+        </section>
+
+    </section><!-- end writing-polynomials -->
+
+    <hr class="divider" role="separator" aria-hidden="true" />
+
+    <!-- ══════════════════════════════════════════
+         DIVISION ALGORITHM
+    ══════════════════════════════════════════ -->
+    <section aria-labelledby="division-heading">
+        <h2 id="division-heading">Long Division &amp; Synthetic Division</h2>
+
+        <p>
+            Now that we've addressed how to find a polynomial given its zeros, let's discuss how we determine if a zero
+            is a factor of a given polynomial. To do this you will need to recall how to use
+            <strong class="blue-text">long division</strong> and <strong class="blue-text">synthetic division</strong>.
+        </p>
+
+        <!-- ── Definition Box: Division Algorithm ── -->
+        <div class="definition-box" role="note" aria-label="The Division Algorithm">
+            <h3>The Division Algorithm</h3>
+            <p>
+                If \(f(x)\) is a polynomial of a specific degree, divided by \(d(x)\) which is a polynomial of a
+                degree less than \(f(x)\) and \(d(x) \neq 0\), then there exists a unique polynomial such that:
+            </p>
+            <div class="display-math">
+                \[f(x) = d(x)\,q(x) + r(x)\]
+            </div>
+            <p>Where:</p>
+            <ul>
+                <li>\(q(x)\) is the quotient</li>
+                <li>\(r(x)\) is the remainder</li>
+            </ul>
+            <p>
+                If \(r(x) = 0\) then we say that \(d(x)\) divides evenly into \(f(x)\), and is therefore a
+                <strong>factor</strong> of \(f(x)\).
+            </p>
+        </div>
+
+        <!-- ── Example: Long Division ── -->
+        <section class="example" aria-labelledby="example-2-2-4">
+            <div class="example-problem">
+                <h3 id="example-2-2-4">Example</h3>
+                <p>
+                    Divide the polynomial \(f(x) = -x^3 + 9x + 6x^4 - x^2 - 3\) by \(d(x) = 3x + 1\). Write your
+                    answer using the division algorithm and determine if \(d(x)\) is a factor of \(f(x)\).
+                </p>
+            </div>
+
+            <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-2-2-4">
+                <span class="toggle-arrow">▼</span>
+                <span>Show Solution</span>
+            </button>
+
+            <div id="solution-2-2-4" class="example-content">
+                <div class="solution">
+                    <h4>Solution</h4>
+
+                    <p>
+                        First, remember that polynomials always need to be written in order from highest exponent to
+                        lowest:
+                    </p>
+                    \[f(x) = 6x^4 - x^3 - x^2 + 9x - 3\]
+
+                    <p>Next, set up the long division and work it through:</p>
+
+                    <!-- Long division rendered as structured math -->
+                    <div class="long-div-display" aria-label="Long division of 6x to the fourth minus x cubed minus x squared plus 9x minus 3 divided by 3x plus 1">
+                        \[
+                            \require{enclose}
+                            \begin{array}{r}
+                                2x^3 - x^2 + 0x + 3 \\[-3pt]
+                                3x+1 \enclose{longdiv}{6x^4 - x^3 - x^2 + 9x - 3} \\[-3pt]
+                                \underline{-(6x^4 + 2x^3)} \phantom{- x^2 + 9x - 3} \\[-3pt]
+                                -3x^3 - x^2 \phantom{{}+ 9x - 3} \\[-3pt]
+                                \underline{-(-3x^3 - x^2)} \phantom{{}+ 9x - 3} \\[-3pt]
+                                0 + 9x - 3 \\[-3pt]
+                                \underline{-(9x + 3)} \\[-3pt]
+                                -6
+                            \end{array}
+                        \]
+                    </div>
+
+                    <p>Writing this using the division algorithm:</p>
+
+                    <div class="algorithm-box">
+                        \[
+                            f(x) = d(x)\,q(x) + r(x)
+                        \]
+                        \[
+                            = (3x+1)(2x^3 - x^2 + 3) + (-6)
+                        \]
+                        \[
+                            = (3x+1)(2x^3 - x^2 + 3) - 6
+                        \]
+                        <p style="margin-top:0.5rem; margin-bottom:0;">This can also be written as:</p>
+                        \[
+                            2x^3 - x^2 + 3 - \frac{6}{3x+1}
+                        \]
+                    </div>
+
+                    <p>
+                        Notice that we have a remainder of \(-6\). This means that \(d(x)\) is <strong>not</strong>
+                        a factor of \(f(x)\).
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── Example: Synthetic Division (x−3, not a factor) ── -->
+        <section class="example" aria-labelledby="example-2-2-5">
+            <div class="example-problem">
+                <h3 id="example-2-2-5">Example</h3>
+                <p>
+                    Use synthetic division to determine if \((x - 3)\) is a factor of
+                    \(f(x) = x^4 - 10x^2 - 2x + 4\).
+                </p>
+            </div>
+
+            <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-2-2-5">
+                <span class="toggle-arrow">▼</span>
+                <span>Show Solution</span>
+            </button>
+
+            <div id="solution-2-2-5" class="example-content">
+                <div class="solution">
+                    <h4>Solution</h4>
+
+                    <p>
+                        First, remember that synthetic division can only be used if \(d(x)\) is of the form
+                        \((x - a)\). We set up the problem, noting the missing \(x^3\) term with a placeholder of 0:
+                    </p>
+
+                    <!-- Setup step -->
+                    <div class="division-wrap">
+                        <div>
+                            <p style="font-weight:bold; margin-bottom:0.5rem;">Setup (coefficients with placeholder):</p>
+                            <table class="syn-div" aria-label="Synthetic division setup for x to the fourth minus 10x squared minus 2x plus 4 divided by x minus 3">
+                                <tbody>
+                                    <tr class="coeff-row">
+                                        <td class="divisor">\(3\)</td>
+                                        <td>\(1\)</td>
+                                        <td>\(0\)</td>
+                                        <td>\(-10\)</td>
+                                        <td>\(-2\)</td>
+                                        <td>\(4\)</td>
+                                    </tr>
+                                    <tr class="mult-row">
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr class="result-row">
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="division-note" role="note">
+                            Remember that we have to account for missing terms using "place holders" and that our
+                            divisor is always the opposite of what we think.
+                        </div>
+                    </div>
+
+                    <p>Working through — remember: add vertically and multiply diagonally.</p>
+
+                    <!-- Completed synthetic division -->
+                    <table class="syn-div" style="margin: 0.8rem auto;" aria-label="Completed synthetic division showing remainder of negative 11">
+                        <tbody>
+                            <tr class="coeff-row">
+                                <td class="divisor">\(3\)</td>
+                                <td>\(1\)</td>
+                                <td>\(0\)</td>
+                                <td>\(-10\)</td>
+                                <td>\(-2\)</td>
+                                <td>\(4\)</td>
+                            </tr>
+                            <tr class="mult-row">
+                                <td></td>
+                                <td></td>
+                                <td>\(3\)</td>
+                                <td>\(9\)</td>
+                                <td>\(-3\)</td>
+                                <td>\(-15\)</td>
+                            </tr>
+                            <tr class="result-row">
+                                <td></td>
+                                <td>\(1\)</td>
+                                <td>\(3\)</td>
+                                <td>\(-1\)</td>
+                                <td>\(-5\)</td>
+                                <td>\(-11\)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <p>The division algorithm gives us:</p>
+                    \[f(x) = (x-3)(x^3 + 3x^2 - x - 5) - 11\]
+                    <p>
+                        Since the remainder is \(-11 \neq 0\), the factor \((x - 3)\) is <strong>not</strong>
+                        a factor of \(f(x)\).
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── Example: Synthetic Division (x−2, is a factor) ── -->
+        <section class="example" aria-labelledby="example-2-2-6">
+            <div class="example-problem">
+                <h3 id="example-2-2-6">Example</h3>
+                <p>Show that \((x - 2)\) is a factor of \(f(x) = 2x^4 + 7x^3 - 4x^2 - 27x - 18\).</p>
+            </div>
+
+            <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-2-2-6">
+                <span class="toggle-arrow">▼</span>
+                <span>Show Solution</span>
+            </button>
+
+            <div id="solution-2-2-6" class="example-content">
+                <div class="solution">
+                    <h4>Solution</h4>
+
+                    <p>
+                        You could use either synthetic division or long division — the choice is yours. Since we
+                        are using a linear factor, we will demonstrate using synthetic division.
+                    </p>
+
+                    <table class="syn-div" style="margin: 0.8rem auto;" aria-label="Synthetic division of 2x to the fourth plus 7x cubed minus 4x squared minus 27x minus 18 by x minus 2, showing remainder of zero">
+                        <tbody>
+                            <tr class="coeff-row">
+                                <td class="divisor">\(2\)</td>
+                                <td>\(2\)</td>
+                                <td>\(7\)</td>
+                                <td>\(-4\)</td>
+                                <td>\(-27\)</td>
+                                <td>\(-18\)</td>
+                            </tr>
+                            <tr class="mult-row">
+                                <td></td>
+                                <td></td>
+                                <td>\(4\)</td>
+                                <td>\(22\)</td>
+                                <td>\(36\)</td>
+                                <td>\(18\)</td>
+                            </tr>
+                            <tr class="result-row">
+                                <td></td>
+                                <td>\(2\)</td>
+                                <td>\(11\)</td>
+                                <td>\(18\)</td>
+                                <td>\(9\)</td>
+                                <td>\(0\)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <p>
+                        Notice how the value in the last position is zero. That means \((x - 2)\) <strong>is</strong>
+                        a factor of \(f(x)\). Therefore:
+                    </p>
+                    \[f(x) = (x-2)(2x^3 + 11x^2 + 18x + 9)\]
+                </div>
+            </div>
+        </section>
+
+    </section><!-- end division -->
+
+    <hr class="divider" role="separator" aria-hidden="true" />
+
+    <!-- ══════════════════════════════════════════
+         REMAINDER THEOREM
+    ══════════════════════════════════════════ -->
+    <section aria-labelledby="remainder-theorem-heading">
+        <h2 id="remainder-theorem-heading">The Remainder Theorem</h2>
+
+        <p>
+            We've looked at examples that have remainders and examples that don't. The remainder in our problems plays
+            an important interpretive role — one captured by the
+            <strong class="blue-text">Remainder Theorem</strong>.
+        </p>
+
+        <!-- ── Definition Box: Remainder Theorem ── -->
+        <div class="definition-box" role="note" aria-label="The Remainder Theorem">
+            <h3>The Remainder Theorem</h3>
+            <p>
+                When a polynomial \(f(x)\) is divided by a linear binomial \(x - a\), then the remainder is:
+            </p>
+            <div class="display-math">
+                \[r = f(a)\]
+            </div>
+            <p><em>If \(r = 0\), then \(a\) is a zero of the polynomial \(f(x)\).</em></p>
+        </div>
+
+        <!-- ── Example: Remainder Theorem ── -->
+        <section class="example" aria-labelledby="example-2-2-7">
+            <div class="example-problem">
+                <h3 id="example-2-2-7">Example</h3>
+                <p>
+                    Use the Remainder Theorem to evaluate \(f(x) = 3x^3 + 8x^2 + 5x - 7\) when \(x = -2\).
+                    Check your answer using synthetic division.
+                </p>
+            </div>
+
+            <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-2-2-7">
+                <span class="toggle-arrow">▼</span>
+                <span>Show Solution</span>
+            </button>
+
+            <div id="solution-2-2-7" class="example-content">
+                <div class="solution">
+                    <h4>Solution</h4>
+
+                    <p>By plugging \(-2\) into \(f(x)\) we get:</p>
+                    \[
+                        f(-2) = 3(-2)^3 + 8(-2)^2 + 5(-2) - 7
+                    \]
+                    \[
+                        = 3(-8) + 8(4) - 10 - 7
+                    \]
+                    \[
+                        = -24 + 32 - 17
+                    \]
+                    \[
+                        = -9
+                    \]
+
+                    <p>
+                        The remainder is \(-9\), which tells us that the point \((-2, -9)\) is a coordinate
+                        on the graph of \(f(x)\).
+                    </p>
+
+                    <!-- TYPO CORRECTED: "syntetic" → "synthetic" -->
+                    <p>Checking using synthetic division should produce the same remainder:</p>
+
+                    <table class="syn-div" style="margin: 0.8rem auto;" aria-label="Synthetic division of 3x cubed plus 8x squared plus 5x minus 7 by x plus 2, confirming remainder of negative 9">
+                        <tbody>
+                            <tr class="coeff-row">
+                                <td class="divisor">\(-2\)</td>
+                                <td>\(3\)</td>
+                                <td>\(8\)</td>
+                                <td>\(5\)</td>
+                                <td>\(-7\)</td>
+                            </tr>
+                            <tr class="mult-row">
+                                <td></td>
+                                <td></td>
+                                <td>\(-6\)</td>
+                                <td>\(-4\)</td>
+                                <td>\(-2\)</td>
+                            </tr>
+                            <tr class="result-row">
+                                <td></td>
+                                <td>\(3\)</td>
+                                <td>\(2\)</td>
+                                <td>\(1\)</td>
+                                <td>\(-9\)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <p>
+                        Notice how both methods produced a remainder of \(r = -9\).
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </section><!-- end remainder-theorem -->
+
+    <hr class="divider" role="separator" aria-hidden="true" />
+
+    <!-- ══════════════════════════════════════════
+         FACTOR THEOREM
+    ══════════════════════════════════════════ -->
+    <section aria-labelledby="factor-theorem-heading">
+        <h2 id="factor-theorem-heading">The Factor Theorem</h2>
+
+        <p>
+            One last theorem for this section that plays an important role in all of this is the
+            <strong class="blue-text">Factor Theorem</strong>, which we've touched on multiple times already.
+        </p>
+
+        <!-- ── Definition Box: Factor Theorem ── -->
+        <div class="definition-box" role="note" aria-label="The Factor Theorem">
+            <h3>The Factor Theorem</h3>
+            <p>
+                A polynomial \(f(x)\) has a factor \((x - a)\) if and only if \(f(a) = 0\).
+            </p>
+        </div>
+
+        <!-- ── Example: Factor Theorem — two factors ── -->
+        <section class="example" aria-labelledby="example-2-2-8">
+            <div class="example-problem">
+                <h3 id="example-2-2-8">Example</h3>
+                <p>
+                    Identify if \((x - 2)\) and \((x - 3)\) are factors of the polynomial
+                    \(f(x) = 2x^4 + 7x^3 - 4x^2 - 27x - 18\).
+                </p>
+            </div>
+
+            <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-2-2-8">
+                <span class="toggle-arrow">▼</span>
+                <span>Show Solution</span>
+            </button>
+
+            <div id="solution-2-2-8" class="example-content">
+                <div class="solution">
+                    <h4>Solution</h4>
+
+                    <p>
+                        Using synthetic division we will evaluate each factor. First we evaluate the factor
+                        \((x - 2)\):
+                    </p>
+
+                    <!-- First synthetic division: x−2 -->
+                    <div class="division-wrap">
+                        <div>
+                            <table class="syn-div" aria-label="Synthetic division of 2x to the fourth plus 7x cubed minus 4x squared minus 27x minus 18 by x minus 2, showing remainder zero">
+                                <tbody>
+                                    <tr class="coeff-row">
+                                        <td class="divisor">\(2\)</td>
+                                        <td>\(2\)</td>
+                                        <td>\(7\)</td>
+                                        <td>\(-4\)</td>
+                                        <td>\(-27\)</td>
+                                        <td>\(-18\)</td>
+                                    </tr>
+                                    <tr class="mult-row">
+                                        <td></td>
+                                        <td></td>
+                                        <td>\(4\)</td>
+                                        <td>\(22\)</td>
+                                        <td>\(36\)</td>
+                                        <td>\(18\)</td>
+                                    </tr>
+                                    <tr class="result-row">
+                                        <td></td>
+                                        <td>\(2\)</td>
+                                        <td>\(11\)</td>
+                                        <td>\(18\)</td>
+                                        <td>\(9\)</td>
+                                        <td>\(0\)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="division-note" role="note">
+                            Notice how we have a remainder of zero. That means that \((x - 2)\) <strong>is</strong>
+                            a factor of our polynomial \(f(x)\).
+                        </div>
+                    </div>
+
+                    <p>
+                        Next, using the polynomial that results from evaluating the first factor, we check the
+                        second factor \((x - 3)\):
+                    </p>
+
+                    <!-- Second synthetic division: x−3 applied to reduced polynomial -->
+                    <div class="division-wrap">
+                        <div>
+                            <table class="syn-div" aria-label="Synthetic division of 2x cubed plus 11x squared plus 18x plus 9 by x minus 3, showing remainder 216">
+                                <tbody>
+                                    <tr class="coeff-row">
+                                        <td class="divisor">\(3\)</td>
+                                        <td>\(2\)</td>
+                                        <td>\(11\)</td>
+                                        <td>\(18\)</td>
+                                        <td>\(9\)</td>
+                                    </tr>
+                                    <tr class="mult-row">
+                                        <td></td>
+                                        <td></td>
+                                        <td>\(6\)</td>
+                                        <td>\(51\)</td>
+                                        <td>\(207\)</td>
+                                    </tr>
+                                    <tr class="result-row">
+                                        <td></td>
+                                        <td>\(2\)</td>
+                                        <td>\(17\)</td>
+                                        <td>\(69\)</td>
+                                        <td>\(216\)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="division-note" role="note">
+                            Notice how this time we have a remainder of 216. That means that \((x - 3)\) is
+                            <strong>not</strong> a factor of our polynomial \(f(x)\).
+                        </div>
+                    </div>
+
+                    <p>
+                        It is important to always check the second factor using the resulting polynomial from the
+                        first. The reason for this will become more apparent in the next section.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </section><!-- end factor-theorem -->
+
+</section><!-- end #polynomial-functions -->
+
+<!-- ══════════════════════════════════════════
+     EXERCISES
+══════════════════════════════════════════ -->
+<section class="exercises-section" role="region" aria-labelledby="exercises-2-2-heading">
+    <h2 id="exercises-2-2-heading" class="subsection-title">Exercises</h2>
+
+    <button class="exercises-header" onclick="toggleExercises(this)" aria-expanded="false" aria-controls="exercises-2-2-content">
+        <span class="toggle-arrow">▼</span>
+        <span>Show Exercises</span>
+    </button>
+
+    <div id="exercises-2-2-content" class="exercises-content" role="region" aria-labelledby="exercises-2-2-heading">
+        <p>Exercises to be added at a later date.</p>
+    </div>
+</section>
+
+</main>
+
+<!-- ── Toggle scripts ── -->
+<script>
+    function toggleExample(button) {
+        const content = button.nextElementSibling;
+        const arrow = button.querySelector('.toggle-arrow');
+
+        if (content.classList.contains('open')) {
+            content.classList.remove('open');
+            arrow.classList.remove('open');
+            button.querySelector('span:last-child').textContent = 'Show Solution';
+            button.setAttribute('aria-expanded', 'false');
+        } else {
+            content.classList.add('open');
+            arrow.classList.add('open');
+            button.querySelector('span:last-child').textContent = 'Hide Solution';
+            button.setAttribute('aria-expanded', 'true');
+        }
+    }
+
+    function toggleExercises(button) {
+        const content = document.getElementById(button.getAttribute('aria-controls'));
+        const arrow = button.querySelector('.toggle-arrow');
+
+        if (content.classList.contains('open')) {
+            content.classList.remove('open');
+            arrow.classList.remove('open');
+            button.querySelector('span:last-child').textContent = 'Show Exercises';
+            button.setAttribute('aria-expanded', 'false');
+        } else {
+            content.classList.add('open');
+            arrow.classList.add('open');
+            button.querySelector('span:last-child').textContent = 'Hide Exercises';
+            button.setAttribute('aria-expanded', 'true');
+        }
+    }
+</script>
+
+<!-- ── TOC loader ── -->
+<script>
+    fetch('toc.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('toc-placeholder').innerHTML = data;
+
+            const chapterButtons = document.querySelectorAll('.toc-chapter');
+            chapterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const expanded = button.getAttribute('aria-expanded') === 'true';
+                    button.setAttribute('aria-expanded', !expanded);
+                    const submenu = button.nextElementSibling;
+                    submenu.classList.toggle('open');
+                });
+            });
+        });
+</script>
+
+</body>
+</html>

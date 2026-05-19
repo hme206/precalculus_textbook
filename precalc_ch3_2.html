@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CH 3.2 – Logarithmic Functions and Their Graphs</title>
+
+    <!-- MathJax configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)'], ['$', '$']],
+                displayMath: [['\\[', '\\]'], ['$$', '$$']],
+                packages: {'[+]': ['cancel', 'color']},
+                macros: {
+                    cancel: ['\\enclose{horizontalstrike}{#1}', 1]
+                }
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            },
+            loader: {
+                load: ['input/tex', 'output/chtml', '[tex]/cancel', '[tex]/color']
+            }
+        };
+    </script>
+    <script id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+
+    <link rel="stylesheet" href="styles.css" />
+
+    <style>
+        /* ── Collapsible exercises ── */
+        .exercises-section { margin: 25px 0; }
+
+        .exercises-header {
+            background-color: #33AB2B;
+            color: white;
+            padding: 12px 20px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+            border-radius: 4px;
+            transition: background-color 0.2s ease;
+            border: none;
+            font-size: 1em;
+            width: 100%;
+        }
+        .exercises-header:hover { background-color: #2a8922; }
+
+        .exercises-content {
+            display: none;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-top: none;
+            border-radius: 0 0 6px 6px;
+            padding: 20px;
+        }
+        .exercises-content.open { display: block; }
+
+        /* ── Utility colours ── */
+        .blue-text  { color: #0066cc; }
+        .red-text   { color: #c0392b; font-weight: bold; }
+        .green-text { color: #33AB2B; font-weight: bold; }
+
+        /* ── Step heading ── */
+        .step-heading {
+            color: #0066cc;
+            font-weight: bold;
+            font-size: 1em;
+            margin-top: 1.2rem;
+            margin-bottom: 0.4rem;
+        }
+
+        /* ── Center utility ── */
+        .center-text {
+            text-align: center;
+            margin: 1rem 0;
+        }
+
+        /* ── Two-column layout ── */
+        .division-wrap {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: start;
+            margin: 1.5rem 0;
+        }
+        @media (max-width: 640px) {
+            .division-wrap { grid-template-columns: 1fr; }
+        }
+
+        /* ── Four-column problem list ── */
+        .four-col-problems {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin: 1rem 0 1rem 0;
+            list-style: none;
+            padding: 0;
+            counter-reset: prob-counter;
+        }
+        .four-col-problems li {
+            counter-increment: prob-counter;
+        }
+        .four-col-problems li::before {
+            content: counter(prob-counter) ". ";
+            font-weight: bold;
+            color: #333;
+        }
+        @media (max-width: 640px) {
+            .four-col-problems { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        /* ── Two-column problem list ── */
+        .two-col-problems {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin: 1rem 0 1rem 0;
+            list-style: none;
+            padding: 0;
+            counter-reset: prob-counter;
+        }
+        .two-col-problems li {
+            counter-increment: prob-counter;
+        }
+        .two-col-problems li::before {
+            content: counter(prob-counter) ". ";
+            font-weight: bold;
+            color: #333;
+        }
+        @media (max-width: 480px) {
+            .two-col-problems { grid-template-columns: 1fr; }
+        }
+
+        /* ── Graph sub-example block ── */
+        .graph-example {
+            margin: 1.5rem 0;
+            padding: 1.2rem;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+        }
+        .graph-example h4 {
+            color: #33AB2B;
+            margin-top: 0;
+            margin-bottom: 0.8rem;
+        }
+
+        /* ── Logarithm table (y-value approach) ── */
+        .log-table {
+            border-collapse: collapse;
+            margin: 0.8rem auto;
+            font-size: 0.95em;
+        }
+        .log-table th {
+            background-color: #f0f8ed;
+            color: #33AB2B;
+            font-weight: bold;
+            padding: 8px 14px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+        .log-table td {
+            padding: 8px 14px;
+            border: 1px solid #ccc;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        /* ── Definition box extras ── */
+        .definition-box ol {
+            margin-left: 20px;
+            margin-bottom: 10px;
+        }
+        .definition-box ol li {
+            margin-bottom: 10px;
+        }
+        .definition-box .big-formula {
+            font-size: 1.3em;
+            font-weight: bold;
+            text-align: center;
+            margin: 0.8rem 0;
+        }
+
+        /* ── Scrollable wrapper ── */
+        .table-scroll { overflow-x: auto; margin: 1rem 0; }
+
+        /* ── Application two-col calculation blocks ── */
+        .calc-block {
+            background-color: #f0f8ed;
+            border: 1px solid #33AB2B;
+            border-radius: 6px;
+            padding: 1rem 1.2rem;
+        }
+        .calc-block p {
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+
+<div id="toc-placeholder"></div>
+
+<main class="container">
+
+<section id="logarithmic-functions" aria-labelledby="section-heading">
+    <h1 id="section-heading">CH 3.2 – Logarithmic Functions and Their Graphs</h1>
+
+    <p>
+        In the previous section we learned about exponential functions and we discussed briefly
+        that they are one-to-one. If you recall from Chapter 1, a function is one-to-one if its
+        inverse is also a function. The inverse of an exponential function is a
+        <strong class="blue-text">logarithmic function with base <em>b</em></strong>.
+    </p>
+
+    <!-- Definition box: Logarithmic Function -->
+    <div class="definition-box" role="note" aria-label="Definition: Logarithmic Function base b">
+        <h3>Logarithmic Function</h3>
+        <p>
+            Assume that \(x > 0\) and base \(b > 0\) where \(b \neq 1\). Then the
+            <strong>logarithmic function base \(b\)</strong> is:
+        </p>
+        <p class="big-formula">
+            \(y = \log_b x \iff x = b^y\)
+        </p>
+        <p>
+            \(y = \log_b x\) is read as <em>"log base \(b\) of \(x\)"</em>.
+        </p>
+    </div>
+
+    <p>
+        Recall that in the previous section we also had a special character for the natural base.
+        In logarithmic functions we also have a special notation for that situation — we call it
+        the <strong class="blue-text">Natural Logarithm</strong>, such that
+    </p>
+    \[\log_e x = \ln x\]
+    <p>
+        Instead of saying "log base \(e\) of \(x\)" we simply call this the "natural log of
+        \(x\)." By default we work in a base-10 system, which means that when we write
+        \(\log\) without a base, it is understood to be \(\log_{10}\).
+    </p>
+
+    <hr class="divider" role="separator" aria-hidden="true" />
+
+    <!-- ══════════════════════════════════════════
+         EVALUATE EXAMPLE
+    ══════════════════════════════════════════ -->
+    <section class="example" aria-labelledby="example-3-2-1-heading">
+        <div class="example-problem">
+            <h3 id="example-3-2-1-heading">Example</h3>
+            <p>Evaluate the following expressions.</p>
+            <ol class="four-col-problems" aria-label="Four logarithmic expressions to evaluate">
+                <li>\(\log_2 32\)</li>
+                <li>\(\ln 5\)</li>
+                <li>\(\log_5 25\)</li>
+                <li>\(\log 150\)</li>
+            </ol>
+        </div>
+
+        <button class="solution-header"
+                onclick="toggleExample(this)"
+                aria-expanded="false"
+                aria-controls="solution-3-2-1">
+            <span class="toggle-arrow">▼</span>
+            <span>Show Solution</span>
+        </button>
+
+        <div id="solution-3-2-1" class="example-content">
+            <div class="solution">
+                <h4>Solution</h4>
+
+                <ol>
+                    <li>
+                        <p>
+                            To begin, we can write the function as an exponential function, since
+                            we cannot enter \(\log_2 32\) directly into a scientific calculator:
+                        </p>
+                        \[\log_2 32 \rightarrow 32 = 2^y\]
+                        <p>
+                            We need to ask: two to what power gives 32? Since
+                            \(2 \times 2 \times 2 \times 2 \times 2 = 32\), we get \(y = 5\).
+                        </p>
+                    </li>
+
+                    <li>
+                        <p>
+                            This one is simple enough to plug into the calculator by entering "ln"
+                            followed by 5:
+                        </p>
+                        \[\ln 5 = 1.609437912\]
+                    </li>
+
+                    <li>
+                        <p>
+                            Once again we rewrite as an exponential function:
+                        </p>
+                        \[\log_5 25 \rightarrow 25 = 5^y\]
+                        <p>
+                            We should know that \(5^2 = 25\), thus \(y = 2\).
+                        </p>
+                    </li>
+
+                    <li>
+                        <p>
+                            We can evaluate this by substituting it into the calculator. Since no
+                            base is written, we assume base 10 by default. Pressing the "log" key
+                            followed by 150 gives:
+                        </p>
+                        \[\log 150 = 2.176091259\]
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </section>
+
+    <p>
+        Most of that was fairly straightforward, but we are going to build upon those ideas — and
+        the conversion to an exponential function will be crucial when graphing logarithmic
+        functions.
+    </p>
+
+    <p>
+        Before we get into graphing logarithmic functions, let's discuss some special properties
+        about them.
+    </p>
+
+    <!-- Definition box: Properties of Logarithms -->
+    <div class="definition-box" role="note" aria-label="Properties of Logarithms: four numbered properties">
+        <h3>Properties of Logarithms</h3>
+        <ol>
+            <li>\(\log_b 1 = 0\), since \(b^0 = 1\)</li>
+            <li>\(\log_b b = 1\), since \(b^1 = b\)</li>
+            <li>
+                \(\log_b b^x = x\) and \(b^{\log_b x} = x\) &nbsp;&nbsp;
+                <em>(Inverse Property)</em>
+            </li>
+            <li>
+                If \(\log_b x = \log_b y\), then \(x = y\) &nbsp;&nbsp;
+                <em>(One-to-One Property)</em>
+            </li>
+        </ol>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+         SIMPLIFY EXAMPLE
+    ══════════════════════════════════════════ -->
+    <section class="example" aria-labelledby="example-3-2-2-heading">
+        <div class="example-problem">
+            <h3 id="example-3-2-2-heading">Example</h3>
+            <p>Simplify the following expressions.</p>
+            <ol class="four-col-problems" aria-label="Four logarithmic expressions to simplify using properties">
+                <li>\(\log_5 5\)</li>
+                <li>\(\ln 1\)</li>
+                <li>\(\log_6 6^7\)</li>
+                <li>\(\log_4(x+2) = \log_4(2x)\)</li>
+            </ol>
+        </div>
+
+        <button class="solution-header"
+                onclick="toggleExample(this)"
+                aria-expanded="false"
+                aria-controls="solution-3-2-2">
+            <span class="toggle-arrow">▼</span>
+            <span>Show Solution</span>
+        </button>
+
+        <div id="solution-3-2-2" class="example-content">
+            <div class="solution">
+                <h4>Solution</h4>
+                <ol>
+                    <li>
+                        <p>
+                            This follows by Property 2. Thus \(\log_5 5 = 1\).
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            The properties that apply for logarithms are the same as the properties
+                            of natural logarithms, thus this follows Property 1:
+                            \(\ln 1 = 0\).
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            This is an example of Property 3: \(\log_6 6^7 = 7\).
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            This is an example of Property 4. Since
+                            \(\log_4(x+2) = \log_4(2x)\), then \(x + 2 = 2x\). Subtracting
+                            \(x\) from both sides gives \(x = 2\).
+                        </p>
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider" role="separator" aria-hidden="true" />
+
+    <!-- ══════════════════════════════════════════
+         GRAPHS OF LOGARITHMIC FUNCTIONS
+    ══════════════════════════════════════════ -->
+    <section aria-labelledby="graphs-heading">
+        <h2 id="graphs-heading">Graphs of Logarithmic Functions</h2>
+
+        <p>
+            When it comes to graphing logarithms we have to take a somewhat backwards approach.
+            As we've mentioned several times, logarithms are the inverses of exponential functions.
+            This is important because it essentially flips our values around. When evaluating
+            logarithms, even of whole numbers, the answer most often comes out as a long decimal.
+            Since graphing functions with long decimal inputs is difficult, we need to employ a
+            backwards approach. But before we get to that, let's look at the properties of
+            logarithmic graphs.
+        </p>
+
+        <!-- Properties of Logarithmic Graphs — image -->
+        <img
+            src="images/3_2_1.png"
+            alt="A gray definition box titled Properties of Logarithmic Graphs. The box states: suppose f of x equals log base b of x. Three bullet points read: the domain of f is 0 to positive infinity and the range of f is negative infinity to positive infinity; the point (1, 0) is on the graph and x equals 0 is a vertical asymptote; f is one-to-one, continuous, and smooth. Below the bullet points are two side-by-side coordinate planes. The left plane is labeled if b is greater than 1: f is always increasing, as x approaches 0 from the right f of x approaches negative infinity, and as x approaches positive infinity f of x approaches positive infinity. A blue curve rises from the lower left near the vertical asymptote and increases gradually to the right. The right plane is labeled if 0 is less than b which is less than 1: f is always decreasing, as x approaches 0 from the right f of x approaches positive infinity, and as x approaches positive infinity f of x approaches negative infinity. A blue curve falls from the upper left near the vertical asymptote and decreases gradually to the right."
+            style="max-width:100%; height:auto; display:block; margin: 1rem auto;"
+        />
+
+        <p>
+            Notice how the domain and range are the opposite of the domain and range of the
+            exponential function base \(b\). This is because they are inverse functions. The
+            exponential function reflects over the \(y\)-axis and the logarithmic function reflects
+            over the \(x\)-axis. These are property traits that are important — take note of the
+            slight differences between an exponential and a logarithmic function, as they play
+            important roles for each other.
+        </p>
+
+        <p>
+            When graphing logarithmic functions it is important to note that they have
+            <strong>vertical asymptotes</strong> — if the graph is transformed left or right, the
+            asymptote moves with it. To graph logarithmic functions we:
+        </p>
+
+        <ol>
+            <li>
+                Convert the logarithm to an exponential function using the property that
+                \(\log_b x = y \iff b^y = x\).
+            </li>
+            <li>
+                Create a table and plug in \(y\)-values to find \(x\)-values.
+                <em>(Notice how we are plugging in for \(y\), not \(x\).)</em>
+            </li>
+            <li>
+                Plot the graph using the points and the vertical asymptote.
+            </li>
+        </ol>
+
+        <!-- ── Graphing Example ── -->
+        <section class="example" aria-labelledby="example-3-2-3-heading">
+            <div class="example-problem">
+                <h3 id="example-3-2-3-heading">Example</h3>
+                <p>Graph each of the logarithms below.</p>
+                <ol class="two-col-problems" aria-label="Four logarithmic functions to graph">
+                    <li>\(f(x) = \log_2 x\)</li>
+                    <li>\(g(x) = \log_5(x-1)\)</li>
+                    <li>\(h(x) = -2 - \log_3 x\)</li>
+                    <li>\(k(x) = \ln(x+2)\)</li>
+                </ol>
+            </div>
+
+            <button class="solution-header"
+                    onclick="toggleExample(this)"
+                    aria-expanded="false"
+                    aria-controls="solution-3-2-3">
+                <span class="toggle-arrow">▼</span>
+                <span>Show Solution</span>
+            </button>
+
+            <div id="solution-3-2-3" class="example-content">
+                <div class="solution">
+                    <h4>Solution</h4>
+
+                    <!-- Part 1: f(x) = log₂ x -->
+                    <div class="graph-example">
+                        <h4>1. \(f(x) = \log_2 x\)</h4>
+                        <p>First, convert \(f(x)\) to an exponential function:</p>
+                        \[f(x) = \log_2 x \iff 2^y = x\]
+                        <p>
+                            Next, create a table where we choose \(y\)-values to plug into the
+                            exponential function to find the \(x\)-values. Remember that the
+                            points are still \((x, y)\) — do not make your table backwards or
+                            you will confuse yourself.
+                        </p>
+                        <div class="table-scroll">
+                            <table class="log-table" aria-label="Table for f of x equals log base 2 of x, showing exponential form 2 to the y equals x, selected y values, and resulting ordered pairs (x, y)">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">\(2^y = x\)</th>
+                                        <th scope="col">\(y\)</th>
+                                        <th scope="col">\((x,\, y)\)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>\(2^{-2}\)</td>
+                                        <td>\(-2\)</td>
+                                        <td>\((0.25,\,-2)\)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>\(2^{-1}\)</td>
+                                        <td>\(-1\)</td>
+                                        <td>\((0.5,\,-1)\)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>\(2^{0}\)</td>
+                                        <td>\(0\)</td>
+                                        <td>\((1,\,0)\)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>\(2^{1}\)</td>
+                                        <td>\(1\)</td>
+                                        <td>\((2,\,1)\)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>\(2^{2}\)</td>
+                                        <td>\(2\)</td>
+                                        <td>\((4,\,2)\)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p>
+                            Plot the points, draw the vertical asymptote at \(x = 0\), and
+                            connect with a smooth curve.
+                        </p>
+                        <img
+                            src="images/3_2_2.png"
+                            alt="A coordinate grid with x-axis ranging from negative 1 to 5 and y-axis ranging from negative 3 to 5, with gridlines every 0.5 units. A blue curve represents f of x equals log base 2 of x. The curve rises steeply from near the vertical asymptote, passing through plotted blue points at (0.5, negative 1), (1, 0), (2, 1), and (4, 2), then continues increasing gradually to the right. A dashed red vertical line marks the asymptote at x equals 0."
+                            style="max-width:100%; height:auto; display:block; margin: 1rem auto;"
+                        />
+                    </div>
+
+                    <!-- Part 2: g(x) = log₅(x−1) -->
+                    <div class="graph-example">
+                        <h4>2. \(g(x) = \log_5(x-1)\)</h4>
+                        <p>Convert \(g(x)\) to an exponential function:</p>
+                        \[\begin{aligned}
+                            g(x) = \log_5(x-1) &\iff 5^y = x - 1 \\
+                            5^y + 1 &= x
+                        \end{aligned}\]
+                        <div class="table-scroll">
+                            <table class="log-table" aria-label="Table for g of x equals log base 5 of the quantity x minus 1, showing exponential form 5 to the y plus 1 equals x, selected y values, and resulting ordered pairs (x, y)">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">\(5^y + 1 = x\)</th>
+                                        <th scope="col">\(y\)</th>
+                                        <th scope="col">\((x,\, y)\)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>\(5^{-1}+1\)</td>
+                                        <td>\(-1\)</td>
+                                        <td>\((1.2,\,-1)\)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>\(5^{0}+1\)</td>
+                                        <td>\(0\)</td>
+                                        <td>\((2,\,0)\)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>\(5^{1}+1\)</td>
+                                        <td>\(1\)</td>
+                                        <td>\((6,\,1)\)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>\(5^{2}+1\)</td>
+                                        <td>\(2\)</td>
+                                        <td>\((26,\,2)\)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>\(5^{3}+1\)</td>
+                                        <td>\(3\)</td>
+                                        <td>\((126,\,3)\)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p>
+                            Plot the points and draw the vertical asymptote. Note that the graph
+                            shifted 1 unit to the right, so the asymptote also shifts to
+                            \(x = 1\).
+                        </p>
+                        <img
+                            src="images/3_2_3.png"
+                            alt="A coordinate grid with x-axis ranging from negative 1 to 5 and y-axis ranging from negative 3 to 5, with gridlines every 0.5 units. A blue curve represents g of x equals log base 5 of the quantity x minus 1. The curve rises steeply from near the vertical asymptote at x equals 1, passing through plotted blue points at (1.2, negative 1), (2, 0), and (3, approximately 0.5), then increases very gradually to the right. A dashed red vertical line marks the asymptote at x equals 1, shifted one unit right from the y-axis."
+                            style="max-width:100%; height:auto; display:block; margin: 1rem auto;"
+                        />
+                    </div>
+
+                    <!-- Part 3: h(x) = −2 − log₃ x -->
+                    <div class="graph-example">
+                        <h4>3. \(h(x) = -2 - \log_3 x\)</h4>
+                        <p>Convert \(h(x)\) to an exponential function:</p>
+                        \[\begin{aligned}
+                            y &= -2 - \log_3 x \\
+                            y + 2 &= -\log_3 x \\
+                            -y - 2 &= \log_3 x \iff 3^{-y-2} = x
+                        \end{aligned}\]
+                        <div class="table-scroll">
+                            <table class="log-table" aria-label="Table for h of x equals negative 2 minus log base 3 of x, showing exponential form 3 to the power of negative y minus 2 equals x, selected y values, and resulting ordered pairs (x, y)">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">\(3^{-y-2} = x\)</th>
+                                        <th scope="col">\(y\)</th>
+                                        <th scope="col">\((x,\, y)\)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>\(3^{-(-4)-2} = 3^{2}\)</td>
+                                        <td>\(-4\)</td>
+                                        <td>\((9,\,-4)\)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>\(3^{-(-3)-2} = 3^{1}\)</td>
+                                        <td>\(-3\)</td>
+                                        <td>\((3,\,-3)\)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>\(3^{-(-2)-2} = 3^{0}\)</td>
+                                        <td>\(-2\)</td>
+                                        <td>\((1,\,-2)\)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>\(3^{-(-1)-2} = 3^{-1}\)</td>
+                                        <td>\(-1\)</td>
+                                        <td>\((0.33,\,-1)\)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>\(3^{-(0)-2} = 3^{-2}\)</td>
+                                        <td>\(0\)</td>
+                                        <td>\((0.11,\,0)\)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p>
+                            Plot the points, draw the vertical asymptote at \(x = 0\), and connect
+                            with a smooth curve.
+                        </p>
+                        <img
+                            src="images/3_2_4.png"
+                            alt="A coordinate grid with x-axis ranging from negative 1 to 5 and y-axis ranging from negative 3 to 5, with gridlines every 0.5 units. A blue curve represents h of x equals negative 2 minus log base 3 of x. The curve falls from the upper left near the vertical asymptote, passing through plotted blue points at approximately (0.11, 0), (0.33, negative 1), (1, negative 2), (3, negative 3), and (4.5, approximately negative 2), and decreases gradually as x increases. A dashed red vertical line marks the asymptote at x equals 0. The graph is reflected over the x-axis and shifted downward two units compared to a standard logarithm."
+                            style="max-width:100%; height:auto; display:block; margin: 1rem auto;"
+                        />
+                        <p>
+                            Notice how this graph was reflected over the \(x\)-axis and then shifted
+                            down two whole units.
+                        </p>
+                    </div>
+
+                    <!-- Part 4: k(x) = ln(x+2) -->
+                    <div class="graph-example">
+                        <h4>4. \(k(x) = \ln(x+2)\)</h4>
+                        <p>Convert \(k(x)\) to an exponential function:</p>
+                        \[\begin{aligned}
+                            k(x) = \ln(x+2) &\iff e^y = x + 2 \\
+                            e^y - 2 &= x
+                        \end{aligned}\]
+                        <div class="table-scroll">
+                            <table class="log-table" aria-label="Table for k of x equals the natural log of the quantity x plus 2, showing exponential form e to the y minus 2 equals x, selected y values, and resulting ordered pairs (x, y)">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">\(e^y - 2 = x\)</th>
+                                        <th scope="col">\(y\)</th>
+                                        <th scope="col">\((x,\, y)\)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>\(e^{-2} - 2\)</td>
+                                        <td>\(-2\)</td>
+                                        <td>\((-1.86,\,-2)\)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>\(e^{-1} - 2\)</td>
+                                        <td>\(-1\)</td>
+                                        <td>\((-1.63,\,-1)\)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>\(e^{0} - 2\)</td>
+                                        <td>\(0\)</td>
+                                        <td>\((-1,\,0)\)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>\(e^{1} - 2\)</td>
+                                        <td>\(1\)</td>
+                                        <td>\((0.718,\,1)\)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>\(e^{2} - 2\)</td>
+                                        <td>\(2\)</td>
+                                        <td>\((5.389,\,2)\)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p>
+                            Plot the points and draw the vertical asymptote. Note that the graph
+                            shifted 2 units to the left, so the asymptote moves to \(x = -2\).
+                        </p>
+                        <img
+                            src="images/3_2_5.png"
+                            alt="A coordinate grid with x-axis ranging from negative 3 to 5 and y-axis ranging from negative 3 to 5, with gridlines every 0.5 units. A blue curve represents k of x equals the natural log of the quantity x plus 2. The curve rises steeply from near the vertical asymptote at x equals negative 2, passing through plotted blue points at approximately (negative 0.93, negative 1), (negative 0.85, negative 0.5), (negative 0.5, 0), (0.36, 0.5), and (2.70, 1), then increases gradually to the right. A dashed red vertical line marks the asymptote at x equals negative 2, shifted two units left from the y-axis."
+                            style="max-width:100%; height:auto; display:block; margin: 1rem auto;"
+                        />
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </section><!-- end graphs section -->
+
+    <hr class="divider" role="separator" aria-hidden="true" />
+
+    <!-- ══════════════════════════════════════════
+         APPLICATIONS
+    ══════════════════════════════════════════ -->
+    <section aria-labelledby="applications-heading">
+        <h2 id="applications-heading">Applications</h2>
+
+        <p>
+            Just like with exponential functions, logarithms can also be applied to the real world.
+        </p>
+
+        <!-- ── Cell-phone Example ── -->
+        <section class="example" aria-labelledby="example-3-2-4-heading">
+            <div class="example-problem">
+                <h3 id="example-3-2-4-heading">Example</h3>
+                <p>
+                    The percent of households in the United States that do not have a land-line
+                    telephone service from the years 2005 to 2014 can be approximated by the model
+                </p>
+                \[P(t) = -3.42 + 1.297(t)\ln(t)\]
+                <p>
+                    where \(t\) is the number of years since 2000. Approximate the number of
+                    households that only have a cell phone in the years 2010 and 2020.
+                </p>
+            </div>
+
+            <button class="solution-header"
+                    onclick="toggleExample(this)"
+                    aria-expanded="false"
+                    aria-controls="solution-3-2-4">
+                <span class="toggle-arrow">▼</span>
+                <span>Show Solution</span>
+            </button>
+
+            <div id="solution-3-2-4" class="example-content">
+                <div class="solution">
+                    <h4>Solution</h4>
+                    <p>
+                        First, find how many years since 2000 each target year represents:
+                    </p>
+                    \[2010 - 2000 = 10 \qquad \text{and} \qquad 2020 - 2000 = 20\]
+                    <p>
+                        We evaluate the expression at \(t = 10\) and \(t = 20\):
+                    </p>
+
+                    <div class="division-wrap" role="group" aria-label="Evaluating the cell-phone model at t equals 10 and t equals 20">
+                        <div class="calc-block">
+                            \[\begin{aligned}
+                                P(10) &= -3.42 + 1.297(10)\ln(10) \\
+                                      &= -3.42 + 12.97(2.302585093) \\
+                                      &\approx 26.44
+                            \end{aligned}\]
+                            <p>
+                                This suggests that in 2010 roughly <strong>26%</strong> of all
+                                households had only a cell phone and no land-line.
+                            </p>
+                        </div>
+                        <div class="calc-block">
+                            \[\begin{aligned}
+                                P(20) &= -3.42 + 1.297(20)\ln(20) \\
+                                      &= -3.42 + 25.94(2.995732274) \\
+                                      &\approx 74.29
+                            \end{aligned}\]
+                            <p>
+                                This suggests that in 2020 roughly <strong>74%</strong> of all
+                                households had only a cell phone and no land-line. Notice how much
+                                those numbers increased in just 10 years.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </section><!-- end applications -->
+
+</section><!-- end #logarithmic-functions -->
+
+<!-- ══════════════════════════════════════════
+     EXERCISES
+══════════════════════════════════════════ -->
+<section class="exercises-section" role="region" aria-labelledby="exercises-3-2-heading">
+    <h2 id="exercises-3-2-heading" class="subsection-title">Exercises</h2>
+
+    <button class="exercises-header"
+            onclick="toggleExercises(this)"
+            aria-expanded="false"
+            aria-controls="exercises-3-2-content">
+        <span class="toggle-arrow">▼</span>
+        <span>Show Exercises</span>
+    </button>
+
+    <div id="exercises-3-2-content"
+         class="exercises-content"
+         role="region"
+         aria-labelledby="exercises-3-2-heading">
+        <p>Exercises to be added at a later date.</p>
+    </div>
+</section>
+
+</main>
+
+<!-- ── Toggle scripts ── -->
+<script>
+    function toggleExample(button) {
+        const content = button.nextElementSibling;
+        const arrow = button.querySelector('.toggle-arrow');
+
+        if (content.classList.contains('open')) {
+            content.classList.remove('open');
+            arrow.classList.remove('open');
+            button.querySelector('span:last-child').textContent = 'Show Solution';
+            button.setAttribute('aria-expanded', 'false');
+        } else {
+            content.classList.add('open');
+            arrow.classList.add('open');
+            button.querySelector('span:last-child').textContent = 'Hide Solution';
+            button.setAttribute('aria-expanded', 'true');
+        }
+    }
+
+    function toggleExercises(button) {
+        const content = document.getElementById(button.getAttribute('aria-controls'));
+        const arrow = button.querySelector('.toggle-arrow');
+
+        if (content.classList.contains('open')) {
+            content.classList.remove('open');
+            arrow.classList.remove('open');
+            button.querySelector('span:last-child').textContent = 'Show Exercises';
+            button.setAttribute('aria-expanded', 'false');
+        } else {
+            content.classList.add('open');
+            arrow.classList.add('open');
+            button.querySelector('span:last-child').textContent = 'Hide Exercises';
+            button.setAttribute('aria-expanded', 'true');
+        }
+    }
+</script>
+
+<!-- ── TOC loader ── -->
+<script>
+    fetch('toc.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('toc-placeholder').innerHTML = data;
+
+            const chapterButtons = document.querySelectorAll('.toc-chapter');
+            chapterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const expanded = button.getAttribute('aria-expanded') === 'true';
+                    button.setAttribute('aria-expanded', !expanded);
+                    const submenu = button.nextElementSibling;
+                    submenu.classList.toggle('open');
+                });
+            });
+        });
+</script>
+
+</body>
+</html>

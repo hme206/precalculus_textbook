@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CH 3.3 – Properties of Logarithms</title>
+
+    <!-- MathJax configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)'], ['$', '$']],
+                displayMath: [['\\[', '\\]'], ['$$', '$$']],
+                packages: {'[+]': ['cancel', 'color']},
+                macros: {
+                    cancel: ['\\enclose{horizontalstrike}{#1}', 1]
+                }
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            },
+            loader: {
+                load: ['input/tex', 'output/chtml', '[tex]/cancel', '[tex]/color']
+            }
+        };
+    </script>
+    <script id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+
+    <link rel="stylesheet" href="styles.css" />
+
+    <style>
+        /* ── Collapsible exercises ── */
+        .exercises-section { margin: 25px 0; }
+
+        .exercises-header {
+            background-color: #33AB2B;
+            color: white;
+            padding: 12px 20px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+            border-radius: 4px;
+            transition: background-color 0.2s ease;
+            border: none;
+            font-size: 1em;
+            width: 100%;
+        }
+        .exercises-header:hover { background-color: #2a8922; }
+
+        .exercises-content {
+            display: none;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-top: none;
+            border-radius: 0 0 6px 6px;
+            padding: 20px;
+        }
+        .exercises-content.open { display: block; }
+
+        /* ── Utility colours ── */
+        .blue-text  { color: #0066cc; }
+        .red-text   { color: #c0392b; font-weight: bold; }
+        .green-text { color: #33AB2B; font-weight: bold; }
+
+        /* ── Center utility ── */
+        .center-text {
+            text-align: center;
+            margin: 1rem 0;
+        }
+
+        /* ── Two-column layout ── */
+        .division-wrap {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: start;
+            margin: 1.5rem 0;
+        }
+        @media (max-width: 640px) {
+            .division-wrap { grid-template-columns: 1fr; }
+        }
+
+        /* ── Three-column formula grid (Change-of-Base) ── */
+        .three-col-formula {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin: 1.2rem 0;
+            text-align: center;
+        }
+        .three-col-formula .formula-cell {
+            background-color: #ffffff;
+            border: 1px solid #33AB2B;
+            border-radius: 6px;
+            padding: 0.8rem 1rem;
+        }
+        .three-col-formula .formula-cell strong {
+            display: block;
+            color: #33AB2B;
+            margin-bottom: 0.4rem;
+            font-size: 1em;
+        }
+        @media (max-width: 600px) {
+            .three-col-formula { grid-template-columns: 1fr; }
+        }
+
+        /* ── Two-column problem list ── */
+        .two-col-problems {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin: 0.8rem 0;
+            list-style: none;
+            padding: 0;
+            counter-reset: prob-counter;
+        }
+        .two-col-problems li {
+            counter-increment: prob-counter;
+        }
+        .two-col-problems li::before {
+            content: counter(prob-counter) ". ";
+            font-weight: bold;
+            color: #333;
+        }
+        @media (max-width: 480px) {
+            .two-col-problems { grid-template-columns: 1fr; }
+        }
+
+        /* ── Annotated stepped solution ── */
+        /* Main wrapper: steps column (wider) + annotation column */
+        .annotated-solution {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 0 1.5rem;
+            align-items: start;
+            margin: 1rem 0;
+        }
+        @media (max-width: 600px) {
+            .annotated-solution { grid-template-columns: 1fr; }
+            .annotated-solution .annot-col { display: none; }
+        }
+
+        /* Each step row spans both columns */
+        .annot-row {
+            display: contents; /* participates in parent grid */
+        }
+
+        /* Step cell (left) */
+        .annot-step {
+            padding: 0.25rem 0;
+            line-height: 1.9;
+        }
+
+        /* Annotation cell (right) */
+        .annot-label {
+            padding: 0.25rem 0;
+            color: #c0392b;
+            font-style: italic;
+            font-weight: bold;
+            white-space: nowrap;
+            line-height: 1.9;
+            font-size: 0.92em;
+        }
+
+        /* Separator between sub-problems inside one solution block */
+        .sub-divider {
+            grid-column: 1 / -1;
+            border-top: 1px dashed #ccc;
+            margin: 0.8rem 0;
+        }
+
+        /* Sub-problem label */
+        .sub-label {
+            grid-column: 1 / -1;
+            font-weight: bold;
+            color: #33AB2B;
+            margin-bottom: 0.2rem;
+            font-size: 1em;
+        }
+
+        /* ── Definition box extras ── */
+        .definition-box ol {
+            margin-left: 20px;
+            margin-bottom: 10px;
+        }
+        .definition-box ol li {
+            margin-bottom: 12px;
+        }
+        .definition-box .rule-formula {
+            font-size: 1.15em;
+            margin-left: 1rem;
+        }
+
+        /* ── Inline solution pairs for short examples ── */
+        .solution-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem 2rem;
+            margin: 0.5rem 0 1rem 0;
+        }
+        @media (max-width: 480px) {
+            .solution-grid { grid-template-columns: 1fr; }
+        }
+        .solution-grid .sol-item {
+            padding: 0.4rem 0;
+        }
+
+        /* ── Scrollable wrapper ── */
+        .table-scroll { overflow-x: auto; margin: 1rem 0; }
+    </style>
+</head>
+<body>
+
+<div id="toc-placeholder"></div>
+
+<main class="container">
+
+<section id="properties-logarithms" aria-labelledby="section-heading">
+    <h1 id="section-heading">CH 3.3 – Properties of Logarithms</h1>
+
+    <p>
+        They say you have to learn to crawl before you can walk. In mathematics it is no different.
+        We have to introduce ideas in smaller steps so that in later processes you can apply them.
+        In this section we are going to cover a lot of properties and how they are applied. While
+        it may seem pointless at first, everything in this section is building to assist you in the
+        section that comes next.
+    </p>
+    <p>
+        Most calculators, as I am sure you've come to see, only have limited logarithm keys. Unless
+        you have a newer graphing calculator, your calculator most likely only has the
+        <kbd>log</kbd> key for common logarithms and the <kbd>ln</kbd> key for natural logarithms.
+        However, we will from time to time need to evaluate logarithmic functions of other bases.
+        This is where the <strong class="blue-text">Change-of-Base Formula</strong> comes into play.
+    </p>
+
+    <!-- ══════════════════════════════════════════
+         CHANGE-OF-BASE FORMULA — Definition Box
+    ══════════════════════════════════════════ -->
+    <div class="definition-box" role="note" aria-label="Change-of-Base Formula: converting any logarithm to base a, base 10, or base e">
+        <h3>Change-of-Base Formula</h3>
+        <p>
+            If we allow \(b\) and \(x\) to be positive real numbers such that \(b \neq 1\), then
+            we can change any logarithm into a common logarithm or natural logarithm.
+        </p>
+        <div class="three-col-formula" role="group" aria-label="Three forms of the Change-of-Base Formula">
+            <div class="formula-cell">
+                <strong>Base \(a\)</strong>
+                \[\log_b x = \frac{\log_a x}{\log_a b}\]
+            </div>
+            <div class="formula-cell">
+                <strong>Base 10</strong>
+                \[\log_b x = \frac{\log x}{\log b}\]
+            </div>
+            <div class="formula-cell">
+                <strong>Base \(e\)</strong>
+                \[\log_b x = \frac{\ln x}{\ln b}\]
+            </div>
+        </div>
+    </div>
+
+    <hr class="divider" role="separator" aria-hidden="true" />
+
+    <!-- ══════════════════════════════════════════
+         CHANGE-OF-BASE EXAMPLE 1 — Common Log
+    ══════════════════════════════════════════ -->
+    <section class="example" aria-labelledby="example-3-3-1-heading">
+        <div class="example-problem">
+            <h3 id="example-3-3-1-heading">Example</h3>
+            <p>
+                Using the change-of-base formula, convert the following to the common base
+                logarithm, then evaluate the expressions.
+            </p>
+            <ol class="two-col-problems" aria-label="Two logarithms to convert to base 10 and evaluate">
+                <li>\(\log_4 30\)</li>
+                <li>\(\log_3 15\)</li>
+            </ol>
+        </div>
+
+        <button class="solution-header"
+                onclick="toggleExample(this)"
+                aria-expanded="false"
+                aria-controls="solution-3-3-1">
+            <span class="toggle-arrow">▼</span>
+            <span>Show Solution</span>
+        </button>
+
+        <div id="solution-3-3-1" class="example-content">
+            <div class="solution">
+                <h4>Solution</h4>
+                <div class="solution-grid" role="list" aria-label="Solutions for converting log base 4 of 30 and log base 3 of 15 to base 10">
+                    <div class="sol-item" role="listitem">
+                        \[\log_4 30 = \frac{\log 30}{\log 4} \approx 2.45\]
+                    </div>
+                    <div class="sol-item" role="listitem">
+                        \[\log_3 15 = \frac{\log 15}{\log 3} \approx 2.46\]
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         CHANGE-OF-BASE EXAMPLE 2 — Natural Log
+    ══════════════════════════════════════════ -->
+    <section class="example" aria-labelledby="example-3-3-2-heading">
+        <div class="example-problem">
+            <h3 id="example-3-3-2-heading">Example</h3>
+            <p>
+                Using the change-of-base formula, convert the following to the natural base
+                logarithm, then evaluate the expressions.
+            </p>
+            <ol class="two-col-problems" aria-label="Two logarithms to convert to natural log and evaluate">
+                <li>\(\log_5 35\)</li>
+                <li>\(\log_6 15\)</li>
+            </ol>
+        </div>
+
+        <button class="solution-header"
+                onclick="toggleExample(this)"
+                aria-expanded="false"
+                aria-controls="solution-3-3-2">
+            <span class="toggle-arrow">▼</span>
+            <span>Show Solution</span>
+        </button>
+
+        <div id="solution-3-3-2" class="example-content">
+            <div class="solution">
+                <h4>Solution</h4>
+                <div class="solution-grid" role="list" aria-label="Solutions for converting log base 5 of 35 and log base 6 of 15 to natural log">
+                    <div class="sol-item" role="listitem">
+                        \[\log_5 35 = \frac{\ln 35}{\ln 5} \approx 2.21\]
+                    </div>
+                    <div class="sol-item" role="listitem">
+                        \[\log_6 15 = \frac{\ln 15}{\ln 6} \approx 1.51\]
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <p>
+        These are not the only properties that allow us to rewrite logarithms in other forms.
+        We also have the following properties that allow us to either <strong>expand</strong> a
+        logarithm or <strong>condense</strong> a logarithm — both of which are useful when solving
+        logarithmic and exponential equations, which we will cover in the next section.
+    </p>
+
+    <!-- ══════════════════════════════════════════
+         PROPERTIES OF LOGARITHMS — Definition Box
+    ══════════════════════════════════════════ -->
+    <div class="definition-box" role="note" aria-label="Properties of Logarithms: Product Rule, Quotient Rule, and Power Rule">
+        <h3>Properties of Logarithms</h3>
+        <p>
+            Allow \(b\) to be any positive real number except \(1\), and allow \(n\), \(u\), and
+            \(v\) to be any positive real numbers. Then:
+        </p>
+        <ol>
+            <li>
+                <strong>Product Rule:</strong>
+                <span class="rule-formula">\(\log_b(uv) = \log_b u + \log_b v\)</span>
+            </li>
+            <li>
+                <strong>Quotient Rule:</strong>
+                <span class="rule-formula">\(\log_b\!\left(\dfrac{u}{v}\right) = \log_b u - \log_b v\)</span>
+            </li>
+            <li>
+                <strong>Power Rule:</strong>
+                <span class="rule-formula">\(\log_b u^n = n\log_b u\)</span>
+            </li>
+        </ol>
+    </div>
+
+    <hr class="divider" role="separator" aria-hidden="true" />
+
+    <!-- ══════════════════════════════════════════
+         PRODUCT RULE EXAMPLE
+    ══════════════════════════════════════════ -->
+    <section aria-labelledby="product-rule-heading">
+        <h2 id="product-rule-heading">Product Rule</h2>
+
+        <section class="example" aria-labelledby="example-3-3-3-heading">
+            <div class="example-problem">
+                <h3 id="example-3-3-3-heading">Example</h3>
+                <p>Apply the Product Rule to the examples below.</p>
+                <ol class="two-col-problems" aria-label="Two logarithms to expand using the Product Rule">
+                    <li>\(\log_3 10\)</li>
+                    <li>\(\log_x 3y\)</li>
+                </ol>
+            </div>
+
+            <button class="solution-header"
+                    onclick="toggleExample(this)"
+                    aria-expanded="false"
+                    aria-controls="solution-3-3-3">
+                <span class="toggle-arrow">▼</span>
+                <span>Show Solution</span>
+            </button>
+
+            <div id="solution-3-3-3" class="example-content">
+                <div class="solution">
+                    <h4>Solution</h4>
+                    <div class="solution-grid" role="list" aria-label="Product Rule solutions for log base 3 of 10 and log base x of 3y">
+                        <div class="sol-item" role="listitem">
+                            \[\log_3 10 = \log_3(5 \cdot 2) = \log_3 5 + \log_3 2\]
+                        </div>
+                        <div class="sol-item" role="listitem">
+                            \[\log_x 3y = \log_x(3 \cdot y) = \log_x 3 + \log_x y\]
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <hr class="divider" role="separator" aria-hidden="true" />
+
+    <!-- ══════════════════════════════════════════
+         QUOTIENT RULE EXAMPLE
+    ══════════════════════════════════════════ -->
+    <section aria-labelledby="quotient-rule-heading">
+        <h2 id="quotient-rule-heading">Quotient Rule</h2>
+
+        <section class="example" aria-labelledby="example-3-3-4-heading">
+            <div class="example-problem">
+                <h3 id="example-3-3-4-heading">Example</h3>
+                <p>Apply the Quotient Rule to the examples below.</p>
+                <ol class="two-col-problems" aria-label="Two logarithms to expand using the Quotient Rule">
+                    <li>\(\log_3\dfrac{2}{27}\)</li>
+                    <li>\(\log_x\dfrac{y}{2}\)</li>
+                </ol>
+            </div>
+
+            <button class="solution-header"
+                    onclick="toggleExample(this)"
+                    aria-expanded="false"
+                    aria-controls="solution-3-3-4">
+                <span class="toggle-arrow">▼</span>
+                <span>Show Solution</span>
+            </button>
+
+            <div id="solution-3-3-4" class="example-content">
+                <div class="solution">
+                    <h4>Solution</h4>
+                    <div class="solution-grid" role="list" aria-label="Quotient Rule solutions for log base 3 of 2 over 27 and log base x of y over 2">
+                        <div class="sol-item" role="listitem">
+                            \[\log_3\frac{2}{27} = \log_3 2 - \log_3 27\]
+                        </div>
+                        <div class="sol-item" role="listitem">
+                            \[\log_x\frac{y}{2} = \log_x y - \log_x 2\]
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <hr class="divider" role="separator" aria-hidden="true" />
+
+    <!-- ══════════════════════════════════════════
+         POWER RULE EXAMPLE
+    ══════════════════════════════════════════ -->
+    <section aria-labelledby="power-rule-heading">
+        <h2 id="power-rule-heading">Power Rule</h2>
+
+        <section class="example" aria-labelledby="example-3-3-5-heading">
+            <div class="example-problem">
+                <h3 id="example-3-3-5-heading">Example</h3>
+                <p>Apply the Power Rule to the examples below.</p>
+                <ol class="two-col-problems" aria-label="Two logarithms to simplify using the Power Rule">
+                    <li>\(\log_3 b^4\)</li>
+                    <li>\(\log_x y^z\)</li>
+                </ol>
+            </div>
+
+            <button class="solution-header"
+                    onclick="toggleExample(this)"
+                    aria-expanded="false"
+                    aria-controls="solution-3-3-5">
+                <span class="toggle-arrow">▼</span>
+                <span>Show Solution</span>
+            </button>
+
+            <div id="solution-3-3-5" class="example-content">
+                <div class="solution">
+                    <h4>Solution</h4>
+                    <div class="solution-grid" role="list" aria-label="Power Rule solutions for log base 3 of b to the 4th and log base x of y to the z">
+                        <div class="sol-item" role="listitem">
+                            \[\log_3 b^4 = 4\log_3 b\]
+                        </div>
+                        <div class="sol-item" role="listitem">
+                            \[\log_x y^z = z\log_x y\]
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <hr class="divider" role="separator" aria-hidden="true" />
+
+    <!-- ══════════════════════════════════════════
+         EXPANDING LOGARITHMS
+    ══════════════════════════════════════════ -->
+    <section aria-labelledby="expanding-heading">
+        <h2 id="expanding-heading">Expanding Logarithmic Expressions</h2>
+
+        <p>
+            Now that we've looked at each property individually, let's apply multiple rules to a
+            single expression.
+        </p>
+
+        <section class="example" aria-labelledby="example-3-3-6-heading">
+            <div class="example-problem">
+                <h3 id="example-3-3-6-heading">Example</h3>
+                <p>Expand each logarithmic expression.</p>
+                <ol class="two-col-problems" aria-label="Two logarithmic expressions to expand using multiple properties">
+                    <li>\(\log_5 5x^2y\)</li>
+                    <li>\(\ln\!\sqrt{\dfrac{3x}{y^2}}\)</li>
+                </ol>
+            </div>
+
+            <button class="solution-header"
+                    onclick="toggleExample(this)"
+                    aria-expanded="false"
+                    aria-controls="solution-3-3-6">
+                <span class="toggle-arrow">▼</span>
+                <span>Show Solution</span>
+            </button>
+
+            <div id="solution-3-3-6" class="example-content">
+                <div class="solution">
+                    <h4>Solution</h4>
+
+                    <!-- Annotated solution grid -->
+                    <div class="annotated-solution" role="group" aria-label="Step-by-step expansion with rule annotations">
+
+                        <!-- Sub-problem 1 label -->
+                        <div class="sub-label">1. \(\log_5 5x^2y\)</div>
+
+                        <!-- Step 1-1 -->
+                        <div class="annot-step">
+                            \[\log_5 5x^2y = \log_5 5 + \log_5 x^2 + \log_5 y\]
+                        </div>
+                        <div class="annot-label annot-col">Product Rule</div>
+
+                        <!-- Step 1-2 -->
+                        <div class="annot-step">
+                            \[= \log_5 5 + 2\log_5 x + \log_5 y\]
+                        </div>
+                        <div class="annot-label annot-col">Power Rule</div>
+
+                        <!-- Step 1-3 -->
+                        <div class="annot-step">
+                            \[= 1 + 2\log_5 x + \log_5 y\]
+                        </div>
+                        <div class="annot-label annot-col">Simplify \((\log_5 5 = 1)\)</div>
+
+                        <!-- Divider -->
+                        <div class="sub-divider" role="separator" aria-hidden="true"></div>
+
+                        <!-- Sub-problem 2 label -->
+                        <div class="sub-label">2. \(\ln\!\sqrt{\dfrac{3x}{y^2}}\)</div>
+
+                        <!-- Step 2-1 -->
+                        <div class="annot-step">
+                            \[\ln\sqrt{\frac{3x}{y^2}} = \ln\!\left(\frac{3x}{y^2}\right)^{\!\frac{1}{2}}\]
+                        </div>
+                        <div class="annot-label annot-col">Definition of Radical</div>
+
+                        <!-- Step 2-2 -->
+                        <div class="annot-step">
+                            \[= \frac{1}{2}\ln\!\left(\frac{3x}{y^2}\right)\]
+                        </div>
+                        <div class="annot-label annot-col">Power Rule</div>
+
+                        <!-- Step 2-3 -->
+                        <div class="annot-step">
+                            \[= \frac{1}{2}\!\left(\ln 3x - \ln y^2\right)\]
+                        </div>
+                        <div class="annot-label annot-col">Quotient Rule</div>
+
+                        <!-- Step 2-4 -->
+                        <div class="annot-step">
+                            \[= \frac{1}{2}\!\left(\ln 3 + \ln x - \ln y^2\right)\]
+                        </div>
+                        <div class="annot-label annot-col">Product Rule</div>
+
+                        <!-- Step 2-5 -->
+                        <div class="annot-step">
+                            \[= \frac{1}{2}\!\left(\ln 3 + \ln x - 2\ln y\right)\]
+                        </div>
+                        <div class="annot-label annot-col">Power Rule</div>
+
+                        <!-- Step 2-6 -->
+                        <div class="annot-step">
+                            \[= \frac{1}{2}\ln 3 + \frac{1}{2}\ln x - (2)\tfrac{1}{2}\ln y\]
+                        </div>
+                        <div class="annot-label annot-col">Distributive Property</div>
+
+                        <!-- Step 2-7 -->
+                        <div class="annot-step">
+                            \[= \frac{1}{2}\ln 3 + \frac{1}{2}\ln x - \ln y\]
+                        </div>
+                        <div class="annot-label annot-col">Simplify</div>
+
+                    </div><!-- end annotated-solution -->
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <hr class="divider" role="separator" aria-hidden="true" />
+
+    <!-- ══════════════════════════════════════════
+         CONDENSING LOGARITHMS
+    ══════════════════════════════════════════ -->
+    <section aria-labelledby="condensing-heading">
+        <h2 id="condensing-heading">Condensing Logarithmic Expressions</h2>
+
+        <section class="example" aria-labelledby="example-3-3-7-heading">
+            <div class="example-problem">
+                <h3 id="example-3-3-7-heading">Example</h3>
+                <p>Condense each logarithmic expression.</p>
+                <ol class="two-col-problems" aria-label="Two logarithmic expressions to condense using multiple properties">
+                    <li>\(\dfrac{1}{2}\log x + 3\log(x+2) - \log y\)</li>
+                    <li>\(3 + 2\log_x y - \dfrac{1}{4}\log_x z\)</li>
+                </ol>
+            </div>
+
+            <button class="solution-header"
+                    onclick="toggleExample(this)"
+                    aria-expanded="false"
+                    aria-controls="solution-3-3-7">
+                <span class="toggle-arrow">▼</span>
+                <span>Show Solution</span>
+            </button>
+
+            <div id="solution-3-3-7" class="example-content">
+                <div class="solution">
+                    <h4>Solution</h4>
+
+                    <div class="annotated-solution" role="group" aria-label="Step-by-step condensing with rule annotations">
+
+                        <!-- Sub-problem 1 label -->
+                        <div class="sub-label">
+                            1. \(\dfrac{1}{2}\log x + 3\log(x+2) - \log y\)
+                        </div>
+
+                        <!-- Step 1-1 -->
+                        <div class="annot-step">
+                            \[= \log\sqrt{x} + \log(x+2)^3 - \log y\]
+                        </div>
+                        <div class="annot-label annot-col">Power Rule</div>
+
+                        <!-- Step 1-2 -->
+                        <div class="annot-step">
+                            \[= \log\!\left[\sqrt{x}\,(x+2)^3\right] - \log y\]
+                        </div>
+                        <div class="annot-label annot-col">Product Rule</div>
+
+                        <!-- Step 1-3 -->
+                        <div class="annot-step">
+                            \[= \log\frac{\sqrt{x}\,(x+2)^3}{y}\]
+                        </div>
+                        <div class="annot-label annot-col">Quotient Rule</div>
+
+                        <!-- Divider -->
+                        <div class="sub-divider" role="separator" aria-hidden="true"></div>
+
+                        <!-- Sub-problem 2 label -->
+                        <div class="sub-label">
+                            2. \(3 + 2\log_x y - \dfrac{1}{4}\log_x z\)
+                        </div>
+
+                        <!-- Step 2-1 -->
+                        <div class="annot-step">
+                            \[= 3\log_x x + 2\log_x y - \frac{1}{4}\log_x z\]
+                        </div>
+                        <div class="annot-label annot-col">Property of Logarithms \((\log_b b = 1)\)</div>
+
+                        <!-- Step 2-2 -->
+                        <div class="annot-step">
+                            \[= \log_x x^3 + \log_x y^2 - \log_x \sqrt[4]{z}\]
+                        </div>
+                        <div class="annot-label annot-col">Power Rule</div>
+
+                        <!-- Step 2-3 -->
+                        <div class="annot-step">
+                            \[= \log_x(x^3 y^2) - \log_x \sqrt[4]{z}\]
+                        </div>
+                        <div class="annot-label annot-col">Product Rule</div>
+
+                        <!-- Step 2-4 -->
+                        <div class="annot-step">
+                            \[= \log_x\frac{x^3 y^2}{\sqrt[4]{z}}\]
+                        </div>
+                        <div class="annot-label annot-col">Quotient Rule</div>
+
+                    </div><!-- end annotated-solution -->
+                </div>
+            </div>
+        </section>
+
+        <p>
+            When it comes to expanding and condensing logarithms you have to think of them as
+            puzzles and work in very small steps. Just like with a puzzle, you can't put together
+            the center until you've assembled the outer shell. Do not try to combine too many steps
+            at once — you're likely to miss something.
+        </p>
+
+    </section><!-- end condensing section -->
+
+</section><!-- end #properties-logarithms -->
+
+<!-- ══════════════════════════════════════════
+     EXERCISES
+══════════════════════════════════════════ -->
+<section class="exercises-section" role="region" aria-labelledby="exercises-3-3-heading">
+    <h2 id="exercises-3-3-heading" class="subsection-title">Exercises</h2>
+
+    <button class="exercises-header"
+            onclick="toggleExercises(this)"
+            aria-expanded="false"
+            aria-controls="exercises-3-3-content">
+        <span class="toggle-arrow">▼</span>
+        <span>Show Exercises</span>
+    </button>
+
+    <div id="exercises-3-3-content"
+         class="exercises-content"
+         role="region"
+         aria-labelledby="exercises-3-3-heading">
+        <p>Exercises to be added at a later date.</p>
+    </div>
+</section>
+
+</main>
+
+<!-- ── Toggle scripts ── -->
+<script>
+    function toggleExample(button) {
+        const content = button.nextElementSibling;
+        const arrow = button.querySelector('.toggle-arrow');
+
+        if (content.classList.contains('open')) {
+            content.classList.remove('open');
+            arrow.classList.remove('open');
+            button.querySelector('span:last-child').textContent = 'Show Solution';
+            button.setAttribute('aria-expanded', 'false');
+        } else {
+            content.classList.add('open');
+            arrow.classList.add('open');
+            button.querySelector('span:last-child').textContent = 'Hide Solution';
+            button.setAttribute('aria-expanded', 'true');
+        }
+    }
+
+    function toggleExercises(button) {
+        const content = document.getElementById(button.getAttribute('aria-controls'));
+        const arrow = button.querySelector('.toggle-arrow');
+
+        if (content.classList.contains('open')) {
+            content.classList.remove('open');
+            arrow.classList.remove('open');
+            button.querySelector('span:last-child').textContent = 'Show Exercises';
+            button.setAttribute('aria-expanded', 'false');
+        } else {
+            content.classList.add('open');
+            arrow.classList.add('open');
+            button.querySelector('span:last-child').textContent = 'Hide Exercises';
+            button.setAttribute('aria-expanded', 'true');
+        }
+    }
+</script>
+
+<!-- ── TOC loader ── -->
+<script>
+    fetch('toc.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('toc-placeholder').innerHTML = data;
+
+            const chapterButtons = document.querySelectorAll('.toc-chapter');
+            chapterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const expanded = button.getAttribute('aria-expanded') === 'true';
+                    button.setAttribute('aria-expanded', !expanded);
+                    const submenu = button.nextElementSibling;
+                    submenu.classList.toggle('open');
+                });
+            });
+        });
+</script>
+
+</body>
+</html>

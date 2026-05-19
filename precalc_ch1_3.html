@@ -1,90 +1,649 @@
 <!DOCTYPE html>
-<html>
-    <head>
-      <!-- MathJax configuration -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CH 1.3 – Parent Functions &amp; Their Transformations</title>
+
+    <!-- MathJax configuration -->
     <script>
         window.MathJax = {
             tex: {
                 inlineMath: [['\\(', '\\)'], ['$', '$']],
-                displayMath: [['\\[', '\\]'], ['$$', '$$']]
+                displayMath: [['\\[', '\\]'], ['$$', '$$']],
+                packages: {'[+]': ['cancel', 'color']},
+                macros: {
+                    cancel: ['\\enclose{horizontalstrike}{#1}', 1]
+                }
             },
             options: {
                 skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
             },
             loader: {
-                load: ['input/tex', 'output/chtml']
+                load: ['input/tex', 'output/chtml', '[tex]/cancel', '[tex]/color']
             }
         };
     </script>
-    <!-- MathJax loader -->
     <script id="MathJax-script" async
         src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
     </script>
 
-    <link rel="stylesheet" href="styles.css">
-    <!-- MathJax -->
-    <script>
-        window.MathJax = { /* ... */ };
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="styles.css" />
 
+    <style>
+        /* ── Collapsible exercises ── */
+        .exercises-section { margin: 25px 0; }
+
+        .exercises-header {
+            background-color: #33AB2B;
+            color: white;
+            padding: 12px 20px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+            border-radius: 4px;
+            transition: background-color 0.2s ease;
+            border: none;
+            font-size: 1em;
+            width: 100%;
+        }
+        .exercises-header:hover { background-color: #2a8922; }
+
+        .exercises-content {
+            display: none;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-top: none;
+            border-radius: 0 0 6px 6px;
+            padding: 20px;
+        }
+        .exercises-content.open { display: block; }
+
+        /* ── Utility text colours ── */
+        .blue-text  { color: #0066cc; }
+        .red-text   { color: #c0392b; font-weight: bold; }
+        .green-text { color: #33AB2B; font-weight: bold; }
+
+        /* ── Suggestion list inside definition box ── */
+        .suggestion-list { margin: 0.5rem 0 0 1.2em; padding: 0; }
+        .suggestion-list li { margin-bottom: 0.4rem; line-height: 1.4; }
+
+        /* ════════════════════════════════════════════
+           PARENT FUNCTION CARDS
+           Replicates the LaTeX TikZ layout:
+             ┌─────────────────────────────────────┐  ← header bar (col-span 2)
+             │  graph (large)  │  Domain info box  │
+             │                 ├───────────────────│
+             │                 │  Range info box   │
+             └─────────────────────────────────────┘
+           ════════════════════════════════════════════ */
+        .pf-card {
+            display: grid;
+            grid-template-columns: 1fr 260px;
+            grid-template-rows: auto 1fr 1fr;
+            grid-template-areas:
+                "header header"
+                "graph  domain"
+                "graph  range";
+            border: 2px solid #333;
+            border-radius: 6px;
+            overflow: hidden;
+            margin: 2rem 0;
+            background: #fff;
+        }
+
+        /* Top header bar — spans both columns */
+        .pf-header {
+            grid-area: header;
+            background-color: #fff;
+            border-bottom: 2px solid #333;
+            padding: 10px 16px;
+            font-size: 1em;
+            line-height: 1.5;
+        }
+
+        /* Graph image area */
+        .pf-graph {
+            grid-area: graph;
+            border-right: 2px solid #333;
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fff;
+        }
+        .pf-graph img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Domain info box — top-right */
+        .pf-domain {
+            grid-area: domain;
+            border-bottom: 2px solid #333;
+            padding: 14px 16px;
+            background: #fff;
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+
+        /* Range info box — bottom-right */
+        .pf-range {
+            grid-area: range;
+            padding: 14px 16px;
+            background: #fff;
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+
+        /* Label headings inside info boxes */
+        .pf-domain strong,
+        .pf-range  strong {
+            color: #0066cc;
+            display: block;
+            margin-bottom: 4px;
+            font-size: 1em;
+        }
+
+        /* Responsive: stack vertically on narrow screens */
+        @media (max-width: 640px) {
+            .pf-card {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto auto auto auto;
+                grid-template-areas:
+                    "header"
+                    "graph"
+                    "domain"
+                    "range";
+            }
+            .pf-graph  { border-right: none; border-bottom: 2px solid #333; }
+            .pf-domain { border-right: none; border-bottom: 2px solid #333; }
+        }
+    </style>
 </head>
- <body> 
+<body>
+
 <div id="toc-placeholder"></div>
 
+<main class="container">
 
+<section id="parent-functions-transformations" aria-labelledby="section-heading">
+    <h1 id="section-heading">CH 1.3 – Parent Functions &amp; Their Transformations</h1>
 
+    <p>When it comes to graphs of functions, all functions are derived from about six basic functions that we call <strong class="blue-text">parent function(s)</strong>. The six basic functions that almost all graphs are comprised of are: <strong class="blue-text">linear</strong>, <strong class="blue-text">quadratic</strong>, <strong class="blue-text">cubic</strong>, <strong class="blue-text">square root</strong>, <strong class="blue-text">absolute value</strong>, and <strong class="blue-text">rational</strong>.</p>
 
-            
+    <!-- ==================== PARENT FUNCTIONS ==================== -->
+    <section aria-labelledby="parent-functions-heading">
+        <h2 id="parent-functions-heading">Parent Functions</h2>
+
+        <p>We are briefly going to review these six functions and how they look graphically and algebraically, the domain and range for each, and the end behaviors.</p>
+
+        <!-- ── 1. LINEAR ── -->
+        <figure class="pf-card" role="figure" aria-labelledby="pf-linear-label">
+            <figcaption class="pf-header" id="pf-linear-label">
+                <strong class="blue-text">Function:</strong> Linear &nbsp;\(f(x) = x\), &nbsp;general form: \(f(x) = mx + b\)
+            </figcaption>
+            <div class="pf-graph">
+                <img
+                    src="images/1_3_1.png"
+                    alt="Coordinate grid from negative 5 to 5 on both axes showing the linear parent function f(x) equals x as a straight blue line through the origin with slope 1, arrows on both ends extending to the upper right and lower left."
+                />
+            </div>
+            <div class="pf-domain" aria-label="Domain of the linear function">
+                <strong class="blue-text">Domain:</strong>
+                \((-\infty, \infty)\)
+                <br/>Unless it is a vertical line. In that case the domain is \(x = a\).
+            </div>
+            <div class="pf-range" aria-label="Range of the linear function">
+                <strong class="blue-text">Range:</strong>
+                \((-\infty, \infty)\)
+                <br/>Unless it is a horizontal line. In that case the range is \(y = a\).
+            </div>
+        </figure>
+
+        <!-- ── 2. QUADRATIC ── -->
+        <figure class="pf-card" role="figure" aria-labelledby="pf-quadratic-label">
+            <figcaption class="pf-header" id="pf-quadratic-label">
+                <strong class="blue-text">Function:</strong> Quadratic &nbsp;\(f(x) = x^2\), &nbsp;general form: \(f(x) = ax^2 + bx + c\)
+            </figcaption>
+            <div class="pf-graph">
+                <img
+                    src="images/1_3_2.png"
+                    alt="Coordinate grid from negative 5 to 5 on both axes showing the quadratic parent function f(x) equals x squared as an upward-opening blue parabola with vertex at the origin, arrows on both ends pointing upward."
+                />
+            </div>
+            <div class="pf-domain" aria-label="Domain of the quadratic function">
+                <strong class="blue-text">Domain:</strong>
+                \((-\infty, \infty)\)
+            </div>
+            <div class="pf-range" aria-label="Range of the quadratic function">
+                <strong class="blue-text">Range:</strong>
+                \(\left[f\!\left(\tfrac{-b}{2a}\right),\, \infty\right)\) when \(a > 0\).
+                <br/>If \(a < 0\) then the range is \(\left(-\infty,\, f\!\left(\tfrac{-b}{2a}\right)\right]\).
+            </div>
+        </figure>
+
+        <!-- ── 3. CUBIC ── -->
+        <figure class="pf-card" role="figure" aria-labelledby="pf-cubic-label">
+            <figcaption class="pf-header" id="pf-cubic-label">
+                <strong class="blue-text">Function:</strong> Cubic &nbsp;\(f(x) = x^3\), &nbsp;general form: \(f(x) = ax^3 + bx^2 + cx + d\)
+            </figcaption>
+            <div class="pf-graph">
+                <img
+                    src="images/1_3_3.png"
+                    alt="Coordinate grid from negative 5 to 5 on both axes showing the cubic parent function f(x) equals x cubed as a blue S-shaped curve through the origin, lower-left end descending and upper-right end ascending, both with arrows."
+                />
+            </div>
+            <div class="pf-domain" aria-label="Domain of the cubic function">
+                <strong class="blue-text">Domain:</strong>
+                \((-\infty, \infty)\)
+            </div>
+            <div class="pf-range" aria-label="Range of the cubic function">
+                <strong class="blue-text">Range:</strong>
+                \((-\infty, \infty)\)
+            </div>
+        </figure>
+
+        <!-- ── 4. ABSOLUTE VALUE ── -->
+        <figure class="pf-card" role="figure" aria-labelledby="pf-absval-label">
+            <figcaption class="pf-header" id="pf-absval-label">
+                <strong class="blue-text">Function:</strong> Absolute Value &nbsp;\(f(x) = |x|\)
+            </figcaption>
+            <div class="pf-graph">
+                <img
+                    src="images/1_3_4.png"
+                    alt="Coordinate grid from negative 5 to 5 on both axes showing the absolute value parent function f(x) equals the absolute value of x as a blue V-shape with vertex at the origin, both arms extending upward with arrows."
+                />
+            </div>
+            <div class="pf-domain" aria-label="Domain of the absolute value function">
+                <strong class="blue-text">Domain:</strong>
+                \((-\infty, \infty)\)
+            </div>
+            <div class="pf-range" aria-label="Range of the absolute value function">
+                <strong class="blue-text">Range:</strong>
+                \([a, \infty)\) when \(f(x) = |x|\), where \(a\) is the \(y\)-value of the vertex.
+                <br/>If \(f(x) = -|x|\), then the range is \((-\infty, a]\).
+            </div>
+        </figure>
+
+        <!-- ── 5. SQUARE ROOT ── -->
+        <figure class="pf-card" role="figure" aria-labelledby="pf-sqrt-label">
+            <figcaption class="pf-header" id="pf-sqrt-label">
+                <strong class="blue-text">Function:</strong> Square Root &nbsp;\(f(x) = \sqrt{x}\)
+            </figcaption>
+            <div class="pf-graph">
+                <img
+                    src="images/1_3_5.png"
+                    alt="Coordinate grid from negative 5 to 5 on both axes showing the square root parent function f(x) equals the square root of x as a blue curve starting at the origin and extending to the upper right with an arrow."
+                />
+            </div>
+            <div class="pf-domain" aria-label="Domain of the square root function">
+                <strong class="blue-text">Domain:</strong>
+                \([0, \infty)\)
+                <br/>The starting value will change depending on horizontal translations.
+            </div>
+            <div class="pf-range" aria-label="Range of the square root function">
+                <strong class="blue-text">Range:</strong>
+                \([0, \infty)\)
+                <br/>The starting value will change depending on vertical translations.
+            </div>
+        </figure>
+
+        <!-- ── 6. RATIONAL ── -->
+        <figure class="pf-card" role="figure" aria-labelledby="pf-rational-label">
+            <figcaption class="pf-header" id="pf-rational-label">
+                <strong class="blue-text">Function:</strong> Rational &nbsp;\(f(x) = \dfrac{1}{x}\)
+            </figcaption>
+            <div class="pf-graph">
+                <img
+                    src="images/1_3_6.png"
+                    alt="Coordinate grid from negative 5 to 5 on both axes showing the rational parent function f(x) equals 1 over x as two blue hyperbolic branches: one in the first quadrant curving toward the axes from above-right, and one in the third quadrant curving toward the axes from below-left, both with arrows and never touching either axis."
+                />
+            </div>
+            <div class="pf-domain" aria-label="Domain of the rational function">
+                <strong class="blue-text">Domain:</strong>
+                \((-\infty, 0) \cup (0, \infty)\)
+                <br/>The excluded value will change depending on horizontal translations.
+            </div>
+            <div class="pf-range" aria-label="Range of the rational function">
+                <strong class="blue-text">Range:</strong>
+                \((-\infty, 0) \cup (0, \infty)\)
+                <br/>The excluded value will change depending on vertical translations.
+            </div>
+        </figure>
+
+        <!-- ── 7. EXPONENTIAL ── -->
+        <figure class="pf-card" role="figure" aria-labelledby="pf-exp-label">
+            <figcaption class="pf-header" id="pf-exp-label">
+                <strong class="blue-text">Function:</strong> Exponential &nbsp;\(f(x) = e^{x}\)
+            </figcaption>
+            <div class="pf-graph">
+                <img
+                    src="images/1_3_7.png"
+                    alt="Coordinate grid from negative 5 to 5 on both axes showing the exponential parent function f(x) equals e to the x as a blue curve that rises steeply to the upper right and flattens toward the negative x-axis approaching but never reaching zero, arrows on both ends."
+                />
+            </div>
+            <div class="pf-domain" aria-label="Domain of the exponential function">
+                <strong class="blue-text">Domain:</strong>
+                \((-\infty, \infty)\)
+            </div>
+            <div class="pf-range" aria-label="Range of the exponential function">
+                <strong class="blue-text">Range:</strong>
+                \((0, \infty)\)
+                <br/>This can change depending on vertical translations.
+            </div>
+        </figure>
+
+        <!-- ── 8. LOGARITHMIC ── -->
+        <figure class="pf-card" role="figure" aria-labelledby="pf-log-label">
+            <figcaption class="pf-header" id="pf-log-label">
+                <strong class="blue-text">Function:</strong> Logarithmic &nbsp;\(f(x) = \log(x)\)
+            </figcaption>
+            <div class="pf-graph">
+                <img
+                    src="images/1_3_8.png"
+                    alt="Coordinate grid from negative 5 to 5 on both axes showing the logarithmic parent function f(x) equals log of x as a blue curve passing through the point (1, 0), rising slowly to the upper right with an arrow and descending steeply toward negative infinity as x approaches zero from the right."
+                />
+            </div>
+            <div class="pf-domain" aria-label="Domain of the logarithmic function">
+                <strong class="blue-text">Domain:</strong>
+                \((0, \infty)\)
+                <br/>This can change depending on horizontal translations.
+            </div>
+            <div class="pf-range" aria-label="Range of the logarithmic function">
+                <strong class="blue-text">Range:</strong>
+                \((-\infty, \infty)\)
+            </div>
+        </figure>
+
+    </section><!-- end parent-functions section -->
+
+    <hr class="divider" role="separator" aria-hidden="true" />
+
+    <!-- ==================== TRANSFORMATIONS ==================== -->
+    <section aria-labelledby="transformations-heading">
+        <h2 id="transformations-heading">Transformations of Functions</h2>
+
+        <p>From our six basic parent functions we can derive any other function that could be used for a number of reasons. Any function can undergo a number of transformations that change the parent function into another version of itself.</p>
+
+        <p>There are two main ways that we can categorize a transformation of the parent function. A transformation in which the shape of the parent function remains exactly the same is known as a <strong class="blue-text">rigid transformation</strong>. Other types of transformations that change the shape of the graph are known as <strong class="blue-text">non-rigid transformations</strong>.</p>
+
+        <!-- ---- Rigid Transformations ---- -->
+        <section aria-labelledby="rigid-heading">
+            <h3 id="rigid-heading">Rigid Transformations</h3>
+
+            <!-- Vertical Translation -->
+            <section aria-labelledby="vert-trans-heading">
+                <h4 id="vert-trans-heading">Vertical Translation</h4>
+
+                <p>The first type of transformation that we are going to look at is a <strong class="blue-text">vertical translation</strong>. This type of transformation moves the entire graph of the function either up or down. Essentially our <em>x-coordinates</em> will remain the same but our <em>y-coordinates</em> will change.</p>
+
+                <img
+                    src="images/1_3_9.png"
+                    alt="Reference card for vertical translations, titled Vertical Transformation. On the left, a text panel shows the general forms: h(x) equals f(x) plus c moves the graph up c units; h(x) equals f(x) minus c moves the graph down c units. Two equation examples are listed: h(x) equals square root of x plus 2 in red, and h(x) equals square root of x minus 3 in blue. On the right, a coordinate grid spanning negative 5 to 5 on both axes shows three square root curves sharing the same shape: the black parent curve starting at the origin, the red curve starting at (0, 2) shifted up two units, and the blue curve starting at (0, negative 3) shifted down three units. All three curves extend to the upper right with arrows."
+                    style="max-width:100%; height:auto; display:block; margin: 1rem auto;"
+                />
+
+                <p>Notice how in the figure above, the shape of the parent function (square root) did not change — the only thing that changed is that each coordinate either moved up or down from the original parent function.</p>
+            </section>
+
+            <!-- Horizontal Translation -->
+            <section aria-labelledby="horiz-trans-heading">
+                <h4 id="horiz-trans-heading">Horizontal Translation</h4>
+
+                <p>The next type of transformation that we are going to look at is a <strong class="blue-text">horizontal translation</strong>. This type of transformation moves the entire graph of the function either left or right. Essentially our <em>y-coordinates</em> will remain the same but our <em>x-coordinates</em> will change \(h\) units.</p>
+
+                <img
+                    src="images/1_3_10.png"
+                    alt="Reference card for horizontal translations, titled Horizontal Transformation. On the left, a text panel shows the general forms: h(x) equals f(x plus h) moves the graph left h units; h(x) equals f(x minus h) moves the graph right h units. Two equation examples are listed: h(x) equals (x plus 2) squared in red, and h(x) equals (x minus 3) squared in blue. On the right, a coordinate grid spanning negative 5 to 5 on both axes shows three upward-opening parabolas sharing the same shape: the black parent parabola with vertex at the origin, the red parabola with vertex shifted two units to the left at (negative 2, 0), and the blue parabola with vertex shifted three units to the right at (3, 0)."
+                    style="max-width:100%; height:auto; display:block; margin: 1rem auto;"
+                />
+
+                <p>Once again notice how the shape of the parent function (quadratic in this case) did not change. All that happened was the function shifted left or right from its original position. Also it is important to notice that the shift is opposite of what we want to think. Typically we think of negative as the left side of the graph and positive as the right side. But in this case, the minus \(h\) moves the graph to the right.</p>
+            </section>
+
+            <!-- Reflections -->
+            <section aria-labelledby="reflections-heading">
+                <h4 id="reflections-heading">Reflections</h4>
+
+                <p>The next type of transformation that we are going to look at is a <strong class="blue-text">reflection</strong>. This type of transformation flips the entire graph of the function either over the \(x\)-axis or the \(y\)-axis. Depending on which axis you reflect the function over will change the variable that has to be transformed. If you reflect the graph over the \(y\)-axis, then the \(x\)-coordinate becomes negated. However, if you reflect the graph over the \(x\)-axis, then the \(y\)-coordinate will become negated.</p>
+
+                <img
+                    src="images/1_3_11.png"
+                    alt="Reference card for reflections, titled Reflections. On the left, a text panel shows the general forms: h(x) equals negative f(x) is a reflection over the x-axis; h(x) equals f(negative x) is a reflection over the y-axis. Two equation examples are listed: h(x) equals negative e to the x in red, and h(x) equals e to the negative x in blue. On the right, a coordinate grid spanning negative 5 to 5 on both axes shows three exponential curves: the black parent curve rising steeply to the upper right and approaching the x-axis from above on the left; the red curve reflected over the x-axis, descending steeply to the lower right and approaching the x-axis from below on the left; and the blue curve reflected over the y-axis, rising steeply to the upper left and approaching the x-axis from above on the right. All three curves have arrows on both ends and never actually touch the x-axis."
+                    style="max-width:100%; height:auto; display:block; margin: 1rem auto;"
+                />
+
+                <p>Still notice that the shape of the parent function (exponential for this one) has not changed. All that changed was either the \(x\)-coordinate negated or the \(y\)-coordinate negated. It is important to note in this particular graph to remember that the exponential parent function will never equal zero. So, while this function looks like it is touching the \(x\)-axis, it in fact is not.</p>
+            </section>
+
+        </section><!-- end Rigid Transformations -->
+
+        <!-- ---- Non-Rigid Transformations ---- -->
+        <section aria-labelledby="nonrigid-heading">
+            <h3 id="nonrigid-heading">Non-Rigid Transformations</h3>
+
+            <p>Non-rigid transformations are unlike the rigid ones — a non-rigid transformation is one in which the <em>shape</em> of the function is changed.</p>
+
+            <!-- Vertical Stretch/Shrink -->
+            <section aria-labelledby="vert-stretch-heading">
+                <h4 id="vert-stretch-heading">Vertical Stretch/Shrink</h4>
+
+                <img
+                    src="images/1_3_12.png"
+                    alt="Reference card for vertical stretch and shrink, titled Vertical Stretch/Shrink. On the left, a text panel shows the general form: h(x) equals c times f(x). If c is greater than 1 then it is a vertical stretch. If c is between 0 and 1 then it is a vertical shrink. Two equation examples are listed: h(x) equals 2 times the absolute value of x in red (stretched), and h(x) equals one-quarter times the absolute value of x in blue (shrunk). On the right, a coordinate grid spanning negative 5 to 5 on both axes shows three V-shaped absolute value graphs all with their vertex at the origin: the black parent function, the red graph with steeper arms (stretched vertically by 2), and the blue graph with shallower arms (shrunk vertically by one-quarter)."
+                    style="max-width:100%; height:auto; display:block; margin: 1rem auto;"
+                />
+
+                <p>With this transformation we can see that the vertex of our parent function (absolute value) did not change. But the shape of the graph did — it was stretched vertically by two, or it was shrunk vertically by a quarter. With a vertical stretch or shrink our <em>x-coordinate</em> will remain the same while we multiply our <em>y-coordinate</em> by \(c\).</p>
+            </section>
+
+            <!-- Horizontal Stretch/Shrink -->
+            <section aria-labelledby="horiz-stretch-heading">
+                <h4 id="horiz-stretch-heading">Horizontal Stretch/Shrink</h4>
+
+                <img
+                    src="images/1_3_13.png"
+                    alt="Reference card for horizontal stretch and shrink, titled Horizontal Stretch/Shrink (corrected from the original LaTeX which incorrectly read Vertical Stretch/Shrink). On the left, a text panel shows the general form: h(x) equals f(c times x). If c is greater than 1 then it is a horizontal shrink. If c is between 0 and 1 then it is a horizontal stretch. Two equation examples are listed: h(x) equals (2x) squared in red (shrunk horizontally), and h(x) equals (one-half x) squared in blue (stretched horizontally). On the right, a coordinate grid spanning negative 5 to 5 on both axes shows three upward-opening parabolas all with their vertex at the origin: the black parent function, the red graph with narrower arms (shrunk horizontally by a factor of 2), and the blue graph with wider arms (stretched horizontally by a factor of one-half)."
+                    style="max-width:100%; height:auto; display:block; margin: 1rem auto;"
+                />
+
+                <p>Once again with this transformation we can see that the vertex of our parent function (quadratic) did not change. But the shape of the graph did — it was stretched horizontally by a half, or it was shrunk horizontally by two. With a horizontal stretch or shrink our <em>y-coordinate</em> will remain the same while we divide our <em>x-coordinate</em> by \(c\).</p>
+            </section>
+
+        </section><!-- end Non-Rigid Transformations -->
+
+        <p>Now that we've looked at all of these transformations separately we will try a few examples that put multiple transformations together.</p>
+
+        <hr class="divider" role="separator" aria-hidden="true" />
+
+        <!-- ==================== EXAMPLE: IDENTIFY TRANSFORMATIONS ==================== -->
+        <section class="example" aria-labelledby="example-1-3-1">
+            <div class="example-problem">
+                <h3 id="example-1-3-1">Example</h3>
+                <p>Using the examples below, identify the parent function and transformation(s) that the parent function underwent.</p>
+                <p>
+                    a.) \(f(x) = 3\sqrt{x-4}\)
+                    <span style="display:inline-block; width:2rem;"></span>
+                    b.) \(h(x) = \dfrac{-3}{x}+3\)
+                    <span style="display:inline-block; width:2rem;"></span>
+                    c.) \(g(t) = (-3x)^2 - 2\)
+                </p>
+            </div>
+
+            <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-1-3-1">
+                <span class="toggle-arrow">▼</span>
+                <span>Show Solution</span>
+            </button>
+
+            <div id="solution-1-3-1" class="example-content">
+                <div class="solution">
+                    <h4>Solution</h4>
+
+                    <p><strong>a.)</strong> If we look at \(f(x) = 3\sqrt{x-4}\), we want to work from the innermost part out, like we would with order of operations. That means:</p>
+
+                    <p>\(f(x) = 3\sqrt{\color{red}{x-4}}\) — Since the \(-4\) is inside the function, this is a <strong>horizontal translation 4 units right</strong>.</p>
+
+                    <p>\(f(x) = \color{red}{3}\sqrt{x-4}\) — With the \(3\) being outside the function, this is a <strong>vertical stretch</strong>, since \(3 > 1\).</p>
+
+                    <p>There are no other transformations in this function, which means that \(f(x)\) is the transformation of a square root function <strong>stretched vertically by a factor of 3</strong> and <strong>translated 4 units right</strong>.</p>
+
+                    <hr class="divider" role="separator" aria-hidden="true" />
+
+                    <p><strong>b.)</strong> \(h(x) = \dfrac{\color{red}{-3}}{x} + 3\) — working from the inside out again. The \(-3\) is actually two transformations in one. The \(3\), since it isn't with the \(x\), is a <strong>vertical stretch</strong> (the factor is greater than zero). The negative in front of the \(3\) is a <strong>reflection over the \(x\)-axis</strong>, because the negative is not with the \(x\).</p>
+
+                    <p>\(h(x) = \dfrac{-3}{x} + \color{red}{3}\) — the last transformation this function undergoes is a <strong>vertical shift (translation) 3 units up</strong>, since it is positive.</p>
+
+                    <p>Putting that all together means that \(h(x)\) is the transformation of the rational function <strong>reflected over the \(x\)-axis</strong>, <strong>vertically stretched by 3</strong>, and <strong>translated up 3 units</strong>.</p>
+
+                    <hr class="divider" role="separator" aria-hidden="true" />
+
+                    <p><strong>c.)</strong> \(g(t) = (\color{red}{-3}x)^2 - 2\) — once again we always work from the inside out. With this function the \(-3\) (with the \(x\)) represents two different transformations. The \(3\) with the \(x\) means it is a <strong>horizontal shrink by a factor of 3</strong>. The negative is a <strong>reflection over the \(y\)-axis</strong>.</p>
+
+                    <p>\(g(t) = (-3x)^2 - \color{red}{2}\) — since this \(-2\) is outside the function, it is a <strong>vertical translation down 2 units</strong>.</p>
+
+                    <p>Putting it all together, \(g(t)\) is the transformation of the quadratic function <strong>horizontally shrunk by a factor of 3</strong>, <strong>reflected over the \(y\)-axis</strong>, and <strong>shifted down 2 units</strong>.</p>
+                </div>
+            </div>
+        </section>
+
+        <hr class="divider" role="separator" aria-hidden="true" />
+
+        <!-- ==================== EXAMPLE: WRITE TRANSFORMATIONS ==================== -->
+        <section class="example" aria-labelledby="example-1-3-2">
+            <div class="example-problem">
+                <h3 id="example-1-3-2">Example</h3>
+                <p>From each of the descriptions below, compose the transformed parent function.</p>
+                <p>a.) The transformation of the quadratic function shifted three units left, reflected over the \(y\)-axis, then translated two units up vertically.</p>
+                <p>b.) The transformation of the square root function translated four units left, and horizontally shrunk with a factor of two.</p>
+                <p>c.) The transformation of the cubic function vertically stretched by a factor of four, and shifted five units down.</p>
+            </div>
+
+            <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-1-3-2">
+                <span class="toggle-arrow">▼</span>
+                <span>Show Solution</span>
+            </button>
+
+            <div id="solution-1-3-2" class="example-content">
+                <div class="solution">
+                    <h4>Solution</h4>
+
+                    <p><strong>a.)</strong> The quadratic parent function <span class="red-text">\(h(x) = x^2\)</span> when shifted three units left becomes <span class="red-text">\(h(x) = (x+3)^2\)</span>. Next, reflecting it over the \(y\)-axis gives us <span class="red-text">\(h(x) = (-x+3)^2\)</span>. Then, translating the graph up two units leaves us with the final function:</p>
+                    \[h(x) = (-x+3)^2 + 2\]
+
+                    <hr class="divider" role="separator" aria-hidden="true" />
+
+                    <p><strong>b.)</strong> The square root parent function <span class="red-text">\(h(x) = \sqrt{x}\)</span> after being translated four units left becomes <span class="red-text">\(h(x) = \sqrt{x+4}\)</span>. Next, applying the horizontal shrink by a factor of two gives us the final function:</p>
+                    \[h(x) = \sqrt{2x+4}\]
+
+                    <hr class="divider" role="separator" aria-hidden="true" />
+
+                    <p><strong>c.)</strong> The cubic parent function <span class="red-text">\(h(x) = x^3\)</span> needs to be stretched vertically by a factor of four, giving us <span class="red-text">\(h(x) = 4x^3\)</span>. Lastly, shifting the graph down five units leaves us with the final function:</p>
+                    \[h(x) = 4x^3 - 5\]
+                </div>
+            </div>
+        </section>
+
+        <hr class="divider" role="separator" aria-hidden="true" />
+
+        <!-- ==================== ORDER OF TRANSFORMATIONS ==================== -->
+        <section aria-labelledby="order-transformations-heading">
+            <h2 id="order-transformations-heading">Order of Transformations</h2>
+
+            <p>Some suggestions when it comes to identifying or writing transformations:</p>
+
+            <div class="definition-box">
+                <h3>Suggested Order When Applying Transformations</h3>
+                <ol class="suggestion-list">
+                    <li>Always start with the <strong>Horizontal Translations</strong> first.</li>
+                    <li>Apply <strong>Stretches/Shrinks</strong> second.</li>
+                    <li>Add in <strong>Reflections</strong> third.</li>
+                    <li>Lastly, apply the <strong>Vertical Translation</strong> up or down.</li>
+                </ol>
+                <p style="margin-top:1rem; margin-bottom:0;">Keep in mind that not all transformed functions will have every transformation — it is acceptable to skip a step if a particular transformation is not present.</p>
+            </div>
+
+            <p>One of the key factors when trying to either determine or write transformations is to make sure that if it is <strong>horizontal</strong>, then it goes <em>with the \(x\) value inside the function</em>. Whereas <strong>vertical</strong> transformations are always <em>outside the function</em>. With those factors in mind, you should be able to work through any transformation problem.</p>
+        </section>
+
+    </section><!-- end Transformations section -->
+
+</section><!-- end #parent-functions-transformations -->
+
+<!-- ==================== EXERCISES ==================== -->
+<section class="exercises-section" aria-labelledby="exercises-1-3-heading">
+    <h2 id="exercises-1-3-heading" class="subsection-title">Exercises</h2>
+
+    <button class="exercises-header" onclick="toggleExercises(this)" aria-expanded="false" aria-controls="exercises-1-3-content">
+        <span class="toggle-arrow">▼</span>
+        <span>Show Exercises</span>
+    </button>
+
+    <div id="exercises-1-3-content" class="exercises-content" role="region" aria-labelledby="exercises-1-3-heading">
+        <p>Exercises to be added at a later date.</p>
+    </div>
+</section>
+
+</main>
+
+<!-- Toggle scripts -->
 <script>
-        function toggleExample(button) {
-            const content = button.nextElementSibling;
-            const arrow = button.querySelector('.toggle-arrow');
-            
-            if (content.classList.contains('open')) {
-                content.classList.remove('open');
-                arrow.classList.remove('open');
-                button.querySelector('span:last-child').textContent = 'Show Solution';
-            } else {
-                content.classList.add('open');
-                arrow.classList.add('open');
-                button.querySelector('span:last-child').textContent = 'Hide Solution';
-            }
+    function toggleExample(button) {
+        const content = button.nextElementSibling;
+        const arrow = button.querySelector('.toggle-arrow');
+
+        if (content.classList.contains('open')) {
+            content.classList.remove('open');
+            arrow.classList.remove('open');
+            button.querySelector('span:last-child').textContent = 'Show Solution';
+            button.setAttribute('aria-expanded', 'false');
+        } else {
+            content.classList.add('open');
+            arrow.classList.add('open');
+            button.querySelector('span:last-child').textContent = 'Hide Solution';
+            button.setAttribute('aria-expanded', 'true');
         }
-    </script>
+    }
 
-    <script>
-        const chapterButtons = document.querySelectorAll(".toc-chapter");
+    function toggleExercises(button) {
+        const content = document.getElementById(button.getAttribute('aria-controls'));
+        const arrow = button.querySelector('.toggle-arrow');
 
-        chapterButtons.forEach(button => {
-            button.addEventListener("click", () => {
-                const expanded = button.getAttribute("aria-expanded") === "true";
-                button.setAttribute("aria-expanded", !expanded);
+        if (content.classList.contains('open')) {
+            content.classList.remove('open');
+            arrow.classList.remove('open');
+            button.querySelector('span:last-child').textContent = 'Show Exercises';
+            button.setAttribute('aria-expanded', 'false');
+        } else {
+            content.classList.add('open');
+            arrow.classList.add('open');
+            button.querySelector('span:last-child').textContent = 'Hide Exercises';
+            button.setAttribute('aria-expanded', 'true');
+        }
+    }
+</script>
 
-                const submenu = button.nextElementSibling;
-                submenu.classList.toggle("open");
-            });
-        });
-    </script>
-                  <script>
-        // Load TOC
-        fetch('toc.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('toc-placeholder').innerHTML = data;
-                
-                // Initialize chapter buttons
-                const chapterButtons = document.querySelectorAll(".toc-chapter");
-                chapterButtons.forEach(button => {
-                    button.addEventListener("click", () => {
-                        const expanded = button.getAttribute("aria-expanded") === "true";
-                        button.setAttribute("aria-expanded", !expanded);
-                        const submenu = button.nextElementSibling;
-                        submenu.classList.toggle("open");
-                    });
+<!-- TOC loader -->
+<script>
+    fetch('toc.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('toc-placeholder').innerHTML = data;
+
+            const chapterButtons = document.querySelectorAll('.toc-chapter');
+            chapterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const expanded = button.getAttribute('aria-expanded') === 'true';
+                    button.setAttribute('aria-expanded', !expanded);
+                    const submenu = button.nextElementSibling;
+                    submenu.classList.toggle('open');
                 });
             });
-    </script>
- 
+        });
+</script>
+
 </body>
 </html>

@@ -1,90 +1,777 @@
 <!DOCTYPE html>
-<html>
-    <head>
-      <!-- MathJax configuration -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CH 1.2 – Graphs of Functions</title>
+
+    <!-- MathJax configuration -->
     <script>
         window.MathJax = {
             tex: {
                 inlineMath: [['\\(', '\\)'], ['$', '$']],
-                displayMath: [['\\[', '\\]'], ['$$', '$$']]
+                displayMath: [['\\[', '\\]'], ['$$', '$$']],
+                packages: {'[+]': ['cancel', 'color']},
+                macros: {
+                    cancel: ['\\enclose{horizontalstrike}{#1}', 1]
+                }
             },
             options: {
                 skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
             },
             loader: {
-                load: ['input/tex', 'output/chtml']
+                load: ['input/tex', 'output/chtml', '[tex]/cancel', '[tex]/color']
             }
         };
     </script>
-    <!-- MathJax loader -->
     <script id="MathJax-script" async
         src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
     </script>
 
-    <link rel="stylesheet" href="styles.css">
-    <!-- MathJax -->
-    <script>
-        window.MathJax = { /* ... */ };
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="styles.css" />
 
-</head>
- <body> 
-<div id="toc-placeholder"></div>
+    <style>
+        /* Three-column diagram row */
+        .diagram-row-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            justify-items: center;
+            align-items: start;
+            margin: 1.5rem 0;
+        }
 
-
-
-
-            
-<script>
-        function toggleExample(button) {
-            const content = button.nextElementSibling;
-            const arrow = button.querySelector('.toggle-arrow');
-            
-            if (content.classList.contains('open')) {
-                content.classList.remove('open');
-                arrow.classList.remove('open');
-                button.querySelector('span:last-child').textContent = 'Show Solution';
-            } else {
-                content.classList.add('open');
-                arrow.classList.add('open');
-                button.querySelector('span:last-child').textContent = 'Hide Solution';
+        @media (max-width: 768px) {
+            .diagram-row-3 {
+                grid-template-columns: 1fr;
+                gap: 1rem;
             }
         }
-    </script>
 
-    <script>
-        const chapterButtons = document.querySelectorAll(".toc-chapter");
+        /* Two-column layout for even/odd algebraic tests */
+        .two-col-test {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin: 1rem 0;
+        }
 
-        chapterButtons.forEach(button => {
-            button.addEventListener("click", () => {
-                const expanded = button.getAttribute("aria-expanded") === "true";
-                button.setAttribute("aria-expanded", !expanded);
+        .two-col-test .col {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 1rem;
+        }
 
-                const submenu = button.nextElementSibling;
-                submenu.classList.toggle("open");
-            });
-        });
-    </script>
-                  <script>
-        // Load TOC
-        fetch('toc.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('toc-placeholder').innerHTML = data;
-                
-                // Initialize chapter buttons
-                const chapterButtons = document.querySelectorAll(".toc-chapter");
-                chapterButtons.forEach(button => {
-                    button.addEventListener("click", () => {
-                        const expanded = button.getAttribute("aria-expanded") === "true";
-                        button.setAttribute("aria-expanded", !expanded);
-                        const submenu = button.nextElementSibling;
-                        submenu.classList.toggle("open");
-                    });
+        .two-col-test .col p {
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .two-col-test {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Collapsible exercises */
+        .exercises-section {
+            margin: 25px 0;
+        }
+
+        .exercises-header {
+            background-color: #33AB2B;
+            color: white;
+            padding: 12px 20px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+            border-radius: 4px;
+            transition: background-color 0.2s ease;
+            border: none;
+            font-size: 1em;
+            width: 100%;
+        }
+
+        .exercises-header:hover {
+            background-color: #2a8922;
+        }
+
+        .exercises-content {
+            display: none;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-top: none;
+            border-radius: 0 0 6px 6px;
+            padding: 20px;
+        }
+
+        .exercises-content.open {
+            display: block;
+        }
+
+        /* red text for zero substitution */
+        .red-text {
+            color: #c0392b;
+            font-weight: bold;
+        }
+
+        /* blue text for key terms */
+        .blue-text {
+            color: #0066cc;
+        }
+
+        /* green text */
+        .green-text {
+            color: #33AB2B;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div id="toc-placeholder"></div>
+
+<main class="container">
+
+<section id="graphs-of-functions" aria-labelledby="section-heading">
+    <h1 id="section-heading">CH 1.2 – Graphs of Functions</h1>
+
+    <!-- ==================== INTERVAL NOTATION ==================== -->
+    <section aria-labelledby="interval-notation-heading">
+        <h2 id="interval-notation-heading">Interval Notation</h2>
+
+        <p>We are briefly going to visit <strong class="blue-text">intervals</strong> and <strong class="blue-text">interval notation</strong>. Both of these should be a previously learned topic; however, if not, here is a brief overview or reminder of what it is.</p>
+
+        <p><em>Interval Notation</em> is a form of writing in mathematics that helps to eliminate words out of answers. Interval notation allows us to take a numerical interval such as \(-3 &lt; x \leq 5\) and write it as \((-3, 5]\). In this type of notation, different types of brackets have different meanings. Hopefully, the table below will help to outline those for you.</p>
+
+        <!-- Image 1_2_1: Full interval notation table -->
+        <img
+            src="images/1_2_1.png"
+            alt="Table of interval notation with three columns: Set Notation, Interval Notation, and Graphical. Eight rows cover all combinations of open and closed endpoints and infinite rays. Row 1: open interval (a,b), both endpoints open circles on a number line. Row 2: half-open [a,b), left endpoint filled, right open. Row 3: half-open (a,b], left open, right filled. Row 4: closed [a,b], both endpoints filled. Row 5: (-infinity, b), ray extending left with open circle at b. Row 6: (-infinity, b], ray extending left with filled circle at b. Row 7: (a, infinity), ray extending right with open circle at a. Row 8: [a, infinity), ray extending right with filled circle at a. All number-line segments are drawn in blue."
+            style="max-width:100%; height:auto; display:block; margin: 1rem auto;"
+        />
+
+        <p>One thing to note that is important is that \(-\infty\) and \(\infty\) always use open brackets, since they are values you will never be able to reach.</p>
+
+        <p>Occasionally with interval notation, we need to break the interval up, or use more than one interval. See the examples below to see how that may look.</p>
+
+        <!-- Image 1_2_2: Full union examples table -->
+        <img
+            src="images/1_2_2.png"
+            alt="Table with two rows showing union interval notation examples. Row 1: A number line with two rays going left from a filled dot at a and right from a filled dot at b, written as (-infinity, a] union [b, infinity). A note explains that the union symbol means it can be either interval or both. Row 2: A number line showing the entire real line except for an open circle (hole) at b, written as (-infinity, b) union (b, infinity). A note explains this represents all values except b, indicated by round brackets."
+            style="max-width:100%; height:auto; display:block; margin: 1rem auto;"
+        />
+
+        <p>Now that we have briefly gone over the basics of writing intervals, we are going to move into where we are going to use them. They really are a useful tool when it comes to writing the domain and range of a function.</p>
+    </section>
+
+    <hr class="divider" role="separator" aria-hidden="true" />
+
+    <!-- ==================== GRAPHS OF FUNCTIONS ==================== -->
+    <section aria-labelledby="graphs-heading">
+        <h2 id="graphs-heading">Graphs of Functions</h2>
+
+        <p>In the first section we looked at how to write the domain and range of functions and relations when given to us in list-type formats. In this section we are going to discuss identifying the domain and range from graphs of relations and functions.</p>
+
+        <p>Allow us to look at the graph of a function \(f(x)\) drawn below:</p>
+
+        <!-- Image 1_2_3: Main f(x) graph with domain/range dashed lines -->
+        <img
+            src="images/1_2_3.png"
+            alt="Coordinate plane showing the graph of a piecewise function f(x). The graph begins with a filled blue dot at (-3, -2), curves upward to an open circle at (-1, 1), then continues as a horizontal segment from an open circle at (-1, 1) to a filled dot at (2, 1), then rises with an arrow extending toward the upper right. Vertical dashed green lines at x equals negative 3 and x equals 5 indicate the extent of the domain, labeled 'Domain'. Horizontal dashed red lines at y equals negative 2 and y equals 5 indicate the extent of the range, labeled 'Range'."
+            style="max-width:100%; height:auto; display:block; margin: 1rem auto;"
+        />
+
+        <p>From looking at the above graph we can see that the domain and range for this function are not as simple as listing a set of numbers. This is where our interval notation comes in handy. Recall that the domain is the set of all the \(x\)-values. As can be seen, \(x\) can take on a number of different values in this graph — and not just whole values either.</p>
+
+        <p>To identify the domain of this function we need to look at the blue line and assess where it starts and where it ends. From looking at the graph we can see that this graph begins at \(x = -3\) and it ends at \(x = 5\). However, we need to be careful with that ending point because there is an arrow, which means that it keeps going indefinitely — it is approaching \(\infty\). Additionally, we need to identify that at \(x = -1\) there is a hole in the graph, meaning that the function does not exist there. This means that our interval will be a union of multiple intervals. After looking at all of that, our domain for this function would be \([-3,-1)\cup(-1,\infty)\). Remember these are <em>not</em> points — they are strictly \(x\)-values.</p>
+
+        <p>To identify the range of this function we take a very similar approach, but instead of looking at the \(x\)-values we are looking at the \(y\)-values. Looking at the \(y\)-values of this function, we can see that the lowest \(y\)-value on our graph is \(y = -2\) and the largest \(y\)-value keeps growing without bound because there is an arrow — meaning it goes on forever. It is important to note that even though there is a hole at \(y = 1\), there are also other \(y\)-values that equal \(1\), which means that when it comes to our range, we still include this value in our interval. This would make our range \([-2, \infty)\).</p>
+
+        <div class="definition-box">
+            <h3>A Couple of Important Things to Mention About Intervals</h3>
+            <ol>
+                <li>Make sure the interval goes from least to greatest.</li>
+                <li>Intervals never use coordinate pairs \((x, y)\); instead, they always go from one number to the next number.</li>
+                <li>Remember to never put a square bracket with \(-\infty\) or \(\infty\).</li>
+            </ol>
+        </div>
+    </section>
+
+    <hr class="divider" role="separator" aria-hidden="true" />
+
+    <!-- ==================== USING GRAPHS TO FIND FUNCTION VALUES ==================== -->
+    <section aria-labelledby="function-values-heading">
+        <h2 id="function-values-heading">Using Graphs to Find Function Values</h2>
+
+        <p>In the previous section we discussed how to evaluate a function at a given value algebraically. However, we don't always have an actual algebraic function to pull values from. In this case we can do so by using the graph of a function. Let's look back at the graph below:</p>
+
+        <!-- Image 1_2_4: Same f(x) graph repeated -->
+        <img
+            src="images/1_2_4.png"
+            alt="Coordinate plane showing the same piecewise function f(x) as before, without the domain and range dashed lines. The graph begins with a filled blue dot at (-3, -2), curves upward to an open circle at (-1, 1), continues as a horizontal segment with a filled dot at (2, 1), then rises with an arrow extending toward the upper right."
+            style="max-width:100%; height:auto; display:block; margin: 1rem auto;"
+        />
+
+        <p>To find function values from a graph, we simply look at the values on the graph.</p>
+
+        <!-- Example: Function Values from Graph -->
+        <section class="example" aria-labelledby="example-1-2-1">
+            <div class="example-problem">
+                <h3 id="example-1-2-1">Example</h3>
+                <p>Using the function above, find the following function values:</p>
+                <p>a.) \(f(3)\) &emsp;&emsp;&emsp; b.) \(f(-2)\) &emsp;&emsp;&emsp; c.) \(f(x) = 2\)</p>
+            </div>
+
+            <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-1-2-1">
+                <span class="toggle-arrow">▼</span>
+                <span>Show Solution</span>
+            </button>
+
+            <div id="solution-1-2-1" class="example-content">
+                <div class="solution">
+                    <h4>Solution</h4>
+                    <p><strong>a.)</strong> If we were looking at the graph, we'd go over to where \(x = 3\) and go up or down to meet the graph of the function, then identify that \(y\)-value. That means \(f(3) \approx 1.2\).</p>
+                    <p><strong>b.)</strong> We would do the same thing as above. On the graph, go over to where \(x = -2\) and identify the \(y\)-value of the function at that point. Hence, \(f(-2) \approx 0.5\).</p>
+                    <p><strong>c.)</strong> This one is a bit different. Notice how in this notation we are not looking for the \(y\)-value when the \(x\)-value is given. In this case we are looking for the \(x\)-value when the \(y\)-value is given. This means we go to where \(y = 2\) on the graph and identify the \(x\)-value of the function. Looking at the graph we can see that when \(y = 2\), \(x = 4\). Therefore we can write our answer as \(f(4) = 2\).</p>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <hr class="divider" role="separator" aria-hidden="true" />
+
+    <!-- ==================== VERTICAL LINE TEST ==================== -->
+    <section aria-labelledby="vlt-heading">
+        <h2 id="vlt-heading">The Vertical Line Test</h2>
+
+        <p>Previously in this chapter it was discussed what makes a relation a function. Another way to determine if a relation is a function graphically is by use of the <strong class="blue-text">vertical line test</strong>.</p>
+
+        <div class="definition-box">
+            <h3>Vertical Line Test</h3>
+            <p>If a vertical line does not pass through the graph of an equation in more than one spot, then the equation \(y\) is a function of \(x\).</p>
+        </div>
+
+        <!-- Example: Vertical Line Test -->
+        <section class="example" aria-labelledby="example-1-2-2">
+            <div class="example-problem">
+                <h3 id="example-1-2-2">Example</h3>
+                <p>Using the vertical line test, determine if each graph below demonstrates that \(y\) is a function of \(x\).</p>
+
+                <!-- Images 1_2_5, 1_2_6, 1_2_7: VLT problem graphs side by side -->
+                <div class="diagram-row-3" role="group" aria-label="Three graphs for the vertical line test example">
+                    <div class="diagram">
+                        <img
+                            src="images/1_2_5.png"
+                            alt="Graph a.) on a coordinate plane showing a cubic-like curve in blue that passes through all four quadrants, with one end going up to the upper right and the other going down to the lower left. The curve is smooth and continuous with no breaks. Labeled 'a.)' in the upper left."
+                        />
+                    </div>
+                    <div class="diagram">
+                        <img
+                            src="images/1_2_6.png"
+                            alt="Graph b.) on a coordinate plane showing two blue curves that together form a sideways parabola opening to the right. The upper branch goes from the point (-2, 0) upward to the right, and the lower branch goes from (-2, 0) downward to the right, creating a shape that fails the vertical line test. Labeled 'b.)' in the upper left."
+                        />
+                    </div>
+                    <div class="diagram">
+                        <img
+                            src="images/1_2_7.png"
+                            alt="Graph c.) on a coordinate plane showing a piecewise curve. One branch starts at a filled dot at (-1, -1) and curves upward to the right with an arrow. Another branch begins at an open circle at (-1, 1) and curves upward to the left with an arrow. Labeled 'c.)' in the upper left."
+                        />
+                    </div>
+                </div>
+            </div>
+
+            <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-1-2-2">
+                <span class="toggle-arrow">▼</span>
+                <span>Show Solution</span>
+            </button>
+
+            <div id="solution-1-2-2" class="example-content">
+                <div class="solution">
+                    <h4>Solution</h4>
+
+                    <p><strong>a.)</strong> This graph is a function. No matter where you drew a vertical line on this graph, there is no place it would touch more than once.</p>
+
+                    <!-- Image 1_2_8: VLT solution a -->
+                    <img
+                        src="images/1_2_8.png"
+                        alt="Graph a.) repeated, now with a dashed red vertical line drawn at x equals 1. The red line intersects the cubic curve at exactly one point, confirming the graph passes the vertical line test and is a function."
+                        style="max-width:100%; height:auto; display:block; margin: 1rem auto;"
+                    />
+
+                    <p><strong>b.)</strong> This graph is <em>not</em> a function of \(x\). This can be determined because, as you can see below, a vertical line passes through this graph in multiple places.</p>
+
+                    <!-- Image 1_2_9: VLT solution b -->
+                    <img
+                        src="images/1_2_9.png"
+                        alt="Graph b.) repeated, now with a dashed red vertical line drawn at x equals 1. The red line intersects both branches of the sideways parabola at two distinct points, confirming the graph fails the vertical line test and is not a function."
+                        style="max-width:100%; height:auto; display:block; margin: 1rem auto;"
+                    />
+
+                    <p><strong>c.)</strong> This graph is a function of \(x\). Even though it looks like the line passes through the graph in two places, we have to keep in mind that one of them is a hole, which means that the vertical line goes through it like the eye on a fish hook.</p>
+
+                    <!-- Image 1_2_10: VLT solution c -->
+                    <img
+                        src="images/1_2_10.png"
+                        alt="Graph c.) repeated, now with a dashed red vertical line drawn at x equals negative 1. The red line passes through the open circle (hole) at (-1, 1) and the filled dot at (-1, -1). Because the hole is not a point on the graph, the vertical line only truly intersects the graph at one point, confirming it is a function."
+                        style="max-width:100%; height:auto; display:block; margin: 1rem auto;"
+                    />
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <hr class="divider" role="separator" aria-hidden="true" />
+
+    <!-- ==================== ZEROS OF A FUNCTION ==================== -->
+    <section aria-labelledby="zeros-heading">
+        <h2 id="zeros-heading">Solving Functions &amp; Zeros</h2>
+
+        <p>We are learning everything there is to know about relations and functions in this chapter. We've already discussed a number of things that functions and relations have, such as a domain and range. Another important aspect of a relation or function is its <strong class="blue-text">zero(s)</strong>. The <em>zero of a function</em> is the point at which the graph crosses the \(x\)-axis. Other names for a zero can include, but are not limited to, solutions and \(x\)-intercepts.</p>
+
+        <div class="definition-box">
+            <h3>Zeros of a Function</h3>
+            <p>The <strong>zeros of a function</strong> are the \(x\)-values for which \(f(x) = 0\). The zero(s) are a set of numbers in which you only list the \(x\)-values. By making it into a coordinate such as \((a, 0)\) you are changing it into an \(x\)-intercept.</p>
+        </div>
+
+        <!-- ---- Finding Zeros Algebraically ---- -->
+        <section aria-labelledby="zeros-algebraic-heading">
+            <h3 id="zeros-algebraic-heading">Finding Zeros Algebraically</h3>
+
+            <p>When you are trying to find the zero of a function algebraically, you replace \(f(x)\) with <span class="red-text">0</span> and then solve the equation for \(x\).</p>
+
+            <!-- Example: Finding Zeros Algebraically -->
+            <section class="example" aria-labelledby="example-1-2-3">
+                <div class="example-problem">
+                    <h3 id="example-1-2-3">Example</h3>
+                    <p>Find the zeros of the functions below algebraically.</p>
+                    <p>a.) \(f(x) = 3x + 4\) &emsp;&emsp;&emsp; b.) \(g(x) = \sqrt{-5 + x^2}\) &emsp;&emsp;&emsp; c.) \(h(t) = t^2 + 5t + 6\)</p>
+                </div>
+
+                <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-1-2-3">
+                    <span class="toggle-arrow">▼</span>
+                    <span>Show Solution</span>
+                </button>
+
+                <div id="solution-1-2-3" class="example-content">
+                    <div class="solution">
+                        <h4>Solution</h4>
+
+                        <p><strong>a.)</strong> To find the solution, replace \(f(x)\) with <span class="red-text">0</span> and then solve for \(x\).</p>
+                        \[
+                        \begin{array}{rcl}
+                        \color{red}{0} &=& 3x + 4 \\[4pt]
+                        -4 &=& 3x \\[4pt]
+                        -\dfrac{4}{3} &=& x
+                        \end{array}
+                        \]
+
+                        <p><strong>b.)</strong> Once again, replace \(g(x)\) with <span class="red-text">0</span> and then solve for \(x\).</p>
+                        \[
+                        \begin{array}{rcl}
+                        \color{red}{0} &=& \sqrt{-5 + x^2} \\[4pt]
+                        0^2 &=& \left(\sqrt{-5 + x^2}\right)^2 \\[4pt]
+                        0 &=& -5 + x^2 \\[4pt]
+                        5 &=& x^2 \\[4pt]
+                        \sqrt{5} &=& \sqrt{x^2} \\[4pt]
+                        \pm\sqrt{5} &=& x
+                        \end{array}
+                        \]
+
+                        <p><strong>c.)</strong> Once again, replace \(h(t)\) with <span class="red-text">0</span> and then solve for \(t\).</p>
+                        \[
+                        \begin{array}{rcl}
+                        \color{red}{0} &=& t^2 + 5t + 6 \\[4pt]
+                        0 &=& (t+3)(t+2) \\[4pt]
+                        t + 3 = 0 &\Rightarrow& t = -3 \\[4pt]
+                        t + 2 = 0 &\Rightarrow& t = -2
+                        \end{array}
+                        \]
+                        <p>The solution set is \(\{-3,\ -2\}\).</p>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+        <!-- ---- Finding Zeros Graphically ---- -->
+        <section aria-labelledby="zeros-graphical-heading">
+            <h3 id="zeros-graphical-heading">Finding Zeros Graphically</h3>
+
+            <p>To find the zeros of a function graphically, it is as simple as looking at the graph and finding the \(x\)-value where it crosses through or touches the \(x\)-axis.</p>
+
+            <!-- Example: Finding Zeros Graphically -->
+            <section class="example" aria-labelledby="example-1-2-4">
+                <div class="example-problem">
+                    <h3 id="example-1-2-4">Example</h3>
+                    <p>Find the zero(s) in the function below.</p>
+
+                    <!-- Image 1_2_11: Zero-finding graph -->
+                    <img
+                        src="images/1_2_11.png"
+                        alt="Coordinate plane with axes labeled x and y, tick marks at integers from -4 to 4 on each axis. A blue piecewise function is drawn: one branch starts with an arrow going up and to the left, crosses the x-axis at approximately x equals negative 13 over 3, passes through a local minimum below the x-axis, and meets a filled dot at approximately (-3, -3). A second branch forms a horizontal segment at y equals 2 from x equals 0 to just before x equals 2 (open circle at x equals 2), then the graph continues to the right with an arrow going downward, crossing the x-axis at approximately x equals 3. The graph also crosses the x-axis at approximately x equals negative 3 over 2."
+                        style="max-width:100%; height:auto; display:block; margin: 1rem auto;"
+                    />
+                </div>
+
+                <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-1-2-4">
+                    <span class="toggle-arrow">▼</span>
+                    <span>Show Solution</span>
+                </button>
+
+                <div id="solution-1-2-4" class="example-content">
+                    <div class="solution">
+                        <h4>Solution</h4>
+                        <p>As we can see in the graph, the function crosses the \(x\)-axis in three spots. That means that our zeros are \(x = -\dfrac{13}{3}\), \(x = -\dfrac{3}{2}\), and \(x = 3\). If we were writing this as a set it would be \(\left\{-\dfrac{13}{3},\ -\dfrac{3}{2},\ 3\right\}\).</p>
+                    </div>
+                </div>
+            </section>
+        </section>
+    </section>
+
+    <hr class="divider" role="separator" aria-hidden="true" />
+
+    <!-- ==================== INCREASING, DECREASING, & CONSTANT ==================== -->
+    <section aria-labelledby="inc-dec-heading">
+        <h2 id="inc-dec-heading">Increasing, Decreasing, &amp; Constant</h2>
+
+        <p>There is much more to a graph of a function than just its zeros, domain, and range. It is important to know when the function is <strong class="blue-text">increasing</strong>, <strong class="blue-text">decreasing</strong>, or <strong class="blue-text">constant</strong>. Remember, whenever we are analyzing graphs we always move from left to right.</p>
+
+        <div class="definition-box">
+            <h3>Increasing, Decreasing, and Constant Functions</h3>
+            <p>A function \(f\) is said to be <strong class="green-text">increasing</strong> if, as the function moves left to right, the first \(y\)-value is smaller than the second \(y\)-value.</p>
+            <p>A function \(f\) is said to be <strong style="color:#c0392b;">decreasing</strong> if, as the function moves left to right, the first \(y\)-value is larger than the second \(y\)-value.</p>
+            <p>A function \(f\) is said to be <strong class="blue-text">constant</strong> if, as the function moves left to right, the \(y\)-value stays the same.</p>
+        </div>
+
+        <!-- Image 1_2_12: Inc/dec/constant reference graph -->
+        <img
+            src="images/1_2_12.png"
+            alt="Coordinate plane with a piecewise function demonstrating all three behaviors. The left portion of the curve descends from upper left, colored red, labeled 'Decreasing'. The middle portion is a horizontal segment colored blue, labeled 'Constant'. The right portion rises toward the upper right, colored green, labeled 'Increasing'."
+            style="max-width:100%; height:auto; display:block; margin: 1rem auto;"
+        />
+
+        <!-- Example: Increasing, Decreasing, Constant -->
+        <section class="example" aria-labelledby="example-1-2-5">
+            <div class="example-problem">
+                <h3 id="example-1-2-5">Example</h3>
+                <p>Determine the open intervals over which the following are increasing, decreasing, and constant.</p>
+
+                <!-- Images 1_2_13, 1_2_14, 1_2_15: Three example graphs side by side -->
+                <div class="diagram-row-3" role="group" aria-label="Three graphs for the increasing, decreasing, and constant example">
+                    <div class="diagram">
+                        <img
+                            src="images/1_2_13.png"
+                            alt="Graph a.) on a coordinate plane. A blue piecewise function: one branch descends with an arrow from upper left to a filled dot at (-1, -1); a horizontal segment runs from an open circle at (-1, 1) to a filled dot at (1, 1); then a second branch descends with an arrow from an open circle at (1, -1) to lower right. Labeled 'a.)' in the upper left."
+                        />
+                    </div>
+                    <div class="diagram">
+                        <img
+                            src="images/1_2_14.png"
+                            alt="Graph b.) on a coordinate plane. A blue piecewise function: one branch descends from upper left with an arrow to an open circle at (-1, 1); a segment rises from a filled dot at (-1, -1) to a filled dot at (1, 1); then a horizontal ray extends to the right from an open circle at (1, -1). Labeled 'b.)' in the upper left."
+                        />
+                    </div>
+                    <div class="diagram">
+                        <img
+                            src="images/1_2_15.png"
+                            alt="Graph c.) on a coordinate plane. A blue curve with arrows on both ends forms an S-shape passing through the origin, rising continuously from the lower left to the upper right. Labeled 'c.)' in the upper left."
+                        />
+                    </div>
+                </div>
+            </div>
+
+            <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-1-2-5">
+                <span class="toggle-arrow">▼</span>
+                <span>Show Solution</span>
+            </button>
+
+            <div id="solution-1-2-5" class="example-content">
+                <div class="solution">
+                    <h4>Solution</h4>
+
+                    <p><strong>a.)</strong> If we were to take the graph and highlight its parts — with red being decreasing, blue being constant, and green being increasing — our graph would look something like:</p>
+
+                    <!-- Image 1_2_16: Inc/dec solution a -->
+                    <img
+                        src="images/1_2_16.png"
+                        alt="Graph a.) with color-coded behavior. The two descending branches are highlighted in red (decreasing). The horizontal segment between x equals negative 1 and x equals 1 is highlighted in blue (constant). There are no green (increasing) portions. Filled dots and open circles mark the transition points at x equals negative 1 and x equals 1."
+                        style="max-width:100%; height:auto; display:block; margin: 1rem auto;"
+                    />
+
+                    <p>If we notice, this graph has no areas of increasing, so we have no interval for increasing. Our open interval of decreasing would be \((-\infty, -1) \cup (1, \infty)\). Our interval over which the equation is constant would be \((-1, 1)\).</p>
+
+                    <hr class="divider" role="separator" aria-hidden="true" />
+
+                    <p><strong>b.)</strong> If we were to take the graph and highlight its parts — with red being decreasing, blue being constant, and green being increasing — our graph would look something like:</p>
+
+                    <!-- Image 1_2_17: Inc/dec solution b -->
+                    <img
+                        src="images/1_2_17.png"
+                        alt="Graph b.) with color-coded behavior. The descending branch from upper left to x equals negative 1 is highlighted in red (decreasing). The rising segment from x equals negative 1 to x equals 1 is highlighted in green (increasing). The horizontal ray from x equals 1 extending right is highlighted in blue (constant). Filled and open dots mark the transition points."
+                        style="max-width:100%; height:auto; display:block; margin: 1rem auto;"
+                    />
+
+                    <p>This graph has all three types of behavior. The interval at which this function is increasing is \((-1, 1)\). The interval in which it is decreasing is \((-\infty, -1)\). Lastly, the interval in which it is constant is \((1, \infty)\).</p>
+
+                    <hr class="divider" role="separator" aria-hidden="true" />
+
+                    <p><strong>c.)</strong> If we were to take the graph and highlight its parts — with red being decreasing, blue being constant, and green being increasing — our graph would look something like:</p>
+
+                    <!-- Image 1_2_18: Inc/dec solution c -->
+                    <img
+                        src="images/1_2_18.png"
+                        alt="Graph c.) with the entire S-shaped curve highlighted in green, indicating that the function is increasing throughout its entire domain."
+                        style="max-width:100%; height:auto; display:block; margin: 1rem auto;"
+                    />
+
+                    <p>This function is increasing throughout its entire domain. That means our interval is \((-\infty, \infty)\).</p>
+
+                    <p>Remember: intervals are never coordinates — they are always just the \(x\)-values.</p>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <hr class="divider" role="separator" aria-hidden="true" />
+
+    <!-- ==================== MAXIMUM & MINIMUM VALUES ==================== -->
+    <section aria-labelledby="maxmin-heading">
+        <h2 id="maxmin-heading">Maximum &amp; Minimum Values of a Function</h2>
+
+        <p>I think it is safe to say that almost everyone knows what a maximum and a minimum are. But what about a <strong class="blue-text">relative minimum</strong> and a <strong class="blue-text">relative maximum</strong>?</p>
+
+        <div class="definition-box">
+            <h3>Relative Minimum and Relative Maximum</h3>
+            <p>A function has a <strong>relative minimum</strong> if there exists some interval \((a, b)\) that contains the lowest point in that interval. It is important to note that it does not have to be the lowest point on the whole graph, just the lowest point in a given interval.</p>
+            <p>A function has a <strong>relative maximum</strong> if there exists some interval \((a, b)\) that contains the highest point in that interval. It is important to note that it does not have to be the highest point on the whole graph, just the highest point in a given interval.</p>
+            <p>Graphs of functions can have neither a relative minimum nor a relative maximum, and they can also have multiple relative minima and/or maxima.</p>
+        </div>
+
+        <p>Looking at the graph below we can see that there are two relative maximums and two relative minimums.</p>
+
+        <!-- Image 1_2_19: Relative max/min graph -->
+        <img
+            src="images/1_2_19.png"
+            alt="Coordinate plane showing a blue wave-like curve with arrows on both ends. Four special points are labeled: point a at a local minimum, point b at a local maximum, point c at a local minimum, and point d at a local maximum. Red filled dots mark the relative minima at a and c; blue filled dots mark the relative maxima at b and d. Arrows and labels identify 'Relative Maximum(s)' pointing to b and d, and 'Relative Minimum(s)' pointing to a and c."
+            style="max-width:100%; height:auto; display:block; margin: 1rem auto;"
+        />
+
+        <p>The <strong class="blue-text">absolute maximum</strong> and the <strong class="blue-text">absolute minimum</strong> are also located in the graph, but instead of being the highest or lowest point in an interval, they are the highest and lowest point, respectively, of the entire graph. Using the graph above as an example, point \(a\) would be the absolute minimum and point \(d\) would be the absolute maximum.</p>
+    </section>
+
+    <hr class="divider" role="separator" aria-hidden="true" />
+
+    <!-- ==================== EVEN AND ODD FUNCTIONS ==================== -->
+    <section aria-labelledby="even-odd-heading">
+        <h2 id="even-odd-heading">Even and Odd Functions</h2>
+
+        <p>The last thing we are going to discuss in this section is a type of symmetry that a function may have. When a function is symmetric with the \(y\)-axis — meaning that you can fold it in half "hot dog" style and what is on the left is the same as what is on the right — we call that function <strong class="blue-text">even</strong>. When a function is symmetric with the <em>origin</em>, we call that function <strong class="blue-text">odd</strong>.</p>
+
+        <div class="definition-box">
+            <h3>Even and Odd Functions</h3>
+            <p>An <strong>even</strong> function graphically will have both ends going the same direction. Algebraically we say that if \(f(x) = f(-x)\), then the function is even.</p>
+            <p>An <strong>odd</strong> function graphically will have its ends going in opposite directions. Algebraically we say that if \(f(-x) = -f(x)\), then the function is odd.</p>
+        </div>
+
+        <!-- Example: Even and Odd -->
+        <section class="example" aria-labelledby="example-1-2-6">
+            <div class="example-problem">
+                <h3 id="example-1-2-6">Example</h3>
+                <p>Algebraically identify whether each function below is even, odd, or neither.</p>
+                <p>a.) \(g(x) = x^3 + x\) &emsp;&emsp;&emsp; b.) \(h(t) = t^2 - 1\) &emsp;&emsp;&emsp; c.) \(f(s) = s^2 + 3s - 10\)</p>
+            </div>
+
+            <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-1-2-6">
+                <span class="toggle-arrow">▼</span>
+                <span>Show Solution</span>
+            </button>
+
+            <div id="solution-1-2-6" class="example-content">
+                <div class="solution">
+                    <h4>Solution</h4>
+
+                    <!-- Part a -->
+                    <p><strong>a.)</strong></p>
+                    <div class="two-col-test" role="group" aria-label="Even and odd test for g(x) equals x cubed plus x">
+                        <div class="col">
+                            <p>Test for Even: show \(g(x) = g(-x)\)</p>
+                            \[
+                            \begin{array}{rcl}
+                            x^3 + x &=& (-x)^3 + (-x) \\[4pt]
+                            x^3 + x &\neq& -x^3 - x
+                            \end{array}
+                            \]
+                            <p>Since the two sides do not match, this function is <strong>not even</strong>.</p>
+                        </div>
+                        <div class="col">
+                            <p>Test for Odd: show \(g(-x) = -g(x)\)</p>
+                            \[
+                            \begin{array}{rcl}
+                            (-x)^3 + (-x) &=& -(x^3 + x) \\[4pt]
+                            -x^3 - x &=& -x^3 - x
+                            \end{array}
+                            \]
+                            <p>Since the two sides match, this function is <strong>odd</strong>.</p>
+                        </div>
+                    </div>
+
+                    <hr class="divider" role="separator" aria-hidden="true" />
+
+                    <!-- Part b -->
+                    <p><strong>b.)</strong></p>
+                    <div class="two-col-test" role="group" aria-label="Even and odd test for h(t) equals t squared minus 1">
+                        <div class="col">
+                            <p>Test for Even: show \(h(t) = h(-t)\)</p>
+                            \[
+                            \begin{array}{rcl}
+                            t^2 - 1 &=& (-t)^2 - 1 \\[4pt]
+                            t^2 - 1 &=& t^2 - 1
+                            \end{array}
+                            \]
+                            <p>Since the two sides match, this function is <strong>even</strong>.</p>
+                        </div>
+                        <div class="col">
+                            <p>Test for Odd: show \(h(-t) = -h(t)\)</p>
+                            \[
+                            \begin{array}{rcl}
+                            (-t)^2 - 1 &=& -(t^2 - 1) \\[4pt]
+                            t^2 - 1 &\neq& -t^2 + 1
+                            \end{array}
+                            \]
+                            <p>Since the two sides do not match, this function is <strong>not odd</strong>.</p>
+                        </div>
+                    </div>
+
+                    <hr class="divider" role="separator" aria-hidden="true" />
+
+                    <!-- Part c -->
+                    <p><strong>c.)</strong></p>
+                    <div class="two-col-test" role="group" aria-label="Even and odd test for f(s) equals s squared plus 3s minus 10">
+                        <div class="col">
+                            <p>Test for Even: show \(f(s) = f(-s)\)</p>
+                            \[
+                            \begin{array}{rcl}
+                            s^2 + 3s - 10 &=& (-s)^2 + 3(-s) - 10 \\[4pt]
+                            s^2 + 3s - 10 &\neq& s^2 - 3s - 10
+                            \end{array}
+                            \]
+                            <p>Since the two sides do not match, this function is <strong>not even</strong>.</p>
+                        </div>
+                        <div class="col">
+                            <p>Test for Odd: show \(f(-s) = -f(s)\)</p>
+                            \[
+                            \begin{array}{rcl}
+                            (-s)^2 + 3(-s) - 10 &=& -(s^2 + 3s - 10) \\[4pt]
+                            s^2 - 3s - 10 &\neq& -s^2 - 3s + 10
+                            \end{array}
+                            \]
+                            <p>Since the two sides do not match, this function is <strong>not odd</strong>. That means this function is <strong>neither</strong> odd nor even. If you were to look at it graphically, both ends go up — but it is not symmetric with the \(y\)-axis.</p>
+                        </div>
+                    </div>
+
+                    <p>Looking at the graphs below we can see the different types of symmetry.</p>
+
+                    <!-- Image 1_2_20: Even/odd example a (odd cubic) -->
+                    <img
+                        src="images/1_2_20.png"
+                        alt="Graph a.) showing the odd function g(x) equals x cubed plus x on a coordinate plane. The curve passes through the origin and rises to the upper right while descending to the lower left, with arrows on both ends going in opposite directions. An annotation to the right reads: 'If you reflected this graph over the y-axis first, and then over the x-axis, you would have the same graph. Notice how one end goes up and one end goes down.' Labeled 'a.)' in the upper left."
+                        style="max-width:100%; height:auto; display:block; margin: 1rem auto;"
+                    />
+
+                    <!-- Image 1_2_21: Even/odd example b (even parabola) -->
+                    <img
+                        src="images/1_2_21.png"
+                        alt="Graph b.) showing the even function h(t) equals t squared minus 1 on a coordinate plane. The parabola opens upward, symmetric about the y-axis, with its vertex below the x-axis and arrows on both ends pointing upward. An annotation to the right reads: 'If you reflected this graph over the y-axis you would have the same graph. Notice how both ends go up.' Labeled 'b.)' in the upper left."
+                        style="max-width:100%; height:auto; display:block; margin: 1rem auto;"
+                    />
+
+                    <!-- Image 1_2_22: Even/odd example c (neither) -->
+                    <img
+                        src="images/1_2_22.png"
+                        alt="Graph c.) showing the function f(s) equals s squared plus 3s minus 10 on a larger coordinate plane with axes going from -8 to 8. The parabola opens upward with both ends pointing up, but is shifted to the left of the y-axis so it is not symmetric about it. An annotation to the right reads: 'Looking at the graph since both ends go the same direction, you may suspect that the graph is even. However, if you notice, when you fold this graph along the y-axis, it is not the same on the left as it is on the right. Therefore this graph has neither symmetry.' Labeled 'c.)' in the upper left."
+                        style="max-width:100%; height:auto; display:block; margin: 1rem auto;"
+                    />
+
+                </div>
+            </div>
+        </section>
+    </section>
+
+</section><!-- end #graphs-of-functions -->
+
+<!-- ==================== EXERCISES ==================== -->
+<section class="exercises-section" aria-labelledby="exercises-1-2-heading">
+    <h2 id="exercises-1-2-heading" class="subsection-title">Exercises</h2>
+
+    <button class="exercises-header" onclick="toggleExercises(this)" aria-expanded="false" aria-controls="exercises-1-2-content">
+        <span class="toggle-arrow">▼</span>
+        <span>Show Exercises</span>
+    </button>
+
+    <div id="exercises-1-2-content" class="exercises-content" role="region" aria-labelledby="exercises-1-2-heading">
+        <p>Exercises to be added at a later date.</p>
+    </div>
+</section>
+
+</main>
+
+<!-- Toggle scripts -->
+<script>
+    function toggleExample(button) {
+        const content = button.nextElementSibling;
+        const arrow = button.querySelector('.toggle-arrow');
+
+        if (content.classList.contains('open')) {
+            content.classList.remove('open');
+            arrow.classList.remove('open');
+            button.querySelector('span:last-child').textContent = 'Show Solution';
+            button.setAttribute('aria-expanded', 'false');
+        } else {
+            content.classList.add('open');
+            arrow.classList.add('open');
+            button.querySelector('span:last-child').textContent = 'Hide Solution';
+            button.setAttribute('aria-expanded', 'true');
+        }
+    }
+
+    function toggleExercises(button) {
+        const content = document.getElementById(button.getAttribute('aria-controls'));
+        const arrow = button.querySelector('.toggle-arrow');
+
+        if (content.classList.contains('open')) {
+            content.classList.remove('open');
+            arrow.classList.remove('open');
+            button.querySelector('span:last-child').textContent = 'Show Exercises';
+            button.setAttribute('aria-expanded', 'false');
+        } else {
+            content.classList.add('open');
+            arrow.classList.add('open');
+            button.querySelector('span:last-child').textContent = 'Hide Exercises';
+            button.setAttribute('aria-expanded', 'true');
+        }
+    }
+</script>
+
+<!-- TOC loader -->
+<script>
+    fetch('toc.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('toc-placeholder').innerHTML = data;
+
+            const chapterButtons = document.querySelectorAll('.toc-chapter');
+            chapterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const expanded = button.getAttribute('aria-expanded') === 'true';
+                    button.setAttribute('aria-expanded', !expanded);
+                    const submenu = button.nextElementSibling;
+                    submenu.classList.toggle('open');
                 });
             });
-    </script>
- 
+        });
+</script>
+
 </body>
 </html>

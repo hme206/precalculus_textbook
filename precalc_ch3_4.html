@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CH 3.4 – Solving Exponential and Logarithmic Equations</title>
+
+    <!-- MathJax configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)'], ['$', '$']],
+                displayMath: [['\\[', '\\]'], ['$$', '$$']],
+                packages: {'[+]': ['cancel', 'color']},
+                macros: {
+                    cancel: ['\\enclose{horizontalstrike}{#1}', 1]
+                }
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            },
+            loader: {
+                load: ['input/tex', 'output/chtml', '[tex]/cancel', '[tex]/color']
+            }
+        };
+    </script>
+    <script id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+
+    <link rel="stylesheet" href="styles.css" />
+
+    <style>
+        /* ── Collapsible exercises ── */
+        .exercises-section { margin: 25px 0; }
+
+        .exercises-header {
+            background-color: #33AB2B;
+            color: white;
+            padding: 12px 20px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+            border-radius: 4px;
+            transition: background-color 0.2s ease;
+            border: none;
+            font-size: 1em;
+            width: 100%;
+        }
+        .exercises-header:hover { background-color: #2a8922; }
+
+        .exercises-content {
+            display: none;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-top: none;
+            border-radius: 0 0 6px 6px;
+            padding: 20px;
+        }
+        .exercises-content.open { display: block; }
+
+        /* ── Utility colours ── */
+        .blue-text  { color: #0066cc; }
+        .red-text   { color: #c0392b; font-weight: bold; }
+        .green-text { color: #33AB2B; font-weight: bold; }
+
+        /* ── Two-column layout ── */
+        .division-wrap {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: start;
+            margin: 1.5rem 0;
+        }
+        @media (max-width: 640px) {
+            .division-wrap { grid-template-columns: 1fr; }
+        }
+
+        /* ── Two-column problem list ── */
+        .two-col-problems {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin: 0.8rem 0;
+            list-style: none;
+            padding: 0;
+            counter-reset: prob-counter;
+        }
+        .two-col-problems li {
+            counter-increment: prob-counter;
+        }
+        .two-col-problems li::before {
+            content: counter(prob-counter) ". ";
+            font-weight: bold;
+            color: #333;
+        }
+        @media (max-width: 480px) {
+            .two-col-problems { grid-template-columns: 1fr; }
+        }
+
+        /* ── Three-column problem list ── */
+        .three-col-problems {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin: 0.8rem 0;
+            list-style: none;
+            padding: 0;
+            counter-reset: prob-counter;
+        }
+        .three-col-problems li {
+            counter-increment: prob-counter;
+        }
+        .three-col-problems li::before {
+            content: counter(prob-counter) ". ";
+            font-weight: bold;
+            color: #333;
+        }
+        @media (max-width: 540px) {
+            .three-col-problems { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 360px) {
+            .three-col-problems { grid-template-columns: 1fr; }
+        }
+
+        /* ── Annotated stepped solution ── */
+        .annotated-solution {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 0 1.5rem;
+            align-items: start;
+            margin: 1rem 0;
+        }
+        @media (max-width: 600px) {
+            .annotated-solution { grid-template-columns: 1fr; }
+            .annot-col { display: none; }
+        }
+        .annot-step {
+            padding: 0.2rem 0;
+            line-height: 1.9;
+        }
+        .annot-label {
+            padding: 0.2rem 0;
+            color: #c0392b;
+            font-style: italic;
+            font-weight: bold;
+            white-space: nowrap;
+            line-height: 1.9;
+            font-size: 0.92em;
+        }
+        .sub-label {
+            grid-column: 1 / -1;
+            font-weight: bold;
+            color: #33AB2B;
+            margin: 0.6rem 0 0.2rem 0;
+            font-size: 1em;
+        }
+        .sub-divider {
+            grid-column: 1 / -1;
+            border-top: 1px dashed #ccc;
+            margin: 0.8rem 0;
+        }
+
+        /* ── Check box for verifying solutions ── */
+        .check-box {
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            padding: 1rem 1.2rem;
+        }
+        .check-box h5 {
+            color: #0066cc;
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+            font-size: 1em;
+        }
+
+        /* ── Extraneous / No-solution callout ── */
+        .warning-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #e67e22;
+            padding: 0.8rem 1.2rem;
+            margin: 0.8rem 0;
+            border-radius: 0 4px 4px 0;
+            font-style: italic;
+        }
+
+        /* ── No solution callout ── */
+        .no-solution-box {
+            background-color: #fdecea;
+            border-left: 4px solid #c0392b;
+            padding: 0.8rem 1.2rem;
+            margin: 0.8rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+
+        /* ── Step heading ── */
+        .step-heading {
+            color: #0066cc;
+            font-weight: bold;
+            font-size: 1em;
+            margin-top: 1.2rem;
+            margin-bottom: 0.4rem;
+        }
+
+        /* ── Center utility ── */
+        .center-text {
+            text-align: center;
+            margin: 1rem 0;
+        }
+
+        /* ── Definition box extras ── */
+        .definition-box ol {
+            margin-left: 20px;
+            margin-bottom: 10px;
+        }
+        .definition-box ol li {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="toc-placeholder"></div>
+
+<main class="container">
+
+<section id="solving-exp-log" aria-labelledby="section-heading">
+    <h1 id="section-heading">CH 3.4 – Solving Exponential and Logarithmic Equations</h1>
+
+    <p>
+        By this point in the chapter you should have a decent understanding of exponential and
+        logarithmic functions, their properties, and the connection between the two functions.
+        It should come as no surprise that exponential and logarithmic functions are the inverses
+        of each other — after all, they are one-to-one. Recall from Chapter 1 that two functions
+        \(f\) and \(g\) are inverses of each other if both compositions \(f(g(x))\) and
+        \(g(f(x))\) equal \(x\). This is an important concept, as it leads directly to our ability
+        to solve these equations — along with the properties learned in the previous section.
+    </p>
+
+    <p>
+        In Section 3.2 we discussed the one-to-one property for logarithmic functions:
+    </p>
+    \[\log_a x = \log_a y \iff x = y\]
+    <p>
+        It should be no surprise that we have the same property for exponential functions:
+    </p>
+    \[b^x = b^y \iff x = y\]
+    <p>
+        This is an extremely useful property because it allows us to access the variables in each
+        equation.
+    </p>
+
+    <hr class="divider" role="separator" aria-hidden="true" />
+
+    <!-- ══════════════════════════════════════════
+         ONE-TO-ONE PROPERTY EXAMPLE
+    ══════════════════════════════════════════ -->
+    <section aria-labelledby="one-to-one-heading">
+        <h2 id="one-to-one-heading">The One-to-One Property</h2>
+
+        <section class="example" aria-labelledby="example-3-4-1-heading">
+            <div class="example-problem">
+                <h3 id="example-3-4-1-heading">Example</h3>
+                <p>Solve the equations below using the one-to-one property.</p>
+                <ol class="two-col-problems" aria-label="Four equations to solve using the one-to-one property, shown in two columns">
+                    <li>\(\log_2(x+1) = \log_2(-3x+5)\)</li>
+                    <li>\(\ln(x^2+x-2) = \ln(x+2)\)</li>
+                    <li>\(2^{(x+2)} = 2^{4x}\)</li>
+                    <li>\(e^{-x^2} = e^{-3x-4}\)</li>
+                </ol>
+            </div>
+
+            <button class="solution-header"
+                    onclick="toggleExample(this)"
+                    aria-expanded="false"
+                    aria-controls="solution-3-4-1">
+                <span class="toggle-arrow">▼</span>
+                <span>Show Solution</span>
+            </button>
+
+            <div id="solution-3-4-1" class="example-content">
+                <div class="solution">
+                    <h4>Solution</h4>
+
+                    <!-- Part 1 -->
+                    <p class="step-heading">1. \(\log_2(x+1) = \log_2(-3x+5)\)</p>
+                    <p>
+                        Since both sides are log base 2, we can drop the \(\log_2\) and set the
+                        arguments equal, then solve for \(x\):
+                    </p>
+                    \[\begin{aligned}
+                        x + 1 &= -3x + 5 \\
+                        4x + 1 &= 5 \\
+                        4x &= 4 \\
+                        x &= 1
+                    \end{aligned}\]
+
+                    <hr class="divider" role="separator" aria-hidden="true" />
+
+                    <!-- Part 2 -->
+                    <p class="step-heading">2. \(\ln(x^2+x-2) = \ln(x+2)\)</p>
+                    <p>
+                        Since \(\ln\) appears on both sides with the same base, we drop it and
+                        solve the resulting equation:
+                    </p>
+                    \[\begin{aligned}
+                        x^2 + x - 2 &= x + 2 \\
+                        x^2 - 2 &= 2 \\
+                        x^2 &= 4 \\
+                        x &= \pm\sqrt{4} = \pm 2
+                    \end{aligned}\]
+                    <p>
+                        It is important to remember that you cannot take the logarithm of a
+                        negative number or zero. That is why we must check each solution.
+                    </p>
+
+                    <div class="division-wrap" role="group" aria-label="Checking both solutions x equals negative 2 and x equals 2">
+                        <div class="check-box">
+                            <h5>Check \(x = -2\):</h5>
+                            \[\begin{aligned}
+                                \ln\!\left((-2)^2+(-2)-2\right) &= \ln\!\left((-2)+2\right) \\
+                                \ln(4-2-2) &= \ln(0) \\
+                                \ln(0) &= \ln(0) \\
+                                \text{undefined} &= \text{undefined}
+                            \end{aligned}\]
+                        </div>
+                        <div class="check-box">
+                            <h5>Check \(x = 2\):</h5>
+                            \[\begin{aligned}
+                                \ln\!\left((2)^2+(2)-2\right) &= \ln\!\left((2)+2\right) \\
+                                \ln(4) &= \ln(4) \checkmark
+                            \end{aligned}\]
+                            <p>This solution checks out. \(x = 2\) is valid.</p>
+                        </div>
+                    </div>
+
+                    <div class="warning-box" role="note">
+                        \(x = -2\) is an <strong class="blue-text">extraneous solution</strong>.
+                        Since \(\ln(0)\) is undefined, \(x = -2\) must be rejected.
+                        The only solution is \(x = 2\).
+                    </div>
+
+                    <hr class="divider" role="separator" aria-hidden="true" />
+
+                    <!-- Part 3 -->
+                    <p class="step-heading">3. \(2^{(x+2)} = 2^{4x}\)</p>
+                    <p>
+                        Both sides have the same base, so we set the exponents equal and solve:
+                    </p>
+                    \[\begin{aligned}
+                        x + 2 &= 4x \\
+                        2 &= 3x \\
+                        x &= \frac{2}{3}
+                    \end{aligned}\]
+
+                    <hr class="divider" role="separator" aria-hidden="true" />
+
+                    <!-- Part 4 -->
+                    <p class="step-heading">4. \(e^{-x^2} = e^{-3x-4}\)</p>
+                    <p>
+                        Remember that \(e\) is a base like any other — it is a fixed number; we
+                        use the symbol to avoid writing all the decimal places. Set the exponents
+                        equal and solve:
+                    </p>
+                    \[\begin{aligned}
+                        -x^2 &= -3x - 4 \\
+                        0 &= x^2 - 3x - 4 \\
+                        0 &= (x-4)(x+1)
+                    \end{aligned}\]
+
+                    <div class="division-wrap" role="group" aria-label="Solving each factor for zero">
+                        <div>
+                            \[\begin{aligned}
+                                x - 4 &= 0 \\
+                                x &= 4
+                            \end{aligned}\]
+                        </div>
+                        <div>
+                            \[\begin{aligned}
+                                x + 1 &= 0 \\
+                                x &= -1
+                            \end{aligned}\]
+                        </div>
+                    </div>
+
+                    <p>
+                        With exponential equations we don't have to be wary of negative solutions,
+                        as we can evaluate both positive and negative exponents. However, it is
+                        always a good habit to check your answer. Both \(x = 4\) and \(x = -1\)
+                        are valid solutions.
+                    </p>
+
+                </div>
+            </div>
+        </section>
+
+        <p>
+            All of this is great when the one-to-one property can be applied, but that isn't
+            always the case. What if we wanted to solve \(\log_2(x+2) + 2 = 4\)? We can't simply
+            drop the \(\log_2\). The same is true for an exponential equation such as
+            \(2^{x+2} = 3\). In order to solve equations like these we need to "log" or "base"
+            both sides, then apply our inverse properties — and if logarithmic, the power rule.
+            Let's tackle these situations one at a time, starting with exponential equations.
+        </p>
+
+    </section><!-- end one-to-one section -->
+
+    <hr class="divider" role="separator" aria-hidden="true" />
+
+    <!-- ══════════════════════════════════════════
+         EXPONENTIAL EQUATIONS
+    ══════════════════════════════════════════ -->
+    <section aria-labelledby="exponential-equations-heading">
+        <h2 id="exponential-equations-heading">Exponential Equations</h2>
+
+        <p>
+            When solving exponential equations that don't follow the one-to-one property, we first
+            isolate the exponential piece and then "log" or "ln" both sides to solve.
+        </p>
+
+        <section class="example" aria-labelledby="example-3-4-2-heading">
+            <div class="example-problem">
+                <h3 id="example-3-4-2-heading">Example</h3>
+                <p>Solve each of the exponential equations below.</p>
+                <ol class="three-col-problems" aria-label="Three exponential equations to solve">
+                    <li>\(e^{x+5} = 3\)</li>
+                    <li>\(2^x + 3 = 7\)</li>
+                    <li>\(2(3^{x+1}) - 4 = 12\)</li>
+                </ol>
+            </div>
+
+            <button class="solution-header"
+                    onclick="toggleExample(this)"
+                    aria-expanded="false"
+                    aria-controls="solution-3-4-2">
+                <span class="toggle-arrow">▼</span>
+                <span>Show Solution</span>
+            </button>
+
+            <div id="solution-3-4-2" class="example-content">
+                <div class="solution">
+                    <h4>Solution</h4>
+
+                    <!-- Part 1 -->
+                    <div class="annotated-solution" role="group" aria-label="Step-by-step solution for e to the x plus 5 equals 3 with annotations">
+                        <div class="sub-label">1. \(e^{x+5} = 3\)</div>
+
+                        <div class="annot-step">
+                            By the inverse property we know that \(\ln(e^x) = x\), meaning \(\ln\)
+                            is the inverse of \(e\). We solve by placing \(\ln\) on both sides:
+                        </div>
+                        <div class="annot-label annot-col"></div>
+
+                        <div class="annot-step">\[e^{x+5} = 3\]</div>
+                        <div class="annot-label annot-col">Write the equation</div>
+
+                        <div class="annot-step">\[\textcolor{red}{\ln}(e^{x+5}) = \textcolor{red}{\ln} 3\]</div>
+                        <div class="annot-label annot-col">Take \(\ln\) of both sides</div>
+
+                        <div class="annot-step">\[x + 5 = \ln 3\]</div>
+                        <div class="annot-label annot-col">Apply inverse property</div>
+
+                        <div class="annot-step">\[x = \ln 3 - 5 \approx -3.9\]</div>
+                        <div class="annot-label annot-col">Solve for \(x\)</div>
+                    </div>
+
+                    <hr class="divider" role="separator" aria-hidden="true" />
+
+                    <!-- Part 2 -->
+                    <div class="annotated-solution" role="group" aria-label="Step-by-step solution for 2 to the x plus 3 equals 7 with annotations">
+                        <div class="sub-label">2. \(2^x + 3 = 7\)</div>
+
+                        <div class="annot-step">
+                            While we could use the inverse property with a log of the matching base,
+                            we prefer to work in base 10. We first isolate the exponential, then
+                            "log" both sides and apply the power rule:
+                        </div>
+                        <div class="annot-label annot-col"></div>
+
+                        <div class="annot-step">\[2^x + 3 = 7\]</div>
+                        <div class="annot-label annot-col">Write the equation</div>
+
+                        <div class="annot-step">\[2^x = 4\]</div>
+                        <div class="annot-label annot-col">Isolate the exponential</div>
+
+                        <div class="annot-step">\[\textcolor{red}{\log}(2^x) = \textcolor{red}{\log} 4\]</div>
+                        <div class="annot-label annot-col">"Log" both sides</div>
+
+                        <div class="annot-step">\[\textcolor{red}{x}\log 2 = \log 4\]</div>
+                        <div class="annot-label annot-col">Power Rule — bring exponent down</div>
+
+                        <div class="annot-step">\[x = \frac{\log 4}{\log 2} = 2\]</div>
+                        <div class="annot-label annot-col">Solve with calculator</div>
+                    </div>
+
+                    <hr class="divider" role="separator" aria-hidden="true" />
+
+                    <!-- Part 3 -->
+                    <div class="annotated-solution" role="group" aria-label="Step-by-step solution for 2 times 3 to the x plus 1 minus 4 equals 12 with annotations">
+                        <div class="sub-label">3. \(2(3^{x+1}) - 4 = 12\)</div>
+
+                        <div class="annot-step">\[2(3^{x+1}) - 4 = 12\]</div>
+                        <div class="annot-label annot-col">Write the equation</div>
+
+                        <div class="annot-step">\[2(3^{x+1}) = 16\]</div>
+                        <div class="annot-label annot-col">Isolate the exponential term</div>
+
+                        <div class="annot-step">\[3^{x+1} = 8\]</div>
+                        <div class="annot-label annot-col">Divide both sides by 2</div>
+
+                        <div class="annot-step">\[\textcolor{red}{\log}(3^{x+1}) = \textcolor{red}{\log} 8\]</div>
+                        <div class="annot-label annot-col">"Log" both sides</div>
+
+                        <div class="annot-step">\[\textcolor{red}{(x+1)}\log 3 = \log 8\]</div>
+                        <div class="annot-label annot-col">Power Rule — bring exponent down</div>
+
+                        <div class="annot-step">\[x\log 3 + \log 3 = \log 8\]</div>
+                        <div class="annot-label annot-col">Distribute \(\log 3\)</div>
+
+                        <div class="annot-step">\[x\log 3 = \log 8 - \log 3\]</div>
+                        <div class="annot-label annot-col">Isolate the \(x\) term</div>
+
+                        <div class="annot-step">\[x = \frac{\log 8 - \log 3}{\log 3} \approx 0.89\]</div>
+                        <div class="annot-label annot-col">Solve with calculator</div>
+                    </div>
+
+                    <p>
+                        Depending on your calculator, you may be able to enter that last expression
+                        directly. If your calculator only has a single-line display, you could apply
+                        the Quotient Rule to combine:
+                    </p>
+                    \[\log 8 - \log 3 = \log\!\left(\frac{8}{3}\right)\]
+                    <p>making it much easier to enter.</p>
+
+                </div>
+            </div>
+        </section>
+
+    </section><!-- end exponential equations -->
+
+    <hr class="divider" role="separator" aria-hidden="true" />
+
+    <!-- ══════════════════════════════════════════
+         LOGARITHMIC EQUATIONS
+    ══════════════════════════════════════════ -->
+    <section aria-labelledby="logarithmic-equations-heading">
+        <h2 id="logarithmic-equations-heading">Logarithmic Equations</h2>
+
+        <p>
+            Now let's look at how we'd solve logarithmic equations that can't be solved using the
+            one-to-one property. We'll start with the ones that just require a bit of manipulation
+            using the product and quotient rules.
+        </p>
+
+        <!-- ── Log Equations Part A: condensing first ── -->
+        <section class="example" aria-labelledby="example-3-4-3-heading">
+            <div class="example-problem">
+                <h3 id="example-3-4-3-heading">Example</h3>
+                <p>Solve the logarithmic equations below.</p>
+                <ol class="two-col-problems" aria-label="Three logarithmic equations requiring condensing before applying the one-to-one property">
+                    <li>\(\log_3(5x-1) = \log_3(x+7) + \log_3 2\)</li>
+                    <li>\(\log_5(x+2) - \log_5 x = \log_5 6\)</li>
+                    <li>\(\ln(x+1) - \ln 4 = \ln(x+2) - \ln 3\)</li>
+                </ol>
+            </div>
+
+            <button class="solution-header"
+                    onclick="toggleExample(this)"
+                    aria-expanded="false"
+                    aria-controls="solution-3-4-3">
+                <span class="toggle-arrow">▼</span>
+                <span>Show Solution</span>
+            </button>
+
+            <div id="solution-3-4-3" class="example-content">
+                <div class="solution">
+                    <h4>Solution</h4>
+
+                    <!-- Part 1 -->
+                    <div class="annotated-solution" role="group" aria-label="Step-by-step solution for log base 3 of 5x minus 1 equals log base 3 of x plus 7 plus log base 3 of 2">
+                        <div class="sub-label">1. \(\log_3(5x-1) = \log_3(x+7) + \log_3 2\)</div>
+
+                        <div class="annot-step">
+                            While all log terms share the same base, we cannot simply drop the log
+                            when multiple terms are present. We must first condense using the
+                            product rule:
+                        </div>
+                        <div class="annot-label annot-col"></div>
+
+                        <div class="annot-step">\[\log_3(5x-1) = \log_3(x+7) + \log_3 2\]</div>
+                        <div class="annot-label annot-col">Write the equation</div>
+
+                        <div class="annot-step">\[\log_3(5x-1) = \log_3\!\bigl[(x+7)(2)\bigr]\]</div>
+                        <div class="annot-label annot-col">Product Rule — condense right side</div>
+
+                        <div class="annot-step">\[(5x-1) = (x+7)(2)\]</div>
+                        <div class="annot-label annot-col">One-to-One Property</div>
+
+                        <div class="annot-step">\[5x - 1 = 2x + 14\]</div>
+                        <div class="annot-label annot-col">Expand</div>
+
+                        <div class="annot-step">\[3x = 15\]</div>
+                        <div class="annot-label annot-col">Solve for \(x\)</div>
+
+                        <div class="annot-step">\[x = 5\]</div>
+                        <div class="annot-label annot-col"></div>
+                    </div>
+
+                    <div class="sub-divider" role="separator" aria-hidden="true"></div>
+
+                    <!-- Part 2 -->
+                    <div class="annotated-solution" role="group" aria-label="Step-by-step solution for log base 5 of x plus 2 minus log base 5 of x equals log base 5 of 6">
+                        <div class="sub-label">2. \(\log_5(x+2) - \log_5 x = \log_5 6\)</div>
+
+                        <div class="annot-step">
+                            The minus sign on the left indicates the Quotient Rule:
+                        </div>
+                        <div class="annot-label annot-col"></div>
+
+                        <div class="annot-step">\[\log_5(x+2) - \log_5 x = \log_5 6\]</div>
+                        <div class="annot-label annot-col">Write the equation</div>
+
+                        <div class="annot-step">\[\log_5\!\left(\frac{x+2}{x}\right) = \log_5 6\]</div>
+                        <div class="annot-label annot-col">Quotient Rule — condense left side</div>
+
+                        <div class="annot-step">\[\frac{x+2}{x} = \frac{6}{1}\]</div>
+                        <div class="annot-label annot-col">One-to-One Property</div>
+
+                        <div class="annot-step">\[6x = 1(x+2)\]</div>
+                        <div class="annot-label annot-col">Cross-multiply</div>
+
+                        <div class="annot-step">\[6x = x + 2\]</div>
+                        <div class="annot-label annot-col">Expand</div>
+
+                        <div class="annot-step">\[5x = 2\]</div>
+                        <div class="annot-label annot-col">Solve for \(x\)</div>
+
+                        <div class="annot-step">\[x = \frac{2}{5}\]</div>
+                        <div class="annot-label annot-col"></div>
+                    </div>
+
+                    <div class="sub-divider" role="separator" aria-hidden="true"></div>
+
+                    <!-- Part 3 -->
+                    <div class="annotated-solution" role="group" aria-label="Step-by-step solution for ln of x plus 1 minus ln 4 equals ln of x plus 2 minus ln 3">
+                        <div class="sub-label">3. \(\ln(x+1) - \ln 4 = \ln(x+2) - \ln 3\)</div>
+
+                        <div class="annot-step">
+                            This one must be condensed on both sides simultaneously:
+                        </div>
+                        <div class="annot-label annot-col"></div>
+
+                        <div class="annot-step">\[\ln(x+1) - \ln 4 = \ln(x+2) - \ln 3\]</div>
+                        <div class="annot-label annot-col">Write the equation</div>
+
+                        <div class="annot-step">\[\ln\frac{x+1}{4} = \ln\frac{x+2}{3}\]</div>
+                        <div class="annot-label annot-col">Quotient Rule — condense both sides</div>
+
+                        <div class="annot-step">\[\frac{x+1}{4} = \frac{x+2}{3}\]</div>
+                        <div class="annot-label annot-col">One-to-One Property</div>
+
+                        <div class="annot-step">\[3(x+1) = 4(x+2)\]</div>
+                        <div class="annot-label annot-col">Cross-multiply</div>
+
+                        <div class="annot-step">\[3x + 3 = 4x + 8\]</div>
+                        <div class="annot-label annot-col">Expand</div>
+
+                        <div class="annot-step">\[x = -5\]</div>
+                        <div class="annot-label annot-col">Solve for \(x\)</div>
+                    </div>
+
+                    <div class="no-solution-box" role="note">
+                        <strong>Check:</strong> Substituting \(x = -5\) requires evaluating
+                        \(\ln(-5+1) = \ln(-4)\), which is undefined. Therefore this equation
+                        has <strong>no solution</strong>.
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <p>
+            Next let's look at logarithmic equations that cannot be solved with condensing and the
+            one-to-one property alone. With these types of equations we need to apply a "base" to
+            each side to use the inverse property \(b^{\log_b x} = x\). Select the base that
+            matches the logarithmic function in the equation.
+        </p>
+
+        <!-- ── Log Equations Part B: applying a base ── -->
+        <section class="example" aria-labelledby="example-3-4-4-heading">
+            <div class="example-problem">
+                <h3 id="example-3-4-4-heading">Example</h3>
+                <p>Solve the following logarithmic equations.</p>
+                <ol class="three-col-problems" aria-label="Three logarithmic equations requiring applying a base to solve">
+                    <li>\(\log_2(3x) = 4\)</li>
+                    <li>\(2\ln(3x+1) = 2\)</li>
+                    <li>\(2\log_3 2x - \log_3 5 = 3\)</li>
+                </ol>
+            </div>
+
+            <button class="solution-header"
+                    onclick="toggleExample(this)"
+                    aria-expanded="false"
+                    aria-controls="solution-3-4-4">
+                <span class="toggle-arrow">▼</span>
+                <span>Show Solution</span>
+            </button>
+
+            <div id="solution-3-4-4" class="example-content">
+                <div class="solution">
+                    <h4>Solution</h4>
+
+                    <!-- Part 1 -->
+                    <div class="annotated-solution" role="group" aria-label="Step-by-step solution for log base 2 of 3x equals 4">
+                        <div class="sub-label">1. \(\log_2(3x) = 4\)</div>
+
+                        <div class="annot-step">
+                            The log is base 2, so we apply a base of 2 to each side:
+                        </div>
+                        <div class="annot-label annot-col"></div>
+
+                        <div class="annot-step">\[\log_2(3x) = 4\]</div>
+                        <div class="annot-label annot-col">Write the equation</div>
+
+                        <div class="annot-step">\[\textcolor{red}{2}^{\log_2(3x)} = \textcolor{red}{2}^4\]</div>
+                        <div class="annot-label annot-col">Apply base 2 to each side</div>
+
+                        <div class="annot-step">\[3x = 16\]</div>
+                        <div class="annot-label annot-col">Inverse Property</div>
+
+                        <div class="annot-step">\[x = \frac{16}{3}\]</div>
+                        <div class="annot-label annot-col">Solve for \(x\)</div>
+                    </div>
+
+                    <div class="sub-divider" role="separator" aria-hidden="true"></div>
+
+                    <!-- Part 2 -->
+                    <div class="annotated-solution" role="group" aria-label="Step-by-step solution for 2 times ln of 3x plus 1 equals 2">
+                        <div class="sub-label">2. \(2\ln(3x+1) = 2\)</div>
+
+                        <div class="annot-step">
+                            First isolate the \(\ln\), then apply base \(e\):
+                        </div>
+                        <div class="annot-label annot-col"></div>
+
+                        <div class="annot-step">\[2\ln(3x+1) = 2\]</div>
+                        <div class="annot-label annot-col">Write the equation</div>
+
+                        <div class="annot-step">\[\ln(3x+1) = 1\]</div>
+                        <div class="annot-label annot-col">Isolate the \(\ln\)</div>
+
+                        <div class="annot-step">\[e^{\ln(3x+1)} = e^1\]</div>
+                        <div class="annot-label annot-col">Apply base \(e\) to each side</div>
+
+                        <div class="annot-step">\[3x + 1 = e\]</div>
+                        <div class="annot-label annot-col">Inverse Property</div>
+
+                        <div class="annot-step">\[3x = e - 1\]</div>
+                        <div class="annot-label annot-col">Subtract 1</div>
+
+                        <div class="annot-step">\[x = \frac{e-1}{3} \approx 0.57\]</div>
+                        <div class="annot-label annot-col">Solve for \(x\)</div>
+                    </div>
+
+                    <div class="sub-divider" role="separator" aria-hidden="true"></div>
+
+                    <!-- Part 3 -->
+                    <div class="annotated-solution" role="group" aria-label="Step-by-step solution for 2 log base 3 of 2x minus log base 3 of 5 equals 3">
+                        <div class="sub-label">3. \(2\log_3 2x - \log_3 5 = 3\)</div>
+
+                        <div class="annot-step">
+                            First apply the Power Rule, then the Quotient Rule, then apply a base
+                            of 3:
+                        </div>
+                        <div class="annot-label annot-col"></div>
+
+                        <div class="annot-step">\[2\log_3 2x - \log_3 5 = 3\]</div>
+                        <div class="annot-label annot-col">Write the equation</div>
+
+                        <div class="annot-step">\[\log_3(2x)^2 - \log_3 5 = 3\]</div>
+                        <div class="annot-label annot-col">Power Rule</div>
+
+                        <div class="annot-step">\[\log_3\!\left(\frac{4x^2}{5}\right) = 3\]</div>
+                        <div class="annot-label annot-col">Quotient Rule</div>
+
+                        <div class="annot-step">\[\textcolor{red}{3}^{\log_3\!\left(\frac{4x^2}{5}\right)} = \textcolor{red}{3}^3\]</div>
+                        <div class="annot-label annot-col">Apply base 3 to each side</div>
+
+                        <div class="annot-step">\[\frac{4x^2}{5} = 27\]</div>
+                        <div class="annot-label annot-col">Inverse Property</div>
+
+                        <div class="annot-step">\[4x^2 = 135\]</div>
+                        <div class="annot-label annot-col">Cross-multiply</div>
+
+                        <div class="annot-step">\[x^2 = \frac{135}{4}\]</div>
+                        <div class="annot-label annot-col">Divide by 4</div>
+
+                        <div class="annot-step">\[x = \pm\frac{\sqrt{135}}{2} \approx \pm 5.809\]</div>
+                        <div class="annot-label annot-col">Take square root</div>
+                    </div>
+
+                    <div class="warning-box" role="note">
+                        The negative solution \(x \approx -5.809\) must be rejected because you
+                        cannot take the logarithm of a negative number. The only valid solution is
+                        \(x \approx 5.809\).
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <p>
+            As can be seen, there is not just one way to solve either of these types of equations.
+            It requires the use of multiple methods and properties — but in most cases they follow
+            the same solving principles learned in basic algebra.
+        </p>
+
+    </section><!-- end logarithmic equations -->
+
+    <hr class="divider" role="separator" aria-hidden="true" />
+
+    <!-- ══════════════════════════════════════════
+         APPLICATIONS
+    ══════════════════════════════════════════ -->
+    <section aria-labelledby="applications-heading">
+        <h2 id="applications-heading">Applications</h2>
+
+        <p>
+            While it is important to be able to evaluate exponential and logarithmic functions, it
+            is equally important to be able to solve them. For example, what if you were investing
+            money and wanted to know how many years you'd need to leave it in an account to reach
+            a specific amount? Instead of using trial-and-error, we can apply the methods just
+            covered. A few models we will use are:
+        </p>
+
+        <div class="definition-box" role="note" aria-label="Three mathematical models: Exponential Growth, Exponential Decay, and Logarithmic Models">
+            <h3>Mathematical Models</h3>
+            <ol>
+                <li><strong>Exponential Growth:</strong> \(y = a(e^{bx})\) where \(b > 0\).</li>
+                <li><strong>Exponential Decay:</strong> \(y = a(e^{-bx})\) where \(b > 0\).</li>
+                <li><strong>Logarithmic Models:</strong> \(y = a + b\log x\) and \(y = a + b\ln x\).</li>
+            </ol>
+        </div>
+
+        <!-- ── Application 1: Bacteria Growth ── -->
+        <section class="example" aria-labelledby="example-3-4-5-heading">
+            <div class="example-problem">
+                <h3 id="example-3-4-5-heading">Example</h3>
+                <p>
+                    Scientists found in a study that a specific bacteria triples each hour. If the
+                    sample started with 10 bacteria, how long will it take for the bacteria to reach
+                    a level of 1,000?
+                </p>
+            </div>
+
+            <button class="solution-header"
+                    onclick="toggleExample(this)"
+                    aria-expanded="false"
+                    aria-controls="solution-3-4-5">
+                <span class="toggle-arrow">▼</span>
+                <span>Show Solution</span>
+            </button>
+
+            <div id="solution-3-4-5" class="example-content">
+                <div class="solution">
+                    <h4>Solution</h4>
+                    <p>
+                        Since we are talking about rapid growth, this is an
+                        <strong>exponential growth model</strong>. We identify the initial value
+                        \(a = 10\) bacteria, giving us
+                    </p>
+                    \[y = 10e^{bx}\]
+                    <p>
+                        where \(x\) is hours and \(y\) is the number of bacteria after \(x\) hours.
+                        We find \(b\) using the fact that at \(x = 1\), the population triples to
+                        \(y = 30\):
+                    </p>
+                    \[\begin{aligned}
+                        30 &= 10e^{b(1)} \\
+                        3  &= e^b \\
+                        \ln 3 &= \ln(e^b) \\
+                        b &= \ln 3
+                    \end{aligned}\]
+                    <p>Substituting back into our model:</p>
+                    \[y = 10e^{x\ln 3} = 10(3^x)\]
+                    <p>
+                        Now we solve for the time \(x\) when \(y = 1{,}000\):
+                    </p>
+                    \[\begin{aligned}
+                        1{,}000 &= 10(3^x) \\
+                        100 &= 3^x \\
+                        \textcolor{red}{\log} 100 &= \textcolor{red}{\log}(3^x) \\
+                        \log 100 &= x\log 3 \\
+                        x &= \frac{\log 100}{\log 3} \approx 4.19
+                    \end{aligned}\]
+                    <p>
+                        It will take approximately <strong>4.2 hours</strong> for the bacteria to
+                        reach a population of 1,000.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── Application 2: Carbon-14 Decay ── -->
+        <section class="example" aria-labelledby="example-3-4-6-heading">
+            <div class="example-problem">
+                <h3 id="example-3-4-6-heading">Example</h3>
+                <p>
+                    The half-life of Carbon-14 is 5,730 years. If an object has a Carbon-14 level
+                    of 15, how many years will it take for the level to reach 1?
+                </p>
+            </div>
+
+            <button class="solution-header"
+                    onclick="toggleExample(this)"
+                    aria-expanded="false"
+                    aria-controls="solution-3-4-6">
+                <span class="toggle-arrow">▼</span>
+                <span>Show Solution</span>
+            </button>
+
+            <div id="solution-3-4-6" class="example-content">
+                <div class="solution">
+                    <h4>Solution</h4>
+                    <p>
+                        This is an <strong>exponential decay model</strong>. The initial amount is
+                        \(a = 15\), giving us
+                    </p>
+                    \[y = 15e^{-bx}\]
+                    <p>
+                        We find \(b\) using the half-life: at \(x = 5{,}730\), the amount is
+                        \(y = 0.5 \times 15 = 7.5\):
+                    </p>
+                    \[\begin{aligned}
+                        7.5 &= 15e^{-b(5730)} \\
+                        0.5 &= e^{-5730b} \\
+                        \ln(0.5) &= \ln(e^{-5730b}) \\
+                        \ln(0.5) &= -5730b \\
+                        b &= \frac{\ln(0.5)}{-5730} \\
+                        b &\approx 1.209 \times 10^{-4} = 0.0001209
+                    \end{aligned}\]
+                    <p>Substituting into our model: \(y = 15e^{-0.0001209x}\).</p>
+                    <p>
+                        Now we solve for \(x\) when \(y = 1\):
+                    </p>
+                    \[\begin{aligned}
+                        1 &= 15e^{-0.0001209x} \\
+                        \tfrac{1}{15} &= e^{-0.0001209x} \\
+                        \ln\!\left(\tfrac{1}{15}\right) &= \ln\!\left(e^{-0.0001209x}\right) \\
+                        \ln\!\left(\tfrac{1}{15}\right) &= -0.0001209x \\
+                        x &= \frac{\ln(1/15)}{-0.0001209} \approx 22{,}386.5
+                    \end{aligned}\]
+                    <p>
+                        It will take roughly <strong>22,386.5 years</strong> before the Carbon-14
+                        level in the object reaches 1.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── Application 3: Richter Scale ── -->
+        <section class="example" aria-labelledby="example-3-4-7-heading">
+            <div class="example-problem">
+                <h3 id="example-3-4-7-heading">Example</h3>
+                <p>
+                    The magnitude \(R\) of earthquakes is measured using the Richter scale, and
+                    the intensity \(I\) can be modeled by
+                </p>
+                \[R = \log\frac{I}{I_0}\]
+                <p>
+                    where the minimum intensity \(I_0 = 1\). What is the intensity of an earthquake
+                    that measured \(R = 7.9\) on the Richter scale?
+                </p>
+            </div>
+
+            <button class="solution-header"
+                    onclick="toggleExample(this)"
+                    aria-expanded="false"
+                    aria-controls="solution-3-4-7">
+                <span class="toggle-arrow">▼</span>
+                <span>Show Solution</span>
+            </button>
+
+            <div id="solution-3-4-7" class="example-content">
+                <div class="solution">
+                    <h4>Solution</h4>
+                    <p>
+                        Set up the equation with \(R = 7.9\) and \(I_0 = 1\):
+                    </p>
+                    \[7.9 = \log\frac{I}{1} = \log I\]
+                    <p>Then solve for \(I\) by applying base 10 to both sides:</p>
+                    \[\begin{aligned}
+                        7.9 &= \log I \\
+                        10^{7.9} &= 10^{\log I} \\
+                        I &= 79{,}431{,}823.47
+                    \end{aligned}\]
+                    <p>
+                        The earthquake would have an intensity of approximately
+                        <strong>79,431,823</strong> — for those who may not know, that is an
+                        extremely intense earthquake.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <p>
+            These are not the only types of applications for these functions, but all others follow
+            the same approach. For example, we could revisit the Chernobyl example from Section 3.1
+            and use our new skills to find how many years it would take until Chernobyl had less
+            than 1 pound of plutonium remaining.
+        </p>
+        <p>
+            Exponential decay models are also frequently used in carbon dating for identifying the
+            age of fossils and artifacts — but that is only one of many applications. The number of
+            real-world situations that exponential and logarithmic functions describe is remarkable,
+            and they are a necessity in the majority of the sciences.
+        </p>
+
+    </section><!-- end applications -->
+
+</section><!-- end #solving-exp-log -->
+
+<!-- ══════════════════════════════════════════
+     EXERCISES
+══════════════════════════════════════════ -->
+<section class="exercises-section" role="region" aria-labelledby="exercises-3-4-heading">
+    <h2 id="exercises-3-4-heading" class="subsection-title">Exercises</h2>
+
+    <button class="exercises-header"
+            onclick="toggleExercises(this)"
+            aria-expanded="false"
+            aria-controls="exercises-3-4-content">
+        <span class="toggle-arrow">▼</span>
+        <span>Show Exercises</span>
+    </button>
+
+    <div id="exercises-3-4-content"
+         class="exercises-content"
+         role="region"
+         aria-labelledby="exercises-3-4-heading">
+        <p>Exercises to be added at a later date.</p>
+    </div>
+</section>
+
+</main>
+
+<!-- ── Toggle scripts ── -->
+<script>
+    function toggleExample(button) {
+        const content = button.nextElementSibling;
+        const arrow = button.querySelector('.toggle-arrow');
+
+        if (content.classList.contains('open')) {
+            content.classList.remove('open');
+            arrow.classList.remove('open');
+            button.querySelector('span:last-child').textContent = 'Show Solution';
+            button.setAttribute('aria-expanded', 'false');
+        } else {
+            content.classList.add('open');
+            arrow.classList.add('open');
+            button.querySelector('span:last-child').textContent = 'Hide Solution';
+            button.setAttribute('aria-expanded', 'true');
+        }
+    }
+
+    function toggleExercises(button) {
+        const content = document.getElementById(button.getAttribute('aria-controls'));
+        const arrow = button.querySelector('.toggle-arrow');
+
+        if (content.classList.contains('open')) {
+            content.classList.remove('open');
+            arrow.classList.remove('open');
+            button.querySelector('span:last-child').textContent = 'Show Exercises';
+            button.setAttribute('aria-expanded', 'false');
+        } else {
+            content.classList.add('open');
+            arrow.classList.add('open');
+            button.querySelector('span:last-child').textContent = 'Hide Exercises';
+            button.setAttribute('aria-expanded', 'true');
+        }
+    }
+</script>
+
+<!-- ── TOC loader ── -->
+<script>
+    fetch('toc.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('toc-placeholder').innerHTML = data;
+
+            const chapterButtons = document.querySelectorAll('.toc-chapter');
+            chapterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const expanded = button.getAttribute('aria-expanded') === 'true';
+                    button.setAttribute('aria-expanded', !expanded);
+                    const submenu = button.nextElementSibling;
+                    submenu.classList.toggle('open');
+                });
+            });
+        });
+</script>
+
+</body>
+</html>

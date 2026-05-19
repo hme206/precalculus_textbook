@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CH 2.5 – Rational Functions</title>
+
+    <!-- MathJax configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)'], ['$', '$']],
+                displayMath: [['\\[', '\\]'], ['$$', '$$']],
+                packages: {'[+]': ['cancel', 'color']},
+                macros: {
+                    cancel: ['\\enclose{horizontalstrike}{#1}', 1]
+                }
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            },
+            loader: {
+                load: ['input/tex', 'output/chtml', '[tex]/cancel', '[tex]/color']
+            }
+        };
+    </script>
+    <script id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+
+    <link rel="stylesheet" href="styles.css" />
+
+    <style>
+        /* ── Collapsible exercises ── */
+        .exercises-section { margin: 25px 0; }
+
+        .exercises-header {
+            background-color: #33AB2B;
+            color: white;
+            padding: 12px 20px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+            border-radius: 4px;
+            transition: background-color 0.2s ease;
+            border: none;
+            font-size: 1em;
+            width: 100%;
+        }
+        .exercises-header:hover { background-color: #2a8922; }
+
+        .exercises-content {
+            display: none;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-top: none;
+            border-radius: 0 0 6px 6px;
+            padding: 20px;
+        }
+        .exercises-content.open { display: block; }
+
+        /* ── Utility text colours ── */
+        .blue-text  { color: #0066cc; }
+        .red-text   { color: #c0392b; font-weight: bold; }
+        .green-text { color: #33AB2B; font-weight: bold; }
+
+        /* ── Centered display math ── */
+        .display-math {
+            text-align: center;
+            margin: 1rem 0;
+        }
+
+        /* ── Step heading style ── */
+        .step-heading {
+            color: #0066cc;
+            font-weight: bold;
+            font-size: 1em;
+            margin-top: 1.2rem;
+            margin-bottom: 0.4rem;
+        }
+
+        /* ── Center text utility ── */
+        .center-text {
+            text-align: center;
+            margin: 1rem 0;
+        }
+
+        /* ── Two-column layout for side-by-side content ── */
+        .division-wrap {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: start;
+            margin: 1.5rem 0;
+        }
+        @media (max-width: 640px) {
+            .division-wrap { grid-template-columns: 1fr; }
+        }
+
+        /* ── Three-column layout for multicols problem lists ── */
+        .three-col-problems {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin: 1rem 0 1rem 1.2em;
+            list-style: none;
+            padding: 0;
+            counter-reset: problem-counter;
+        }
+        .three-col-problems li {
+            counter-increment: problem-counter;
+            margin-bottom: 0.5rem;
+        }
+        .three-col-problems li::before {
+            content: counter(problem-counter) ".) ";
+            font-weight: bold;
+            color: #333;
+        }
+        @media (max-width: 640px) {
+            .three-col-problems { grid-template-columns: 1fr; }
+        }
+
+        .division-note {
+            color: #c0392b;
+            font-weight: bold;
+            font-style: italic;
+            line-height: 1.6;
+            padding: 0.5rem 0;
+        }
+
+        /* ── Value table for step tables ── */
+        .value-table {
+            border-collapse: collapse;
+            margin: 0.5rem auto;
+        }
+        .value-table th,
+        .value-table td {
+            border: 1px solid #ccc;
+            padding: 8px 14px;
+            text-align: center;
+        }
+        .value-table th {
+            background-color: #f0f8ed;
+            color: #33AB2B;
+            font-weight: bold;
+        }
+        .value-table .asy-cell {
+            color: #c0392b;
+            font-weight: bold;
+        }
+
+        /* ── Horizontal asymptote rule display ── */
+        .ha-rule {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin: 0.8rem 0;
+            font-size: 1em;
+        }
+        .ha-fraction {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+        }
+        .ha-fraction .ha-num,
+        .ha-fraction .ha-den {
+            padding: 0 0.5rem;
+        }
+        .ha-fraction .ha-bar {
+            width: 100%;
+            height: 2px;
+            background-color: #333;
+        }
+
+        /* ── Minipage-style side-by-side blocks inside solutions ── */
+        .three-col-solution {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            align-items: start;
+            margin: 1.5rem 0;
+        }
+        @media (max-width: 700px) {
+            .three-col-solution { grid-template-columns: 1fr; }
+        }
+        .three-col-solution h4 {
+            font-size: 1em;
+            color: #333;
+            text-decoration: underline;
+            margin-bottom: 0.5rem;
+            margin-top: 0;
+        }
+
+        /* ── Long division display ── */
+        .long-div-block {
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 1rem 1.5rem;
+            margin: 1rem auto;
+            max-width: 340px;
+            text-align: center;
+        }
+        .long-div-block .ld-result {
+            border-bottom: 2px solid #333;
+            padding-bottom: 0.4rem;
+            margin-bottom: 0.4rem;
+        }
+
+        /* ── Asymptote-style table ── */
+        .asy-table {
+            border-collapse: collapse;
+            margin: 1rem auto;
+            min-width: 400px;
+        }
+        .asy-table th,
+        .asy-table td {
+            border: 1px solid #ccc;
+            padding: 10px 16px;
+            text-align: center;
+        }
+        .asy-table th {
+            background-color: #f0f8ed;
+            color: #33AB2B;
+            font-weight: bold;
+        }
+        .asy-table .asy-cell {
+            color: #c0392b;
+            font-weight: bold;
+        }
+        @media (max-width: 640px) {
+            .asy-table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+                min-width: unset;
+            }
+        }
+
+        /* ── Definition box two-column (def-two-col) ── */
+        .def-two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        @media (max-width: 640px) {
+            .def-two-col { grid-template-columns: 1fr; }
+        }
+        .def-two-col .def-col h4 {
+            color: #33AB2B;
+            font-size: 1em;
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+        }
+
+        /* ── Numbered list inside definition box ── */
+        .definition-box ol {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        .definition-box ol li {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="toc-placeholder"></div>
+
+<main class="container">
+
+<section id="rational-functions" aria-labelledby="section-heading">
+    <h1 id="section-heading">CH 2.5 – Rational Functions</h1>
+
+    <!-- ══════════════════════════════════════════
+         INTRODUCTION
+    ══════════════════════════════════════════ -->
+    <p>
+        Another type of function that contains polynomials are <strong class="blue-text">Rational
+        Functions</strong>. These types of functions are the quotient(s) of two polynomial functions,
+        and are written in the form of
+    </p>
+
+    \[f(x) = \frac{N(x)}{D(x)}\]
+
+    <p>
+        where \(D(x)\) is any nonzero polynomial of any degree. Rational functions have domains that
+        are restricted by values that make the denominator any number except zero. This is where we
+        have to be careful, because it is possible for some denominators to equal zero. When that
+        happens we end up with a fraction that is <strong class="blue-text">undefined</strong>,
+        meaning that it doesn't exist at that given point. We call these points
+        <strong class="blue-text">discontinuities</strong>. They can be further defined as
+        <strong class="blue-text">removable discontinuities</strong> (holes) or
+        <strong class="blue-text">non-removable discontinuities</strong> (vertical asymptotes),
+        depending on whether the rational function can be reduced to eliminate a common factor in
+        the denominator and numerator.
+    </p>
+
+    <!-- ══════════════════════════════════════════
+         VERTICAL ASYMPTOTES — SECTION
+    ══════════════════════════════════════════ -->
+    <section aria-labelledby="vertical-asymptotes-heading">
+        <h2 id="vertical-asymptotes-heading">Vertical Asymptotes</h2>
+
+        <!-- Definition box: Vertical Asymptote -->
+        <div class="definition-box" role="note" aria-label="Definition: Vertical Asymptote">
+            <h3>Vertical Asymptote</h3>
+            <p>
+                Assuming that \(f(x)\) is a rational function in simplest terms, the line \(x = a\)
+                is a <strong class="blue-text">vertical asymptote</strong> of the graph of \(f(x)\)
+                when \(f(x) \to \infty\) or \(f(x) \to -\infty\).
+            </p>
+            <p>
+                The vertical asymptote(s) \(x = a\) can be found anywhere \(D(x) = 0\).
+            </p>
+        </div>
+
+        <p>
+            In a rational function, a vertical asymptote is a line that the function will get
+            infinitely close to but never actually touch. To find vertical asymptote(s) you first
+            have to make sure that your rational function is in simplified form. This means that if
+            you factor the numerator and denominator there are no common factors. If there are common
+            factors this creates something known as a <strong class="blue-text">hole</strong>.
+        </p>
+
+        <!-- ── Example: Vertical Asymptotes ── -->
+        <section class="example" aria-labelledby="example-2-5-1-heading">
+            <div class="example-problem">
+                <h3 id="example-2-5-1-heading">Example</h3>
+                <p>
+                    Find the vertical asymptote and any holes for the rational functions.
+                </p>
+                <ol class="three-col-problems" aria-label="List of three rational functions">
+                    <li>\(\displaystyle f(x) = \frac{x^2 + x - 6}{x^2 - 6x + 8}\)</li>
+                    <li>\(\displaystyle g(x) = \frac{x^2 + 3x}{x^2 + 2x - 8}\)</li>
+                    <li>\(\displaystyle h(x) = \frac{x + 3}{x^2 + 2}\)</li>
+                </ol>
+            </div>
+
+            <button class="solution-header"
+                    onclick="toggleExample(this)"
+                    aria-expanded="false"
+                    aria-controls="solution-2-5-1">
+                <span class="toggle-arrow">▼</span>
+                <span>Show Solution</span>
+            </button>
+
+            <div id="solution-2-5-1" class="example-content">
+                <div class="solution">
+                    <h4>Solution</h4>
+
+                    <!-- Part 1 -->
+                    <p><strong>1.</strong> First we need to factor our numerator and denominator to
+                    see if we have any common factors.</p>
+                    \[f(x) = \frac{(x-2)(x+3)}{(x-2)(x-4)}\]
+                    <p>
+                        Notice how we have an \((x - 2)\) in the numerator and denominator. This
+                        means that this rational function has a <strong>hole</strong> in the graph
+                        at \(x = 2\). This would leave us with the rational function of
+                    </p>
+                    \[f(x) = \frac{(x+3)}{(x-4)}\]
+                    <p>
+                        To find the vertical asymptote you take the portion of the denominator that
+                        is left and set it equal to zero, then solve for \(x\).
+                    </p>
+                    \[x - 4 = 0\]
+                    \[x = 4\]
+                    <p>That means that \(f(x)\) has a vertical asymptote at \(x = 4\).</p>
+
+                    <hr class="divider" role="separator" aria-hidden="true" />
+
+                    <!-- Part 2 -->
+                    <p><strong>2.</strong> Once again we start by factoring both the numerator and
+                    denominator of the rational function to get</p>
+                    \[g(x) = \frac{x(x+3)}{(x+4)(x-2)}\]
+                    <p>
+                        This rational function has no common factors, meaning that there are no holes
+                        in this graph. That means that we need to set each factor in the denominator
+                        equal to zero, then solve for \(x\).
+                    </p>
+
+                    <div class="division-wrap" role="group" aria-label="Solving each denominator factor for zero">
+                        <div>
+                            \[\begin{aligned}
+                                x + 4 &= 0 \\
+                                x     &= -4
+                            \end{aligned}\]
+                        </div>
+                        <div>
+                            \[\begin{aligned}
+                                x - 2 &= 0 \\
+                                x     &= 2
+                            \end{aligned}\]
+                        </div>
+                    </div>
+
+                    <p>
+                        This means that we have a vertical asymptote at \(x = -4\) and \(x = 2\).
+                        It is possible for a rational function to have more than one vertical asymptote.
+                    </p>
+
+                    <hr class="divider" role="separator" aria-hidden="true" />
+
+                    <!-- Part 3 -->
+                    <p><strong>3.</strong> Looking at \(h(x)\) it can be seen that there is no way
+                    to factor the numerator or the denominator. The polynomial on the top doesn't
+                    match the polynomial on the bottom so that means this function has no holes. To
+                    locate our vertical asymptote we'd set the denominator equal to zero and solve
+                    for \(x\):</p>
+                    \[\begin{aligned}
+                        0      &= x^2 + 2 \\
+                        -2     &= x^2 \\
+                        \sqrt{-2} &= x \\
+                        i\sqrt{2} &= x
+                    \end{aligned}\]
+                    <p>
+                        We have a problem here. We know that \(\sqrt{-2} = i\sqrt{2}\), which is an
+                        imaginary number. That means that this function does not have any vertical
+                        asymptotes.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <p>
+            It is important to keep in mind that a rational function does not have to have a vertical
+            asymptote. When this happens it will typically have another type of asymptote that will
+            aid you in graphing the function. The other types of asymptotes that a rational function
+            can have are <strong class="blue-text">horizontal asymptotes</strong> or
+            <strong class="blue-text">oblique (slant) asymptotes</strong>.
+        </p>
+
+    </section><!-- end vertical asymptotes -->
+
+    <hr class="divider" role="separator" aria-hidden="true" />
+
+    <!-- ══════════════════════════════════════════
+         HORIZONTAL ASYMPTOTES — SECTION
+    ══════════════════════════════════════════ -->
+    <section aria-labelledby="horizontal-asymptotes-heading">
+        <h2 id="horizontal-asymptotes-heading">Horizontal Asymptotes</h2>
+
+        <p>
+            Horizontal asymptotes are also important aspects of a rational function. While a little
+            bit more involved to find, they still provide valuable information for graphing. While
+            the graph of a rational function cannot pass through or touch a vertical asymptote, it
+            <em>is</em> possible for the graph of a rational function to pass through or touch a
+            horizontal asymptote.
+        </p>
+
+        <!-- Definition box: Horizontal Asymptote -->
+        <div class="definition-box" role="note" aria-label="Definition: Horizontal Asymptote with three cases based on degree comparison">
+            <h3>Horizontal Asymptote</h3>
+            <p>The horizontal asymptote \(y = b\) can be found when:</p>
+            <ol>
+                <li>
+                    <strong>If the degree of the numerator is equal to the degree of the
+                    denominator</strong>, then
+                    \[y = \frac{\text{Leading Coefficient of the Numerator}}{\text{Leading Coefficient of the Denominator}}\]
+                </li>
+                <li>
+                    <strong>If the degree of the numerator is less than the degree of the
+                    denominator</strong>, then \(y = 0\).
+                </li>
+                <li>
+                    <strong>If the degree of the numerator is greater than the degree of the
+                    denominator</strong>, then there is no horizontal asymptote.
+                </li>
+            </ol>
+        </div>
+
+        <!-- ── Example: Horizontal Asymptotes ── -->
+        <section class="example" aria-labelledby="example-2-5-2-heading">
+            <div class="example-problem">
+                <h3 id="example-2-5-2-heading">Example</h3>
+                <p>Identify the horizontal asymptote (if it exists) for each example below.</p>
+                <ol class="three-col-problems" aria-label="List of three rational functions for horizontal asymptote identification">
+                    <li>\(\displaystyle f(x) = \frac{2x - 5}{-4x + 3}\)</li>
+                    <li>\(\displaystyle g(x) = \frac{x - 1}{x^2 + 2x + 1}\)</li>
+                    <li>\(\displaystyle h(x) = \frac{x^3 + 2x^2 + x}{x - 4}\)</li>
+                </ol>
+            </div>
+
+            <button class="solution-header"
+                    onclick="toggleExample(this)"
+                    aria-expanded="false"
+                    aria-controls="solution-2-5-2">
+                <span class="toggle-arrow">▼</span>
+                <span>Show Solution</span>
+            </button>
+
+            <div id="solution-2-5-2" class="example-content">
+                <div class="solution">
+                    <h4>Solution</h4>
+
+                    <!-- Part 1 -->
+                    <p><strong>1.</strong> Any time we look at a rational function we should always
+                    try to factor first to see if it needs to be reduced. Fortunately for us \(f(x)\)
+                    cannot be factored, meaning it's already in its simplest form. That means we go
+                    straight to looking at the degree of the numerator and denominator.</p>
+
+                    <p class="center-text">
+                        Degree of the numerator \(= 1\)<br />
+                        Degree of the denominator \(= 1\)
+                    </p>
+
+                    <p>
+                        Since the degree of the numerator is equal to the degree of the denominator,
+                        our horizontal asymptote is at
+                    </p>
+                    \[y = \frac{\text{Leading Coefficient of the Numerator}}{\text{Leading Coefficient of the Denominator}}\]
+                    \[\begin{aligned}
+                        f(x) &= \frac{\textcolor{blue}{2}x - 5}{\textcolor{red}{-4}x + 3} \\[6pt]
+                        \Rightarrow\quad y &= \frac{\textcolor{blue}{2}}{\textcolor{red}{-4}} = -\frac{1}{2}
+                    \end{aligned}\]
+
+                    <hr class="divider" role="separator" aria-hidden="true" />
+
+                    <!-- Part 2 -->
+                    <p><strong>2.</strong> Once again we want to first factor our rational function
+                    to see if there are any common factors. There are no common factors. Moving right
+                    on to finding the degree of the denominator and the degree of the numerator.</p>
+
+                    <p class="center-text">
+                        Degree of the numerator \(= 1\)<br />
+                        Degree of the denominator \(= 2\)
+                    </p>
+
+                    <p>
+                        In this problem the degree of the numerator is less than the degree of the
+                        denominator, which tells us that our horizontal asymptote is at \(y = 0\).
+                    </p>
+
+                    <hr class="divider" role="separator" aria-hidden="true" />
+
+                    <!-- Part 3 -->
+                    <p><strong>3.</strong> For this problem, it doesn't reduce or contain any holes.
+                    We will just move on to the degree of the denominator and the degree of the
+                    numerator.</p>
+
+                    <p class="center-text">
+                        Degree of the numerator \(= 3\)<br />
+                        Degree of the denominator \(= 1\)
+                    </p>
+
+                    <p>
+                        With the degree of the numerator being greater than the degree of the
+                        denominator, this rational function does not have a horizontal asymptote.
+                        Instead it may have an oblique asymptote.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </section><!-- end horizontal asymptotes -->
+
+    <hr class="divider" role="separator" aria-hidden="true" />
+
+    <!-- ══════════════════════════════════════════
+         OBLIQUE ASYMPTOTES — SECTION
+    ══════════════════════════════════════════ -->
+    <section aria-labelledby="oblique-asymptote-heading">
+        <h2 id="oblique-asymptote-heading">Oblique Asymptote</h2>
+
+        <p>
+            If our rational function doesn't have a horizontal asymptote then it could possibly have
+            an oblique asymptote. But this will only happen if the degree of the numerator is
+            <em>exactly one more</em> than the degree of the denominator once the rational function
+            has been reduced. Finding an oblique asymptote requires us to use division.
+        </p>
+
+        <!-- ── Example: Oblique Asymptote ── -->
+        <section class="example" aria-labelledby="example-2-5-3-heading">
+            <div class="example-problem">
+                <h3 id="example-2-5-3-heading">Example</h3>
+                <p>Find the oblique asymptote for \(\displaystyle f(x) = \frac{x^2 + 2x + 1}{x - 4}\).</p>
+            </div>
+
+            <button class="solution-header"
+                    onclick="toggleExample(this)"
+                    aria-expanded="false"
+                    aria-controls="solution-2-5-3">
+                <span class="toggle-arrow">▼</span>
+                <span>Show Solution</span>
+            </button>
+
+            <div id="solution-2-5-3" class="example-content">
+                <div class="solution">
+                    <h4>Solution</h4>
+                    <p>
+                        Use long division (or synthetic division where applicable) to find the equation
+                        of the oblique asymptote.
+                    </p>
+
+                    <!-- Polynomial long division rendered in MathJax -->
+                    <div class="long-div-block" role="img" aria-label="Polynomial long division of x squared plus 2x plus 1 divided by x minus 4. The quotient is x plus 6 with a remainder of 25.">
+                        \[\require{enclose}
+                        \begin{array}{r}
+                            x + 6 \phantom{{}+ 25} \\[-3pt]
+                            x - 4 \enclose{longdiv}{x^2 + 2x + 1} \\[-3pt]
+                            \underline{-(x^2 - 4x)} \phantom{{}+ 1} \\[-3pt]
+                            6x + 1 \\[-3pt]
+                            \underline{-(6x - 24)} \\[-3pt]
+                            25
+                        \end{array}\]
+                    </div>
+
+                    <p>
+                        The line \(y = x + 6\) is the equation of the oblique asymptote.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </section><!-- end oblique asymptote -->
+
+    <hr class="divider" role="separator" aria-hidden="true" />
+
+    <!-- ══════════════════════════════════════════
+         GUIDELINES + GRAPHING EXAMPLES
+    ══════════════════════════════════════════ -->
+    <section aria-labelledby="graphing-guidelines-heading">
+        <h2 id="graphing-guidelines-heading">Guidelines for Graphing Rational Functions</h2>
+
+        <p>
+            Now that we've learned how to find the asymptotes of a rational function, let's define
+            an outline on how to graph rational functions.
+        </p>
+
+        <div class="orange-box" role="note" aria-label="Step-by-step guidelines for graphing rational functions">
+            <h3>Guidelines for Graphing Rational Functions</h3>
+            <ol>
+                <li>Identify all asymptotes of the rational function.</li>
+                <li>Identify the zeros of the rational function.</li>
+                <li>Find the \(y\)-intercept \(f(0)\).</li>
+                <li>
+                    Find values between the asymptotes and zeros to help define the general shape.
+                </li>
+                <li>
+                    Plot the graph, first placing the asymptotes and critical points on the graph,
+                    and then connecting the dots using smooth lines — being sure not to cross any
+                    vertical asymptotes.
+                </li>
+            </ol>
+        </div>
+
+        <!-- ══════════════════════════════════════════
+             GRAPHING EXAMPLE 1 — f(x) = (2x+3)/(3x²+7x−6)
+        ══════════════════════════════════════════ -->
+        <section class="example" aria-labelledby="example-2-5-4-heading">
+            <div class="example-problem">
+                <h3 id="example-2-5-4-heading">Example</h3>
+                <p>Sketch the graph for \(\displaystyle f(x) = \frac{2x+3}{3x^2+7x-6}\).</p>
+            </div>
+
+            <button class="solution-header"
+                    onclick="toggleExample(this)"
+                    aria-expanded="false"
+                    aria-controls="solution-2-5-4">
+                <span class="toggle-arrow">▼</span>
+                <span>Show Solution</span>
+            </button>
+
+            <div id="solution-2-5-4" class="example-content">
+                <div class="solution">
+                    <h4>Solution</h4>
+
+                    <!-- Step 1 -->
+                    <p class="step-heading">Step 1: Factor and Find Asymptotes</p>
+                    <p>
+                        Start by factoring the numerator and denominator to determine if there are
+                        any common factors, then find the asymptotes.
+                    </p>
+                    \[f(x) = \frac{2x+3}{3x^2+7x-6} = \frac{2x+3}{(x+3)(3x-2)}\]
+                    <p>
+                        Note how there are no common factors; this means we can move on to finding
+                        our asymptotes.
+                    </p>
+
+                    <div class="three-col-solution" role="group" aria-label="Three types of asymptotes for f(x)">
+                        <div>
+                            <h4>a.) Vertical Asymptote(s):</h4>
+                            <p>Set the denominator equal to zero:</p>
+                            \[(x+3)(3x-2) = 0\]
+                            \[(x+3) = 0 \quad \text{and} \quad (3x-2) = 0\]
+                            \[x = -3 \quad \text{and} \quad x = \tfrac{2}{3}\]
+                        </div>
+                        <div>
+                            <h4>b.) Horizontal Asymptote:</h4>
+                            <p>
+                                Degree of the numerator \(= 1\)<br />
+                                Degree of the denominator \(= 2\)
+                            </p>
+                            <p>
+                                Since the degree of the numerator is less than the degree of the
+                                denominator, our asymptote is at \(y = 0\).
+                            </p>
+                        </div>
+                        <div>
+                            <h4>c.) Oblique Asymptote:</h4>
+                            <p>
+                                There is no oblique asymptote because there is a horizontal asymptote.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <p class="step-heading">Step 2: Find the Zeros</p>
+                    <p>
+                        To find the zeros of a rational function you set the numerator equal to zero
+                        and solve for \(x\).
+                    </p>
+                    \[\begin{aligned}
+                        2x + 3 &= 0 \\
+                        2x     &= -3 \\
+                        x      &= -\tfrac{3}{2}
+                    \end{aligned}\]
+
+                    <!-- Step 3 -->
+                    <p class="step-heading">Step 3: Find the \(y\)-Intercept</p>
+                    <p>The \(y\)-intercept is found by substituting zero into the function.</p>
+                    \[\begin{aligned}
+                        f(0) &= \frac{2(0)+3}{3(0)^2+7(0)-6} \\[6pt]
+                             &= \frac{3}{-6} \\[6pt]
+                             &= -\tfrac{1}{2}
+                    \end{aligned}\]
+
+                    <!-- Step 4 -->
+                    <p class="step-heading">Step 4: Build a Table of Values</p>
+                    <p>
+                        Insert critical values (vertical asymptotes and zeros) to help identify
+                        values between them, and evaluate the function at each of those values.
+                    </p>
+
+                    <div style="overflow-x:auto;">
+                        <table class="asy-table" aria-label="Table of x and f(x) values for f(x) equals (2x plus 3) divided by (3x squared plus 7x minus 6). Vertical asymptotes occur at x equals negative 3 and x equals two-thirds; the zero is at x equals negative three-halves; the y-intercept is at x equals 0.">
+                            <thead>
+                                <tr>
+                                    <th scope="col">\(x\)</th>
+                                    <th scope="col">\(-4\)</th>
+                                    <th scope="col">\(-3\)</th>
+                                    <th scope="col">\(-2\)</th>
+                                    <th scope="col">\(-\tfrac{3}{2}\)</th>
+                                    <th scope="col">\(0\)</th>
+                                    <th scope="col">\(\tfrac{2}{3}\)</th>
+                                    <th scope="col">\(1\)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">\(f(x)\)</th>
+                                    <td>\(-\tfrac{5}{14}\)</td>
+                                    <td class="asy-cell">ASY</td>
+                                    <td>\(\tfrac{1}{8}\)</td>
+                                    <td>\(0\)</td>
+                                    <td>\(-\tfrac{1}{2}\)</td>
+                                    <td class="asy-cell">ASY</td>
+                                    <td>\(\tfrac{5}{4}\)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Step 5 -->
+                    <p class="step-heading">Step 5: Sketch the Graph</p>
+                    <p>
+                        Place the asymptotes on the graph using dotted lines, plot the points, and
+                        connect with a smooth curve.
+                    </p>
+
+                    <img
+                        src="images/2_5_1.png"
+                        alt="A coordinate grid with both axes ranging from negative 8 to 8, labeled at negative 5, negative 2, 2, and 5. Two vertical dashed red lines mark the vertical asymptotes at x equals negative 3 and x equals two-thirds. A horizontal dashed red line along the x-axis marks the horizontal asymptote at y equals 0. Blue filled dots mark the plotted points including the zero at x equals negative three-halves, the y-intercept at (0, negative one-half), and the test points at x equals negative 4, negative 2, and 1. A smooth blue curve follows three separate branches: one branch in the region left of x equals negative 3 approaching the vertical asymptote from below and the horizontal asymptote from below as x goes to negative infinity; one branch between the two vertical asymptotes curving through the zero and y-intercept; and one branch to the right of x equals two-thirds rising steeply from the asymptote then decreasing toward the horizontal asymptote as x increases."
+                        style="max-width:100%; height:auto; display:block; margin: 1rem auto;"
+                    />
+
+                    <p>
+                        By looking at this graph we can see that the function does cross our
+                        horizontal asymptote, which is allowable — it just can't cross the vertical
+                        asymptotes.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══════════════════════════════════════════
+             GRAPHING EXAMPLE 2 — g(x) = (x²−x)/(x+1)
+        ══════════════════════════════════════════ -->
+        <section class="example" aria-labelledby="example-2-5-5-heading">
+            <div class="example-problem">
+                <h3 id="example-2-5-5-heading">Example</h3>
+                <p>Sketch the graph of \(\displaystyle g(x) = \frac{x^2 - x}{x + 1}\).</p>
+            </div>
+
+            <button class="solution-header"
+                    onclick="toggleExample(this)"
+                    aria-expanded="false"
+                    aria-controls="solution-2-5-5">
+                <span class="toggle-arrow">▼</span>
+                <span>Show Solution</span>
+            </button>
+
+            <div id="solution-2-5-5" class="example-content">
+                <div class="solution">
+                    <h4>Solution</h4>
+
+                    <!-- Step 1 -->
+                    <p class="step-heading">Step 1: Factor and Find Asymptotes</p>
+                    <p>
+                        Start by factoring the numerator and denominator to determine if there are
+                        any common factors, then find the asymptotes.
+                    </p>
+                    \[g(x) = \frac{x^2 - x}{x+1} = \frac{x(x-1)}{(x+1)}\]
+                    <p>
+                        Note how there are no common factors; this means we can move on to finding
+                        our asymptotes.
+                    </p>
+
+                    <div class="three-col-solution" role="group" aria-label="Three types of asymptotes for g(x)">
+                        <div>
+                            <h4>Vertical Asymptote(s):</h4>
+                            <p>Set the denominator equal to zero:</p>
+                            \[(x+1) = 0\]
+                            \[x = -1\]
+                        </div>
+                        <div>
+                            <h4>Horizontal Asymptote:</h4>
+                            <p>
+                                Degree of the numerator \(= 2\)<br />
+                                Degree of the denominator \(= 1\)
+                            </p>
+                            <p>
+                                Since the degree of the numerator is greater than the degree of the
+                                denominator, there is no horizontal asymptote.
+                            </p>
+                        </div>
+                        <div>
+                            <h4>Oblique Asymptote:</h4>
+                            <p>
+                                Since there is no horizontal asymptote, there may be an oblique
+                                asymptote. We find this using long division:
+                            </p>
+                            <div class="long-div-block" role="img" aria-label="Polynomial long division of x squared minus x divided by x plus 1. The quotient is x minus 2 with a remainder of 2.">
+                                \[\begin{array}{r}
+                                    x - 2 \phantom{{}+ 2} \\[-3pt]
+                                    x + 1 \enclose{longdiv}{x^2 - x} \\[-3pt]
+                                    \underline{-(x^2 + x)} \\[-3pt]
+                                    -2x \phantom{{}+ 0} \\[-3pt]
+                                    \underline{-(-2x - 2)} \\[-3pt]
+                                    2
+                                \end{array}\]
+                            </div>
+                            <p>Our oblique asymptote is the equation \(y = x - 2\).</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <p class="step-heading">Step 2: Find the Zeros</p>
+                    \[\begin{aligned}
+                        x(x-1) &= 0 \\
+                        x = 0 \quad &\text{or} \quad x - 1 = 0 \\
+                        x = 0 \quad &, \quad x = 1
+                    \end{aligned}\]
+
+                    <!-- Step 3 -->
+                    <p class="step-heading">Step 3: Find the \(y\)-Intercept</p>
+                    \[\begin{aligned}
+                        g(0) &= \frac{(0)^2 - 0}{0 + 1} \\[6pt]
+                             &= \frac{0}{1} \\[6pt]
+                             &= 0
+                    \end{aligned}\]
+
+                    <!-- Step 4 -->
+                    <p class="step-heading">Step 4: Build a Table of Values</p>
+                    <p>
+                        Insert critical values (vertical asymptotes and zeros) and evaluate the
+                        function between them.
+                    </p>
+
+                    <div style="overflow-x:auto;">
+                        <table class="asy-table" aria-label="Table of x and g(x) values for g(x) equals (x squared minus x) divided by (x plus 1). The vertical asymptote is at x equals negative 1; zeros are at x equals 0 and x equals 1.">
+                            <thead>
+                                <tr>
+                                    <th scope="col">\(x\)</th>
+                                    <th scope="col">\(-2\)</th>
+                                    <th scope="col">\(-1\)</th>
+                                    <th scope="col">\(-\tfrac{1}{2}\)</th>
+                                    <th scope="col">\(0\)</th>
+                                    <th scope="col">\(\tfrac{1}{2}\)</th>
+                                    <th scope="col">\(1\)</th>
+                                    <th scope="col">\(2\)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">\(g(x)\)</th>
+                                    <td>\(-6\)</td>
+                                    <td class="asy-cell">ASY</td>
+                                    <td>\(\tfrac{3}{2}\)</td>
+                                    <td>\(0\)</td>
+                                    <td>\(-\tfrac{1}{6}\)</td>
+                                    <td>\(0\)</td>
+                                    <td>\(\tfrac{1}{3}\)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Step 5 -->
+                    <p class="step-heading">Step 5: Sketch the Graph</p>
+
+                    <img
+                        src="images/2_5_2.png"
+                        alt="A coordinate grid with both axes ranging from negative 8 to 8, labeled at negative 5, negative 2, 2, and 5. A vertical dashed red line marks the vertical asymptote at x equals negative 1. A diagonal dashed red line with slope 1 and y-intercept negative 2 marks the oblique asymptote y equals x minus 2. Blue filled dots mark the plotted points: (negative 2, negative 6), (negative one-half, three-halves), (0, 0), (one-half, negative one-sixth), (1, 0), and (2, one-third). A smooth blue curve has two branches: one branch in the region left of x equals negative 1 that rises from the lower left approaching the oblique asymptote from below, curves through (negative 2, negative 6), then rises steeply toward positive infinity approaching the vertical asymptote from the left; and one branch to the right of x equals negative 1 that falls steeply from negative infinity near the vertical asymptote, crosses through the zeros at x equals 0 and x equals 1, and gradually approaches the oblique asymptote from below as x increases to the right."
+                        style="max-width:100%; height:auto; display:block; margin: 1rem auto;"
+                    />
+
+                    <p>
+                        When graphing rational functions, as you can see, the asymptotes provide you
+                        with a lot of direction and information. The zeros and the points are used to
+                        aid you in finding a general shape; otherwise you may not know where the graph
+                        will go.
+                    </p>
+
+                </div>
+            </div>
+        </section>
+
+    </section><!-- end graphing guidelines section -->
+
+</section><!-- end #rational-functions -->
+
+<!-- ══════════════════════════════════════════
+     EXERCISES
+══════════════════════════════════════════ -->
+<section class="exercises-section" role="region" aria-labelledby="exercises-2-5-heading">
+    <h2 id="exercises-2-5-heading" class="subsection-title">Exercises</h2>
+
+    <button class="exercises-header"
+            onclick="toggleExercises(this)"
+            aria-expanded="false"
+            aria-controls="exercises-2-5-content">
+        <span class="toggle-arrow">▼</span>
+        <span>Show Exercises</span>
+    </button>
+
+    <div id="exercises-2-5-content"
+         class="exercises-content"
+         role="region"
+         aria-labelledby="exercises-2-5-heading">
+        <p>Exercises to be added at a later date.</p>
+    </div>
+</section>
+
+</main>
+
+<!-- ── Toggle scripts ── -->
+<script>
+    function toggleExample(button) {
+        const content = button.nextElementSibling;
+        const arrow = button.querySelector('.toggle-arrow');
+
+        if (content.classList.contains('open')) {
+            content.classList.remove('open');
+            arrow.classList.remove('open');
+            button.querySelector('span:last-child').textContent = 'Show Solution';
+            button.setAttribute('aria-expanded', 'false');
+        } else {
+            content.classList.add('open');
+            arrow.classList.add('open');
+            button.querySelector('span:last-child').textContent = 'Hide Solution';
+            button.setAttribute('aria-expanded', 'true');
+        }
+    }
+
+    function toggleExercises(button) {
+        const content = document.getElementById(button.getAttribute('aria-controls'));
+        const arrow = button.querySelector('.toggle-arrow');
+
+        if (content.classList.contains('open')) {
+            content.classList.remove('open');
+            arrow.classList.remove('open');
+            button.querySelector('span:last-child').textContent = 'Show Exercises';
+            button.setAttribute('aria-expanded', 'false');
+        } else {
+            content.classList.add('open');
+            arrow.classList.add('open');
+            button.querySelector('span:last-child').textContent = 'Hide Exercises';
+            button.setAttribute('aria-expanded', 'true');
+        }
+    }
+</script>
+
+<!-- ── TOC loader ── -->
+<script>
+    fetch('toc.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('toc-placeholder').innerHTML = data;
+
+            const chapterButtons = document.querySelectorAll('.toc-chapter');
+            chapterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const expanded = button.getAttribute('aria-expanded') === 'true';
+                    button.setAttribute('aria-expanded', !expanded);
+                    const submenu = button.nextElementSibling;
+                    submenu.classList.toggle('open');
+                });
+            });
+        });
+</script>
+
+</body>
+</html>

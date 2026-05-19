@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CH 2.4 – Graphing Polynomials</title>
+
+    <!-- MathJax configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)'], ['$', '$']],
+                displayMath: [['\\[', '\\]'], ['$$', '$$']],
+                packages: {'[+]': ['cancel', 'color']},
+                macros: {
+                    cancel: ['\\enclose{horizontalstrike}{#1}', 1]
+                }
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            },
+            loader: {
+                load: ['input/tex', 'output/chtml', '[tex]/cancel', '[tex]/color']
+            }
+        };
+    </script>
+    <script id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+
+    <link rel="stylesheet" href="styles.css" />
+
+    <style>
+        /* ── Collapsible exercises ── */
+        .exercises-section { margin: 25px 0; }
+
+        .exercises-header {
+            background-color: #33AB2B;
+            color: white;
+            padding: 12px 20px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+            border-radius: 4px;
+            transition: background-color 0.2s ease;
+            border: none;
+            font-size: 1em;
+            width: 100%;
+        }
+        .exercises-header:hover { background-color: #2a8922; }
+
+        .exercises-content {
+            display: none;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-top: none;
+            border-radius: 0 0 6px 6px;
+            padding: 20px;
+        }
+        .exercises-content.open { display: block; }
+
+        /* ── Utility text colours ── */
+        .blue-text  { color: #0066cc; }
+        .red-text   { color: #c0392b; font-weight: bold; }
+        .green-text { color: #33AB2B; font-weight: bold; }
+
+        /* ── Centered display math ── */
+        .display-math {
+            text-align: center;
+            margin: 1rem 0;
+        }
+
+        /* ── Step heading style ── */
+        .step-heading {
+            color: #0066cc;
+            font-weight: bold;
+            font-size: 1em;
+            margin-top: 1.2rem;
+            margin-bottom: 0.4rem;
+        }
+
+        /* ── Center text utility ── */
+        .center-text {
+            text-align: center;
+            margin: 1rem 0;
+        }
+
+        /* ── Two-column layout for side-by-side content ── */
+        .division-wrap {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: start;
+            margin: 1.5rem 0;
+        }
+        @media (max-width: 640px) {
+            .division-wrap { grid-template-columns: 1fr; }
+        }
+
+        .division-note {
+            color: #c0392b;
+            font-weight: bold;
+            font-style: italic;
+            line-height: 1.6;
+            padding: 0.5rem 0;
+        }
+
+        /* ── Synthetic division table ── */
+        .syn-div {
+            border-collapse: collapse;
+            margin: 0.5rem auto;
+            font-size: 1em;
+        }
+        .syn-div td {
+            padding: 6px 14px;
+            text-align: center;
+            border: none;
+            min-width: 2.5rem;
+        }
+        .syn-div .coeff-row td {
+            border-bottom: 2px solid #333;
+        }
+        .syn-div .divisor {
+            border-right: 2px solid #333;
+            font-weight: bold;
+        }
+        .syn-div .result-row td {
+            color: #0066cc;
+            font-weight: bold;
+        }
+        .syn-div .mult-row td {
+            color: #c0392b;
+            font-size: 0.9em;
+        }
+
+        /* ── Descartes / sign table ── */
+        .rule-table {
+            border-collapse: collapse;
+            margin: 1rem auto;
+            min-width: 220px;
+        }
+        .rule-table td,
+        .rule-table th {
+            border: 1px solid #ccc;
+            padding: 8px 18px;
+            text-align: center;
+        }
+        .rule-table thead tr {
+            background-color: #f0f8ed;
+        }
+        .rule-table .pos-row td  { color: #0066cc; font-weight: bold; }
+        .rule-table .neg-row td  { color: #c0392b; font-weight: bold; }
+        .rule-table .imag-row td { color: #333; }
+        .rule-table .total-row td { font-weight: bold; border-top: 2px solid #333; }
+
+        /* ── Sign change colours ── */
+        .sign-plus  { color: #0066cc; font-weight: bold; }
+        .sign-minus { color: #c0392b; font-weight: bold; }
+
+        /* ── Step 4 table + scatter plot side by side ── */
+        .step4-wrap {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 2rem;
+            align-items: start;
+            margin: 1.5rem 0;
+        }
+        @media (max-width: 640px) {
+            .step4-wrap { grid-template-columns: 1fr; }
+        }
+
+        /* ── Value table for Step 4 ── */
+        .value-table {
+            border-collapse: collapse;
+            margin: 0 auto;
+        }
+        .value-table th,
+        .value-table td {
+            border: 1px solid #ccc;
+            padding: 8px 16px;
+            text-align: center;
+        }
+        .value-table th {
+            background-color: #f0f8ed;
+            color: #33AB2B;
+            font-weight: bold;
+        }
+        .value-table .red-val { color: #c0392b; font-weight: bold; }
+
+        /* ── p/q inline display ── */
+        .pq-row {
+            display: flex;
+            gap: 3rem;
+            flex-wrap: wrap;
+            margin: 0.8rem 0 0.8rem 1rem;
+        }
+        .pq-row p { margin: 0; }
+    </style>
+</head>
+<body>
+
+<div id="toc-placeholder"></div>
+
+<main class="container">
+
+<section id="graphing-polynomials" aria-labelledby="section-heading">
+    <h1 id="section-heading">CH 2.4 – Graphing Polynomials</h1>
+
+    <p>
+        In a previous section we worked on graphing quadratic functions, which is a polynomial function.
+        When it comes to graph sketching for polynomials the quadratic and linear functions are definitely
+        the easiest of them all. The further you dive into polynomial functions and their graphs the more
+        complex it starts to get. In this course we are going to lay the basic foundations for graphing
+        polynomials, to prepare you to further dive into the process in Calculus.
+    </p>
+
+    <p>
+        When it comes to graphing polynomials there are a number of characteristics that a polynomial
+        possesses that will assist us in trying to graph them. The first that we are going to look at is
+        the <strong class="blue-text">Leading Coefficient Test</strong>.
+    </p>
+
+    <!-- ══════════════════════════════════════════
+         LEADING COEFFICIENT TEST — ODD (Image 2_4_1)
+    ══════════════════════════════════════════ -->
+    <div class="definition-box" role="note" aria-label="Definition: The Leading Coefficient Test for odd-degree polynomials">
+        <h3>The Leading Coefficient Test — Part A: When <em>n</em> is Odd</h3>
+        <p>
+            Allow \(f(x)\) to be a polynomial function of degree \(n\), where \(x\) moves without bounds
+            from left to right. When \(n\) is <strong>odd</strong>, there are two possible end behaviors
+            depending on the sign of the leading coefficient \(a_n\).
+        </p>
+        <img
+            src="images/2_4_1.png"
+            alt="The Leading Coefficient Test for odd-degree polynomials. Two coordinate planes are shown side by side inside a gray box labeled 'A. When n is odd.' The left plane contains a dashed blue S-shaped curve rising from lower-left to upper-right, illustrating an odd-degree polynomial with positive leading coefficient: f(x) approaches negative infinity as x approaches negative infinity, and f(x) approaches positive infinity as x approaches positive infinity. The right plane shows a dashed blue curve with multiple turns falling from upper-left to lower-right, illustrating an odd-degree polynomial with negative leading coefficient: f(x) approaches positive infinity as x approaches negative infinity, and f(x) approaches negative infinity as x approaches positive infinity. Red annotation text beneath each graph describes these two cases."
+            style="max-width:100%; height:auto; display:block; margin: 1rem auto;"
+        />
+    </div>
+
+    <!-- ══════════════════════════════════════════
+         LEADING COEFFICIENT TEST — EVEN (Image 2_4_2)
+    ══════════════════════════════════════════ -->
+    <div class="definition-box" role="note" aria-label="Definition: The Leading Coefficient Test for even-degree polynomials">
+        <h3>The Leading Coefficient Test — Part B: When <em>n</em> is Even</h3>
+        <p>
+            When \(n\) is <strong>even</strong>, both ends of the graph move in the same direction,
+            determined by the sign of \(a_n\).
+        </p>
+        <img
+            src="images/2_4_2.png"
+            alt="The Leading Coefficient Test for even-degree polynomials. Two coordinate planes are shown side by side inside a gray box labeled 'B. When n is even.' The left plane shows a dashed blue upward-opening curve resembling a parabola, illustrating an even-degree polynomial with positive leading coefficient: both ends rise upward, so f(x) approaches positive infinity as x approaches both positive and negative infinity. The right plane shows a dashed blue downward-opening curve, illustrating an even-degree polynomial with negative leading coefficient: both ends fall downward, so f(x) approaches negative infinity as x approaches both positive and negative infinity. Red annotation text beneath each graph describes these two cases."
+            style="max-width:100%; height:auto; display:block; margin: 1rem auto;"
+        />
+    </div>
+
+    <hr class="divider" role="separator" aria-hidden="true" />
+
+    <!-- ══════════════════════════════════════════
+         END BEHAVIOR EXAMPLE
+    ══════════════════════════════════════════ -->
+    <section aria-labelledby="end-behavior-heading">
+        <h2 id="end-behavior-heading">End Behavior: Leading Coefficient Test</h2>
+
+        <section class="example" aria-labelledby="example-2-4-1">
+            <div class="example-problem">
+                <h3 id="example-2-4-1">Example</h3>
+                <p>Explain the end behavior of the following functions using the leading coefficient test.</p>
+                <ol>
+                    <li>\(f(x) = 3x^3 + 3x - 3\)</li>
+                    <li>\(g(x) = -4x^4 - 2x^2 + 4x\)</li>
+                    <li>\(h(x) = 3 - x^5\)</li>
+                </ol>
+            </div>
+
+            <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-2-4-1">
+                <span class="toggle-arrow">▼</span>
+                <span>Show Solution</span>
+            </button>
+
+            <div id="solution-2-4-1" class="example-content">
+                <div class="solution">
+                    <h4>Solution</h4>
+                    <ol>
+                        <li>
+                            <p>
+                                \(f(x)\) is a polynomial of degree \(3\) which means that \(n\) is
+                                <strong class="blue-text">odd</strong>. Next we identify \(a_n = 3\),
+                                that means that \(a_n > 0\). Since this polynomial is odd and \(a_n > 0\)
+                                that means that the left-hand side of the polynomial goes down
+                                (\(x \to -\infty,\ f(x) \to -\infty\)), and the right-hand side of the
+                                polynomial goes up (\(x \to \infty,\ f(x) \to \infty\)).
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                \(g(x)\) is a polynomial of degree \(4\) which means that \(n\) is
+                                <strong class="blue-text">even</strong>. Looking at the leading coefficient
+                                \(a_n = -4\) which means that \(a_n < 0\). Therefore we can determine that
+                                both ends of this polynomial go the same direction which is down
+                                (\(x \to \pm\infty,\ f(x) \to -\infty\)).
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                \(h(x)\) is a polynomial of degree \(5\), which means that \(n\) is
+                                <strong class="blue-text">odd</strong>. We can see that \(a_n = -1\)
+                                which means that \(a_n < 0\) suggesting that the right end of the graph
+                                will go down and the left side of the graph will go up
+                                (\(x \to -\infty,\ f(x) \to \infty\) and \(x \to \infty,\ f(x) \to -\infty\)).
+                            </p>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <p>
+        Now, I am sure you've figured out that this really doesn't help us determine what happens between
+        the end points of our graph — this just gives us an idea of what the ends do. Another characteristic
+        that helps us to graph a function are the <strong>real zeros</strong> of the function.
+    </p>
+
+    <hr class="divider" role="separator" aria-hidden="true" />
+
+    <!-- ══════════════════════════════════════════
+         REAL ZEROS AND TURNING POINTS EXAMPLE
+    ══════════════════════════════════════════ -->
+    <section aria-labelledby="real-zeros-heading">
+        <h2 id="real-zeros-heading">Real Zeros and Turning Points</h2>
+
+        <section class="example" aria-labelledby="example-2-4-2">
+            <div class="example-problem">
+                <h3 id="example-2-4-2">Example</h3>
+                <p>
+                    Using the polynomial \(f(x) = -4x^5 + 8x^3\), identify all real zeros of the function,
+                    and the maximum number of turning points the graph will have.
+                </p>
+            </div>
+
+            <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-2-4-2">
+                <span class="toggle-arrow">▼</span>
+                <span>Show Solution</span>
+            </button>
+
+            <div id="solution-2-4-2" class="example-content">
+                <div class="solution">
+                    <h4>Solution</h4>
+
+                    <p>
+                        In order to find the zeros of \(f(x)\) we first have to set \(f(x) = 0\) and solve.
+                        To do that we will have to factor \(f(x)\).
+                    </p>
+                    \[
+                        \begin{aligned}
+                            0 &= -4x^5 + 8x^3 \\
+                              &= -4x^3(x^2 - 2)
+                        \end{aligned}
+                    \]
+
+                    <p>By setting each factor equal to zero we would find the zeros of this function.</p>
+
+                    <div class="division-wrap">
+                        <div>
+                            \[
+                                \begin{aligned}
+                                    -4x^3 &= 0 \\
+                                    x^3   &= 0 \\
+                                    \sqrt[3]{x^3} &= \sqrt[3]{0} \\
+                                    x &= 0
+                                \end{aligned}
+                            \]
+                        </div>
+                        <div>
+                            \[
+                                \begin{aligned}
+                                    x^2 - 2 &= 0 \\
+                                    x^2     &= 2 \\
+                                    \sqrt{x^2} &= \sqrt{2} \\
+                                    x &= \pm\sqrt{2}
+                                \end{aligned}
+                            \]
+                        </div>
+                    </div>
+
+                    <p>The number of turning points that \(f(x)\) has is \(n - 1 = 5 - 1 = 4\).</p>
+
+                    <p>
+                        Based on what we previously said a graph of a function has at most \(n\) real zeros.
+                        But we only found three zeros. This happens because in this function some of our zeros
+                        are repeated. Keep in mind that if you had an imaginary zero, they have to come in
+                        pairs, which count as two zeros not just one.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <hr class="divider" role="separator" aria-hidden="true" />
+
+    <!-- ══════════════════════════════════════════
+         REPEATED ZEROS DEFINITION BOX (HTML — no image)
+    ══════════════════════════════════════════ -->
+    <section aria-labelledby="repeated-zeros-heading">
+        <h2 id="repeated-zeros-heading">Repeated Zeros</h2>
+
+        <div class="definition-box" role="note" aria-label="Definition: Repeated Zeros and Multiplicity">
+            <h3>Repeated Zeros</h3>
+            <p>
+                If \((x - a)^k\) is a factor of \(f(x)\) where \(k > 1\), then \(x = a\) is a
+                <strong>repeated zero</strong> with a <strong>multiplicity of \(k\)</strong>.
+            </p>
+            <ol>
+                <li>
+                    If \(k\) is <strong class="blue-text">odd</strong>, then the graph
+                    <strong>crosses</strong> the \(x\)-axis at \(x = a\).
+                </li>
+                <li>
+                    If \(k\) is <strong class="blue-text">even</strong>, then the graph
+                    <strong>touches</strong> the \(x\)-axis at \(x = a\), but does not go through it.
+                </li>
+            </ol>
+        </div>
+
+        <p>
+            That means based on our example the graph would cross through the \(x\)-axis at \(x = 0\)
+            because \(k = 3\); it also goes through the \(x\)-axis at \(x = \pm\sqrt{2}\) because in
+            those cases \(k = 1\).
+        </p>
+
+        <hr class="divider" role="separator" aria-hidden="true" />
+
+        <!-- ── Repeated zeros example — g(x) = 2x³ − 6x² ── -->
+        <section class="example" aria-labelledby="example-2-4-3">
+            <div class="example-problem">
+                <h3 id="example-2-4-3">Example</h3>
+                <p>
+                    Find and describe the real zeros of the function. Also determine the maximum number of
+                    turning points possible for \(g(x) = 2x^3 - 6x^2\).
+                </p>
+            </div>
+
+            <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-2-4-3">
+                <span class="toggle-arrow">▼</span>
+                <span>Show Solution</span>
+            </button>
+
+            <div id="solution-2-4-3" class="example-content">
+                <div class="solution">
+                    <h4>Solution</h4>
+
+                    <p>
+                        The maximum number of turning points would be \(n - 1 = 3 - 1 = 2\). To find the
+                        zeros and their multiplicity we first need to factor the polynomial and solve for \(x\).
+                    </p>
+                    \[0 = 2x^2(x - 3)\]
+
+                    <div class="division-wrap">
+                        <div>
+                            \[
+                                \begin{aligned}
+                                    2x^2 &= 0 \\
+                                    x    &= 0
+                                \end{aligned}
+                            \]
+                        </div>
+                        <div>
+                            \[
+                                \begin{aligned}
+                                    x - 3 &= 0 \\
+                                    x     &= 3
+                                \end{aligned}
+                            \]
+                        </div>
+                    </div>
+
+                    <p>
+                        This graph would cross through the \(x\)-axis at \(x = 3\), and the graph would
+                        touch the \(x\)-axis but not go through it at \(x = 0\) since it has a multiplicity
+                        of two.
+                    </p>
+
+                    <img
+                        src="images/2_4_3.png"
+                        alt="A coordinate grid with x-axis and y-axis both ranging from negative 5 to 5, labeled in increments of 5. A blue curve represents g(x) equals 2x cubed minus 6x squared. The curve descends from the upper left, touches the x-axis at the origin (x equals 0) without crossing it — demonstrating even multiplicity of 2 — then dips below the x-axis, reaches a local minimum near x equals 2, and crosses back up through the x-axis at x equals 3, continuing upward to the right."
+                        style="max-width:100%; height:auto; display:block; margin: 1rem auto;"
+                    />
+
+                    <p>
+                        Looking at the graph we can see that at \(x = 0\) the graph does in fact touch the
+                        \(x\)-axis but does not go through it, then at \(x = 3\) it crosses through the
+                        \(x\)-axis as we had found using our multiplicity. Also notice that we said that
+                        \(g(x)\) would have two turning points. We can see that in the graph as well at
+                        \(x = 0\) and at \(x = 2\).
+                    </p>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <p>
+        Now we are going to put together all of the pieces that we've learned in this section up to this
+        point, in order to graph a polynomial. As we stated earlier we are laying the ground rules for
+        graphing polynomials. In Calculus you will dive much further into this idea.
+    </p>
+
+    <hr class="divider" role="separator" aria-hidden="true" />
+
+    <!-- ══════════════════════════════════════════
+         BASIC GUIDELINES + FULL GRAPHING EXAMPLE
+    ══════════════════════════════════════════ -->
+    <section aria-labelledby="guidelines-heading">
+        <h2 id="guidelines-heading">Basic Guidelines for Graphing Polynomials</h2>
+
+        <div class="orange-box" role="note" aria-label="Step-by-step guidelines for graphing polynomial functions">
+            <h3>Basic Guidelines for Graphing Polynomials</h3>
+            <ol>
+                <li>
+                    Write the polynomial in standard form and apply the
+                    <strong class="blue-text">Leading Coefficient Test</strong> to identify the end behavior.
+                </li>
+                <li>Find the zeros of \(f(x)\).</li>
+                <li>Find the \(y\)-intercept if one exists.</li>
+                <li>
+                    Find additional points between the zeros and \(y\)-intercept to help determine the
+                    shape of the graph.
+                </li>
+                <li>Sketch the graph using the pieces outlined in the previous four steps.</li>
+            </ol>
+        </div>
+
+        <!-- ── Full graphing example ── -->
+        <section class="example" aria-labelledby="example-2-4-4">
+            <div class="example-problem">
+                <h3 id="example-2-4-4">Example</h3>
+                <p>Sketch the graph of \(f(x) = -4x^3 + x^4 - 3x^2 + 18x\).</p>
+            </div>
+
+            <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-2-4-4">
+                <span class="toggle-arrow">▼</span>
+                <span>Show Solution</span>
+            </button>
+
+            <div id="solution-2-4-4" class="example-content">
+                <div class="solution">
+                    <h4>Solution</h4>
+
+                    <!-- Step 1 -->
+                    <p class="step-heading">Step 1: Standard Form and End Behavior</p>
+                    <p>
+                        Remember that we first need to write our polynomial in standard form, which means
+                        that our exponents need to go in decreasing order:
+                    </p>
+                    \[f(x) = x^4 - 4x^3 - 3x^2 + 18x\]
+                    <p>
+                        Next we need to identify our leading coefficient \(a_n\) and our degree to identify
+                        the end behavior.
+                    </p>
+                    <p>
+                        \(a_n = 1\) — <strong class="blue-text">positive</strong><br />
+                        \(n = 4\) — <strong class="blue-text">even</strong>
+                    </p>
+                    <p>
+                        Since our leading coefficient is positive and our degree is even that means the end
+                        behavior of our graph will have both ends going upward, or more specifically:
+                        as \(x \to -\infty,\ f(x) \to \infty\) and as \(x \to \infty,\ f(x) \to \infty\).
+                    </p>
+
+                    <!-- Step 2 -->
+                    <p class="step-heading">Step 2: Find the Zeros</p>
+                    <p>
+                        Next we need to identify our zeros of \(f(x)\). To do that we may need to apply
+                        all of the processes and rules that we learned in the previous section. First we
+                        will need to factor out an \(x\) from all the terms.
+                    </p>
+                    \[f(x) = x(x^3 - 4x^2 - 3x + 18)\]
+                    <p>
+                        This means there is a zero at \(x = 0\). Next we can apply Descartes' Rule to the
+                        polynomial inside the parentheses to identify the type of zeros that we may have.
+                    </p>
+
+                    <div class="division-wrap">
+                        <div>
+                            <p><strong><u>Positives</u></strong></p>
+                            <div class="display-math">
+                                \[f(x) = \textcolor{blue}{+}x^3 \textcolor{red}{-} 4x^2 \textcolor{red}{-} 3x \textcolor{blue}{+} 18\]
+                            </div>
+                            <p>
+                                We can see that there are two sign changes so that means we will have either
+                                two or zero positive zeros.
+                            </p>
+                        </div>
+                        <div>
+                            <p><strong><u>Negatives</u></strong></p>
+                            \[
+                                \begin{aligned}
+                                    f(-x) &= (-x)^3 - 4(-x)^2 - 3(-x) + 18 \\
+                                          &= \textcolor{red}{-}x^3 \textcolor{red}{-} 4x^2 \textcolor{blue}{+} 3x + 18
+                                \end{aligned}
+                            \]
+                            <p>
+                                There is one sign change in \(f(-x)\); this means that there is only one
+                                negative zero for the polynomial.
+                            </p>
+                        </div>
+                    </div>
+
+                    <table class="rule-table" aria-label="Descartes Rule of Signs table for x cubed minus 4x squared minus 3x plus 18, showing two possible combinations of positive, negative, and imaginary zeros each totaling three">
+                        <thead>
+                            <tr><th></th><th></th><th></th></tr>
+                        </thead>
+                        <tbody>
+                            <tr class="pos-row"><td>Positive</td><td>2</td><td>0</td></tr>
+                            <tr class="neg-row"><td>Negative</td><td>1</td><td>1</td></tr>
+                            <tr class="imag-row"><td>Imaginary</td><td>0</td><td>2</td></tr>
+                            <tr class="total-row"><td>Total</td><td>3</td><td>3</td></tr>
+                        </tbody>
+                    </table>
+
+                    <p>Next we move on to our Rational Root Theorem:</p>
+
+                    <div class="pq-row">
+                        <p>\(a_n = 1\) &emsp; \(q = \pm 1\)</p>
+                        <p>\(a_0 = 18\) &emsp; \(p = \pm 1,\ \pm 2,\ \pm 3,\ \pm 6,\ \pm 9,\ \pm 18\)</p>
+                    </div>
+                    \[
+                        \frac{p}{q} = \pm 1,\ \pm 2,\ \pm 3,\ \pm 6,\ \pm 9,\ \pm 18
+                    \]
+
+                    <p>Use synthetic division to check each zero.</p>
+
+                    <!-- Test x = 2 -->
+                    <div class="division-wrap">
+                        <div>
+                            <p style="font-weight:bold; margin-bottom:0.5rem;">Testing \(x = 2\):</p>
+                            <table class="syn-div" aria-label="Synthetic division of x cubed minus 4x squared minus 3x plus 18 using x equals 2, showing a nonzero remainder so x equals 2 is not a zero, and the last row is not all positive so it is not an upper bound">
+                                <tbody>
+                                    <tr class="coeff-row">
+                                        <td class="divisor">\(2\)</td>
+                                        <td>\(1\)</td>
+                                        <td>\(-4\)</td>
+                                        <td>\(-3\)</td>
+                                        <td>\(18\)</td>
+                                    </tr>
+                                    <tr class="mult-row">
+                                        <td></td>
+                                        <td></td>
+                                        <td>\(2\)</td>
+                                        <td>\(-4\)</td>
+                                        <td>\(-14\)</td>
+                                    </tr>
+                                    <tr class="result-row">
+                                        <td></td>
+                                        <td>\(1\)</td>
+                                        <td>\(-2\)</td>
+                                        <td>\(-7\)</td>
+                                        <td>\(4\)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="division-note" role="note">
+                            Since our last row is not all positive we know there is a zero larger than
+                            \(x = 2\), because it is not an upper bound.
+                        </div>
+                    </div>
+
+                    <!-- Test x = 3 -->
+                    <div class="division-wrap">
+                        <div>
+                            <p style="font-weight:bold; margin-bottom:0.5rem;">Testing \(x = 3\):</p>
+                            <table class="syn-div" aria-label="Synthetic division of x cubed minus 4x squared minus 3x plus 18 using x equals 3, showing remainder zero — x equals 3 is confirmed as a zero">
+                                <tbody>
+                                    <tr class="coeff-row">
+                                        <td class="divisor">\(3\)</td>
+                                        <td>\(1\)</td>
+                                        <td>\(-4\)</td>
+                                        <td>\(-3\)</td>
+                                        <td>\(18\)</td>
+                                    </tr>
+                                    <tr class="mult-row">
+                                        <td></td>
+                                        <td></td>
+                                        <td>\(3\)</td>
+                                        <td>\(-3\)</td>
+                                        <td>\(-18\)</td>
+                                    </tr>
+                                    <tr class="result-row">
+                                        <td></td>
+                                        <td>\(1\)</td>
+                                        <td>\(-1\)</td>
+                                        <td>\(-6\)</td>
+                                        <td>\(0\)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="division-note" role="note">
+                            We can see that \(x = 3\) is a zero of \(f(x)\). Now we can solve the quadratic
+                            that the result leaves us with to find the remaining zeros. We will call it \(g(x)\).
+                        </div>
+                    </div>
+
+                    \[
+                        \begin{aligned}
+                            g(x) &= x^2 - x - 6 \\
+                                 &= (x - 3)(x + 2)
+                        \end{aligned}
+                    \]
+
+                    <div class="division-wrap">
+                        <div class="center-text">
+                            \[(x - 3) = 0 \implies x = 3\]
+                        </div>
+                        <div class="center-text">
+                            \[(x + 2) = 0 \implies x = -2\]
+                        </div>
+                    </div>
+
+                    <p>
+                        This means that \(f(x)\) has zeros at \(x = -2,\ 0,\ 3\). We can also see there
+                        is a multiplicity of two for the zero \(x = 3\), which means that at that point
+                        the function will touch the \(x\)-axis but not go through it.
+                    </p>
+
+                    <!-- Step 3 -->
+                    <p class="step-heading">Step 3: Identify the \(y\)-Intercept</p>
+                    <p>
+                        Remember the \(y\)-intercept occurs when \(x = 0\), thus:
+                    </p>
+                    \[f(0) = 0^4 - 4(0)^3 - 3(0)^2 + 18(0) = 0\]
+                    <p>giving us a \(y\)-intercept of \((0,\ 0)\).</p>
+
+                    <!-- Step 4 -->
+                    <p class="step-heading">Step 4: Build a Table of Values</p>
+                    <p>
+                        Now that we know our \(x\)-intercepts and \(y\)-intercept we can create a table to
+                        evaluate the function at several other values to help us with the shape of this graph.
+                        The values below that appear in red are values that you select on your own. The values
+                        you pick aren't really all that important; the important part is that they are values
+                        between what we are going to call <strong class="blue-text">critical values</strong> —
+                        these would be your zeros (\(x\)-intercepts) and \(y\)-intercepts.
+                    </p>
+
+                    <!-- Step 5 heading centered over both columns -->
+                    <p class="step-heading" style="text-align:center;">Step 5: Plot the Points</p>
+                    <div class="step4-wrap">
+                        <div>
+                            <table class="value-table" aria-label="Table of x and f(x) values for f(x) equals x to the fourth minus 4x cubed minus 3x squared plus 18x. Values in red are student-selected test points; other entries are the zeros and y-intercept.">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">\(x\)</th>
+                                        <th scope="col">\(f(x)\)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td class="red-val">\(-3\)</td><td>\(108\)</td></tr>
+                                    <tr><td>\(-2\)</td><td>\(0\)</td></tr>
+                                    <tr><td class="red-val">\(-1\)</td><td>\(-16\)</td></tr>
+                                    <tr><td>\(0\)</td><td>\(0\)</td></tr>
+                                    <tr><td class="red-val">\(1\)</td><td>\(12\)</td></tr>
+                                    <tr><td class="red-val">\(2\)</td><td>\(8\)</td></tr>
+                                    <tr><td>\(3\)</td><td>\(0\)</td></tr>
+                                    <tr><td class="red-val">\(4\)</td><td>\(24\)</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div>
+                            <img
+                                src="images/2_4_4.png"
+                                alt="A coordinate grid with x-axis and y-axis both ranging from negative 5 to 5, labeled in increments of 5. Three blue filled dots mark the zeros at x equals negative 2, x equals 0, and x equals 3 on the x-axis. Three red filled dots mark additional student-selected test points between and near the zeros to help establish the shape of the curve. The points for x equals negative 3 and x equals 4 fall outside the visible grid range."
+                                style="max-width:100%; height:auto; display:block; margin: 0 auto;"
+                            />
+                            <p style="margin-top:0.5rem; font-size:0.95em; color:#555; text-align:center;">
+                                <em>Note: The points for \(x = -3\) and \(x = 4\) are large and would not fit
+                                on the graph, but that is okay because we know that both ends will go up from
+                                our leading coefficient test.</em>
+                            </p>
+                        </div>
+                    </div>
+
+                    <p>
+                        Next, using the other information that we have, we will draw in our end behavior
+                        from our outer two zeros and connect the dots using our knowledge of multiplicity.
+                        That will give us our entire graph which looks like:
+                    </p>
+
+                    <img
+                        src="images/2_4_5.png"
+                        alt="A complete coordinate grid with x-axis labeled from negative 10 to 10 and y-axis labeled from negative 10 to 10 in increments of 5. A smooth blue curve represents f(x) equals x to the fourth minus 4x cubed minus 3x squared plus 18x. Both ends of the curve rise upward, consistent with an even-degree polynomial with a positive leading coefficient. The curve crosses the x-axis at x equals negative 2, passes through the origin at x equals 0, and touches but does not cross the x-axis at x equals 3 due to a multiplicity of 2, before rising back upward. Blue dots mark the three zeros and red dots mark the additional test points from the table."
+                        style="max-width:100%; height:auto; display:block; margin: 1rem auto;"
+                    />
+
+                </div>
+            </div>
+        </section>
+
+        <p>
+            The process behind graphing a polynomial can be a very long drawn-out process when you have to
+            find the zeros using the process learned in the previous section. Combined with everything else,
+            it isn't unrealistic to expect that the problem will take an entire page of work or more to complete.
+        </p>
+
+    </section><!-- end guidelines section -->
+
+</section><!-- end #graphing-polynomials -->
+
+<!-- ══════════════════════════════════════════
+     EXERCISES
+══════════════════════════════════════════ -->
+<section class="exercises-section" role="region" aria-labelledby="exercises-2-4-heading">
+    <h2 id="exercises-2-4-heading" class="subsection-title">Exercises</h2>
+
+    <button class="exercises-header" onclick="toggleExercises(this)" aria-expanded="false" aria-controls="exercises-2-4-content">
+        <span class="toggle-arrow">▼</span>
+        <span>Show Exercises</span>
+    </button>
+
+    <div id="exercises-2-4-content" class="exercises-content" role="region" aria-labelledby="exercises-2-4-heading">
+        <p>Exercises to be added at a later date.</p>
+    </div>
+</section>
+
+</main>
+
+<!-- ── Toggle scripts ── -->
+<script>
+    function toggleExample(button) {
+        const content = button.nextElementSibling;
+        const arrow = button.querySelector('.toggle-arrow');
+
+        if (content.classList.contains('open')) {
+            content.classList.remove('open');
+            arrow.classList.remove('open');
+            button.querySelector('span:last-child').textContent = 'Show Solution';
+            button.setAttribute('aria-expanded', 'false');
+        } else {
+            content.classList.add('open');
+            arrow.classList.add('open');
+            button.querySelector('span:last-child').textContent = 'Hide Solution';
+            button.setAttribute('aria-expanded', 'true');
+        }
+    }
+
+    function toggleExercises(button) {
+        const content = document.getElementById(button.getAttribute('aria-controls'));
+        const arrow = button.querySelector('.toggle-arrow');
+
+        if (content.classList.contains('open')) {
+            content.classList.remove('open');
+            arrow.classList.remove('open');
+            button.querySelector('span:last-child').textContent = 'Show Exercises';
+            button.setAttribute('aria-expanded', 'false');
+        } else {
+            content.classList.add('open');
+            arrow.classList.add('open');
+            button.querySelector('span:last-child').textContent = 'Hide Exercises';
+            button.setAttribute('aria-expanded', 'true');
+        }
+    }
+</script>
+
+<!-- ── TOC loader ── -->
+<script>
+    fetch('toc.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('toc-placeholder').innerHTML = data;
+
+            const chapterButtons = document.querySelectorAll('.toc-chapter');
+            chapterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const expanded = button.getAttribute('aria-expanded') === 'true';
+                    button.setAttribute('aria-expanded', !expanded);
+                    const submenu = button.nextElementSibling;
+                    submenu.classList.toggle('open');
+                });
+            });
+        });
+</script>
+
+</body>
+</html>

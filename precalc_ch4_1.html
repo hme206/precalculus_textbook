@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CH 4.1 – Two Variable Systems of Equations</title>
+
+    <!-- MathJax configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)'], ['$', '$']],
+                displayMath: [['\\[', '\\]'], ['$$', '$$']],
+                packages: {'[+]': ['cancel', 'color']},
+                macros: {
+                    cancel: ['\\enclose{horizontalstrike}{#1}', 1]
+                }
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            },
+            loader: {
+                load: ['input/tex', 'output/chtml', '[tex]/cancel', '[tex]/color']
+            }
+        };
+    </script>
+    <script id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+
+    <link rel="stylesheet" href="styles.css" />
+
+    <style>
+        /* ── Collapsible exercises ── */
+        .exercises-section { margin: 25px 0; }
+
+        .exercises-header {
+            background-color: #33AB2B;
+            color: white;
+            padding: 12px 20px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+            border-radius: 4px;
+            transition: background-color 0.2s ease;
+            border: none;
+            font-size: 1em;
+            width: 100%;
+        }
+        .exercises-header:hover { background-color: #2a8922; }
+
+        .exercises-content {
+            display: none;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-top: none;
+            border-radius: 0 0 6px 6px;
+            padding: 20px;
+        }
+        .exercises-content.open { display: block; }
+
+        /* ── Utility colours ── */
+        .blue-text  { color: #0066cc; }
+        .red-text   { color: #c0392b; font-weight: bold; }
+        .green-text { color: #33AB2B; font-weight: bold; }
+
+        /* ── Center utility ── */
+        .center-text {
+            text-align: center;
+            margin: 1rem 0;
+        }
+
+        /* ── Step heading ── */
+        .step-heading {
+            color: #0066cc;
+            font-weight: bold;
+            font-size: 1em;
+            margin-top: 1.2rem;
+            margin-bottom: 0.4rem;
+        }
+
+        /* ── Four-column system problem list ── */
+        .four-col-systems {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin: 1rem 0;
+            list-style: none;
+            padding: 0;
+            counter-reset: sys-counter;
+        }
+        .four-col-systems li {
+            counter-increment: sys-counter;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 0.8rem 1rem;
+            text-align: center;
+        }
+        .four-col-systems li::before {
+            content: counter(sys-counter) ".";
+            display: block;
+            font-weight: bold;
+            color: #33AB2B;
+            margin-bottom: 0.4rem;
+        }
+        @media (max-width: 700px) {
+            .four-col-systems { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 400px) {
+            .four-col-systems { grid-template-columns: 1fr; }
+        }
+
+        /* ── System brace display ── */
+        .system-brace {
+            display: inline-block;
+            text-align: left;
+            border-left: 2px solid #333;
+            padding-left: 0.5rem;
+            margin: 0.3rem 0;
+            line-height: 2;
+        }
+
+        /* ── Graph sub-example block ── */
+        .graph-example {
+            margin: 1.5rem 0;
+            padding: 1.2rem;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+        }
+        .graph-example h4 {
+            color: #33AB2B;
+            margin-top: 0;
+            margin-bottom: 0.8rem;
+        }
+
+        /* ── Solution callout ── */
+        .solution-callout {
+            background-color: #f0f8ed;
+            border-left: 4px solid #33AB2B;
+            padding: 0.6rem 1rem;
+            margin: 0.8rem 0;
+            border-radius: 0 4px 4px 0;
+            font-weight: bold;
+        }
+
+        /* ── No solution callout ── */
+        .no-solution-box {
+            background-color: #fdecea;
+            border-left: 4px solid #c0392b;
+            padding: 0.6rem 1rem;
+            margin: 0.8rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+
+        /* ── Consistent / inconsistent badge ── */
+        .consistent-badge {
+            display: inline-block;
+            background-color: #33AB2B;
+            color: white;
+            border-radius: 4px;
+            padding: 0.15rem 0.6rem;
+            font-size: 0.88em;
+            font-weight: bold;
+            margin-left: 0.4rem;
+        }
+        .inconsistent-badge {
+            display: inline-block;
+            background-color: #c0392b;
+            color: white;
+            border-radius: 4px;
+            padding: 0.15rem 0.6rem;
+            font-size: 0.88em;
+            font-weight: bold;
+            margin-left: 0.4rem;
+        }
+
+        /* ── Correction note ── */
+        .correction-note {
+            background-color: #fff8e1;
+            border-left: 4px solid #ffc107;
+            padding: 0.5rem 1rem;
+            margin: 0.6rem 0;
+            border-radius: 0 4px 4px 0;
+            font-size: 0.93em;
+            font-style: italic;
+        }
+
+        /* ── Scrollable wrapper ── */
+        .table-scroll { overflow-x: auto; margin: 1rem 0; }
+
+        /* ── Definition box extras ── */
+        .definition-box ol {
+            margin-left: 20px;
+            margin-bottom: 10px;
+        }
+        .definition-box ol li {
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="toc-placeholder"></div>
+
+<main class="container">
+
+<section id="two-variable-systems" aria-labelledby="section-heading">
+    <h1 id="section-heading">CH 4.1 – Two Variable Systems of Equations</h1>
+
+    <p>
+        Throughout this whole course we've been learning to solve different types of equations.
+        In this section we are going to continue that process; however, we will be looking at
+        multiple equations at a time. Systems of equations are used throughout the real world to
+        find a <strong>point of equilibrium</strong> — a point at which all of the equations
+        intersect. This is useful in business applications to understand where a company would
+        break even if one function represented their profits and one equation represented their
+        cost to produce the product.
+    </p>
+
+    <p>We have three major methods to determine the solution to a system of equations:</p>
+
+    <div class="definition-box" role="note" aria-label="Three methods for solving systems of equations">
+        <h3>Methods for Solving Systems of Equations</h3>
+        <ol>
+            <li><strong>Graphing</strong></li>
+            <li><strong>Substitution</strong></li>
+            <li><strong>Elimination</strong></li>
+        </ol>
+    </div>
+
+    <hr class="divider" role="separator" aria-hidden="true" />
+
+    <!-- ══════════════════════════════════════════
+         SOLVING BY GRAPHING — SECTION
+    ══════════════════════════════════════════ -->
+    <section aria-labelledby="graphing-heading">
+        <h2 id="graphing-heading">Solving Systems of Equations by Graphing</h2>
+
+        <p>
+            When it comes to solving systems of equations there are several different types of
+            solutions you may end up with. The objective is to find the point at which all of the
+            equations intersect. Whether you have linear or non-linear equations can change the
+            type of solution(s) that is possible. Let's look at the linear options first.
+        </p>
+
+        <!-- Linear systems image -->
+        <img
+            src="images/4_1_1.png"
+            alt="A gray box containing three side-by-side coordinate planes illustrating the three possible outcomes for a linear system of equations. The left plane is labeled One Solution and shows two blue lines crossing at a single point, with a note that this is a Consistent Solution. The center plane is labeled No Solution and shows two blue parallel lines that never intersect, with a note that this is an Inconsistent Solution and the lines are parallel. The right plane is labeled Infinite Solutions and shows a single blue line (both equations are the same), with a note that this is a Consistent Solution satisfied by any real number."
+            style="max-width:100%; height:auto; display:block; margin: 1rem auto;"
+        />
+
+        <p>
+            A system of equations that has one or more solutions is known as
+            <strong class="blue-text">consistent</strong>, whereas a system with no solutions is
+            <strong class="blue-text">inconsistent</strong>. When dealing with nonlinear systems
+            those three options are still possible — we just add a fourth. With a nonlinear system
+            we have the option of more than one solution that isn't infinite.
+        </p>
+
+        <!-- Nonlinear systems image -->
+        <img
+            src="images/4_1_2.png"
+            alt="A gray box containing three side-by-side coordinate planes illustrating possible outcomes for a nonlinear system of equations. The left plane is labeled One Solution and shows a blue circle with a blue line tangent to it at exactly one point, with a note that the line touches the circle but does not go through it. The center plane is labeled No Solution and shows a blue parabola with a blue line that does not intersect it, with a note that there is no solution. The right plane is labeled Multiple Solutions and shows a blue parabola with a blue line crossing it at two distinct points, with a note that the system has two solutions."
+            style="max-width:100%; height:auto; display:block; margin: 1rem auto;"
+        />
+
+        <p>
+            Not pictured above is the option for infinite solutions — this would happen when the
+            equations are the same, making it so any real number satisfies the system.
+        </p>
+
+        <p>
+            So, how do we solve a system of equations graphically? It's rather simple — you graph
+            the two (or more) equations and find where they intersect on the graph.
+        </p>
+
+        <!-- ── Graphing Example ── -->
+        <section class="example" aria-labelledby="example-4-1-1-heading">
+            <div class="example-problem">
+                <h3 id="example-4-1-1-heading">Example</h3>
+                <p>Solve the system of equations below graphically and identify the solution.</p>
+
+                <ol class="four-col-systems" aria-label="Four systems of equations to solve graphically">
+                    <li>
+                        <div class="system-brace" aria-label="System 1: y equals 2x plus 3 and y equals negative x plus 6">
+                            \(y = 2x + 3\)<br/>
+                            \(y = -x + 6\)
+                        </div>
+                    </li>
+                    <li>
+                        <div class="system-brace" aria-label="System 2: 2y equals 4x plus 4 and y equals x plus 2">
+                            \(2y = 4x + 4\)<br/>
+                            \(y = x + 2\)
+                        </div>
+                    </li>
+                    <li>
+                        <div class="system-brace" aria-label="System 3: x squared plus y squared equals 16 and y equals x plus 4">
+                            \(x^2 + y^2 = 16\)<br/>
+                            \(y = x + 4\)
+                        </div>
+                    </li>
+                    <li>
+                        <div class="system-brace" aria-label="System 4: y plus 1 equals x squared and 2y plus 3x equals 4">
+                            \(y + 1 = x^2\)<br/>
+                            \(2y + 3x = 4\)
+                        </div>
+                    </li>
+                </ol>
+            </div>
+
+            <button class="solution-header"
+                    onclick="toggleExample(this)"
+                    aria-expanded="false"
+                    aria-controls="solution-4-1-1">
+                <span class="toggle-arrow">▼</span>
+                <span>Show Solution</span>
+            </button>
+
+            <div id="solution-4-1-1" class="example-content">
+                <div class="solution">
+                    <h4>Solution</h4>
+
+                    <!-- System 1 -->
+                    <div class="graph-example">
+                        <h4>System 1: \(\;y = 2x+3\) and \(y = -x+6\)</h4>
+                        <p>
+                            Both equations are in slope-intercept form (\(y = mx + b\)), which
+                            means we place a point on the \(y\)-axis at \((0, b)\) and use the
+                            slope \(m\) to rise and run to the next point. If this is a skill you
+                            need to brush up on, consult your instructor or an online resource.
+                        </p>
+                        <img
+                            src="images/4_1_3.png"
+                            alt="A coordinate grid with x-axis and y-axis both ranging from negative 5 to 5, with gridlines every 0.5 units. Two blue lines are graphed: one with slope 2 and y-intercept 3 (rising steeply from lower left to upper right) and one with slope negative 1 and y-intercept 6 (falling from upper left to lower right). The two lines intersect at a single red filled dot at the point (1, 5)."
+                            style="max-width:100%; height:auto; display:block; margin: 1rem auto;"
+                        />
+                        <div class="solution-callout" role="note">
+                            The lines intersect at \(\textcolor{red}{(1,\,5)}\). The solution is
+                            \((1, 5)\). <span class="consistent-badge">Consistent</span>
+                        </div>
+                    </div>
+
+                    <!-- System 2 -->
+                    <div class="graph-example">
+                        <h4>System 2: \(\;2y = 4x+4\) and \(y = x+2\)</h4>
+                        <p>
+                            Notice that the first equation simplifies to \(y = 2x + 2\), and the
+                            second is \(y = x + 2\). We graph both linear equations.
+                        </p>
+                        <img
+                            src="images/4_1_4.png"
+                            alt="A coordinate grid with x-axis and y-axis both ranging from negative 5 to 5, with gridlines every 0.5 units. Two blue lines are graphed: one with slope 2 and y-intercept 2, and one with slope 1 and y-intercept 2. Both lines share the same y-intercept at (0, 2). A single red filled dot marks the intersection point at (0, 2)."
+                            style="max-width:100%; height:auto; display:block; margin: 1rem auto;"
+                        />
+                        <div class="solution-callout" role="note">
+                            The lines intersect at \(\textcolor{red}{(0,\,2)}\). The solution is
+                            \((0, 2)\). <span class="consistent-badge">Consistent</span>
+                        </div>
+                    </div>
+
+                    <!-- System 3 -->
+                    <div class="graph-example">
+                        <h4>System 3: \(\;x^2 + y^2 = 16\) and \(y = x+4\)</h4>
+                        <p>
+                            The equation \(x^2 + y^2 = 16\) is the equation of a circle with
+                            radius 4 and center \((0, 0)\). Graphing that along with the line
+                            \(y = x + 4\):
+                        </p>
+                        <img
+                            src="images/4_1_5.png"
+                            alt="A coordinate grid with x-axis and y-axis both ranging from negative 5 to 5, with gridlines every 0.5 units. A blue circle of radius 4 is centered at the origin. A blue line with slope 1 and y-intercept 4 is also graphed. The line intersects the circle at two points marked with red filled dots: one at (negative 4, 0) on the negative x-axis, and one at (0, 4) on the positive y-axis."
+                            style="max-width:100%; height:auto; display:block; margin: 1rem auto;"
+                        />
+                        <p>
+                            In this nonlinear system the line intersects the circle in two
+                            locations.
+                        </p>
+                        <div class="solution-callout" role="note">
+                            Solutions: \(\textcolor{red}{(-4,\,0)}\) and \(\textcolor{red}{(0,\,4)}\).
+                            <span class="consistent-badge">Consistent</span>
+                        </div>
+                    </div>
+
+                    <!-- System 4 -->
+                    <div class="graph-example">
+                        <h4>System 4: \(\;y + 1 = x^2\) and \(2y + 3x = 4\)</h4>
+                        <p>
+                            Rewriting each equation in a familiar form: the quadratic becomes
+                            \(y = x^2 - 1\), and the linear equation simplifies to
+                            \(y = -\dfrac{3}{2}x + 2\).
+                        </p>
+                        <img
+                            src="images/4_1_6.png"
+                            alt="A coordinate grid with x-axis and y-axis both ranging from negative 5 to 5, with gridlines every 0.5 units. A blue upward-opening parabola represents y equals x squared minus 1 with vertex at (0, negative 1). A blue line with slope negative three-halves and y-intercept 2 is also graphed. The line and the parabola do not intersect at any point within the visible region, indicating no real solution."
+                            style="max-width:100%; height:auto; display:block; margin: 1rem auto;"
+                        />
+                        <div class="no-solution-box" role="note">
+                            The line does not intersect the parabola. This system has
+                            <strong>no solution</strong> and is
+                            <span class="inconsistent-badge">Inconsistent</span>.
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </section><!-- end graphing section -->
+
+</section><!-- end #two-variable-systems -->
+
+<!-- ══════════════════════════════════════════
+     EXERCISES
+══════════════════════════════════════════ -->
+<section class="exercises-section" role="region" aria-labelledby="exercises-4-1-heading">
+    <h2 id="exercises-4-1-heading" class="subsection-title">Exercises</h2>
+
+    <button class="exercises-header"
+            onclick="toggleExercises(this)"
+            aria-expanded="false"
+            aria-controls="exercises-4-1-content">
+        <span class="toggle-arrow">▼</span>
+        <span>Show Exercises</span>
+    </button>
+
+    <div id="exercises-4-1-content"
+         class="exercises-content"
+         role="region"
+         aria-labelledby="exercises-4-1-heading">
+        <p>Exercises to be added at a later date.</p>
+    </div>
+</section>
+
+</main>
+
+<!-- ── Toggle scripts ── -->
+<script>
+    function toggleExample(button) {
+        const content = button.nextElementSibling;
+        const arrow = button.querySelector('.toggle-arrow');
+
+        if (content.classList.contains('open')) {
+            content.classList.remove('open');
+            arrow.classList.remove('open');
+            button.querySelector('span:last-child').textContent = 'Show Solution';
+            button.setAttribute('aria-expanded', 'false');
+        } else {
+            content.classList.add('open');
+            arrow.classList.add('open');
+            button.querySelector('span:last-child').textContent = 'Hide Solution';
+            button.setAttribute('aria-expanded', 'true');
+        }
+    }
+
+    function toggleExercises(button) {
+        const content = document.getElementById(button.getAttribute('aria-controls'));
+        const arrow = button.querySelector('.toggle-arrow');
+
+        if (content.classList.contains('open')) {
+            content.classList.remove('open');
+            arrow.classList.remove('open');
+            button.querySelector('span:last-child').textContent = 'Show Exercises';
+            button.setAttribute('aria-expanded', 'false');
+        } else {
+            content.classList.add('open');
+            arrow.classList.add('open');
+            button.querySelector('span:last-child').textContent = 'Hide Exercises';
+            button.setAttribute('aria-expanded', 'true');
+        }
+    }
+</script>
+
+<!-- ── TOC loader ── -->
+<script>
+    fetch('toc.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('toc-placeholder').innerHTML = data;
+
+            const chapterButtons = document.querySelectorAll('.toc-chapter');
+            chapterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const expanded = button.getAttribute('aria-expanded') === 'true';
+                    button.setAttribute('aria-expanded', !expanded);
+                    const submenu = button.nextElementSibling;
+                    submenu.classList.toggle('open');
+                });
+            });
+        });
+</script>
+
+</body>
+</html>

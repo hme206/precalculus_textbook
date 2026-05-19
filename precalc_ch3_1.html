@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CH 3.1 – Exponential Functions and Their Graphs</title>
+
+    <!-- MathJax configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)'], ['$', '$']],
+                displayMath: [['\\[', '\\]'], ['$$', '$$']],
+                packages: {'[+]': ['cancel', 'color']},
+                macros: {
+                    cancel: ['\\enclose{horizontalstrike}{#1}', 1]
+                }
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            },
+            loader: {
+                load: ['input/tex', 'output/chtml', '[tex]/cancel', '[tex]/color']
+            }
+        };
+    </script>
+    <script id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+
+    <link rel="stylesheet" href="styles.css" />
+
+    <style>
+        /* ── Collapsible exercises ── */
+        .exercises-section { margin: 25px 0; }
+
+        .exercises-header {
+            background-color: #33AB2B;
+            color: white;
+            padding: 12px 20px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+            border-radius: 4px;
+            transition: background-color 0.2s ease;
+            border: none;
+            font-size: 1em;
+            width: 100%;
+        }
+        .exercises-header:hover { background-color: #2a8922; }
+
+        .exercises-content {
+            display: none;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-top: none;
+            border-radius: 0 0 6px 6px;
+            padding: 20px;
+        }
+        .exercises-content.open { display: block; }
+
+        /* ── Utility colours ── */
+        .blue-text  { color: #0066cc; }
+        .red-text   { color: #c0392b; font-weight: bold; }
+        .green-text { color: #33AB2B; font-weight: bold; }
+
+        /* ── Step heading ── */
+        .step-heading {
+            color: #0066cc;
+            font-weight: bold;
+            font-size: 1em;
+            margin-top: 1.2rem;
+            margin-bottom: 0.4rem;
+        }
+
+        /* ── Center utility ── */
+        .center-text {
+            text-align: center;
+            margin: 1rem 0;
+        }
+
+        /* ── Four-column evaluate table ── */
+        .eval-table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1rem 0;
+        }
+        .eval-table th {
+            background-color: #f0f8ed;
+            color: #33AB2B;
+            font-weight: bold;
+            padding: 10px 14px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+        .eval-table td {
+            padding: 10px 14px;
+            border: 1px solid #ccc;
+            text-align: center;
+            vertical-align: middle;
+        }
+        .eval-table tr:nth-child(even) { background-color: #f9f9f9; }
+
+        /* ── x/y table for graphing ── */
+        .xy-table {
+            border-collapse: collapse;
+            margin: 0.8rem auto;
+            font-size: 0.95em;
+        }
+        .xy-table th {
+            background-color: #f0f8ed;
+            color: #33AB2B;
+            font-weight: bold;
+            padding: 8px 14px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+        .xy-table td {
+            padding: 8px 14px;
+            border: 1px solid #ccc;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        /* ── Compound interest results table ── */
+        .compound-table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1rem 0;
+        }
+        .compound-table th {
+            background-color: #f0f8ed;
+            color: #33AB2B;
+            font-weight: bold;
+            padding: 10px 14px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+        .compound-table td {
+            padding: 10px 14px;
+            border: 1px solid #ccc;
+            text-align: center;
+            vertical-align: middle;
+        }
+        .compound-table tr:nth-child(even) { background-color: #f9f9f9; }
+
+        /* ── Graph sub-example block ── */
+        .graph-example {
+            margin: 1.5rem 0;
+            padding: 1.2rem;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+        }
+        .graph-example h4 {
+            color: #33AB2B;
+            margin-top: 0;
+            margin-bottom: 0.8rem;
+        }
+
+        /* ── Four-column problem list ── */
+        .four-col-problems {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin: 1rem 0 1rem 1.2em;
+            list-style: none;
+            padding: 0;
+            counter-reset: prob-counter;
+        }
+        .four-col-problems li {
+            counter-increment: prob-counter;
+        }
+        .four-col-problems li::before {
+            content: counter(prob-counter) ". ";
+            font-weight: bold;
+            color: #333;
+        }
+        @media (max-width: 640px) {
+            .four-col-problems { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 400px) {
+            .four-col-problems { grid-template-columns: 1fr; }
+        }
+
+        /* ── Definition box list styles ── */
+        .definition-box ul {
+            margin-left: 20px;
+            margin-bottom: 10px;
+        }
+        .definition-box ul li {
+            margin-bottom: 8px;
+        }
+        .definition-box .big-formula {
+            font-size: 1.5em;
+            font-weight: bold;
+            text-align: center;
+            margin: 0.8rem 0;
+        }
+
+        /* ── Scrollable wrapper ── */
+        .table-scroll { overflow-x: auto; margin: 1rem 0; }
+
+        /* ── Highlight note ── */
+        .note-box {
+            background-color: #fff8e1;
+            border-left: 4px solid #ffc107;
+            padding: 0.8rem 1.2rem;
+            margin: 1rem 0;
+            border-radius: 0 4px 4px 0;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+<div id="toc-placeholder"></div>
+
+<main class="container">
+
+<section id="exponential-functions" aria-labelledby="section-heading">
+    <h1 id="section-heading">CH 3.1 – Exponential Functions and Their Graphs</h1>
+
+    <p>
+        In this text we've already discussed several of our parent functions including the linear,
+        quadratic, polynomial, and the rational functions. While all of those functions can and do
+        have roles in the real world, the next two functions that we will discuss in this chapter
+        are most likely the two that have the most real-world application.
+    </p>
+    <p>
+        I am sure that at some point in your lives you've heard about carbon dating, decay and
+        growth rates. These are just a few of the applications that
+        <strong class="blue-text">Exponential Functions</strong> can be applied to.
+    </p>
+
+    <!-- Definition box: Exponential Function -->
+    <div class="definition-box" role="note" aria-label="Definition: Exponential Function of base b">
+        <h3>Exponential Function</h3>
+        <p>
+            An <strong>Exponential Function</strong> of base \(b\) and exponent \(x\) can be
+            denoted as
+        </p>
+        <p class="big-formula">\(f(x) = b^x\)</p>
+        <p>
+            where \(b\) is a fixed real number such that \(b > 0\), \(b \neq 1\), and \(x\) is
+            any real number. Thus we call it an <strong>exponential function base \(b\)</strong>.
+        </p>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+         EVALUATE EXAMPLE
+    ══════════════════════════════════════════ -->
+    <section class="example" aria-labelledby="example-3-1-1-heading">
+        <div class="example-problem">
+            <h3 id="example-3-1-1-heading">Example</h3>
+            <p>Evaluate the exponential functions at each given value.</p>
+            <div class="table-scroll">
+                <table class="eval-table" aria-label="Three exponential functions with their given x values to evaluate">
+                    <thead>
+                        <tr>
+                            <th scope="col">Function</th>
+                            <th scope="col">Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1. \(f(x) = 3^x\)</td>
+                            <td>\(x = -2\)</td>
+                        </tr>
+                        <tr>
+                            <td>2. \(f(x) = 4^{-x}\)</td>
+                            <td>\(x = 1.6\)</td>
+                        </tr>
+                        <tr>
+                            <td>3. \(f(x) = 0.6^x\)</td>
+                            <td>\(x = 5\)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <button class="solution-header"
+                onclick="toggleExample(this)"
+                aria-expanded="false"
+                aria-controls="solution-3-1-1">
+            <span class="toggle-arrow">▼</span>
+            <span>Show Solution</span>
+        </button>
+
+        <div id="solution-3-1-1" class="example-content">
+            <div class="solution">
+                <h4>Solution</h4>
+                <div class="table-scroll">
+                    <table class="eval-table" aria-label="Evaluation of three exponential functions showing function, value, substituted input, and numerical solution">
+                        <thead>
+                            <tr>
+                                <th scope="col">Function</th>
+                                <th scope="col">Value</th>
+                                <th scope="col">Input</th>
+                                <th scope="col">Solution</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1. \(f(x) = 3^x\)</td>
+                                <td>\(x = -2\)</td>
+                                <td>\(3^{-2} = \dfrac{1}{3^2}\)</td>
+                                <td>\(\dfrac{1}{9}\)</td>
+                            </tr>
+                            <tr>
+                                <td>2. \(f(x) = 4^{-x}\)</td>
+                                <td>\(x = 1.6\)</td>
+                                <td>\(4^{-1.6} = \dfrac{1}{4^{1.6}}\)</td>
+                                <td>\(0.1088\)</td>
+                            </tr>
+                            <tr>
+                                <td>3. \(f(x) = 0.6^x\)</td>
+                                <td>\(x = 5\)</td>
+                                <td>\(0.6^5\)</td>
+                                <td>\(0.07776\)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <p>
+        When we evaluate exponential functions, sometimes we need to use a calculator — as in the
+        last two examples above — and other times we can evaluate them without one. It is important
+        to remember that negative exponents can be made positive by moving the base number to the
+        denominator and making the exponent positive, if the base is originally in the numerator
+        (or vice versa if the base was originally in the denominator).
+    </p>
+
+    <p>
+        A special type of exponential function that we will use is something known as
+        <strong class="blue-text">The Natural Base "e"</strong>. The natural base "e" is very
+        similar to that of the number \(\pi\). In mathematics we tend to use symbols for irrational
+        numbers like these two — it is much easier to write the symbol than all of the decimal
+        places, and since neither number can be calculated to all decimal places, using the symbol
+        is the most accurate representation of the number. The number
+        \(\textcolor{blue}{e = 2.718281828\ldots}\) and can be evaluated in your calculator by
+        pressing the \(e^x\) button and substituting \(1\) for \(x\). When we use this number as
+        a base in an exponential function we call it the <strong>natural exponential function</strong>.
+    </p>
+
+    <hr class="divider" role="separator" aria-hidden="true" />
+
+    <!-- ══════════════════════════════════════════
+         GRAPHS OF EXPONENTIAL FUNCTIONS
+    ══════════════════════════════════════════ -->
+    <section aria-labelledby="graphs-heading">
+        <h2 id="graphs-heading">Graphs of Exponential Functions</h2>
+
+        <p>
+            When it comes to graphing an exponential function, just like any other type of function,
+            there are some specific properties that we need to be aware of to make graphing them a
+            simpler process.
+        </p>
+
+        <!-- Properties image -->
+        <img
+            src="images/3_1_1.png"
+            alt="A gray definition box titled Properties of Exponential Graphs. The box states: suppose f of x equals b to the x. Three bullet points read: the domain of f is negative infinity to positive infinity and the range of f is 0 to positive infinity; the point (0, 1) is on the graph and y equals 0 is a horizontal asymptote; f is one-to-one, continuous, and smooth. Below the bullet points are two side-by-side coordinate planes illustrating the two cases. The left plane is labeled if b is greater than 1: f is always increasing, as x approaches negative infinity f of x approaches 0 from above, and as x approaches positive infinity f of x approaches positive infinity. A blue curve rises steeply from near the horizontal asymptote on the left and increases rapidly to the right. The right plane is labeled if 0 is less than b which is less than 1: f is always decreasing, as x approaches negative infinity f of x approaches positive infinity, and as x approaches positive infinity f of x approaches 0 from above. A blue curve falls steeply from the upper left and flattens toward the horizontal asymptote on the right."
+            style="max-width:100%; height:auto; display:block; margin: 1rem auto;"
+        />
+
+        <p>
+            Just like any other parent function, the exponential function can be transformed using
+            any of the transformations discussed in Chapter 1. The transformation that will play the
+            largest role in the exponential function is the <strong>vertical translation</strong>,
+            as exponential functions have horizontal asymptotes. If you move the graph up or down,
+            the asymptote moves with the graph.
+        </p>
+
+        <!-- ── Graphing Example ── -->
+        <section class="example" aria-labelledby="example-3-1-2-heading">
+            <div class="example-problem">
+                <h3 id="example-3-1-2-heading">Example</h3>
+                <p>
+                    Graph the exponential functions below, being sure to include the horizontal
+                    asymptote in the graph.
+                </p>
+                <ol class="four-col-problems" aria-label="Four exponential functions to graph">
+                    <li>\(f(x) = 0.25^x\)</li>
+                    <li>\(g(x) = -3^{x+1}\)</li>
+                    <li>\(h(x) = 4^x - 2\)</li>
+                    <li>\(k(x) = 2^{-x}\)</li>
+                </ol>
+            </div>
+
+            <button class="solution-header"
+                    onclick="toggleExample(this)"
+                    aria-expanded="false"
+                    aria-controls="solution-3-1-2">
+                <span class="toggle-arrow">▼</span>
+                <span>Show Solution</span>
+            </button>
+
+            <div id="solution-3-1-2" class="example-content">
+                <div class="solution">
+                    <h4>Solution</h4>
+                    <p>
+                        When it comes to graphing exponential functions we graph them like we would
+                        any other function — by creating an \(x\), \(y\) table and plotting our
+                        points.
+                    </p>
+
+                    <!-- Part 1: f(x) = 0.25^x -->
+                    <div class="graph-example">
+                        <h4>1. \(f(x) = 0.25^x\)</h4>
+                        <p>
+                            When creating the table remember that you select the \(x\)-values that
+                            you'll plug in to find the \(y\) or \(f(x)\) values coming out.
+                        </p>
+                        <div class="table-scroll">
+                            <table class="xy-table" aria-label="Table of x and f of x values for f of x equals 0.25 to the x, using x values negative 2 through 2">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">\(x\)</th>
+                                        <th scope="col">\(-2\)</th>
+                                        <th scope="col">\(-1\)</th>
+                                        <th scope="col">\(0\)</th>
+                                        <th scope="col">\(1\)</th>
+                                        <th scope="col">\(2\)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">\(f(x)\)</th>
+                                        <td>\(0.25^{-2}\)</td>
+                                        <td>\(0.25^{-1}\)</td>
+                                        <td>\(0.25^{0}\)</td>
+                                        <td>\(0.25^{1}\)</td>
+                                        <td>\(0.25^{2}\)</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">\(y\)</th>
+                                        <td>\(16\)</td>
+                                        <td>\(4\)</td>
+                                        <td>\(1\)</td>
+                                        <td>\(0.25\)</td>
+                                        <td>\(0.0625\)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p>
+                            Since the point \((-2,\,16)\) is larger than the rest, it will not be
+                            placed on the graph for the sake of space — but it gives you an idea of
+                            how quickly the function is increasing.
+                        </p>
+                        <img
+                            src="images/3_1_2.png"
+                            alt="A coordinate grid with x-axis ranging from negative 5 to 5 and y-axis ranging from 0 to approximately 12, with gridlines every 0.5 units. A blue curve represents f of x equals 0.25 to the x. The curve descends steeply from the upper left, passing through plotted blue points at (negative 1, 4), (0, 1), (0.5, approximately 0.5), and (1, approximately 0.5), then flattens and approaches but never touches the x-axis as x increases to the right. A dashed red horizontal line marks the asymptote at y equals 0 along the x-axis."
+                            style="max-width:100%; height:auto; display:block; margin: 1rem auto;"
+                        />
+                        <p>
+                            While it looks like the graph will touch the \(x\)-axis, this is not the
+                            case because of the horizontal asymptote at \(y = 0\) — our graph gets
+                            infinitely close to that line but never actually touches it.
+                        </p>
+                    </div>
+
+                    <!-- Part 2: g(x) = -3^(x+1) -->
+                    <div class="graph-example">
+                        <h4>2. \(g(x) = -3^{x+1}\)</h4>
+                        <div class="table-scroll">
+                            <table class="xy-table" aria-label="Table of x and g of x values for g of x equals negative 3 to the power of x plus 1, using x values negative 2 through 2">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">\(x\)</th>
+                                        <th scope="col">\(-2\)</th>
+                                        <th scope="col">\(-1\)</th>
+                                        <th scope="col">\(0\)</th>
+                                        <th scope="col">\(1\)</th>
+                                        <th scope="col">\(2\)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">\(g(x)\)</th>
+                                        <td>\(-3^{-2+1}\)</td>
+                                        <td>\(-3^{-1+1}\)</td>
+                                        <td>\(-3^{0+1}\)</td>
+                                        <td>\(-3^{1+1}\)</td>
+                                        <td>\(-3^{2+1}\)</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">\(y\)</th>
+                                        <td>\(-\tfrac{1}{3}\)</td>
+                                        <td>\(-1\)</td>
+                                        <td>\(-3\)</td>
+                                        <td>\(-9\)</td>
+                                        <td>\(-27\)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <img
+                            src="images/3_1_3.png"
+                            alt="A coordinate grid with x-axis ranging from negative 5 to 5 and y-axis ranging from approximately negative 10 to 1, with gridlines every 0.5 units. A blue curve represents g of x equals negative 3 to the power of x plus 1. The curve begins near zero on the far left, passes through plotted blue points at (negative 1, negative 0.5), (negative 0.5, negative 1), (0, negative 1.5), and (0.5, negative 4.5), then descends steeply below the visible grid as x increases. A dashed red horizontal line marks the asymptote at y equals 0 along the x-axis."
+                            style="max-width:100%; height:auto; display:block; margin: 1rem auto;"
+                        />
+                        <p>
+                            Notice how this graph is below the \(x\)-axis. This occurred because the
+                            graph was reflected over the \(x\)-axis due to the negative in front of
+                            our base.
+                        </p>
+                    </div>
+
+                    <!-- Part 3: h(x) = 4^x - 2 -->
+                    <div class="graph-example">
+                        <h4>3. \(h(x) = 4^x - 2\)</h4>
+                        <div class="table-scroll">
+                            <table class="xy-table" aria-label="Table of x and h of x values for h of x equals 4 to the x minus 2, using x values negative 2 through 2">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">\(x\)</th>
+                                        <th scope="col">\(-2\)</th>
+                                        <th scope="col">\(-1\)</th>
+                                        <th scope="col">\(0\)</th>
+                                        <th scope="col">\(1\)</th>
+                                        <th scope="col">\(2\)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">\(h(x)\)</th>
+                                        <td>\(4^{-2}-2\)</td>
+                                        <td>\(4^{-1}-2\)</td>
+                                        <td>\(4^{0}-2\)</td>
+                                        <td>\(4^{1}-2\)</td>
+                                        <td>\(4^{2}-2\)</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">\(y\)</th>
+                                        <td>\(-1.9375\)</td>
+                                        <td>\(-1.75\)</td>
+                                        <td>\(-1\)</td>
+                                        <td>\(2\)</td>
+                                        <td>\(14\)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <img
+                            src="images/3_1_4.png"
+                            alt="A coordinate grid with x-axis ranging from negative 5 to 5 and y-axis ranging from approximately negative 2 to 8, with gridlines every 0.5 units. A blue curve represents h of x equals 4 to the x minus 2. The curve begins nearly flat just below y equals negative 2 on the left side, passing through plotted blue points at (negative 1, approximately negative 0.97), (negative 0.5, approximately negative 0.875), (0, negative 0.5), (0.5, 1), and (1, 7), then rises steeply off the top of the graph. A dashed red horizontal line marks the asymptote at y equals negative 2."
+                            style="max-width:100%; height:auto; display:block; margin: 1rem auto;"
+                        />
+                        <p>
+                            Looking at this graph we can see that the entire graph was shifted down
+                            by the \(-2\) in the equation, which means that our asymptote is also
+                            shifted down two units to \(y = -2\).
+                        </p>
+                    </div>
+
+                    <!-- Part 4: k(x) = 2^(-x) -->
+                    <div class="graph-example">
+                        <h4>4. \(k(x) = 2^{-x}\)</h4>
+                        <div class="table-scroll">
+                            <table class="xy-table" aria-label="Table of x and k of x values for k of x equals 2 to the negative x, using x values negative 2 through 2">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">\(x\)</th>
+                                        <th scope="col">\(-2\)</th>
+                                        <th scope="col">\(-1\)</th>
+                                        <th scope="col">\(0\)</th>
+                                        <th scope="col">\(1\)</th>
+                                        <th scope="col">\(2\)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">\(k(x)\)</th>
+                                        <td>\(2^{+2}\)</td>
+                                        <td>\(2^{+1}\)</td>
+                                        <td>\(2^{0}\)</td>
+                                        <td>\(2^{-1}\)</td>
+                                        <td>\(2^{-2}\)</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">\(y\)</th>
+                                        <td>\(4\)</td>
+                                        <td>\(2\)</td>
+                                        <td>\(1\)</td>
+                                        <td>\(0.5\)</td>
+                                        <td>\(0.25\)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <img
+                            src="images/3_1_5.png"
+                            alt="A coordinate grid with x-axis ranging from negative 5 to 5 and y-axis ranging from approximately negative 1 to 5, with gridlines every 0.5 units. A blue curve represents k of x equals 2 to the negative x. The curve descends from the upper left, passing through plotted blue points at (negative 1, 2), (negative 0.5, 1), (0, 0.5), (0.5, 0.25), and (1, 0.125), then flattens toward the horizontal asymptote at y equals 0 as x increases to the right. A dashed red horizontal line marks the asymptote at y equals 0."
+                            style="max-width:100%; height:auto; display:block; margin: 1rem auto;"
+                        />
+                        <p>
+                            Notice how this graph looks very similar to the graph of our first
+                            example. Negative exponents and fractional bases have the same effect on
+                            the graph — they both reflect the graph over the \(y\)-axis.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </section><!-- end graphs section -->
+
+    <hr class="divider" role="separator" aria-hidden="true" />
+
+    <!-- ══════════════════════════════════════════
+         APPLICATIONS
+    ══════════════════════════════════════════ -->
+    <section aria-labelledby="applications-heading">
+        <h2 id="applications-heading">Applications</h2>
+
+        <p>
+            Now that we have the graphs of exponential functions worked out, let's look at how
+            exponential functions can be applied to the real world.
+        </p>
+        <p>
+            One of the more common or familiar applications using exponential functions are
+            exponential growth type examples. The one we are going to talk about specifically today
+            is used primarily in investments. The <strong>compound interest</strong> formula is used
+            in investing to calculate the future value of an account with so much invested at a
+            given interest rate, where the interest can be calculated multiple times a year.
+        </p>
+
+        <!-- Definition box: Compound Interest -->
+        <div class="definition-box" role="note" aria-label="Definition: Compound Interest formula with variables explained">
+            <h3>Compound Interest</h3>
+            <p class="big-formula">\(\displaystyle A = P\!\left(1 + \frac{r}{n}\right)^{nt}\)</p>
+            <p>Where:</p>
+            <ul>
+                <li>\(P\) — is the initial investment.</li>
+                <li>\(r\) — is the interest rate as a decimal.</li>
+                <li>\(n\) — is the number of times interest is compounded per year.</li>
+                <li>\(t\) — is the time in years.</li>
+            </ul>
+            <p>In this equation, \(A\) is the value in the account after \(t\) years.</p>
+        </div>
+
+        <p>
+            Since \(t\) is in the exponent's place, that makes this equation an exponential
+            function. With compound interest the amount in the account grows exponentially.
+        </p>
+
+        <!-- ── Compound Interest Example: Sally ── -->
+        <section class="example" aria-labelledby="example-3-1-3-heading">
+            <div class="example-problem">
+                <h3 id="example-3-1-3-heading">Example</h3>
+                <p>
+                    Sally inherited a large sum of money when her grandfather died, and is looking
+                    to invest the money into an account that compounds interest quarterly at a rate
+                    of 6.5%. If Sally inherited \(\$20{,}000\), how much money will she have in
+                    1, 5, 10, and \(t\) years?
+                </p>
+            </div>
+
+            <button class="solution-header"
+                    onclick="toggleExample(this)"
+                    aria-expanded="false"
+                    aria-controls="solution-3-1-3">
+                <span class="toggle-arrow">▼</span>
+                <span>Show Solution</span>
+            </button>
+
+            <div id="solution-3-1-3" class="example-content">
+                <div class="solution">
+                    <h4>Solution</h4>
+                    <p>
+                        First we will need to derive the formula using the pieces from the problem.
+                        Sally invests \(P = \$20{,}000\). The interest rate is 6.5%, so as a decimal
+                        \(r = 0.065\). Compounded quarterly means \(n = 4\). Putting it all together:
+                    </p>
+                    \[A = \$20{,}000\!\left(1 + \frac{0.065}{4}\right)^{4t}
+                       = \$20{,}000\,(1.01625)^{4t}\]
+                    <p>
+                        Don't forget to use order of operations — you must evaluate
+                        \((1.01625)^{4t}\) before multiplying by \(\$20{,}000\). Now let's evaluate
+                        the expression for each value of \(t\):
+                    </p>
+                    <div class="table-scroll">
+                        <table class="compound-table" aria-label="Compound interest results for Sally's 20000 dollar investment at 6.5 percent compounded quarterly, evaluated at t equals 1, 5, 10, and t years">
+                            <thead>
+                                <tr>
+                                    <th scope="col">\(t\)</th>
+                                    <th scope="col">Expression</th>
+                                    <th scope="col">\(A\)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>\(1\)</td>
+                                    <td>\(\$20{,}000\,(1.01625)^{4(1)} = \$20{,}000\,(1.01625)^{4}\)</td>
+                                    <td>\(\$21{,}332.03\)</td>
+                                </tr>
+                                <tr>
+                                    <td>\(5\)</td>
+                                    <td>\(\$20{,}000\,(1.01625)^{4(5)} = \$20{,}000\,(1.01625)^{20}\)</td>
+                                    <td>\(\$27{,}608.40\)</td>
+                                </tr>
+                                <tr>
+                                    <td>\(10\)</td>
+                                    <td>\(\$20{,}000\,(1.01625)^{4(10)} = \$20{,}000\,(1.01625)^{40}\)</td>
+                                    <td>\(\$38{,}111.18\)</td>
+                                </tr>
+                                <tr>
+                                    <td>\(t\)</td>
+                                    <td>\(\$20{,}000\,(1.01625)^{4t}\)</td>
+                                    <td>\(\$20{,}000\,(1.01625)^{4t}\)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p>
+                        Looking at the table we can see that the account does not increase by the
+                        same amount each year. It starts slowly at first and then jumps to larger
+                        amounts over more years. Our last row is a general expression so that we can
+                        find the value for any number of years.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <p>
+            Occasionally a person may want to calculate the interest placed into an account using
+            <strong>continuous compounding</strong>. In this type of equation, we calculate the
+            interest using
+        </p>
+        \[A = Pe^{rt}\]
+        <p>
+            instead. This formula brings us closer to an exponential growth model, which we will
+            talk about later in the chapter.
+        </p>
+        <p>
+            We saw in the graphs that sometimes our graphs will increase exponentially (such as
+            example 3) or they will decrease exponentially (as seen in examples 1 and 4). Both are
+            useful for application purposes.
+        </p>
+
+        <!-- ── Decay Example: Plutonium / Chernobyl ── -->
+        <section class="example" aria-labelledby="example-3-1-4-heading">
+            <div class="example-problem">
+                <h3 id="example-3-1-4-heading">Example</h3>
+                <p>
+                    A documentary revisited in 2019 the nuclear accident that occurred in Chernobyl
+                    in 1986. During the explosion, toxic radioactive gas such as plutonium was
+                    released into the air and spanned an area of over hundreds of square miles. The
+                    model
+                </p>
+                \[P = 10\!\left(\frac{1}{2}\right)^{\!\frac{t}{24{,}100}}\]
+                <p>
+                    represents the amount of plutonium that remains in the area after \(t\) years,
+                    given an initial amount of 10 pounds was leaked. Based on this information,
+                    sketch the graph of the amount of plutonium left after \(t\) years, and find
+                    how much plutonium would be left in the year 2025.
+                </p>
+            </div>
+
+            <button class="solution-header"
+                    onclick="toggleExample(this)"
+                    aria-expanded="false"
+                    aria-controls="solution-3-1-4">
+                <span class="toggle-arrow">▼</span>
+                <span>Show Solution</span>
+            </button>
+
+            <div id="solution-3-1-4" class="example-content">
+                <div class="solution">
+                    <h4>Solution</h4>
+                    <p>
+                        To graph this equation we create a table just as we did earlier in the
+                        chapter.
+                    </p>
+                    <div class="table-scroll">
+                        <table class="compound-table" aria-label="Table of plutonium remaining in pounds after 0, 10, 20, 30, and 40 years based on the decay model P equals 10 times one-half to the power of t divided by 24100">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Years (\(t\))</th>
+                                    <th scope="col">\(0\)</th>
+                                    <th scope="col">\(10\)</th>
+                                    <th scope="col">\(20\)</th>
+                                    <th scope="col">\(30\)</th>
+                                    <th scope="col">\(40\)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">Plutonium (lbs)</th>
+                                    <td>\(10\)</td>
+                                    <td>\(9.9971\)</td>
+                                    <td>\(9.9942\)</td>
+                                    <td>\(9.9914\)</td>
+                                    <td>\(9.9885\)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p>
+                        As we can see in the table, it is barely changing after 40 years, which
+                        means to graph it we'd need much larger numbers to see the whole picture.
+                        Using technology, the graph looks like:
+                    </p>
+
+                    <img
+                        src="images/3_1_6.png"
+                        alt="A coordinate grid with the x-axis labeled in years of decay, with tick marks at approximately 25000, 50000, 75000, and 100000 years, and the y-axis labeled Plutonium in pounds with tick marks at 1, 3, 5, 7, and 9. A blue curve begins at 10 pounds at year 0 and decreases in a smooth exponential decay, passing through values near 7 pounds at roughly 25000 years, 5 pounds at 24100 years (the half-life), and continuing to approach but never reach zero as the years increase. Yellow labels identify the x-axis as Years of decay and the y-axis as Plutonium in pounds."
+                        style="max-width:100%; height:auto; display:block; margin: 1rem auto;"
+                    />
+
+                    <p>
+                        From the graph we can see that it will take a very long time for the amount
+                        of plutonium to decay. But we also know that since this is an exponential
+                        function, there will actually never be zero plutonium in Chernobyl.
+                    </p>
+                    <p>
+                        To find the amount of plutonium left in the year 2025, we first identify
+                        how many years have passed since 1986:
+                    </p>
+                    \[2025 - 1986 = 39 \text{ years}\]
+                    <p>Then substitute \(t = 39\) into the equation:</p>
+                    \[P = 10\!\left(\frac{1}{2}\right)^{\!\frac{39}{24{,}100}}
+                       = 10\!\left(\frac{1}{2}\right)^{0.0016182573}
+                       = 10\,(0.9988789384)
+                       \approx 9.9888 \text{ lbs}\]
+
+                    <div class="note-box" role="note">
+                        This suggests that in the year 2025 there will still be approximately
+                        <strong>9.99 pounds</strong> of plutonium active in Chernobyl. Later in
+                        this chapter we will learn how to determine how long it would take until a
+                        specific amount of plutonium remained — even though we know there will
+                        always be some.
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </section><!-- end applications -->
+
+</section><!-- end #exponential-functions -->
+
+<!-- ══════════════════════════════════════════
+     EXERCISES
+══════════════════════════════════════════ -->
+<section class="exercises-section" role="region" aria-labelledby="exercises-3-1-heading">
+    <h2 id="exercises-3-1-heading" class="subsection-title">Exercises</h2>
+
+    <button class="exercises-header"
+            onclick="toggleExercises(this)"
+            aria-expanded="false"
+            aria-controls="exercises-3-1-content">
+        <span class="toggle-arrow">▼</span>
+        <span>Show Exercises</span>
+    </button>
+
+    <div id="exercises-3-1-content"
+         class="exercises-content"
+         role="region"
+         aria-labelledby="exercises-3-1-heading">
+        <p>Exercises to be added at a later date.</p>
+    </div>
+</section>
+
+</main>
+
+<!-- ── Toggle scripts ── -->
+<script>
+    function toggleExample(button) {
+        const content = button.nextElementSibling;
+        const arrow = button.querySelector('.toggle-arrow');
+
+        if (content.classList.contains('open')) {
+            content.classList.remove('open');
+            arrow.classList.remove('open');
+            button.querySelector('span:last-child').textContent = 'Show Solution';
+            button.setAttribute('aria-expanded', 'false');
+        } else {
+            content.classList.add('open');
+            arrow.classList.add('open');
+            button.querySelector('span:last-child').textContent = 'Hide Solution';
+            button.setAttribute('aria-expanded', 'true');
+        }
+    }
+
+    function toggleExercises(button) {
+        const content = document.getElementById(button.getAttribute('aria-controls'));
+        const arrow = button.querySelector('.toggle-arrow');
+
+        if (content.classList.contains('open')) {
+            content.classList.remove('open');
+            arrow.classList.remove('open');
+            button.querySelector('span:last-child').textContent = 'Show Exercises';
+            button.setAttribute('aria-expanded', 'false');
+        } else {
+            content.classList.add('open');
+            arrow.classList.add('open');
+            button.querySelector('span:last-child').textContent = 'Hide Exercises';
+            button.setAttribute('aria-expanded', 'true');
+        }
+    }
+</script>
+
+<!-- ── TOC loader ── -->
+<script>
+    fetch('toc.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('toc-placeholder').innerHTML = data;
+
+            const chapterButtons = document.querySelectorAll('.toc-chapter');
+            chapterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const expanded = button.getAttribute('aria-expanded') === 'true';
+                    button.setAttribute('aria-expanded', !expanded);
+                    const submenu = button.nextElementSibling;
+                    submenu.classList.toggle('open');
+                });
+            });
+        });
+</script>
+
+</body>
+</html>

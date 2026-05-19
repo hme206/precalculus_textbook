@@ -1,90 +1,423 @@
 <!DOCTYPE html>
-<html>
-    <head>
-      <!-- MathJax configuration -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CH 1.4 – Arithmetic Combinations &amp; Function Composition</title>
+
+    <!-- MathJax configuration -->
     <script>
         window.MathJax = {
             tex: {
                 inlineMath: [['\\(', '\\)'], ['$', '$']],
-                displayMath: [['\\[', '\\]'], ['$$', '$$']]
+                displayMath: [['\\[', '\\]'], ['$$', '$$']],
+                packages: {'[+]': ['cancel', 'color']},
+                macros: {
+                    cancel: ['\\enclose{horizontalstrike}{#1}', 1]
+                }
             },
             options: {
                 skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
             },
             loader: {
-                load: ['input/tex', 'output/chtml']
+                load: ['input/tex', 'output/chtml', '[tex]/cancel', '[tex]/color']
             }
         };
     </script>
-    <!-- MathJax loader -->
     <script id="MathJax-script" async
         src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
     </script>
 
-    <link rel="stylesheet" href="styles.css">
-    <!-- MathJax -->
-    <script>
-        window.MathJax = { /* ... */ };
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="styles.css" />
 
+    <style>
+        /* ── Collapsible exercises ── */
+        .exercises-section { margin: 25px 0; }
+
+        .exercises-header {
+            background-color: #33AB2B;
+            color: white;
+            padding: 12px 20px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+            border-radius: 4px;
+            transition: background-color 0.2s ease;
+            border: none;
+            font-size: 1em;
+            width: 100%;
+        }
+        .exercises-header:hover { background-color: #2a8922; }
+
+        .exercises-content {
+            display: none;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-top: none;
+            border-radius: 0 0 6px 6px;
+            padding: 20px;
+        }
+        .exercises-content.open { display: block; }
+
+        /* ── Utility text colours ── */
+        .blue-text  { color: #0066cc; }
+        .red-text   { color: #c0392b; font-weight: bold; }
+        .green-text { color: #33AB2B; font-weight: bold; }
+    </style>
 </head>
- <body> 
+<body>
+
 <div id="toc-placeholder"></div>
 
+<main class="container">
 
+<section id="arithmetic-combinations-composition" aria-labelledby="section-heading">
+    <h1 id="section-heading">CH 1.4 – Arithmetic Combinations &amp; Function Composition</h1>
 
+    <p>Many times in the world of functions we need to be able to put more than one function together. This can occur for a number of real-world applications. Let's pretend that you are looking to start a new business selling personalized 32 oz. tumblers. You've been told that the cost to produce \(x\) tumblers can be modeled using the function \(p(x) = x^2 + \$30\), and you've also been told that the cost to personalize each one is \(c(x) = 2x + \$150\). As an entrepreneur you need to know the total cost for the entire tumbler, that means you'd need to put together the cost to make the tumblers and the cost to personalize them. In this case we'd add the two equations together using what we call <strong class="blue-text">arithmetic combinations</strong>.</p>
 
-            
+    <!-- ==================== ARITHMETIC COMBINATIONS ==================== -->
+    <section aria-labelledby="arithmetic-combinations-heading">
+        <h2 id="arithmetic-combinations-heading">Arithmetic Combinations</h2>
+
+        <div class="definition-box">
+            <h3>Arithmetic Combinations</h3>
+            <p>Allow \(f\) and \(g\) to be two functions, such that their domains overlap each other.</p>
+            <ol>
+                <li><strong>Sum:</strong> \((f+g)(x) = f(x) + g(x)\)</li>
+                <li><strong>Difference:</strong> \((f-g)(x) = f(x) - g(x)\)</li>
+                <li><strong>Product:</strong> \((fg)(x) = f(x) \cdot g(x)\)</li>
+                <li><strong>Quotient:</strong> \(\left(\dfrac{f}{g}\right)(x) = \dfrac{f(x)}{g(x)}\), where \(g(x) \neq 0\)</li>
+            </ol>
+        </div>
+
+        <hr class="divider" role="separator" aria-hidden="true" />
+
+        <!-- ── Example: Arithmetic Combinations ── -->
+        <section class="example" aria-labelledby="example-1-4-1-heading">
+            <div class="example-problem">
+                <h3 id="example-1-4-1-heading">Example</h3>
+                <p>Using \(f(x) = x + 2\) and \(g(x) = x^2 + x\), find the arithmetic combinations below:</p>
+                <p>
+                    a.) \((f+g)(x)\)
+                    <span style="display:inline-block; width:2rem;"></span>
+                    b.) \((fg)(3)\)
+                    <span style="display:inline-block; width:2rem;"></span>
+                    c.) \((f-g)(2s)\)
+                </p>
+            </div>
+
+            <button class="solution-header"
+                    onclick="toggleExample(this)"
+                    aria-expanded="false"
+                    aria-controls="solution-1-4-1">
+                <span class="toggle-arrow">▼</span>
+                <span>Show Solution</span>
+            </button>
+
+            <div id="solution-1-4-1" class="example-content">
+                <div class="solution">
+                    <h4>Solution</h4>
+
+                    <p><strong>a.)</strong></p>
+                    \[
+                        \begin{aligned}
+                            (f+g)(x) &= f(x) + g(x) \\
+                                     &= (x+2) + (x^2+x) \\
+                                     &= x + 2 + x^2 + x \\
+                                     &= x^2 + 2x + 2
+                        \end{aligned}
+                    \]
+
+                    <hr class="divider" role="separator" aria-hidden="true" />
+
+                    <p><strong>b.)</strong></p>
+                    \[
+                        \begin{aligned}
+                            (fg)(3) &= f(3) \cdot g(3) \\
+                                    &= (3+2)(3^2+3) \\
+                                    &= 5 \cdot 12 \\
+                                    &= 60
+                        \end{aligned}
+                    \]
+
+                    <hr class="divider" role="separator" aria-hidden="true" />
+
+                    <p><strong>c.)</strong></p>
+                    \[
+                        \begin{aligned}
+                            (f-g)(2s) &= f(2s) - g(2s) \\
+                                      &= (2s+2) - \bigl((2s)^2 + 2s\bigr) \\
+                                      &= 2s + 2 - 4s^2 - 2s \\
+                                      &= -4s^2 + 2
+                        \end{aligned}
+                    \]
+                </div>
+            </div>
+        </section><!-- end example 1-4-1 -->
+
+    </section><!-- end Arithmetic Combinations -->
+
+    <hr class="divider" role="separator" aria-hidden="true" />
+
+    <!-- ==================== FUNCTION COMPOSITIONS ==================== -->
+    <section aria-labelledby="function-compositions-heading">
+        <h2 id="function-compositions-heading">Function Compositions</h2>
+
+        <p>Another way to put two functions together is by making a <strong class="blue-text">composition</strong> of two functions. In this type of operation you are placing one function into another function to make one function. Compositions of functions can be denoted by using a small circle that looks like a multiplication symbol "\(\circ\)" and can look like \((f \circ g)(x)\), which means <em>"f composed with g"</em>.</p>
+
+        <div class="definition-box">
+            <h3>Compositions</h3>
+            <p>The composition of two functions \(f\) and \(g\) is:</p>
+            <p>\[(f \circ g)(x) = f(g(x))\]</p>
+            <p>The domain of the composition of \(f\) and \(g\) is the set of all \(x\) values in the domain of \(g\) such that \(g(x)\) is in the domain of \(f\).</p>
+        </div>
+
+        <p>An example for the domain of \((f \circ g)(x)\) would be if the domain of \(g(x) = \{1,2,3,4,5\}\) and the domain of \(f(x) = \{3,4,5,6\}\), then the domain of the composition would be \(\{3,4,5\}\) — only the values that \(g\) can accept <em>and</em> whose outputs land inside the domain of \(f\). Now, clearly we are dealing with continuous functions, meaning that our domains are intervals instead of sets. But this gives you an idea of how it works.</p>
+
+        <hr class="divider" role="separator" aria-hidden="true" />
+
+        <!-- ── Example: Function Compositions ── -->
+        <section class="example" aria-labelledby="example-1-4-2-heading">
+            <div class="example-problem">
+                <h3 id="example-1-4-2-heading">Example</h3>
+                <p>Allow \(f(x) = 2x + 3\) and \(g(x) = x^2 - 3\). Find the following compositions below, then identify the domain of the composite function.</p>
+                <p>
+                    a.) \((f \circ g)(x)\)
+                    <span style="display:inline-block; width:2rem;"></span>
+                    b.) \(g(f(x))\)
+                    <span style="display:inline-block; width:2rem;"></span>
+                    c.) \((f \circ f)(3)\)
+                </p>
+            </div>
+
+            <button class="solution-header"
+                    onclick="toggleExample(this)"
+                    aria-expanded="false"
+                    aria-controls="solution-1-4-2">
+                <span class="toggle-arrow">▼</span>
+                <span>Show Solution</span>
+            </button>
+
+            <div id="solution-1-4-2" class="example-content">
+                <div class="solution">
+                    <h4>Solution</h4>
+
+                    <p><strong>a.)</strong> To take the composition of \((f \circ g)(x)\), you take the function of \(g(x)\) and plug it into \(f(x)\) everywhere you see an \(x\).</p>
+                    \[
+                        \begin{aligned}
+                            (f \circ g)(x) &= f\!\left(\textcolor{red}{g(x)}\right) \\
+                                           &= f\!\left(\textcolor{red}{x^2-3}\right) \\
+                                           &= 2\!\left(\textcolor{red}{x^2-3}\right)+3 \\
+                                           &= 2x^2 - 6 + 3 \\
+                                           &= 2x^2 - 3
+                        \end{aligned}
+                    \]
+                    <p>To identify the domain of this composite function, we know that \(f(x)\) is a linear function with domain \((-\infty,\infty)\), and \(g(x)\) is a quadratic function which also has a domain of \((-\infty,\infty)\). Since both functions accept all real numbers, the domain of the composite function is \((-\infty,\infty)\).</p>
+
+                    <hr class="divider" role="separator" aria-hidden="true" />
+
+                    <p><strong>b.)</strong> To take the composition of \(g(f(x))\), you take the function of \(f(x)\) and plug it into \(g(x)\) everywhere you see an \(x\).</p>
+                    \[
+                        \begin{aligned}
+                            g(f(x)) &= g\!\left(\textcolor{red}{f(x)}\right) \\
+                                    &= g\!\left(\textcolor{red}{2x+3}\right) \\
+                                    &= \left(\textcolor{red}{2x+3}\right)^2 - 3 \\
+                                    &= (4x^2 + 12x + 9) - 3 \\
+                                    &= 4x^2 + 12x + 6
+                        \end{aligned}
+                    \]
+                    <p>Once again, to identify the domain of this composite function, we know that \(f(x)\) is a linear function with domain \((-\infty,\infty)\), and \(g(x)\) is a quadratic function which also has a domain of \((-\infty,\infty)\). The domain of the composite function is therefore \((-\infty,\infty)\).</p>
+
+                    <hr class="divider" role="separator" aria-hidden="true" />
+
+                    <p><strong>c.)</strong> To take the composition of \((f \circ f)(3)\), you take the function of \(f(3)\) and plug it into \(f(x)\) everywhere you see an \(x\). That means you first need to find \(f(3)\).</p>
+                    \[
+                        \begin{aligned}
+                            f(3) &= 2(\textcolor{red}{3}) + 3 \\
+                                 &= 6 + 3 \\
+                                 &= 9
+                        \end{aligned}
+                    \]
+                    <p>Now plug that value into \(f(x)\), since this was \((f \circ f)(3)\).</p>
+                    \[
+                        \begin{aligned}
+                            (f \circ f)(3) &= f\!\left(\textcolor{red}{f(3)}\right) \\
+                                           &= f\!\left(\textcolor{red}{9}\right) \\
+                                           &= 2(\textcolor{red}{9}) + 3 \\
+                                           &= 18 + 3 \\
+                                           &= 21
+                        \end{aligned}
+                    \]
+                    <p>For this composition we ended up with a single value rather than a function, which means there is no function domain to identify.</p>
+                </div>
+            </div>
+        </section><!-- end example 1-4-2 -->
+
+    </section><!-- end Function Compositions -->
+
+    <hr class="divider" role="separator" aria-hidden="true" />
+
+    <!-- ==================== THE DIFFERENCE QUOTIENT ==================== -->
+    <section aria-labelledby="difference-quotient-heading">
+        <h2 id="difference-quotient-heading">The Difference Quotient</h2>
+
+        <p>The <strong class="blue-text">difference quotient</strong> is an extremely important component of calculus. It is essentially the process we use to find something called a derivative. But don't worry — we aren't doing derivatives in this course. In short, the derivative of a function gives you the slope of a tangent line at a given point.</p>
+
+        <div class="definition-box">
+            <h3>Difference Quotient</h3>
+            <p>\[\frac{f(x+h)-f(x)}{h}, \quad \text{where } h \neq 0\]</p>
+        </div>
+
+        <hr class="divider" role="separator" aria-hidden="true" />
+
+        <!-- ── Example: Difference Quotient ── -->
+        <section class="example" aria-labelledby="example-1-4-3-heading">
+            <div class="example-problem">
+                <h3 id="example-1-4-3-heading">Example</h3>
+                <p>a.) Use the difference quotient to find the slope of the tangent line of \(f(x) = 2x + 3\).</p>
+                <p>b.) Use the difference quotient to find the slope of the tangent line of \(f(x) = x^2 - 8x + 7\).</p>
+            </div>
+
+            <button class="solution-header"
+                    onclick="toggleExample(this)"
+                    aria-expanded="false"
+                    aria-controls="solution-1-4-3">
+                <span class="toggle-arrow">▼</span>
+                <span>Show Solution</span>
+            </button>
+
+            <div id="solution-1-4-3" class="example-content">
+                <div class="solution">
+                    <h4>Solution</h4>
+
+                    <p><strong>a.)</strong> This is essentially a multi-part combination. One way to make this slightly less confusing is to find \(f(x+h)\) first by substituting \((x+h)\) into \(f(x)\) everywhere you see an \(x\).</p>
+                    \[
+                        \begin{aligned}
+                            f(x+h) &= 2(x+h) + 3 \\
+                                   &= 2x + 2h + 3
+                        \end{aligned}
+                    \]
+                    <p>Next, put what you just found and \(f(x)\) into the difference quotient.</p>
+                    \[
+                        \begin{aligned}
+                            \frac{f(x+h)-f(x)}{h}
+                                &= \frac{(2x+2h+3)-(2x+3)}{h} \\
+                                &= \frac{2x+2h+3-2x-3}{h} \\
+                                &= \frac{2h}{h} \\
+                                &= 2
+                        \end{aligned}
+                    \]
+                    <p>As we can see, the slope of the line is two. This should have been something we recognized before we even applied the difference quotient — when a linear equation is written in slope-intercept form, the coefficient of \(x\) is always the slope.</p>
+
+                    <hr class="divider" role="separator" aria-hidden="true" />
+
+                    <p><strong>b.)</strong> This one is a bit trickier, as we aren't dealing with a linear function but a quadratic. We still take the same steps. Start by finding \(f(x+h)\).</p>
+                    \[
+                        \begin{aligned}
+                            f(x+h) &= (x+h)^2 - 8(x+h) + 7 \\
+                                   &= x^2 + 2xh + h^2 - 8x - 8h + 7
+                        \end{aligned}
+                    \]
+                    <p>Now plug that into the difference quotient.</p>
+                    \[
+                        \begin{aligned}
+                            \frac{f(x+h)-f(x)}{h}
+                                &= \frac{(x^2+2xh+h^2-8x-8h+7)-(x^2-8x+7)}{h} \\
+                                &= \frac{x^2+2xh+h^2-8x-8h+7-x^2+8x-7}{h} \\
+                                &= \frac{2xh+h^2-8h}{h} \\
+                                &= \frac{h(2x-8+h)}{h} \\
+                                &= 2x - 8 + h, \quad h \neq 0
+                        \end{aligned}
+                    \]
+                    <p>Notice how the final answer still contains an \(h\) and is not a single number. That is because the value of the slope depends on where you are located on the parabola. This is a topic you will explore further in calculus.</p>
+                </div>
+            </div>
+        </section><!-- end example 1-4-3 -->
+
+    </section><!-- end Difference Quotient -->
+
+</section><!-- end #arithmetic-combinations-composition -->
+
+<!-- ==================== EXERCISES ==================== -->
+<section class="exercises-section" aria-labelledby="exercises-1-4-heading">
+    <h2 id="exercises-1-4-heading" class="subsection-title">Exercises</h2>
+
+    <button class="exercises-header"
+            onclick="toggleExercises(this)"
+            aria-expanded="false"
+            aria-controls="exercises-1-4-content">
+        <span class="toggle-arrow">▼</span>
+        <span>Show Exercises</span>
+    </button>
+
+    <div id="exercises-1-4-content"
+         class="exercises-content"
+         role="region"
+         aria-labelledby="exercises-1-4-heading">
+        <p>Exercises to be added at a later date.</p>
+    </div>
+</section>
+
+</main>
+
+<!-- Toggle scripts -->
 <script>
-        function toggleExample(button) {
-            const content = button.nextElementSibling;
-            const arrow = button.querySelector('.toggle-arrow');
-            
-            if (content.classList.contains('open')) {
-                content.classList.remove('open');
-                arrow.classList.remove('open');
-                button.querySelector('span:last-child').textContent = 'Show Solution';
-            } else {
-                content.classList.add('open');
-                arrow.classList.add('open');
-                button.querySelector('span:last-child').textContent = 'Hide Solution';
-            }
+    function toggleExample(button) {
+        const content = button.nextElementSibling;
+        const arrow = button.querySelector('.toggle-arrow');
+
+        if (content.classList.contains('open')) {
+            content.classList.remove('open');
+            arrow.classList.remove('open');
+            button.querySelector('span:last-child').textContent = 'Show Solution';
+            button.setAttribute('aria-expanded', 'false');
+        } else {
+            content.classList.add('open');
+            arrow.classList.add('open');
+            button.querySelector('span:last-child').textContent = 'Hide Solution';
+            button.setAttribute('aria-expanded', 'true');
         }
-    </script>
+    }
 
-    <script>
-        const chapterButtons = document.querySelectorAll(".toc-chapter");
+    function toggleExercises(button) {
+        const content = document.getElementById(button.getAttribute('aria-controls'));
+        const arrow = button.querySelector('.toggle-arrow');
 
-        chapterButtons.forEach(button => {
-            button.addEventListener("click", () => {
-                const expanded = button.getAttribute("aria-expanded") === "true";
-                button.setAttribute("aria-expanded", !expanded);
+        if (content.classList.contains('open')) {
+            content.classList.remove('open');
+            arrow.classList.remove('open');
+            button.querySelector('span:last-child').textContent = 'Show Exercises';
+            button.setAttribute('aria-expanded', 'false');
+        } else {
+            content.classList.add('open');
+            arrow.classList.add('open');
+            button.querySelector('span:last-child').textContent = 'Hide Exercises';
+            button.setAttribute('aria-expanded', 'true');
+        }
+    }
+</script>
 
-                const submenu = button.nextElementSibling;
-                submenu.classList.toggle("open");
-            });
-        });
-    </script>
-                  <script>
-        // Load TOC
-        fetch('toc.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('toc-placeholder').innerHTML = data;
-                
-                // Initialize chapter buttons
-                const chapterButtons = document.querySelectorAll(".toc-chapter");
-                chapterButtons.forEach(button => {
-                    button.addEventListener("click", () => {
-                        const expanded = button.getAttribute("aria-expanded") === "true";
-                        button.setAttribute("aria-expanded", !expanded);
-                        const submenu = button.nextElementSibling;
-                        submenu.classList.toggle("open");
-                    });
+<!-- TOC loader -->
+<script>
+    fetch('toc.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('toc-placeholder').innerHTML = data;
+
+            const chapterButtons = document.querySelectorAll('.toc-chapter');
+            chapterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const expanded = button.getAttribute('aria-expanded') === 'true';
+                    button.setAttribute('aria-expanded', !expanded);
+                    const submenu = button.nextElementSibling;
+                    submenu.classList.toggle('open');
                 });
             });
-    </script>
- 
+        });
+</script>
+
 </body>
 </html>

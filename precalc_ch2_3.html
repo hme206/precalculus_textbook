@@ -1,0 +1,1182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CH 2.3 – Zeros of Polynomial Functions</title>
+
+    <!-- MathJax configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)'], ['$', '$']],
+                displayMath: [['\\[', '\\]'], ['$$', '$$']],
+                packages: {'[+]': ['cancel', 'color']},
+                macros: {
+                    cancel: ['\\enclose{horizontalstrike}{#1}', 1]
+                }
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            },
+            loader: {
+                load: ['input/tex', 'output/chtml', '[tex]/cancel', '[tex]/color']
+            }
+        };
+    </script>
+    <script id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+
+    <link rel="stylesheet" href="styles.css" />
+
+    <style>
+        /* ── Collapsible exercises ── */
+        .exercises-section { margin: 25px 0; }
+
+        .exercises-header {
+            background-color: #33AB2B;
+            color: white;
+            padding: 12px 20px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+            border-radius: 4px;
+            transition: background-color 0.2s ease;
+            border: none;
+            font-size: 1em;
+            width: 100%;
+        }
+        .exercises-header:hover { background-color: #2a8922; }
+
+        .exercises-content {
+            display: none;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-top: none;
+            border-radius: 0 0 6px 6px;
+            padding: 20px;
+        }
+        .exercises-content.open { display: block; }
+
+        /* ── Utility text colours ── */
+        .blue-text  { color: #0066cc; }
+        .red-text   { color: #c0392b; font-weight: bold; }
+        .green-text { color: #33AB2B; font-weight: bold; }
+
+        /* ── Step labels ── */
+        .step-label {
+            color: #0066cc;
+            font-weight: bold;
+        }
+
+        /* ── Centered display math ── */
+        .display-math {
+            text-align: center;
+            margin: 1rem 0;
+        }
+
+        /* ── Synthetic / long division layout ── */
+        .division-wrap {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: start;
+            margin: 1.5rem 0;
+        }
+        .division-wrap.single {
+            grid-template-columns: 1fr;
+        }
+        @media (max-width: 640px) {
+            .division-wrap { grid-template-columns: 1fr; }
+        }
+
+        .division-note {
+            color: #c0392b;
+            font-weight: bold;
+            font-style: italic;
+            line-height: 1.6;
+            padding: 0.5rem 0;
+        }
+
+        /* Synthetic division table */
+        .syn-div {
+            border-collapse: collapse;
+            margin: 0.5rem auto;
+            font-size: 1em;
+        }
+        .syn-div td {
+            padding: 6px 14px;
+            text-align: center;
+            border: none;
+            min-width: 2.5rem;
+        }
+        .syn-div .coeff-row td {
+            border-bottom: 2px solid #333;
+        }
+        .syn-div .divisor {
+            border-right: 2px solid #333;
+            font-weight: bold;
+        }
+        .syn-div .result-row td {
+            color: #0066cc;
+            font-weight: bold;
+        }
+        .syn-div .mult-row td {
+            color: #c0392b;
+            font-size: 0.9em;
+        }
+
+        /* Algorithm result display */
+        .algorithm-box {
+            background: #f0f8ed;
+            border-left: 4px solid #33AB2B;
+            padding: 1rem 1.2rem;
+            margin: 1rem 0;
+            border-radius: 0 6px 6px 0;
+        }
+
+        /* Center text utility */
+        .center-text {
+            text-align: center;
+            margin: 1rem 0;
+        }
+
+        /* ── Descartes / bound tables ── */
+        .rule-table {
+            border-collapse: collapse;
+            margin: 1rem auto;
+            min-width: 260px;
+        }
+        .rule-table td,
+        .rule-table th {
+            border: 1px solid #ccc;
+            padding: 8px 18px;
+            text-align: center;
+        }
+        .rule-table thead tr {
+            background-color: #f0f8ed;
+        }
+        .rule-table .pos-row td { color: #0066cc; font-weight: bold; }
+        .rule-table .neg-row td { color: #c0392b; font-weight: bold; }
+        .rule-table .imag-row td { color: #333; }
+        .rule-table .total-row td { font-weight: bold; border-top: 2px solid #333; }
+
+        /* Step heading style */
+        .step-heading {
+            color: #0066cc;
+            font-weight: bold;
+            font-size: 1em;
+            margin-top: 1.2rem;
+            margin-bottom: 0.4rem;
+        }
+
+        /* p&q table */
+        .pq-table {
+            border-collapse: collapse;
+            margin: 0.8rem auto;
+        }
+        .pq-table td, .pq-table th {
+            border: 1px solid #ccc;
+            padding: 8px 18px;
+            text-align: center;
+        }
+        .pq-table th {
+            background-color: #f0f8ed;
+            font-weight: bold;
+        }
+
+        /* sign-change inline highlight */
+        .sign-plus  { color: #0066cc; font-weight: bold; }
+        .sign-minus { color: #c0392b; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div id="toc-placeholder"></div>
+
+<main class="container">
+
+<section id="zeros-polynomial-functions" aria-labelledby="section-heading">
+    <h1 id="section-heading">CH 2.3 – Zeros of Polynomial Functions</h1>
+
+    <p>
+        Thus far we've looked at how to write a polynomial given its factors or zeros, and how to determine if
+        something is a zero or factor of a given polynomial. Next we are going to learn how to find all zeros of
+        a polynomial and how to completely factor one. This is going to require the information that we just went
+        over in the previous chapters as well as a few new rules.
+    </p>
+
+    <p>
+        Carl Friedrich Gauss is a famous mathematician known for many different theorems and rules throughout
+        mathematics. The <strong class="blue-text">Fundamental Theorem of Algebra</strong> was one of them. He
+        was one of the first to prove this theorem to be true.
+    </p>
+
+    <!-- ── Definition Box: Fundamental Theorem of Algebra ── -->
+    <div class="definition-box" role="note" aria-label="Definition: The Fundamental Theorem of Algebra">
+        <h3>The Fundamental Theorem of Algebra</h3>
+        <p>
+            If \(f(x)\) is a polynomial of degree \(n\), where \(n > 0\), then \(f\) has at least one zero in
+            the complex number system.
+        </p>
+    </div>
+
+    <p>
+        More precisely what this means is that in the complex number system a polynomial of degree \(n\) has
+        exactly \(n\) zeros. Now keep in mind that just because we are in the complex number system doesn't mean
+        that we can't have a real number as well. Technically speaking the zero of \(x = 4\) would be the
+        imaginary number \(x = 4 + 0i\) where the imaginary part of the number is zero. Remember that all
+        complex numbers have both a real part \((a)\) and an imaginary part \((bi)\).
+    </p>
+
+    <p>
+        With the use of the Fundamental Theorem of Algebra and the equivalence of factors and zeros we obtain
+        the <strong class="blue-text">Linear Factorization Theorem</strong>.
+    </p>
+
+    <!-- ── Definition Box: Linear Factorization Theorem ── -->
+    <div class="definition-box" role="note" aria-label="Definition: The Linear Factorization Theorem">
+        <h3>The Linear Factorization Theorem</h3>
+        <p>
+            If \(f(x)\) is a polynomial of degree \(n\), where \(n > 0\), then \(f(x)\) has exactly \(n\)
+            linear factors:
+        </p>
+        <div class="display-math">
+            \[f(x) = a_n(x - c_1)(x - c_2) \cdots (x - c_n)\]
+        </div>
+        <p>where \(c_1, c_2, \ldots, c_n\) are all complex numbers.</p>
+    </div>
+
+    <p>
+        Both of these theorems are great because they tell you that zeros exist in all polynomials. What they
+        don't tell you is how to actually find the zeros of a polynomial. When it comes to finding zeros of a
+        polynomial there are a number of other tests and rules that can be applied. Frequently when trying to
+        determine the zeros of a polynomial it is helpful to know how many of each type it could possibly have.
+        For example if a polynomial only has negative zeros you don't want to be looking at positive zeros.
+        <strong class="blue-text">Descartes' Rule of Signs</strong> tells us how many positive, negative, and
+        imaginary zeros are possible in a given polynomial based on the sign variations within the polynomial.
+    </p>
+
+    <!-- ── Definition Box: Descartes' Rule of Signs ── -->
+    <div class="definition-box" role="note" aria-label="Definition: Descartes' Rule of Signs">
+        <h3>Descartes' Rule of Signs</h3>
+        <p>Allow \(f(x)\) to be a polynomial with real coefficients.</p>
+        <ol>
+            <li>
+                The number of <strong class="blue-text">positive real zeros</strong> of \(f\) is either equal
+                to the number of variations in sign changes of \(f(x)\) or less than that number by increments
+                of two.
+            </li>
+            <li>
+                The number of <strong class="red-text">negative real zeros</strong> of \(f\) is either equal
+                to the number of variations in sign changes of \(f(-x)\) or less than that number by increments
+                of two.
+            </li>
+        </ol>
+    </div>
+
+    <p>
+        When using Descartes' Rule it is important to remember that a polynomial will have a total of \(n\)
+        zeros. That means if \(n = 5\) and you found that it had two positive zeros and one negative zero, that
+        means you would have possibly two imaginary zeros to make the total five. Your total number of zeros
+        still has to equal \(n\).
+    </p>
+
+    <hr class="divider" role="separator" aria-hidden="true" />
+
+    <!-- ══════════════════════════════════════════
+         DESCARTES' RULE EXAMPLE
+    ══════════════════════════════════════════ -->
+    <section aria-labelledby="descartes-example-heading">
+        <h2 id="descartes-example-heading">Descartes' Rule of Signs</h2>
+
+        <!-- ── Example: Descartes' Rule ── -->
+        <section class="example" aria-labelledby="example-2-3-1">
+            <div class="example-problem">
+                <h3 id="example-2-3-1">Example</h3>
+                <p>
+                    Determine the possible numbers of positive, negative, and imaginary zeros that
+                    \(f(x) = 3x^3 - 5x^2 + 6x - 4\) could have.
+                </p>
+            </div>
+
+            <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-2-3-1">
+                <span class="toggle-arrow">▼</span>
+                <span>Show Solution</span>
+            </button>
+
+            <div id="solution-2-3-1" class="example-content">
+                <div class="solution">
+                    <h4>Solution</h4>
+
+                    <p>
+                        We first need to look at the sign changes in \(f(x)\) to determine the possible number
+                        of <strong class="blue-text">positive real zeros</strong>.
+                    </p>
+                    <div class="display-math">
+                        \[f(x) = \textcolor{blue}{+}3x^3 \textcolor{red}{-} 5x^2 \textcolor{blue}{+} 6x \textcolor{red}{-} 4\]
+                    </div>
+                    <p>
+                        As we can see above the signs change from <span class="sign-plus">+</span> to
+                        <span class="sign-minus">−</span> a total of three times, that means that our polynomial
+                        could have either three positive real zeros or \((3 - 2 = 1)\) one positive real zero.
+                    </p>
+
+                    <p>
+                        Next to determine the number of <strong class="red-text">negative real zeros</strong>
+                        we need to first evaluate \(f(-x)\).
+                    </p>
+                    \[
+                        \begin{aligned}
+                            f(-x) &= 3(-x)^3 - 5(-x)^2 + 6(-x) - 4 \\
+                                  &= 3(-x^3) - 5(x^2) - 6x - 4 \\
+                                  &= \textcolor{red}{-}3x^3 \textcolor{red}{-} 5x^2 \textcolor{red}{-} 6x \textcolor{red}{-} 4
+                        \end{aligned}
+                    \]
+                    <p>
+                        Notice how the sign does not change at all in \(f(-x)\); they are all negative. This
+                        means that there are no negative real zeros in this polynomial.
+                    </p>
+
+                    <p>If we organized this information into a table we'd see that:</p>
+
+                    <table class="rule-table" aria-label="Descartes Rule sign table for 3x cubed minus 5x squared plus 6x minus 4">
+                        <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col"></th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="pos-row">
+                                <td>Positive</td>
+                                <td>3</td>
+                                <td>1</td>
+                            </tr>
+                            <tr class="neg-row">
+                                <td>Negative</td>
+                                <td>0</td>
+                                <td>0</td>
+                            </tr>
+                            <tr class="imag-row">
+                                <td>Imaginary</td>
+                                <td>0</td>
+                                <td>2</td>
+                            </tr>
+                            <tr class="total-row">
+                                <td>Total</td>
+                                <td>3</td>
+                                <td>3</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <p>
+                        Notice how in each column we end up with three total zeros. This table helps us to
+                        put the type of zeros that \(f(x)\) could have into a better setup. From looking at
+                        this we know that when trying to find zeros we don't need to try any negative numbers
+                        since this polynomial will have no negative real numbers.
+                    </p>
+
+                    <p>
+                        Sometimes it is not that straightforward. For example, if \(f(x)\) is of degree
+                        \(n = 7\) and you find using Descartes' Rule that \(f(x)\) could have at most three
+                        positive and at most two negative real zeros, then our table would look something
+                        like this:
+                    </p>
+
+                    <table class="rule-table" aria-label="Descartes Rule sign table for a degree-7 polynomial with at most 3 positive and 2 negative real zeros, showing all combinations">
+                        <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col"></th>
+                                <th scope="col"></th>
+                                <th scope="col"></th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="pos-row">
+                                <td>Positive</td>
+                                <td>3</td>
+                                <td>1</td>
+                                <td>3</td>
+                                <td>1</td>
+                            </tr>
+                            <tr class="neg-row">
+                                <td>Negative</td>
+                                <td>2</td>
+                                <td>2</td>
+                                <td>0</td>
+                                <td>0</td>
+                            </tr>
+                            <tr class="imag-row">
+                                <td>Imaginary</td>
+                                <td>2</td>
+                                <td>4</td>
+                                <td>4</td>
+                                <td>6</td>
+                            </tr>
+                            <tr class="total-row">
+                                <td>Total</td>
+                                <td>7</td>
+                                <td>7</td>
+                                <td>7</td>
+                                <td>7</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <p>
+                        We have to make sure to account for all the combinations of numbers that are possible.
+                        As you can see our bottom row still all adds up to seven since that was how many zeros
+                        this polynomial would have. It is also important to remember that imaginary zeros always
+                        come in pairs, so they should always have an even number.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </section><!-- end descartes section -->
+
+    <hr class="divider" role="separator" aria-hidden="true" />
+
+    <!-- ══════════════════════════════════════════
+         RATIONAL ROOT THEOREM
+    ══════════════════════════════════════════ -->
+    <section aria-labelledby="rational-root-heading">
+        <h2 id="rational-root-heading">The Rational Root Theorem</h2>
+
+        <p>
+            This rule can come in very handy especially when using the
+            <strong class="blue-text">Rational Root Theorem</strong>, also sometimes called the
+            <strong class="blue-text">Rational Zero Test</strong>. It all really just depends on the author
+            and the book as to which wording they prefer. The Rational Root Theorem is helpful when solving or
+            factoring polynomials because it helps identify possible rational zeros that satisfy the polynomial.
+            It doesn't give us the exact zeros but it helps us to narrow them down. Then if you combine it with
+            Descartes' Rule, it helps to narrow down the possible rational zeros even more. This sometimes is
+            really nice, because the list of possible rational zeros the Rational Root Theorem helps you find
+            can be extensive.
+        </p>
+
+        <!-- ── Definition Box: Rational Root Theorem ── -->
+        <div class="definition-box" role="note" aria-label="Definition: The Rational Root Theorem">
+            <h3>The Rational Root Theorem</h3>
+            <p>
+                Allow \(f(x)\) to be a polynomial with real coefficients, where \(a_n\) is the leading
+                coefficient and \(a_0\) is the constant term, and they are both integers. Every rational
+                zero of \(f\) has the form:
+            </p>
+            <div class="display-math">
+                \[\text{Rational zero} = \frac{p}{q}\]
+            </div>
+            <p>where \(p\) and \(q\) have no common factors other than 1, and:</p>
+            <ul>
+                <li>\(p =\) a factor of the constant term \((a_0)\)</li>
+                <li>\(q =\) a factor of the leading coefficient \((a_n)\)</li>
+            </ul>
+        </div>
+
+        <!-- ── Example: Rational Root Theorem ── -->
+        <section class="example" aria-labelledby="example-2-3-2">
+            <div class="example-problem">
+                <h3 id="example-2-3-2">Example</h3>
+                <p>
+                    Use the Rational Root Theorem to find all possible rational zeros of
+                    \(f(x) = 2x^3 + 3x^2 - 8x + 3\).
+                </p>
+            </div>
+
+            <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-2-3-2">
+                <span class="toggle-arrow">▼</span>
+                <span>Show Solution</span>
+            </button>
+
+            <div id="solution-2-3-2" class="example-content">
+                <div class="solution">
+                    <h4>Solution</h4>
+
+                    <p>
+                        To identify all of the <em>possible</em> rational zeros of \(f(x)\) we first need to
+                        identify \(a_n\) and \(a_0\).
+                    </p>
+
+                    <div class="center-text">
+                        <p>
+                            \(a_n = 2\) &emsp;&emsp;&emsp; Factors of \(a_n\), \(q = \pm 1, \pm 2\)
+                        </p>
+                        <p>
+                            \(a_0 = 3\) &emsp;&emsp;&emsp; Factors of \(a_0\), \(p = \pm 1, \pm 3\)
+                        </p>
+                    </div>
+
+                    <p>
+                        To find the possible zeros you could create a table to help you organize the
+                        information, but it isn't necessary.
+                    </p>
+
+                    <table class="pq-table" aria-label="p over q table showing possible rational zeros of 2x cubed plus 3x squared minus 8x plus 3">
+                        <thead>
+                            <tr>
+                                <th scope="col">\(\dfrac{p}{q}\)</th>
+                                <th scope="col">\(\pm 1\)</th>
+                                <th scope="col">\(\pm 3\)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>\(\pm 1\)</td>
+                                <td>\(\pm 1\)</td>
+                                <td>\(\pm 3\)</td>
+                            </tr>
+                            <tr>
+                                <td>\(\pm 2\)</td>
+                                <td>\(\pm \dfrac{1}{2}\)</td>
+                                <td>\(\pm \dfrac{3}{2}\)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <p>This tells us that our possible rational zeros of \(f(x)\) are:</p>
+                    <div class="display-math">
+                        \[\frac{p}{q} = \pm 1,\ \pm 3,\ \pm \frac{1}{2},\ \pm \frac{3}{2}\]
+                    </div>
+
+                    <p>
+                        If we wanted to find all of the actual rational zeros of \(f(x)\) we'd need to check
+                        each of those zeros using synthetic division to see if they work or not. This example
+                        provided us with eight possible rational zeros, which is not a lot compared to some.
+                        This is why Descartes' Rule is nice, because it could tell us that we don't need to
+                        check for any negative real zeros, which would cut down to four zeros that we'd have
+                        to check using synthetic division.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </section><!-- end rational root -->
+
+    <hr class="divider" role="separator" aria-hidden="true" />
+
+    <!-- ══════════════════════════════════════════
+         UPPER AND LOWER BOUND RULES
+    ══════════════════════════════════════════ -->
+    <section aria-labelledby="bound-rules-heading">
+        <h2 id="bound-rules-heading">Upper and Lower Bound Rules</h2>
+
+        <p>
+            Thus far we've started to put together the process for finding zeros of a polynomial function. As
+            we've seen, some of the rules help us in trying to identify those zeros. The next rule we are going
+            to look at helps you to identify if the number you're trying is an
+            <strong class="blue-text">upper bound</strong> or a
+            <strong class="blue-text">lower bound</strong> for our polynomial.
+        </p>
+
+        <!-- ── Definition Box: Upper and Lower Bound Rules ── -->
+        <div class="definition-box" role="note" aria-label="Definition: Upper and Lower Bound Rules">
+            <h3>Upper and Lower Bound Rules</h3>
+            <p>
+                Allow \(f(x)\) to be a polynomial with a positive leading coefficient \(a_n\). If when
+                dividing \(f(x)\) by \((x - c)\) using synthetic division, then:
+            </p>
+            <ol>
+                <li>
+                    If \(c > 0\), and each number in the last row is positive or zero, then \(c\) is an
+                    <strong>upper bound</strong>. Meaning there is no zero higher than that number.
+                </li>
+                <li>
+                    If \(c &lt; 0\), and each number in the last row alternates between positive and
+                    negative, then \(c\) is a <strong>lower bound</strong>. Meaning there is no zero
+                    below that number.
+                </li>
+            </ol>
+        </div>
+
+        <p>
+            Now, if we combine together all of these rules and tests we can start to begin the process of
+            finding all zeros of a polynomial function.
+        </p>
+
+        <!-- ── Example: Find all zeros of 8x³−4x²+6x−3 ── -->
+        <section class="example" aria-labelledby="example-2-3-3">
+            <div class="example-problem">
+                <h3 id="example-2-3-3">Example</h3>
+                <p>Find all zeros of the function \(f(x) = 8x^3 - 4x^2 + 6x - 3\).</p>
+            </div>
+
+            <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-2-3-3">
+                <span class="toggle-arrow">▼</span>
+                <span>Show Solution</span>
+            </button>
+
+            <div id="solution-2-3-3" class="example-content">
+                <div class="solution">
+                    <h4>Solution</h4>
+
+                    <p>To begin this process we're going to start with Descartes' Rule.</p>
+
+                    <p class="step-heading">Start by finding the number of sign changes in \(f(x)\):</p>
+                    <div class="display-math">
+                        \[f(x) = \textcolor{blue}{+}8x^3 \textcolor{red}{-} 4x^2 \textcolor{blue}{+} 6x \textcolor{red}{-} 3\]
+                    </div>
+                    <p>
+                        This means there are three sign changes in \(f(x)\) suggesting there are either three
+                        or one positive zeros.
+                    </p>
+
+                    <p class="step-heading">Next identify the sign changes in \(f(-x)\):</p>
+                    \[
+                        \begin{aligned}
+                            f(-x) &= 8(-x)^3 - 4(-x)^2 + 6(-x) - 3 \\
+                                  &= \textcolor{red}{-}8x^3 \textcolor{red}{-} 4x^2 \textcolor{red}{-} 6x \textcolor{red}{-} 3
+                        \end{aligned}
+                    \]
+                    <p>This means that there are no negative zeros.</p>
+
+                    <table class="rule-table" aria-label="Descartes Rule table for 8x cubed minus 4x squared plus 6x minus 3">
+                        <thead>
+                            <tr><th></th><th></th><th></th></tr>
+                        </thead>
+                        <tbody>
+                            <tr class="pos-row"><td>Positive</td><td>3</td><td>1</td></tr>
+                            <tr class="neg-row"><td>Negative</td><td>0</td><td>0</td></tr>
+                            <tr class="imag-row"><td>Imaginary</td><td>0</td><td>2</td></tr>
+                            <tr class="total-row"><td>Total</td><td>3</td><td>3</td></tr>
+                        </tbody>
+                    </table>
+
+                    <p class="step-heading">Next we move on to our Rational Root Theorem (\(p\) &amp; \(q\)'s):</p>
+                    <div class="center-text">
+                        <p>
+                            \(a_n = 8\) &emsp;&emsp;&emsp;
+                            Factors of \(a_n\), \(q = \pm 1, \pm 2, \pm 4, \pm 8\)
+                        </p>
+                        <p>
+                            \(a_0 = 3\) &emsp;&emsp;&emsp;
+                            Factors of \(a_0\), \(p = \pm 1, \pm 3\)
+                        </p>
+                    </div>
+                    <p>This means our possible zeros would be:</p>
+                    <div class="display-math">
+                        \[\frac{p}{q} = \pm 1,\ \pm 3,\ \pm \frac{1}{2},\ \pm \frac{1}{4},\ \pm \frac{1}{8},\ \pm \frac{3}{2},\ \pm \frac{3}{4},\ \pm \frac{3}{8}\]
+                    </div>
+
+                    <p>
+                        Now we are ready to start and use synthetic division to determine which of these zeros
+                        may be our solutions.
+                    </p>
+
+                    <!-- Test x = 3/4 (upper bound) -->
+                    <div class="division-wrap">
+                        <div>
+                            <p style="font-weight:bold; margin-bottom:0.5rem;">Testing \(x = \dfrac{3}{4}\):</p>
+                            <table class="syn-div" aria-label="Synthetic division of 8x cubed minus 4x squared plus 6x minus 3 using x equals 3 over 4, showing all positive last row — upper bound">
+                                <tbody>
+                                    <tr class="coeff-row">
+                                        <td class="divisor">\(\frac{3}{4}\)</td>
+                                        <td>\(8\)</td>
+                                        <td>\(-4\)</td>
+                                        <td>\(6\)</td>
+                                        <td>\(-3\)</td>
+                                    </tr>
+                                    <tr class="mult-row">
+                                        <td></td>
+                                        <td></td>
+                                        <td>\(6\)</td>
+                                        <td>\(\frac{3}{2}\)</td>
+                                        <td>\(\frac{57}{8}\)</td>
+                                    </tr>
+                                    <tr class="result-row">
+                                        <td></td>
+                                        <td>\(8\)</td>
+                                        <td>\(2\)</td>
+                                        <td>\(\frac{15}{2}\)</td>
+                                        <td>\(\frac{33}{8}\)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="division-note" role="note">
+                            Now notice how the last row of our synthetic division is all positive values. This
+                            means that since \(\frac{3}{4} > 0\) then \(x = \frac{3}{4}\) is an upper bound
+                            of our polynomial. Meaning there is no need to check any of our possible rational
+                            zeros that are greater than \(\frac{3}{4}\).
+                        </div>
+                    </div>
+
+                    <!-- Test x = 1/2 (zero) -->
+                    <p>Next we will try our \(x = \frac{1}{2}\) zero and see if that works.</p>
+                    <div class="division-wrap">
+                        <div>
+                            <p style="font-weight:bold; margin-bottom:0.5rem;">Testing \(x = \dfrac{1}{2}\):</p>
+                            <table class="syn-div" aria-label="Synthetic division of 8x cubed minus 4x squared plus 6x minus 3 using x equals 1 over 2, showing remainder zero confirming it is a zero">
+                                <tbody>
+                                    <tr class="coeff-row">
+                                        <td class="divisor">\(\frac{1}{2}\)</td>
+                                        <td>\(8\)</td>
+                                        <td>\(-4\)</td>
+                                        <td>\(6\)</td>
+                                        <td>\(-3\)</td>
+                                    </tr>
+                                    <tr class="mult-row">
+                                        <td></td>
+                                        <td></td>
+                                        <td>\(4\)</td>
+                                        <td>\(0\)</td>
+                                        <td>\(3\)</td>
+                                    </tr>
+                                    <tr class="result-row">
+                                        <td></td>
+                                        <td>\(8\)</td>
+                                        <td>\(0\)</td>
+                                        <td>\(6\)</td>
+                                        <td>\(0\)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="division-note" role="note">
+                            Recall that if the last row ends in a zero then it is a zero of the polynomial
+                            \(f(x)\).
+                        </div>
+                    </div>
+
+                    <p>
+                        Now we can take our remaining polynomial and solve it for \(x\) since we have reduced
+                        it to a quadratic.
+                    </p>
+                    \[
+                        \begin{aligned}
+                            8x^2 + 6 &= 0 \\
+                            8x^2 &= -6 \\
+                            x^2 &= \frac{-6}{8} \\
+                            x &= \pm\sqrt{\frac{-3}{4}} \\
+                            x &= \pm \frac{\sqrt{3}}{2}i
+                        \end{aligned}
+                    \]
+
+                    <p>This means that our zeros for \(f(x)\) are equal to:</p>
+                    <div class="display-math">
+                        \[\left\{\frac{1}{2},\ -\frac{\sqrt{3}}{2}i,\ \frac{\sqrt{3}}{2}i\right\}\]
+                    </div>
+
+                    <p>With a factored form of:</p>
+                    <div class="display-math">
+                        \[f(x) = \left(x - \frac{1}{2}\right)\left(x + \frac{\sqrt{3}}{2}i\right)\left(x - \frac{\sqrt{3}}{2}i\right)\]
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section><!-- end bound rules -->
+
+    <hr class="divider" role="separator" aria-hidden="true" />
+
+    <!-- ══════════════════════════════════════════
+         FULL PROCESS / STEPS
+    ══════════════════════════════════════════ -->
+    <section aria-labelledby="full-process-heading">
+        <h2 id="full-process-heading">The Full Process for Finding Zeros</h2>
+
+        <p>
+            Now that we've gone through the entire process to solve a polynomial function let's set out a
+            set of steps.
+        </p>
+
+        <!-- ── Orange Steps Box ── -->
+        <div class="orange-box" role="note" aria-label="Step-by-step process for finding all zeros of a polynomial">
+            <h3>Steps for Finding All Zeros of a Polynomial</h3>
+            <ol>
+                <li>Apply Descartes' Rule of Signs.</li>
+                <li>Apply the Rational Root Theorem.</li>
+                <li>
+                    Use synthetic division with upper/lower bounds rules to identify all rational zeros of
+                    the polynomial \(f(x)\).
+                </li>
+                <li>When applicable, solve the remaining quadratic to find imaginary or irrational zeros.</li>
+                <li>Write out zeros using set notation.</li>
+                <li>
+                    Check our solutions by setting up the polynomial in factored form and multiplying it
+                    all back out.
+                </li>
+            </ol>
+        </div>
+
+        <!-- ── Example: Full process — degree 4 ── -->
+        <section class="example" aria-labelledby="example-2-3-4">
+            <div class="example-problem">
+                <h3 id="example-2-3-4">Example</h3>
+                <p>
+                    Solve \(f(x) = x^4 + x^3 - 16x^2 - 4x + 48\). Then write \(f(x)\) as a product of
+                    its linear factors.
+                </p>
+            </div>
+
+            <button class="solution-header" onclick="toggleExample(this)" aria-expanded="false" aria-controls="solution-2-3-4">
+                <span class="toggle-arrow">▼</span>
+                <span>Show Solution</span>
+            </button>
+
+            <div id="solution-2-3-4" class="example-content">
+                <div class="solution">
+                    <h4>Solution</h4>
+
+                    <!-- Step 1 -->
+                    <p class="step-heading">Step 1: Descartes' Rule of Signs</p>
+
+                    <div class="division-wrap">
+                        <div>
+                            <p><strong>Number of sign changes in \(f(x)\):</strong></p>
+                            <div class="display-math">
+                                \[f(x) = \textcolor{blue}{+}x^4 \textcolor{blue}{+} x^3 \textcolor{red}{-} 16x^2 \textcolor{red}{-} 4x \textcolor{blue}{+} 48\]
+                            </div>
+                            <p>
+                                As we can see there are two sign changes meaning there are two positive zeros
+                                or less than that by two for this polynomial.
+                            </p>
+                        </div>
+                        <div>
+                            <p><strong>Number of sign changes in \(f(-x)\):</strong></p>
+                            \[
+                                \begin{aligned}
+                                    f(-x) &= (-x)^4 + (-x)^3 - 16(-x)^2 - 4(-x) + 48 \\
+                                          &= \textcolor{blue}{+}x^4 \textcolor{red}{-} x^3 \textcolor{red}{-} 16x^2 \textcolor{blue}{+} 4x \textcolor{blue}{+} 48
+                                \end{aligned}
+                            \]
+                            <p>
+                                From this we can see that there are two sign changes. This means there are
+                                two negative zeros, or less than that by two.
+                            </p>
+                        </div>
+                    </div>
+
+                    <table class="rule-table" aria-label="Descartes Rule table for x to the fourth plus x cubed minus 16x squared minus 4x plus 48, showing four combinations of positive, negative and imaginary zeros all totaling four">
+                        <thead>
+                            <tr><th></th><th></th><th></th><th></th><th></th></tr>
+                        </thead>
+                        <tbody>
+                            <tr class="pos-row"><td>Positive</td><td>2</td><td>0</td><td>2</td><td>0</td></tr>
+                            <tr class="neg-row"><td>Negative</td><td>2</td><td>2</td><td>0</td><td>0</td></tr>
+                            <tr class="imag-row"><td>Imaginary</td><td>0</td><td>2</td><td>2</td><td>4</td></tr>
+                            <tr class="total-row"><td>Total</td><td>4</td><td>4</td><td>4</td><td>4</td></tr>
+                        </tbody>
+                    </table>
+
+                    <!-- Step 2 -->
+                    <p class="step-heading">Step 2: Rational Root Theorem</p>
+                    <div class="center-text">
+                        <p>
+                            \(a_n = 1\) &emsp;&emsp;&emsp;
+                            Factors of \(a_n\), \(q = \pm 1\)
+                        </p>
+                        <p>
+                            \(a_0 = 48\) &emsp;&emsp;&emsp;
+                            Factors of \(a_0\), \(p = \pm 1, \pm 2, \pm 3, \pm 4, \pm 6, \pm 8, \pm 12, \pm 16, \pm 24, \pm 48\)
+                        </p>
+                    </div>
+                    <div class="display-math">
+                        \[\frac{p}{q} = \pm 1,\ \pm 2,\ \pm 3,\ \pm 4,\ \pm 6,\ \pm 8,\ \pm 12,\ \pm 16,\ \pm 24,\ \pm 48\]
+                    </div>
+
+                    <!-- Step 3 -->
+                    <p class="step-heading">Step 3: Testing the Zeros</p>
+
+                    <!-- Test −3 and −1 side by side -->
+                    <div class="division-wrap">
+                        <div>
+                            <p style="font-weight:bold; margin-bottom:0.5rem;">Testing \(x = -3\):</p>
+                            <table class="syn-div" aria-label="Synthetic division of x to the fourth plus x cubed minus 16x squared minus 4x plus 48 using x equals negative 3, showing nonzero remainder — not a zero">
+                                <tbody>
+                                    <tr class="coeff-row">
+                                        <td class="divisor">\(-3\)</td>
+                                        <td>\(1\)</td>
+                                        <td>\(1\)</td>
+                                        <td>\(-16\)</td>
+                                        <td>\(-4\)</td>
+                                        <td>\(48\)</td>
+                                    </tr>
+                                    <tr class="mult-row">
+                                        <td></td>
+                                        <td></td>
+                                        <td>\(-3\)</td>
+                                        <td>\(6\)</td>
+                                        <td>\(30\)</td>
+                                        <td>\(-78\)</td>
+                                    </tr>
+                                    <tr class="result-row">
+                                        <td></td>
+                                        <td>\(1\)</td>
+                                        <td>\(-2\)</td>
+                                        <td>\(-10\)</td>
+                                        <td>\(26\)</td>
+                                        <td>\(-30\)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div>
+                            <p style="font-weight:bold; margin-bottom:0.5rem;">Testing \(x = -1\):</p>
+                            <table class="syn-div" aria-label="Synthetic division of x to the fourth plus x cubed minus 16x squared minus 4x plus 48 using x equals negative 1, showing nonzero remainder — not a zero">
+                                <tbody>
+                                    <tr class="coeff-row">
+                                        <td class="divisor">\(-1\)</td>
+                                        <td>\(1\)</td>
+                                        <td>\(1\)</td>
+                                        <td>\(-16\)</td>
+                                        <td>\(-4\)</td>
+                                        <td>\(48\)</td>
+                                    </tr>
+                                    <tr class="mult-row">
+                                        <td></td>
+                                        <td></td>
+                                        <td>\(-1\)</td>
+                                        <td>\(0\)</td>
+                                        <td>\(16\)</td>
+                                        <td>\(-12\)</td>
+                                    </tr>
+                                    <tr class="result-row">
+                                        <td></td>
+                                        <td>\(1\)</td>
+                                        <td>\(0\)</td>
+                                        <td>\(-16\)</td>
+                                        <td>\(12\)</td>
+                                        <td>\(36\)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Test −6 (lower bound) and −4 (zero) side by side -->
+                    <div class="division-wrap">
+                        <div>
+                            <p style="font-weight:bold; margin-bottom:0.5rem;">Testing \(x = -6\):</p>
+                            <table class="syn-div" aria-label="Synthetic division of x to the fourth plus x cubed minus 16x squared minus 4x plus 48 using x equals negative 6, showing alternating signs in last row — lower bound">
+                                <tbody>
+                                    <tr class="coeff-row">
+                                        <td class="divisor">\(-6\)</td>
+                                        <td>\(1\)</td>
+                                        <td>\(1\)</td>
+                                        <td>\(-16\)</td>
+                                        <td>\(-4\)</td>
+                                        <td>\(48\)</td>
+                                    </tr>
+                                    <tr class="mult-row">
+                                        <td></td>
+                                        <td></td>
+                                        <td>\(-6\)</td>
+                                        <td>\(30\)</td>
+                                        <td>\(-84\)</td>
+                                        <td>\(528\)</td>
+                                    </tr>
+                                    <tr class="result-row">
+                                        <td></td>
+                                        <td>\(1\)</td>
+                                        <td>\(-5\)</td>
+                                        <td>\(14\)</td>
+                                        <td>\(-88\)</td>
+                                        <td>\(576\)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p class="division-note" role="note" style="margin-top:0.5rem;">
+                                Notice the alternating signs and \(c &lt; 0\) — that means it's a lower bound.
+                            </p>
+                        </div>
+                        <div>
+                            <p style="font-weight:bold; margin-bottom:0.5rem;">Testing \(x = -4\):</p>
+                            <table class="syn-div" aria-label="Synthetic division of x to the fourth plus x cubed minus 16x squared minus 4x plus 48 using x equals negative 4, showing remainder zero — confirmed zero">
+                                <tbody>
+                                    <tr class="coeff-row">
+                                        <td class="divisor">\(-4\)</td>
+                                        <td>\(1\)</td>
+                                        <td>\(1\)</td>
+                                        <td>\(-16\)</td>
+                                        <td>\(-4\)</td>
+                                        <td>\(48\)</td>
+                                    </tr>
+                                    <tr class="mult-row">
+                                        <td></td>
+                                        <td></td>
+                                        <td>\(-4\)</td>
+                                        <td>\(12\)</td>
+                                        <td>\(16\)</td>
+                                        <td>\(-48\)</td>
+                                    </tr>
+                                    <tr class="result-row">
+                                        <td></td>
+                                        <td>\(1\)</td>
+                                        <td>\(-3\)</td>
+                                        <td>\(-4\)</td>
+                                        <td>\(12\)</td>
+                                        <td>\(0\)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p class="division-note" role="note" style="margin-top:0.5rem;">
+                                This is a zero!!
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Test −2 on the reduced cubic -->
+                    <div class="division-wrap">
+                        <div>
+                            <p style="font-weight:bold; margin-bottom:0.5rem;">Testing \(x = -2\) on the reduced polynomial \(x^3 - 3x^2 - 4x + 12\):</p>
+                            <table class="syn-div" aria-label="Synthetic division of x cubed minus 3x squared minus 4x plus 12 using x equals negative 2, showing remainder zero — confirmed zero">
+                                <tbody>
+                                    <tr class="coeff-row">
+                                        <td class="divisor">\(-2\)</td>
+                                        <td>\(1\)</td>
+                                        <td>\(-3\)</td>
+                                        <td>\(-4\)</td>
+                                        <td>\(12\)</td>
+                                    </tr>
+                                    <tr class="mult-row">
+                                        <td></td>
+                                        <td></td>
+                                        <td>\(-2\)</td>
+                                        <td>\(10\)</td>
+                                        <td>\(-12\)</td>
+                                    </tr>
+                                    <tr class="result-row">
+                                        <td></td>
+                                        <td>\(1\)</td>
+                                        <td>\(-5\)</td>
+                                        <td>\(6\)</td>
+                                        <td>\(0\)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="division-note" role="note">
+                            We can see that this is also a zero. Notice that we did not use the original
+                            equation for the synthetic division — we used the quotient from the previous
+                            problem to evaluate this one. Now that we're down to a quadratic we will
+                            proceed to Step 4.
+                        </div>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <p class="step-heading">Step 4: Solve the remaining quadratic by factoring</p>
+                    \[
+                        \begin{aligned}
+                            x^2 - 5x + 6 &= 0 \\
+                            (x - 3)(x - 2) &= 0 \\
+                            x &= 3,\ 2
+                        \end{aligned}
+                    \]
+
+                    <!-- Step 5 -->
+                    <p class="step-heading">Step 5: Zeros and factored form</p>
+                    <p>
+                        This means that our zeros are \(\{-4,\ -2,\ 2,\ 3\}\) and our factored form would be:
+                    </p>
+                    <div class="display-math">
+                        \[f(x) = (x + 4)(x + 2)(x - 2)(x - 3)\]
+                    </div>
+
+                    <!-- Step 6 -->
+                    <p class="step-heading">Step 6: Check</p>
+                    \[
+                        \begin{aligned}
+                            f(x) &= (x + 4)(x + 2)(x - 2)(x - 3) \\
+                                 &= (x^2 + 6x + 8)(x^2 - 5x + 6) \\
+                                 &= x^4 + x^3 - 16x^2 - 4x + 48
+                        \end{aligned}
+                    \]
+                    <p>
+                        This matches our original polynomial meaning we've found the correct zeros and
+                        everything works out.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <p>
+            When it comes to solving polynomials, no two polynomials will be solved the exact same way. It is
+            important to use all of the tools that we outlined in this section to make the process as effective
+            as possible, without having to draw the process out.
+        </p>
+
+    </section><!-- end full process -->
+
+</section><!-- end #zeros-polynomial-functions -->
+
+<!-- ══════════════════════════════════════════
+     EXERCISES
+══════════════════════════════════════════ -->
+<section class="exercises-section" role="region" aria-labelledby="exercises-2-3-heading">
+    <h2 id="exercises-2-3-heading" class="subsection-title">Exercises</h2>
+
+    <button class="exercises-header" onclick="toggleExercises(this)" aria-expanded="false" aria-controls="exercises-2-3-content">
+        <span class="toggle-arrow">▼</span>
+        <span>Show Exercises</span>
+    </button>
+
+    <div id="exercises-2-3-content" class="exercises-content" role="region" aria-labelledby="exercises-2-3-heading">
+        <p>Exercises to be added at a later date.</p>
+    </div>
+</section>
+
+</main>
+
+<!-- ── Toggle scripts ── -->
+<script>
+    function toggleExample(button) {
+        const content = button.nextElementSibling;
+        const arrow = button.querySelector('.toggle-arrow');
+
+        if (content.classList.contains('open')) {
+            content.classList.remove('open');
+            arrow.classList.remove('open');
+            button.querySelector('span:last-child').textContent = 'Show Solution';
+            button.setAttribute('aria-expanded', 'false');
+        } else {
+            content.classList.add('open');
+            arrow.classList.add('open');
+            button.querySelector('span:last-child').textContent = 'Hide Solution';
+            button.setAttribute('aria-expanded', 'true');
+        }
+    }
+
+    function toggleExercises(button) {
+        const content = document.getElementById(button.getAttribute('aria-controls'));
+        const arrow = button.querySelector('.toggle-arrow');
+
+        if (content.classList.contains('open')) {
+            content.classList.remove('open');
+            arrow.classList.remove('open');
+            button.querySelector('span:last-child').textContent = 'Show Exercises';
+            button.setAttribute('aria-expanded', 'false');
+        } else {
+            content.classList.add('open');
+            arrow.classList.add('open');
+            button.querySelector('span:last-child').textContent = 'Hide Exercises';
+            button.setAttribute('aria-expanded', 'true');
+        }
+    }
+</script>
+
+<!-- ── TOC loader ── -->
+<script>
+    fetch('toc.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('toc-placeholder').innerHTML = data;
+
+            const chapterButtons = document.querySelectorAll('.toc-chapter');
+            chapterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const expanded = button.getAttribute('aria-expanded') === 'true';
+                    button.setAttribute('aria-expanded', !expanded);
+                    const submenu = button.nextElementSibling;
+                    submenu.classList.toggle('open');
+                });
+            });
+        });
+</script>
+
+</body>
+</html>

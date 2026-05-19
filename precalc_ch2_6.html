@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CH 2.6 – Polynomial and Rational Inequalities</title>
+
+    <!-- MathJax configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)'], ['$', '$']],
+                displayMath: [['\\[', '\\]'], ['$$', '$$']],
+                packages: {'[+]': ['cancel', 'color']},
+                macros: {
+                    cancel: ['\\enclose{horizontalstrike}{#1}', 1]
+                }
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            },
+            loader: {
+                load: ['input/tex', 'output/chtml', '[tex]/cancel', '[tex]/color']
+            }
+        };
+    </script>
+    <script id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+
+    <link rel="stylesheet" href="styles.css" />
+
+    <style>
+        /* ── Collapsible exercises ── */
+        .exercises-section { margin: 25px 0; }
+
+        .exercises-header {
+            background-color: #33AB2B;
+            color: white;
+            padding: 12px 20px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+            border-radius: 4px;
+            transition: background-color 0.2s ease;
+            border: none;
+            font-size: 1em;
+            width: 100%;
+        }
+        .exercises-header:hover { background-color: #2a8922; }
+
+        .exercises-content {
+            display: none;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-top: none;
+            border-radius: 0 0 6px 6px;
+            padding: 20px;
+        }
+        .exercises-content.open { display: block; }
+
+        /* ── Utility text colours ── */
+        .blue-text  { color: #0066cc; }
+        .red-text   { color: #c0392b; font-weight: bold; }
+        .green-text { color: #33AB2B; font-weight: bold; }
+
+        /* ── Centered display math ── */
+        .display-math {
+            text-align: center;
+            margin: 1rem 0;
+        }
+
+        /* ── Step heading style ── */
+        .step-heading {
+            color: #0066cc;
+            font-weight: bold;
+            font-size: 1em;
+            margin-top: 1.2rem;
+            margin-bottom: 0.4rem;
+        }
+
+        /* ── Center text utility ── */
+        .center-text {
+            text-align: center;
+            margin: 1rem 0;
+        }
+
+        /* ── Two-column layout for side-by-side content ── */
+        .division-wrap {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: start;
+            margin: 1.5rem 0;
+        }
+        @media (max-width: 640px) {
+            .division-wrap { grid-template-columns: 1fr; }
+        }
+
+        /* ── Test interval table ── */
+        .interval-table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1rem 0;
+            font-size: 0.95em;
+        }
+        .interval-table th {
+            background-color: #f0f8ed;
+            color: #33AB2B;
+            font-weight: bold;
+            padding: 10px 12px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+        .interval-table td {
+            padding: 10px 12px;
+            border: 1px solid #ccc;
+            text-align: center;
+            vertical-align: middle;
+        }
+        .interval-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .pos-cell { color: #0066cc; font-weight: bold; }
+        .neg-cell { color: #c0392b; font-weight: bold; }
+
+        /* ── Number line image caption style ── */
+        .number-line-wrap {
+            margin: 1.2rem 0;
+            text-align: center;
+        }
+        .number-line-wrap img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        /* ── Definition box ordered list ── */
+        .definition-box ol {
+            margin-left: 20px;
+            margin-bottom: 10px;
+        }
+        .definition-box ol li {
+            margin-bottom: 10px;
+        }
+        .definition-box ul {
+            margin-left: 20px;
+            margin-bottom: 5px;
+        }
+        .definition-box ul li {
+            margin-bottom: 6px;
+        }
+
+        /* ── Profit/revenue display ── */
+        .profit-eq {
+            background-color: #f0f8ed;
+            border-left: 4px solid #33AB2B;
+            padding: 0.8rem 1.2rem;
+            margin: 1rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+
+        /* ── Scrollable table wrapper for mobile ── */
+        .table-scroll {
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+    </style>
+</head>
+<body>
+
+<div id="toc-placeholder"></div>
+
+<main class="container">
+
+<section id="polynomial-rational-inequalities" aria-labelledby="section-heading">
+    <h1 id="section-heading">CH 2.6 – Polynomial and Rational Inequalities</h1>
+
+    <p>
+        Throughout this section we've been building on how to solve polynomial functions, which is an
+        essential skill to be able to graph and solve rational functions. In the previous section we
+        discussed the graphs of rational functions. We found in these graphs that they have asymptotes,
+        zeros, and a number of other characteristics. All of these pieces play an important role in
+        solving <strong class="blue-text">inequalities</strong>.
+    </p>
+
+    <!-- ══════════════════════════════════════════
+         POLYNOMIAL INEQUALITIES — SECTION
+    ══════════════════════════════════════════ -->
+    <section aria-labelledby="polynomial-inequalities-heading">
+        <h2 id="polynomial-inequalities-heading">Polynomial Inequalities</h2>
+
+        <p>
+            When it comes to solving any type of inequality we have to use the functions to find zeros
+            of the functions. When pertaining to inequalities we call these values
+            <strong class="blue-text">critical values</strong>. These values help us to set up a
+            "test interval" that we would need to determine where the function is positive or negative.
+        </p>
+
+        <!-- Definition box: Outline for Solving Polynomial Inequalities -->
+        <div class="definition-box" role="note" aria-label="Outline for Solving Polynomial Inequalities: five steps">
+            <h3>Outline for Solving Polynomial Inequalities</h3>
+            <ol>
+                <li><strong>Step 1.</strong> Swap the inequality sign for an equality sign.</li>
+                <li><strong>Step 2.</strong> Set the equation equal to zero.</li>
+                <li><strong>Step 3.</strong> Solve the polynomial function.</li>
+                <li>
+                    <strong>Step 4.</strong> Set up the test intervals using the zeros found in the
+                    previous step, and test each interval to determine if it is negative or positive.
+                </li>
+                <li>
+                    <strong>Step 5.</strong> Based on the signs found in Step 4, conclude the intervals
+                    that make the expression valid using the original inequality symbol.
+                </li>
+            </ol>
+        </div>
+
+        <!-- ══════════════════════════════════════════
+             POLYNOMIAL EXAMPLE 1 — x³+3x² ≥ x+3
+        ══════════════════════════════════════════ -->
+        <section class="example" aria-labelledby="example-2-6-1-heading">
+            <div class="example-problem">
+                <h3 id="example-2-6-1-heading">Example</h3>
+                <p>Solve \(f(x) = x^3 + 3x^2 \geq x + 3\).</p>
+            </div>
+
+            <button class="solution-header"
+                    onclick="toggleExample(this)"
+                    aria-expanded="false"
+                    aria-controls="solution-2-6-1">
+                <span class="toggle-arrow">▼</span>
+                <span>Show Solution</span>
+            </button>
+
+            <div id="solution-2-6-1" class="example-content">
+                <div class="solution">
+                    <h4>Solution</h4>
+
+                    <!-- Step 1 -->
+                    <p class="step-heading">Step 1: Swap the Inequality for an Equality</p>
+                    \[x^3 + 3x^2 \geq x + 3\]
+                    \[x^3 + 3x^2 = x + 3\]
+
+                    <!-- Step 2 -->
+                    <p class="step-heading">Step 2: Set the Equation Equal to Zero</p>
+                    \[\begin{aligned}
+                        x^3 + 3x^2 &= x + 3 \\
+                        x^3 + 3x^2 - x - 3 &= 0
+                    \end{aligned}\]
+
+                    <!-- Step 3 -->
+                    <p class="step-heading">Step 3: Solve the Polynomial</p>
+                    <p>
+                        In some cases we may need to use all the steps used throughout this chapter.
+                        However, this expression can be solved by factoring by grouping.
+                    </p>
+
+                    <div class="division-wrap" role="group" aria-label="Factoring by grouping and solving for zeros">
+                        <div>
+                            \[\begin{aligned}
+                                x^3 + 3x^2 - x - 3 &= 0 \\
+                                x^2(x + 3) - 1(x + 3) &= 0 \\
+                                (x + 3)(x^2 - 1) &= 0
+                            \end{aligned}\]
+                        </div>
+                        <div>
+                            \[x + 3 = 0 \qquad x^2 - 1 = 0\]
+                            \[x = -3 \qquad\quad x = \pm 1\]
+                        </div>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <p class="step-heading">Step 4: Set Up Test Intervals</p>
+                    <p>
+                        This means that we can set up a number line and find test values between each
+                        zero to determine the interval sign. The values you choose to evaluate the
+                        function at are yours to choose — they just have to be values between the
+                        critical values. You plug those values into the function to evaluate the sign.
+                    </p>
+
+                    <div class="number-line-wrap">
+                        <img
+                            src="images/2_6_1.png"
+                            alt="A number line from negative 4 to 4 with tick marks at each integer. Red X marks appear at the three critical values: negative 3, negative 1, and 1. Test value labels appear above the line: f of negative 4 is in the leftmost interval, f of negative 2 is between negative 3 and negative 1, f of 0 is between negative 1 and 1, and f of 3 is in the rightmost interval."
+                            style="max-width:100%; height:auto; display:block; margin: 0 auto;"
+                        />
+                    </div>
+
+                    <div class="table-scroll">
+                        <table class="interval-table" aria-label="Test interval table for x cubed plus 3x squared minus x minus 3 with four intervals and their signs">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Test Interval</th>
+                                    <th scope="col">Test Value</th>
+                                    <th scope="col">Polynomial Value</th>
+                                    <th scope="col">Positive / Negative</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>\((-\infty, -3)\)</td>
+                                    <td>\(x = -4\)</td>
+                                    <td>\((\textcolor{red}{-4})^3 + 3(\textcolor{red}{-4})^2 - (\textcolor{red}{-4}) - 3 = -12\)</td>
+                                    <td class="neg-cell">Negative</td>
+                                </tr>
+                                <tr>
+                                    <td>\((-3, -1)\)</td>
+                                    <td>\(x = -2\)</td>
+                                    <td>\((\textcolor{red}{-2})^3 + 3(\textcolor{red}{-2})^2 - (\textcolor{red}{-2}) - 3 = 3\)</td>
+                                    <td class="pos-cell">Positive</td>
+                                </tr>
+                                <tr>
+                                    <td>\((-1, 1)\)</td>
+                                    <td>\(x = 0\)</td>
+                                    <td>\((\textcolor{red}{0})^3 + 3(\textcolor{red}{0})^2 - (\textcolor{red}{0}) - 3 = -3\)</td>
+                                    <td class="neg-cell">Negative</td>
+                                </tr>
+                                <tr>
+                                    <td>\((1, \infty)\)</td>
+                                    <td>\(x = 3\)</td>
+                                    <td>\((\textcolor{red}{3})^3 + 3(\textcolor{red}{3})^2 - (\textcolor{red}{3}) - 3 = 48\)</td>
+                                    <td class="pos-cell">Positive</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Step 5 -->
+                    <p class="step-heading">Step 5: Conclude</p>
+                    <p>
+                        Now we have to conclude and identify our answers. With inequalities it is
+                        important to remember that there isn't one singular value answer — it is always
+                        a range of values that make the statement true. Looking back at our original
+                        statement \(x^3 + 3x^2 \geq x + 3\), we had a greater than or equal to sign.
+                        This tells us that we need the <strong>positive intervals</strong>, and since
+                        it includes the equal to, we use square brackets (except for \(\pm\infty\)).
+                        The positive intervals are \((-3, -1)\) and \((1, \infty)\), so our solution is:
+                    </p>
+                    \[[-3,\,-1] \cup [1,\,\infty)\]
+                    <p>Graphically on our number line:</p>
+
+                    <div class="number-line-wrap">
+                        <img
+                            src="images/2_6_2.png"
+                            alt="A number line from negative 4 to 4 with tick marks at each integer. A yellow highlighted segment runs from negative 3 to negative 1, and a second yellow highlighted segment runs from 1 to the right arrow indicating positive infinity. A red left square bracket appears at negative 3, a red right square bracket at negative 1, and a red left square bracket at 1, indicating the solution set negative 3 to negative 1 inclusive union 1 to positive infinity inclusive."
+                            style="max-width:100%; height:auto; display:block; margin: 0 auto;"
+                        />
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ══════════════════════════════════════════
+             POLYNOMIAL EXAMPLE 2 — 2x³−3x²−32x < −48
+        ══════════════════════════════════════════ -->
+        <section class="example" aria-labelledby="example-2-6-2-heading">
+            <div class="example-problem">
+                <h3 id="example-2-6-2-heading">Example</h3>
+                <p>Solve \(2x^3 - 3x^2 - 32x < -48\).</p>
+            </div>
+
+            <button class="solution-header"
+                    onclick="toggleExample(this)"
+                    aria-expanded="false"
+                    aria-controls="solution-2-6-2">
+                <span class="toggle-arrow">▼</span>
+                <span>Show Solution</span>
+            </button>
+
+            <div id="solution-2-6-2" class="example-content">
+                <div class="solution">
+                    <h4>Solution</h4>
+
+                    <!-- Step 1 -->
+                    <p class="step-heading">Step 1: Swap the Inequality for an Equality</p>
+                    \[2x^3 - 3x^2 - 32x < -48\]
+                    \[2x^3 - 3x^2 - 32x = -48\]
+
+                    <!-- Step 2 -->
+                    <p class="step-heading">Step 2: Set the Equation Equal to Zero</p>
+                    \[\begin{aligned}
+                        2x^3 - 3x^2 - 32x &= -48 \\
+                        2x^3 - 3x^2 - 32x + 48 &= 0
+                    \end{aligned}\]
+
+                    <!-- Step 3 -->
+                    <p class="step-heading">Step 3: Solve the Polynomial</p>
+
+                    <div class="division-wrap" role="group" aria-label="Factoring by grouping and solving for zeros">
+                        <div>
+                            \[\begin{aligned}
+                                2x^3 - 3x^2 - 32x + 48 &= 0 \\
+                                x^2(2x - 3) - 16(2x - 3) &= 0 \\
+                                (2x - 3)(x^2 - 16) &= 0
+                            \end{aligned}\]
+                        </div>
+                        <div>
+                            \[2x - 3 = 0 \qquad x^2 - 16 = 0\]
+                            \[x = \tfrac{3}{2} \qquad\quad x = \pm 4\]
+                        </div>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <p class="step-heading">Step 4: Set Up Test Intervals</p>
+
+                    <div class="number-line-wrap">
+                        <img
+                            src="images/2_6_3.png"
+                            alt="A number line from negative 5 to 5 with tick marks at each integer and a mark at three-halves. Red X marks appear at the three critical values: negative 4, three-halves, and 4. Test value labels appear above the line: f of negative 5 in the leftmost interval, f of 0 between negative 4 and three-halves, f of 3 between three-halves and 4, and f of 5 in the rightmost interval."
+                            style="max-width:100%; height:auto; display:block; margin: 0 auto;"
+                        />
+                    </div>
+
+                    <div class="table-scroll">
+                        <table class="interval-table" aria-label="Test interval table for 2x cubed minus 3x squared minus 32x plus 48 with four intervals and their signs">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Test Interval</th>
+                                    <th scope="col">Test Value</th>
+                                    <th scope="col">Polynomial Value</th>
+                                    <th scope="col">Positive / Negative</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>\((-\infty, -4)\)</td>
+                                    <td>\(x = -5\)</td>
+                                    <td>\(2(\textcolor{red}{-5})^3 - 3(\textcolor{red}{-5})^2 - 32(\textcolor{red}{-5}) + 48 = -117\)</td>
+                                    <td class="neg-cell">Negative</td>
+                                </tr>
+                                <tr>
+                                    <td>\(\left(-4,\, \tfrac{3}{2}\right)\)</td>
+                                    <td>\(x = 0\)</td>
+                                    <td>\(2(\textcolor{red}{0})^3 - 3(\textcolor{red}{0})^2 - 32(\textcolor{red}{0}) + 48 = 48\)</td>
+                                    <td class="pos-cell">Positive</td>
+                                </tr>
+                                <tr>
+                                    <td>\(\left(\tfrac{3}{2},\, 4\right)\)</td>
+                                    <td>\(x = 3\)</td>
+                                    <td>\(2(\textcolor{red}{3})^3 - 3(\textcolor{red}{3})^2 - 32(\textcolor{red}{3}) + 48 = -21\)</td>
+                                    <td class="neg-cell">Negative</td>
+                                </tr>
+                                <tr>
+                                    <td>\((4, \infty)\)</td>
+                                    <td>\(x = 5\)</td>
+                                    <td>\(2(\textcolor{red}{5})^3 - 3(\textcolor{red}{5})^2 - 32(\textcolor{red}{5}) + 48 = 63\)</td>
+                                    <td class="pos-cell">Positive</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Step 5 -->
+                    <p class="step-heading">Step 5: Conclude</p>
+                    <p>
+                        Looking back at our original inequality \(2x^3 - 3x^2 - 32x < -48\), our
+                        symbol is <em>less than</em> but not equal to, which tells us we need
+                        <strong>round brackets</strong>. Since it is less than, we are looking for the
+                        <strong>negative intervals</strong>, which are \((-\infty, -4)\) and
+                        \(\left(\tfrac{3}{2}, 4\right)\). Our solution is:
+                    </p>
+                    \[(-\infty,\,-4) \cup \left(\tfrac{3}{2},\,4\right)\]
+                    <p>Graphically on our number line:</p>
+
+                    <div class="number-line-wrap">
+                        <img
+                            src="images/2_6_4.png"
+                            alt="A number line from negative 5 to 5 with tick marks at each integer and a mark at three-halves. A yellow highlighted segment runs from the left arrow indicating negative infinity up to but not including negative 4. A second yellow highlighted segment runs from three-halves to but not including 4. A red right round parenthesis appears at negative 4, a red left round parenthesis at three-halves, and a red right round parenthesis at 4, indicating the solution set negative infinity to negative 4 open union three-halves to 4 open."
+                            style="max-width:100%; height:auto; display:block; margin: 0 auto;"
+                        />
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <p>
+            It is important to take note of the difference between the inequalities with equal to
+            symbols and those without — it can be the difference between a correct answer and an
+            incorrect answer. Also, while in both examples our intervals of positive and negative
+            alternated, this is not always the case. You cannot just assume that if one interval is
+            positive the next will be negative. It is possible for them all to be positive or all to
+            be negative. If you're not sure when this happens, check the multiplicity of the critical
+            value. If the critical value has an <strong>odd</strong> multiplicity, the sign will
+            change. If the critical value has an <strong>even</strong> multiplicity, the sign will
+            stay the same.
+        </p>
+
+    </section><!-- end polynomial inequalities -->
+
+    <hr class="divider" role="separator" aria-hidden="true" />
+
+    <!-- ══════════════════════════════════════════
+         RATIONAL INEQUALITIES — SECTION
+    ══════════════════════════════════════════ -->
+    <section aria-labelledby="rational-inequalities-heading">
+        <h2 id="rational-inequalities-heading">Rational Inequalities</h2>
+
+        <p>
+            The process for solving rational inequalities is very similar to that for solving
+            polynomials. There are just a few things that we have to take into account. For example,
+            rational functions can have vertical asymptotes, and if an interval contains one of those
+            asymptotes as a critical value, then regardless of what the sign is for our inequality
+            we never include the asymptote — meaning we always use round brackets at asymptote values.
+        </p>
+
+        <!-- Definition box: Outline for Solving Rational Inequalities -->
+        <div class="definition-box" role="note" aria-label="Outline for Solving Rational Inequalities: five steps with two sub-steps under Step 3">
+            <h3>Outline for Solving Rational Inequalities</h3>
+            <ol>
+                <li><strong>Step 1.</strong> Swap the inequality sign for an equality sign.</li>
+                <li><strong>Step 2.</strong> Set the equation equal to zero.</li>
+                <li>
+                    <strong>Step 3.</strong> Find the critical points.
+                    <ul>
+                        <li>a.) Vertical asymptotes.</li>
+                        <li>b.) Zeros of the rational function.</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Step 4.</strong> Set up the test intervals using the zeros found in the
+                    previous step, and test each interval to determine if it is negative or positive.
+                </li>
+                <li>
+                    <strong>Step 5.</strong> Based on the signs found in Step 4, conclude the intervals
+                    that make the expression valid using the original inequality symbol.
+                </li>
+            </ol>
+        </div>
+
+        <!-- ══════════════════════════════════════════
+             RATIONAL EXAMPLE 1 — (x−7)/(x+2) ≥ (x−9)/(x+3)
+        ══════════════════════════════════════════ -->
+        <section class="example" aria-labelledby="example-2-6-3-heading">
+            <div class="example-problem">
+                <h3 id="example-2-6-3-heading">Example</h3>
+                <p>Solve \(\displaystyle\frac{x-7}{x+2} \geq \frac{x-9}{x+3}\).</p>
+            </div>
+
+            <button class="solution-header"
+                    onclick="toggleExample(this)"
+                    aria-expanded="false"
+                    aria-controls="solution-2-6-3">
+                <span class="toggle-arrow">▼</span>
+                <span>Show Solution</span>
+            </button>
+
+            <div id="solution-2-6-3" class="example-content">
+                <div class="solution">
+                    <h4>Solution</h4>
+
+                    <!-- Step 1 -->
+                    <p class="step-heading">Step 1: Swap the Inequality for an Equality</p>
+                    \[\frac{x-7}{x+2} \geq \frac{x-9}{x+3}\]
+                    \[\frac{x-7}{x+2} = \frac{x-9}{x+3}\]
+
+                    <!-- Step 2 -->
+                    <p class="step-heading">Step 2: Set Equal to Zero</p>
+                    <p>
+                        We are actually going to skip this step. Since we have a single rational
+                        function on each side, we can cross-multiply, which is a much easier approach.
+                    </p>
+
+                    <!-- Step 3 -->
+                    <p class="step-heading">Step 3: Find the Critical Points</p>
+                    <p>
+                        Since we have rational functions on each side, we can cross-multiply. This
+                        cannot be done with all rational equations, so be careful. Cross-multiplying gives:
+                    </p>
+                    \[\begin{aligned}
+                        (x-7)(x+3) &= (x+2)(x-9) \\
+                        x^2 - 4x - 21 &= x^2 - 7x - 18
+                    \end{aligned}\]
+                    <p>Bringing everything to one side:</p>
+                    \[\begin{aligned}
+                        x^2 - 4x - 21 - x^2 + 7x + 18 &= 0 \\
+                        3x - 3 &= 0 \\
+                        3x &= 3 \\
+                        x &= 1
+                    \end{aligned}\]
+                    <p>
+                        The reason this works is that when solving rational equations you only set the
+                        numerator equal to zero. Cross-multiplying creates a common denominator that
+                        allows us to essentially "add" our functions together. So our zero occurs at
+                        \(x = 1\). Now we need the vertical asymptotes to find the remaining critical
+                        points. To find vertical asymptotes, set each denominator equal to zero:
+                    </p>
+
+                    <div class="division-wrap" role="group" aria-label="Solving each denominator for vertical asymptotes">
+                        <div>
+                            \[\begin{aligned}
+                                x + 2 &= 0 \\
+                                x &= -2
+                            \end{aligned}\]
+                        </div>
+                        <div>
+                            \[\begin{aligned}
+                                x + 3 &= 0 \\
+                                x &= -3
+                            \end{aligned}\]
+                        </div>
+                    </div>
+
+                    <p>The critical points of this graph are \(\{-3,\,-2,\,1\}\).</p>
+
+                    <!-- Step 4 -->
+                    <p class="step-heading">Step 4: Set Up Test Intervals</p>
+                    <p>
+                        Remember that the function you evaluate is not just \(3x - 3 = 0\). You have
+                        to include the denominators, so the function used to evaluate test values is
+                        \(\dfrac{3x - 3}{(x+2)(x+3)}\).
+                    </p>
+
+                    <div class="number-line-wrap">
+                        <img
+                            src="images/2_6_5.png"
+                            alt="A number line from negative 4 to 4 with tick marks at each integer. Red X marks appear at the three critical values: negative 3, negative 2, and 1. Test value labels appear above the line: f of negative 4 in the leftmost interval, f of negative five-halves between negative 3 and negative 2, f of 0 between negative 2 and 1, and f of 2 in the rightmost interval."
+                            style="max-width:100%; height:auto; display:block; margin: 0 auto;"
+                        />
+                    </div>
+
+                    <div class="table-scroll">
+                        <table class="interval-table" aria-label="Test interval table for the quantity 3x minus 3 divided by the product of x plus 2 and x plus 3, with four intervals and their signs">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Test Interval</th>
+                                    <th scope="col">Test Value</th>
+                                    <th scope="col">Value of \(\dfrac{3x-3}{(x+2)(x+3)}\)</th>
+                                    <th scope="col">Positive / Negative</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>\((-\infty, -3)\)</td>
+                                    <td>\(x = -4\)</td>
+                                    <td>\(\dfrac{3(\textcolor{red}{-4})-3}{(\textcolor{red}{-4}+2)(\textcolor{red}{-4}+3)} = -7.5\)</td>
+                                    <td class="neg-cell">Negative</td>
+                                </tr>
+                                <tr>
+                                    <td>\((-3, -2)\)</td>
+                                    <td>\(x = -\tfrac{5}{2}\)</td>
+                                    <td>\(\dfrac{3(\textcolor{red}{-\frac{5}{2}})-3}{(\textcolor{red}{-\frac{5}{2}}+2)(\textcolor{red}{-\frac{5}{2}}+3)} = 42\)</td>
+                                    <td class="pos-cell">Positive</td>
+                                </tr>
+                                <tr>
+                                    <td>\((-2, 1)\)</td>
+                                    <td>\(x = 0\)</td>
+                                    <td>\(\dfrac{3(\textcolor{red}{0})-3}{(\textcolor{red}{0}+2)(\textcolor{red}{0}+3)} = -1.5\)</td>
+                                    <td class="neg-cell">Negative</td>
+                                </tr>
+                                <tr>
+                                    <td>\((1, \infty)\)</td>
+                                    <td>\(x = 2\)</td>
+                                    <td>\(\dfrac{3(\textcolor{red}{2})-3}{(\textcolor{red}{2}+2)(\textcolor{red}{2}+3)} = \tfrac{3}{20}\)</td>
+                                    <td class="pos-cell">Positive</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Step 5 -->
+                    <p class="step-heading">Step 5: Conclude</p>
+                    <p>
+                        Going back to our original statement, our symbol was greater than or equal to.
+                        That typically means square brackets and positive values. However, we must
+                        remember that our positive interval \((-3, -2)\) contains asymptotes at both
+                        endpoints — we never use square brackets at asymptotes. The interval
+                        \((1, \infty)\) contains the zero \(x = 1\), which does get a square bracket.
+                        Our solution is:
+                    </p>
+                    \[(-3,\,-2) \cup [1,\,\infty)\]
+
+                    <div class="number-line-wrap">
+                        <img
+                            src="images/2_6_6.png"
+                            alt="A number line from negative 4 to 4 with tick marks at each integer. A yellow highlighted segment runs from negative 3 to negative 2 with open round parentheses at both ends, indicating the open interval negative 3 to negative 2. A second yellow highlighted segment runs from 1 to the right arrow indicating positive infinity, with a left square bracket at 1. A red left round parenthesis at negative 3, a red right round parenthesis at negative 2, and a red left square bracket at 1 mark the solution set."
+                            style="max-width:100%; height:auto; display:block; margin: 0 auto;"
+                        />
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ══════════════════════════════════════════
+             RATIONAL EXAMPLE 2 — 3x/(x−1) ≤ x/(x+4)+3
+        ══════════════════════════════════════════ -->
+        <section class="example" aria-labelledby="example-2-6-4-heading">
+            <div class="example-problem">
+                <h3 id="example-2-6-4-heading">Example</h3>
+                <p>Solve \(\displaystyle\frac{3x}{x-1} \leq \frac{x}{x+4} + 3\).</p>
+            </div>
+
+            <button class="solution-header"
+                    onclick="toggleExample(this)"
+                    aria-expanded="false"
+                    aria-controls="solution-2-6-4">
+                <span class="toggle-arrow">▼</span>
+                <span>Show Solution</span>
+            </button>
+
+            <div id="solution-2-6-4" class="example-content">
+                <div class="solution">
+                    <h4>Solution</h4>
+
+                    <!-- Step 1 -->
+                    <p class="step-heading">Step 1: Swap the Inequality for an Equality</p>
+                    \[\frac{3x}{x-1} \leq \frac{x}{x+4} + 3\]
+                    \[\frac{3x}{x-1} = \frac{x}{x+4} + 3\]
+
+                    <!-- Step 2 -->
+                    <p class="step-heading">Step 2: Bring Everything to One Side</p>
+                    <p>
+                        In this rational function we can't cross-multiply because of the plus three.
+                        That means we have to bring everything to one side and then find the common
+                        denominator to solve.
+                    </p>
+                    \[\begin{aligned}
+                        \frac{3x}{x-1} - \frac{x}{x+4} - 3 &= 0
+                    \end{aligned}\]
+
+                    <!-- Step 3 -->
+                    <p class="step-heading">Step 3: Find the Critical Points</p>
+                    <p>
+                        It does not matter whether you find the vertical asymptotes or the zeros
+                        first. This time we will find the vertical asymptotes first.
+                    </p>
+
+                    <div class="division-wrap" role="group" aria-label="Solving each denominator for vertical asymptotes">
+                        <div>
+                            \[\begin{aligned}
+                                x - 1 &= 0 \\
+                                x &= 1
+                            \end{aligned}\]
+                        </div>
+                        <div>
+                            \[\begin{aligned}
+                                x + 4 &= 0 \\
+                                x &= -4
+                            \end{aligned}\]
+                        </div>
+                    </div>
+
+                    <p>
+                        Next we find our zeros. To do that we must find the least common multiple and
+                        create rational expressions all with a common denominator.
+                    </p>
+                    \[\begin{aligned}
+                        \frac{3x}{(x-1)} - \frac{x}{x+4} - 3 &= 0 \\[8pt]
+                        \frac{3x(\textcolor{red}{x+4})}{(x-1)(\textcolor{red}{x+4})}
+                        - \frac{x(\textcolor{red}{x-1})}{(x+4)(\textcolor{red}{x-1})}
+                        - \frac{3\textcolor{red}{(x+4)(x-1)}}{\textcolor{red}{(x+4)(x-1)}} &= 0 \\[8pt]
+                        \frac{3x^2+12x}{(x-1)(x+4)}
+                        - \frac{x^2-x}{(x-1)(x+4)}
+                        - \frac{3x^2+9x-12}{(x-1)(x+4)} &= 0 \\[8pt]
+                        \frac{-x^2 + 4x + 12}{(x-1)(x+4)} &= 0
+                    \end{aligned}\]
+                    <p>
+                        Don't worry about multiplying out the denominator — just leave it as the
+                        product of two binomials. Once you've combined your rational expressions,
+                        solve by setting the numerator equal to zero.
+                    </p>
+
+                    <div class="division-wrap" role="group" aria-label="Factoring the numerator and solving for zeros">
+                        <div>
+                            \[\begin{aligned}
+                                -x^2 + 4x + 12 &= 0 \\
+                                -1(x^2 - 4x - 12) &= 0 \\
+                                -1(x-6)(x+2) &= 0
+                            \end{aligned}\]
+                        </div>
+                        <div>
+                            \[x - 6 = 0 \qquad x + 2 = 0\]
+                            \[x = 6 \qquad\quad x = -2\]
+                        </div>
+                    </div>
+
+                    <p>Our critical values are \(\{-4,\,-2,\,1,\,6\}\).</p>
+
+                    <!-- Step 4 -->
+                    <p class="step-heading">Step 4: Set Up Test Intervals</p>
+
+                    <div class="number-line-wrap">
+                        <img
+                            src="images/2_6_7.png"
+                            alt="A number line from negative 4 to 7 with tick marks at each integer. Red X marks appear at the four critical values: negative 4, negative 2, 1, and 6. Test value labels appear above the line: f of negative 5 in the leftmost interval, f of negative 3 between negative 4 and negative 2, f of 0 between negative 2 and 1, f of 2 between 1 and 6, and f of 7 in the rightmost interval."
+                            style="max-width:100%; height:auto; display:block; margin: 0 auto;"
+                        />
+                    </div>
+
+                    <div class="table-scroll">
+                        <table class="interval-table" aria-label="Test interval table for the quantity negative x squared plus 4x plus 12 divided by the product of x minus 1 and x plus 4, with five intervals and their signs">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Test Interval</th>
+                                    <th scope="col">Test Value</th>
+                                    <th scope="col">Value of \(\dfrac{-x^2+4x+12}{(x-1)(x+4)}\)</th>
+                                    <th scope="col">Positive / Negative</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>\((-\infty, -4)\)</td>
+                                    <td>\(x = -5\)</td>
+                                    <td>\(\dfrac{-(\textcolor{red}{-5})^2+4(\textcolor{red}{-5})+12}{((\textcolor{red}{-5})-1)((\textcolor{red}{-5})+4)} = -5.5\)</td>
+                                    <td class="neg-cell">Negative</td>
+                                </tr>
+                                <tr>
+                                    <td>\((-4, -2)\)</td>
+                                    <td>\(x = -3\)</td>
+                                    <td>\(\dfrac{-(\textcolor{red}{-3})^2+4(\textcolor{red}{-3})+12}{((\textcolor{red}{-3})-1)((\textcolor{red}{-3})+4)} = 2.25\)</td>
+                                    <td class="pos-cell">Positive</td>
+                                </tr>
+                                <tr>
+                                    <td>\((-2, 1)\)</td>
+                                    <td>\(x = 0\)</td>
+                                    <td>\(\dfrac{-(\textcolor{red}{0})^2+4(\textcolor{red}{0})+12}{((\textcolor{red}{0})-1)((\textcolor{red}{0})+4)} = -3\)</td>
+                                    <td class="neg-cell">Negative</td>
+                                </tr>
+                                <tr>
+                                    <td>\((1, 6)\)</td>
+                                    <td>\(x = 2\)</td>
+                                    <td>\(\dfrac{-(\textcolor{red}{2})^2+4(\textcolor{red}{2})+12}{((\textcolor{red}{2})-1)((\textcolor{red}{2})+4)} \approx 2.667\)</td>
+                                    <td class="pos-cell">Positive</td>
+                                </tr>
+                                <tr>
+                                    <td>\((6, \infty)\)</td>
+                                    <td>\(x = 7\)</td>
+                                    <td>\(\dfrac{-(\textcolor{red}{7})^2+4(\textcolor{red}{7})+12}{((\textcolor{red}{7})-1)((\textcolor{red}{7})+4)} \approx -0.1364\)</td>
+                                    <td class="neg-cell">Negative</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Step 5 -->
+                    <p class="step-heading">Step 5: Conclude</p>
+                    <p>
+                        Our original statement had a less than or equal to sign, so we are looking for
+                        the <strong>negative intervals</strong>. Remember: asymptote values always get
+                        round brackets, regardless of the inequality symbol. The zeros \(x = -2\) and
+                        \(x = 6\) get square brackets; the asymptotes \(x = -4\) and \(x = 1\) get
+                        round brackets. Our solution is:
+                    </p>
+                    \[(-\infty,\,-4) \cup [-2,\,1) \cup [6,\,\infty)\]
+
+                    <div class="number-line-wrap">
+                        <img
+                            src="images/2_6_8.png"
+                            alt="A number line from negative 4 to 7 with tick marks at each integer. Three yellow highlighted segments mark the solution set. The first runs from the left arrow indicating negative infinity to but not including negative 4, with a red right round parenthesis at negative 4. The second runs from negative 2 inclusive to but not including 1, with a red left square bracket at negative 2 and a red right round parenthesis at 1. The third runs from 6 inclusive to the right arrow indicating positive infinity, with a red left square bracket at 6. This represents the solution negative infinity to negative 4 open, union negative 2 to 1 half-open, union 6 to positive infinity half-open."
+                            style="max-width:100%; height:auto; display:block; margin: 0 auto;"
+                        />
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </section><!-- end rational inequalities -->
+
+    <hr class="divider" role="separator" aria-hidden="true" />
+
+    <!-- ══════════════════════════════════════════
+         REAL-WORLD APPLICATION — MARKETING/PROFIT
+    ══════════════════════════════════════════ -->
+    <section aria-labelledby="application-heading">
+        <h2 id="application-heading">Real-World Application: Profit Inequalities</h2>
+
+        <p>
+            There are a number of ways that inequalities can be applied to real-world situations.
+            This includes topics such as cost, revenue, and profits for marketing research. In this
+            type of model it is important to know that the profit a company makes is equal to the
+            revenue they have coming in minus the cost they put out to produce the good.
+        </p>
+
+        <!-- ── Marketing Example ── -->
+        <section class="example" aria-labelledby="example-2-6-5-heading">
+            <div class="example-problem">
+                <h3 id="example-2-6-5-heading">Example</h3>
+                <p>
+                    A marketing department for a slogan t-shirt company determines that the demand
+                    for their new t-shirt is
+                </p>
+                \[p = 100 - 0.00001x, \qquad 0 \leq x \leq 10{,}000{,}000\]
+                <p>
+                    where \(p\) is the price per t-shirt (in dollars) and \(x\) represents the
+                    number of t-shirts sold. The revenue for selling \(x\) t-shirts is
+                </p>
+                \[R = x(100 - 0.00001x)\]
+                <p>
+                    The total cost of producing \(x\) t-shirts is \(\$10\) per t-shirt plus a
+                    one-time set-up cost of \(\$2{,}500{,}000\), giving a total cost of
+                </p>
+                \[C = 10x + 2{,}500{,}000\]
+                <p>
+                    What prices can the company charge per t-shirt to obtain a profit of at least
+                    \(\$190{,}000{,}000\)?
+                </p>
+            </div>
+
+            <button class="solution-header"
+                    onclick="toggleExample(this)"
+                    aria-expanded="false"
+                    aria-controls="solution-2-6-5">
+                <span class="toggle-arrow">▼</span>
+                <span>Show Solution</span>
+            </button>
+
+            <div id="solution-2-6-5" class="example-content">
+                <div class="solution">
+                    <h4>Solution</h4>
+
+                    <p>First we need to set up our equation.</p>
+
+                    <div class="profit-eq">
+                        <p class="center-text"><strong>Profit = Revenue − Cost</strong></p>
+                        \[P = \bigl(x(100 - 0.00001x)\bigr) - (10x + 2{,}500{,}000)\]
+                        \[190{,}000{,}000 \geq \bigl(x(100 - 0.00001x)\bigr) - (10x + 2{,}500{,}000)\]
+                    </div>
+
+                    <p>
+                        As with all our other inequalities, we need to simplify and bring everything
+                        to one side to solve for \(x\).
+                    </p>
+                    \[\begin{aligned}
+                        190{,}000{,}000 &\geq x(100 - 0.00001x) - 10x - 2{,}500{,}000 \\
+                        190{,}000{,}000 &\geq 100x - 0.00001x^2 - 10x - 2{,}500{,}000 \\
+                        190{,}000{,}000 &\geq 90x - 0.00001x^2 - 2{,}500{,}000 \\
+                        0 &\geq 90x - 0.00001x^2 - 192{,}500{,}000
+                    \end{aligned}\]
+
+                    <p>Applying the quadratic formula to find the zeros:</p>
+                    \[\begin{aligned}
+                        x &= \frac{-90 \pm \sqrt{(90)^2 - 4(-0.00001)(-192{,}500{,}000)}}{2(-0.00001)} \\[6pt]
+                          &= \frac{-90 \pm \sqrt{8100 - 7700}}{-0.00002} \\[6pt]
+                          &= \frac{-90 \pm \sqrt{400}}{-0.00002} \\[6pt]
+                          &= \frac{-90 \pm 20}{-0.00002}
+                    \end{aligned}\]
+
+                    <p>
+                        The zeros are at \(x = 5{,}500{,}000\) and \(x = 3{,}500{,}000\). We now
+                        find test values between those critical values:
+                    </p>
+                    \[\begin{aligned}
+                        P(3{,}000{,}000) &= -0.00001(3{,}000{,}000)^2 + 90(3{,}000{,}000) - 192{,}500{,}000 \\
+                                         &= -\$12{,}500{,}000 \\[6pt]
+                        P(4{,}000{,}000) &= -0.00001(4{,}000{,}000)^2 + 90(4{,}000{,}000) - 192{,}500{,}000 \\
+                                         &= \$7{,}500{,}000 \\[6pt]
+                        P(6{,}000{,}000) &= -0.00001(6{,}000{,}000)^2 + 90(6{,}000{,}000) - 192{,}500{,}000 \\
+                                         &= -\$12{,}500{,}000
+                    \end{aligned}\]
+
+                    <p>
+                        From this we can see that the company needs to make between
+                        \(3{,}500{,}000\) and \(5{,}500{,}000\) t-shirts in order to achieve a
+                        profit greater than \(\$190{,}000{,}000\).
+                    </p>
+
+                    <p>
+                        To find the corresponding price range, substitute the boundary values of
+                        \(x\) back into the demand equation \(p = 100 - 0.00001x\):
+                    </p>
+                    \[\begin{aligned}
+                        p(3{,}500{,}000) &= 100 - 0.00001(3{,}500{,}000) = \$65 \\
+                        p(5{,}500{,}000) &= 100 - 0.00001(5{,}500{,}000) = \$45
+                    \end{aligned}\]
+
+                    <p>
+                        The company should charge between <strong>\(\$45\)</strong> and
+                        <strong>\(\$65\)</strong> per t-shirt to obtain a profit of at least
+                        \(\$190{,}000{,}000\).
+                    </p>
+
+                </div>
+            </div>
+        </section>
+
+        <p>
+            This is only one example of how inequalities can be applied in the real world. There are
+            many others. The important part is that you still work through the same set of processes
+            to solve the problem as you would with a regular polynomial.
+        </p>
+
+    </section><!-- end application -->
+
+</section><!-- end #polynomial-rational-inequalities -->
+
+<!-- ══════════════════════════════════════════
+     EXERCISES
+══════════════════════════════════════════ -->
+<section class="exercises-section" role="region" aria-labelledby="exercises-2-6-heading">
+    <h2 id="exercises-2-6-heading" class="subsection-title">Exercises</h2>
+
+    <button class="exercises-header"
+            onclick="toggleExercises(this)"
+            aria-expanded="false"
+            aria-controls="exercises-2-6-content">
+        <span class="toggle-arrow">▼</span>
+        <span>Show Exercises</span>
+    </button>
+
+    <div id="exercises-2-6-content"
+         class="exercises-content"
+         role="region"
+         aria-labelledby="exercises-2-6-heading">
+        <p>Exercises to be added at a later date.</p>
+    </div>
+</section>
+
+</main>
+
+<!-- ── Toggle scripts ── -->
+<script>
+    function toggleExample(button) {
+        const content = button.nextElementSibling;
+        const arrow = button.querySelector('.toggle-arrow');
+
+        if (content.classList.contains('open')) {
+            content.classList.remove('open');
+            arrow.classList.remove('open');
+            button.querySelector('span:last-child').textContent = 'Show Solution';
+            button.setAttribute('aria-expanded', 'false');
+        } else {
+            content.classList.add('open');
+            arrow.classList.add('open');
+            button.querySelector('span:last-child').textContent = 'Hide Solution';
+            button.setAttribute('aria-expanded', 'true');
+        }
+    }
+
+    function toggleExercises(button) {
+        const content = document.getElementById(button.getAttribute('aria-controls'));
+        const arrow = button.querySelector('.toggle-arrow');
+
+        if (content.classList.contains('open')) {
+            content.classList.remove('open');
+            arrow.classList.remove('open');
+            button.querySelector('span:last-child').textContent = 'Show Exercises';
+            button.setAttribute('aria-expanded', 'false');
+        } else {
+            content.classList.add('open');
+            arrow.classList.add('open');
+            button.querySelector('span:last-child').textContent = 'Hide Exercises';
+            button.setAttribute('aria-expanded', 'true');
+        }
+    }
+</script>
+
+<!-- ── TOC loader ── -->
+<script>
+    fetch('toc.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('toc-placeholder').innerHTML = data;
+
+            const chapterButtons = document.querySelectorAll('.toc-chapter');
+            chapterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const expanded = button.getAttribute('aria-expanded') === 'true';
+                    button.setAttribute('aria-expanded', !expanded);
+                    const submenu = button.nextElementSibling;
+                    submenu.classList.toggle('open');
+                });
+            });
+        });
+</script>
+
+</body>
+</html>

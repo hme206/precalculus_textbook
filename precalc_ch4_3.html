@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CH 4.3 – Solving Systems by Elimination</title>
+
+    <!-- MathJax configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)'], ['$', '$']],
+                displayMath: [['\\[', '\\]'], ['$$', '$$']],
+                packages: {'[+]': ['cancel', 'color']},
+                macros: {
+                    cancel: ['\\enclose{horizontalstrike}{#1}', 1]
+                }
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            },
+            loader: {
+                load: ['input/tex', 'output/chtml', '[tex]/cancel', '[tex]/color']
+            }
+        };
+    </script>
+    <script id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+
+    <link rel="stylesheet" href="styles.css" />
+
+    <style>
+        /* ── Collapsible exercises ── */
+        .exercises-section { margin: 25px 0; }
+
+        .exercises-header {
+            background-color: #33AB2B;
+            color: white;
+            padding: 12px 20px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+            border-radius: 4px;
+            transition: background-color 0.2s ease;
+            border: none;
+            font-size: 1em;
+            width: 100%;
+        }
+        .exercises-header:hover { background-color: #2a8922; }
+
+        .exercises-content {
+            display: none;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-top: none;
+            border-radius: 0 0 6px 6px;
+            padding: 20px;
+        }
+        .exercises-content.open { display: block; }
+
+        /* ── Utility colours ── */
+        .blue-text  { color: #0066cc; }
+        .red-text   { color: #c0392b; font-weight: bold; }
+        .green-text { color: #33AB2B; font-weight: bold; }
+
+        /* ── Step heading ── */
+        .step-heading {
+            color: #0066cc;
+            font-weight: bold;
+            font-size: 1em;
+            margin-top: 1.2rem;
+            margin-bottom: 0.4rem;
+        }
+
+        /* ── Two-column layout ── */
+        .division-wrap {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: start;
+            margin: 1.5rem 0;
+        }
+        @media (max-width: 600px) {
+            .division-wrap { grid-template-columns: 1fr; }
+        }
+
+        /* ── Four-column system problem list ── */
+        .four-col-systems {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin: 1rem 0;
+            list-style: none;
+            padding: 0;
+            counter-reset: sys-counter;
+        }
+        .four-col-systems li {
+            counter-increment: sys-counter;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 0.8rem 1rem;
+            text-align: center;
+        }
+        .four-col-systems li::before {
+            content: counter(sys-counter) ".";
+            display: block;
+            font-weight: bold;
+            color: #33AB2B;
+            margin-bottom: 0.4rem;
+        }
+        @media (max-width: 700px) {
+            .four-col-systems { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 400px) {
+            .four-col-systems { grid-template-columns: 1fr; }
+        }
+
+        /* ── System brace display ── */
+        .system-brace {
+            display: inline-block;
+            text-align: left;
+            border-left: 2px solid #333;
+            padding-left: 0.6rem;
+            margin: 0.3rem 0;
+            line-height: 2.2;
+        }
+
+        /* ── Elimination table ── */
+        .elim-table {
+            margin: 1rem auto;
+            border-collapse: collapse;
+            font-size: 1em;
+            width: auto;
+            background: transparent;
+        }
+        .elim-table td {
+            padding: 0.25rem 0.4rem;
+            border: none;
+            text-align: center;
+            vertical-align: middle;
+            background: transparent;
+            white-space: nowrap;
+        }
+        .elim-table tr.elim-rule td {
+            border-top: 2px solid #333;
+            padding-top: 0.4rem;
+        }
+        .elim-table td.elim-op {
+            font-weight: bold;
+            padding-right: 0.6rem;
+            color: #333;
+        }
+        .elim-table td.elim-label {
+            color: #555;
+            font-size: 0.9em;
+            padding-left: 0.8rem;
+            text-align: left;
+        }
+        .elim-wrap {
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+
+        /* ── Solution callout (green) ── */
+        .solution-callout {
+            background-color: #f0f8ed;
+            border-left: 4px solid #33AB2B;
+            padding: 0.6rem 1rem;
+            margin: 0.8rem 0;
+            border-radius: 0 4px 4px 0;
+            font-weight: bold;
+        }
+
+        /* ── No solution callout (red) ── */
+        .no-solution-box {
+            background-color: #fdecea;
+            border-left: 4px solid #c0392b;
+            padding: 0.6rem 1rem;
+            margin: 0.8rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+
+        /* ── Infinite solutions callout (blue) ── */
+        .infinite-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #0066cc;
+            padding: 0.8rem 1.2rem;
+            margin: 0.8rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+        .infinite-box p { margin-bottom: 0.5rem; }
+        .infinite-box p:last-child { margin-bottom: 0; }
+
+        /* ── Sub-example heading inside solution ── */
+        .sub-example-heading {
+            color: #33AB2B;
+            font-size: 1.05em;
+            font-weight: bold;
+            margin-top: 1.4rem;
+            margin-bottom: 0.6rem;
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 0.3rem;
+        }
+
+        /* ── Consistent badge ── */
+        .consistent-badge {
+            display: inline-block;
+            background-color: #33AB2B;
+            color: white;
+            border-radius: 4px;
+            padding: 0.15rem 0.6rem;
+            font-size: 0.88em;
+            font-weight: bold;
+            margin-left: 0.4rem;
+        }
+
+        /* ── Inconsistent badge ── */
+        .inconsistent-badge {
+            display: inline-block;
+            background-color: #c0392b;
+            color: white;
+            border-radius: 4px;
+            padding: 0.15rem 0.6rem;
+            font-size: 0.88em;
+            font-weight: bold;
+            margin-left: 0.4rem;
+        }
+
+        /* ── Application table ── */
+        .app-table {
+            width: auto;
+            border-collapse: collapse;
+            margin: 1rem auto;
+        }
+        .app-table th,
+        .app-table td {
+            border: 1px solid #999;
+            padding: 10px 18px;
+            text-align: center;
+        }
+        .app-table th {
+            background-color: #f0f8ed;
+            color: #33AB2B;
+            font-weight: bold;
+        }
+        .app-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+
+<div id="toc-placeholder"></div>
+
+<main class="container">
+
+<section id="elimination" aria-labelledby="section-heading">
+    <h1 id="section-heading">CH 4.3 – Solving Systems by Elimination</h1>
+
+    <p>
+        In the previous section we learned to solve systems of equations by graphing and substitution. In this section we will discuss how we solve systems using the <strong class="blue-text">elimination</strong> method (Addition Method). This method lends itself to linear systems.
+    </p>
+    <p>
+        When using the elimination method, what you are looking to do, is try to perform operations on either one equation or both equations in a way that when you add the two together, you eliminate one of your variables.
+    </p>
+
+    <hr class="divider" role="separator" aria-hidden="true" />
+
+    <!-- ══════════════════════════════════════════
+         MAIN ELIMINATION EXAMPLE
+    ══════════════════════════════════════════ -->
+    <section aria-labelledby="elimination-example-heading">
+
+        <section class="example" aria-labelledby="example-4-3-1-heading">
+            <div class="example-problem">
+                <h3 id="example-4-3-1-heading">Example</h3>
+                <p>Solve the system of equations below by using the elimination method.</p>
+
+                <ol class="four-col-systems" aria-label="Four linear systems of equations to solve by the elimination method">
+                    <li>
+                        <div class="system-brace" aria-label="System 1: x plus y equals 6, and x minus y equals 12">
+                            \(x + y = 6\)<br/>
+                            \(x - y = 12\)
+                        </div>
+                    </li>
+                    <li>
+                        <div class="system-brace" aria-label="System 2: 2x minus 4y equals negative 7, and 5x plus y equals negative 1">
+                            \(2x - 4y = -7\)<br/>
+                            \(5x + y = -1\)
+                        </div>
+                    </li>
+                    <li>
+                        <div class="system-brace" aria-label="System 3: 3x plus 2y equals 4, and 9x plus 6y equals 3">
+                            \(3x + 2y = 4\)<br/>
+                            \(9x + 6y = 3\)
+                        </div>
+                    </li>
+                    <li>
+                        <div class="system-brace" aria-label="System 4: 7x plus 8y equals 6, and negative 0.14x minus 0.16y equals negative 0.12">
+                            \(7x + 8y = 6\)<br/>
+                            \(-0.14x - 0.16y = -0.12\)
+                        </div>
+                    </li>
+                </ol>
+            </div>
+
+            <button class="solution-header"
+                    onclick="toggleExample(this)"
+                    aria-expanded="false"
+                    aria-controls="solution-4-3-1">
+                <span class="toggle-arrow">▼</span>
+                <span>Show Solution</span>
+            </button>
+
+            <div id="solution-4-3-1" class="example-content">
+                <div class="solution">
+                    <h4>Solution</h4>
+
+                    <!-- System 1 -->
+                    <p class="sub-example-heading">System 1</p>
+                    <p>
+                        To solve this first example we first need to decide which variable we want to eliminate. Try to first look to see if any variable had opposite signs. In this example our \(y\) have different signs in each equation, so we will eliminate that variable. Next we have to determine what we'd need to multiply each equation by to have the same coefficient in front of \(y\), luckily for this question they are already the same coefficient with different signs, meaning we can just add the questions together.
+                    </p>
+
+                    <div class="elim-wrap">
+                        <table class="elim-table" aria-label="Elimination table for System 1">
+                            <tbody>
+                                <tr>
+                                    <td class="elim-op"></td>
+                                    <td>\(x\)</td>
+                                    <td>\(+\)</td>
+                                    <td>\(y\)</td>
+                                    <td>\(=\)</td>
+                                    <td>\(6\)</td>
+                                </tr>
+                                <tr>
+                                    <td class="elim-op">\(+\)</td>
+                                    <td>\(x\)</td>
+                                    <td>\(-\)</td>
+                                    <td>\(y\)</td>
+                                    <td>\(=\)</td>
+                                    <td>\(12\)</td>
+                                </tr>
+                                <tr class="elim-rule">
+                                    <td class="elim-op"></td>
+                                    <td>\(2x\)</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>\(=\)</td>
+                                    <td>\(18\)</td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>\(x\)</td>
+                                    <td>\(=\)</td>
+                                    <td>\(\dfrac{18}{2}\)</td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>\(x\)</td>
+                                    <td>\(=\)</td>
+                                    <td>\(9\)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <p>
+                        Now, that we've found \(x\) we take that value and plug it into one of the two equations, the equation that you plug into doesn't really matter. Just as long as you end up with a \(y\) value that makes the statements true. If we plugged it into the first equation:
+                    </p>
+                    \[\begin{aligned}
+                        \textcolor{red}{9} + y &= 6 \\
+                        y &= -3
+                    \end{aligned}\]
+                    <div class="solution-callout" role="note">
+                        Giving us the solution of \((9, -3)\), making this a consistent system.
+                        <span class="consistent-badge">Consistent</span>
+                    </div>
+
+                    <hr class="divider" role="separator" aria-hidden="true" />
+
+                    <!-- System 2 -->
+                    <p class="sub-example-heading">System 2</p>
+                    <p>
+                        We start this the same way, first select the variable you'll eliminate, we are going to eliminate \(y\) again because of the fact that one is positive and the other is negative. Then we have to decide what we will multiply the second equation by to have the opposite coefficient of the first equation. In this case it would be four:
+                    </p>
+
+                    <div class="elim-wrap">
+                        <table class="elim-table" aria-label="Elimination table for System 2">
+                            <tbody>
+                                <tr>
+                                    <td class="elim-op"></td>
+                                    <td>\(2x\)</td>
+                                    <td>\(-\)</td>
+                                    <td>\(4y\)</td>
+                                    <td>\(=\)</td>
+                                    <td>\(-7\)</td>
+                                    <td class="elim-label">\(\rightarrow\)</td>
+                                    <td>\(2x\)</td>
+                                    <td>\(-\)</td>
+                                    <td>\(4y\)</td>
+                                    <td>\(=\)</td>
+                                    <td>\(-7\)</td>
+                                </tr>
+                                <tr>
+                                    <td class="elim-op">\(+\)</td>
+                                    <td>\(4(5x\)</td>
+                                    <td>\(+\)</td>
+                                    <td>\(y\)</td>
+                                    <td>\(=\)</td>
+                                    <td>\(-1)\)</td>
+                                    <td class="elim-label">\(\rightarrow\)</td>
+                                    <td>\(20x\)</td>
+                                    <td>\(+\)</td>
+                                    <td>\(4y\)</td>
+                                    <td>\(=\)</td>
+                                    <td>\(-4\)</td>
+                                </tr>
+                                <tr class="elim-rule">
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>\(22x\)</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>\(=\)</td>
+                                    <td>\(-11\)</td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>\(x\)</td>
+                                    <td>\(=\)</td>
+                                    <td colspan="2">\(\dfrac{-11}{22}\)</td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>\(x\)</td>
+                                    <td>\(=\)</td>
+                                    <td colspan="2">\(-\dfrac{1}{2}\)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <p>
+                        Plug that back in to find \(y\), once again the equation doesn't matter you could even use the equation that was the result of multiplying the second equation by 4 if you really wanted to. Try to evaluate which of the equations would be the simplest to use, notice how the first equation multiplies \(x\) by two, if we multiply our \(x\) value by two it will eliminate the fraction in it:
+                    </p>
+                    \[\begin{aligned}
+                        2\!\left(\textcolor{red}{-\tfrac{1}{2}}\right) - 4y &= -7 \\
+                        -1 - 4y &= -7 \\
+                        -4y &= -6 \\
+                        y &= \frac{-6}{-4} = \frac{3}{2}
+                    \end{aligned}\]
+                    <div class="solution-callout" role="note">
+                        Giving us the solution of \(\left(-\dfrac{1}{2},\, \dfrac{3}{2}\right)\), which once again is a consistent system.
+                        <span class="consistent-badge">Consistent</span>
+                    </div>
+
+                    <hr class="divider" role="separator" aria-hidden="true" />
+
+                    <!-- System 3 -->
+                    <p class="sub-example-heading">System 3</p>
+                    <p>Take the same approach as the others:</p>
+
+                    <div class="elim-wrap">
+                        <table class="elim-table" aria-label="Elimination table for System 3">
+                            <tbody>
+                                <tr>
+                                    <td class="elim-op"></td>
+                                    <td>\(-3(3x\)</td>
+                                    <td>\(+\)</td>
+                                    <td>\(2y\)</td>
+                                    <td>\(=\)</td>
+                                    <td>\(4)\)</td>
+                                    <td class="elim-label">\(\rightarrow\)</td>
+                                    <td>\(-9x\)</td>
+                                    <td>\(-\)</td>
+                                    <td>\(6y\)</td>
+                                    <td>\(=\)</td>
+                                    <td>\(-12\)</td>
+                                </tr>
+                                <tr>
+                                    <td class="elim-op">\(+\)</td>
+                                    <td>\(9x\)</td>
+                                    <td>\(+\)</td>
+                                    <td>\(6y\)</td>
+                                    <td>\(=\)</td>
+                                    <td>\(3\)</td>
+                                    <td class="elim-label">\(\rightarrow\)</td>
+                                    <td>\(9x\)</td>
+                                    <td>\(+\)</td>
+                                    <td>\(6y\)</td>
+                                    <td>\(=\)</td>
+                                    <td>\(3\)</td>
+                                </tr>
+                                <tr class="elim-rule">
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>\(0\)</td>
+                                    <td>\(=\)</td>
+                                    <td>\(-9\)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="no-solution-box" role="note">
+                        In this example notice how we have a statement that is false, the left hand and right hand side are not the same. If you recall from the previous section, this meant that the system had no solution. The same is still true, this example has no solution, and would be inconsistent.
+                        <span class="inconsistent-badge">Inconsistent</span>
+                    </div>
+
+                    <hr class="divider" role="separator" aria-hidden="true" />
+
+                    <!-- System 4 -->
+                    <p class="sub-example-heading">System 4</p>
+                    <p>
+                        For our last example the first thing we'd want to do is eliminate any decimal or fractional values to do that, we're going to multiply the entire second equation by 100 to move the decimal place two places which would give us an equation of \(-14x - 16y = -12\). From here we can then continue our method of elimination:
+                    </p>
+
+                    <div class="elim-wrap">
+                        <table class="elim-table" aria-label="Elimination table for System 4">
+                            <tbody>
+                                <tr>
+                                    <td class="elim-op"></td>
+                                    <td>\(2(7x\)</td>
+                                    <td>\(+\)</td>
+                                    <td>\(8y\)</td>
+                                    <td>\(=\)</td>
+                                    <td>\(6)\)</td>
+                                    <td class="elim-label">\(\rightarrow\)</td>
+                                    <td>\(14x\)</td>
+                                    <td>\(+\)</td>
+                                    <td>\(16y\)</td>
+                                    <td>\(=\)</td>
+                                    <td>\(12\)</td>
+                                </tr>
+                                <tr>
+                                    <td class="elim-op">\(+\)</td>
+                                    <td>\(-14x\)</td>
+                                    <td>\(-\)</td>
+                                    <td>\(16y\)</td>
+                                    <td>\(=\)</td>
+                                    <td>\(-12\)</td>
+                                    <td class="elim-label">\(\rightarrow\)</td>
+                                    <td>\(-14x\)</td>
+                                    <td>\(-\)</td>
+                                    <td>\(16y\)</td>
+                                    <td>\(=\)</td>
+                                    <td>\(-12\)</td>
+                                </tr>
+                                <tr class="elim-rule">
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>\(0\)</td>
+                                    <td>\(=\)</td>
+                                    <td>\(0\)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="infinite-box" role="note">
+                        <p>
+                            Once again recall from the previous section that when you end up with a true statement meaning the left hand and right hand side are the same, that tells us that we have infinite solutions. But, remember we can't just say infinite solutions we have to put that in terms of one of the variables. We are going to put this one in terms of \(x\) that means we'd need to solve one equation for \(y\):
+                        </p>
+                        \[\begin{aligned}
+                            7x + 8y &= 6 \\
+                            8y &= 6 - 7x \\
+                            y &= \frac{6}{8} - \frac{7}{8}x \\
+                            y &= \frac{3}{4} - \frac{7}{8}x
+                        \end{aligned}\]
+                        <p>Thus giving us the solution of:</p>
+                        \[\left(x,\; \frac{3}{4} - \frac{7}{8}x\right)\]
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <p>
+            In each of these examples we only had to manipulate the equations minimally to make them work, sometimes more work will be required. It is possible that you'll have to multiply each equation by different values in order to eliminate a variable. This method is important because of the fact it will be used in the next section.
+        </p>
+        <p>
+            While it doesn't matter which method you use to solve equations, each method lends itself to certain characteristics of how the equations are set up. Typically speaking if in a system of equations one equation is already solved or mostly solved for a variable we tend to use the substitution method. Where as, if a system is set up where both the \(x\) and \(y\) values are on the same side of the equation and the constant on the opposite, we use the elimination method. But, there is no rule that says you have to do that. If you want to only solve systems using one method go for it, however, it will cause you more work in the long run.
+        </p>
+
+    </section>
+
+    <hr class="divider" role="separator" aria-hidden="true" />
+
+    <!-- ══════════════════════════════════════════
+         APPLICATIONS
+    ══════════════════════════════════════════ -->
+    <section aria-labelledby="applications-heading">
+        <h2 id="applications-heading">Applications</h2>
+
+        <p>
+            We've mentioned in this chapter that systems of equations have a number of applications to the real world, one of the more common applications is the example of supply and demand. In these types of applications typically analysts want to find the equilibrium point, this is the point at which supply and demand are the same. Think about it, this is an important concept in product production. A company doesn't want to produce thousands of products when their demand equation says they'll only sell hundreds of the product. That company would lose money in that case.
+        </p>
+        <p>
+            Supply and demand is not the only way we use systems of equations in the real-world. There are many more and we will look at a few different examples.
+        </p>
+
+        <!-- Supply and Demand Example -->
+        <section class="example" aria-labelledby="example-4-3-2-heading">
+            <div class="example-problem">
+                <h3 id="example-4-3-2-heading">Example</h3>
+                <p>
+                    A company hires a financial analyst to determine how many of their new product they should produce. The analyst found that the company demand is \(p = 180 - 0.00001x\) and their supply equation is \(p = 90 + 0.00002x\). Where \(p\) is the price per unit, and \(x\) is the number of units they can sell. How many units should the company have made? What is their price to break-even?
+                </p>
+            </div>
+
+            <button class="solution-header"
+                    onclick="toggleExample(this)"
+                    aria-expanded="false"
+                    aria-controls="solution-4-3-2">
+                <span class="toggle-arrow">▼</span>
+                <span>Show Solution</span>
+            </button>
+
+            <div id="solution-4-3-2" class="example-content">
+                <div class="solution">
+                    <h4>Solution</h4>
+                    <p>
+                        For this example we are trying to find the equilibrium point. Notice that each of the equations are solved for the same variable that means we can set them equal to each other and solve for \(x\):
+                    </p>
+                    \[\begin{aligned}
+                        180 - 0.00001x &= 90 + 0.00002x \\
+                        180 &= 90 + 0.00003x \\
+                        90 &= 0.00003x \\
+                        \frac{90}{0.00003} &= x \\
+                        3{,}000{,}000 &= x
+                    \end{aligned}\]
+                    <p>
+                        This means that the company should make three million units to break-even, and they should sell the units for:
+                    </p>
+                    \[\begin{aligned}
+                        p &= 180 - 0.00001(\textcolor{red}{3{,}000{,}000}) \\
+                        p &= \$150.00
+                    \end{aligned}\]
+                    <div class="solution-callout" role="note">
+                        This means our equilibrium point is \((3{,}000{,}000,\; \$150)\). You can check this solution by plugging it back into the equations and verifying that they both work out.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Acid Mixture Example -->
+        <section class="example" aria-labelledby="example-4-3-3-heading">
+            <div class="example-problem">
+                <h3 id="example-4-3-3-heading">Example</h3>
+                <p>
+                    Carrie is taking a Chemistry class, in her lab section she needs to create a certain chemical mixture. If thirty liters of 40% acid solution is obtained by mixing 25% solution with a 50% solution. How much of each solution does she need to make the 40% solution?
+                </p>
+            </div>
+
+            <button class="solution-header"
+                    onclick="toggleExample(this)"
+                    aria-expanded="false"
+                    aria-controls="solution-4-3-3">
+                <span class="toggle-arrow">▼</span>
+                <span>Show Solution</span>
+            </button>
+
+            <div id="solution-4-3-3" class="example-content">
+                <div class="solution">
+                    <h4>Solution</h4>
+                    <p>
+                        When it comes to application questions where equations are not given, it is useful to create a table to help arrange your information:
+                    </p>
+
+                    <table class="app-table" aria-label="Acid mixture table showing concentration, amount, and resulting solution for each component">
+                        <thead>
+                            <tr>
+                                <th>Acid</th>
+                                <th>Amount</th>
+                                <th>Solution</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>\(40\%\)</td>
+                                <td>\(30\)</td>
+                                <td>\(0.4(30) = 12\)</td>
+                            </tr>
+                            <tr>
+                                <td>\(25\%\)</td>
+                                <td>\(x\)</td>
+                                <td>\(0.25x\)</td>
+                            </tr>
+                            <tr>
+                                <td>\(50\%\)</td>
+                                <td>\(y\)</td>
+                                <td>\(0.5y\)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <p>
+                        Since we don't know how much of each solution we need we use variables. It doesn't matter what you label those variables as, you can use any variable you want. From the table we can conclude that we have the system of:
+                    </p>
+                    \[\begin{cases} x + y = 30 \\ 0.25x + 0.5y = 12 \end{cases}\]
+                    <p>
+                        We know that we need to take that second equation and make everything whole numbers, to do that we'd need to multiply by \(100\): \((0.25x + 0.5y = 12) \rightarrow 25x + 50y = 1200\). Next we'd solve our system of equations using which ever method we want. We are going to use elimination though, since that is how this system is set up.
+                    </p>
+
+                    <div class="elim-wrap">
+                        <table class="elim-table" aria-label="Elimination table for the acid mixture system">
+                            <tbody>
+                                <tr>
+                                    <td class="elim-op"></td>
+                                    <td>\(-25(x\)</td>
+                                    <td>\(+\)</td>
+                                    <td>\(y\)</td>
+                                    <td>\(=\)</td>
+                                    <td>\(30)\)</td>
+                                    <td class="elim-label">\(\rightarrow\)</td>
+                                    <td>\(-25x\)</td>
+                                    <td>\(-\)</td>
+                                    <td>\(25y\)</td>
+                                    <td>\(=\)</td>
+                                    <td>\(-750\)</td>
+                                </tr>
+                                <tr>
+                                    <td class="elim-op">\(+\)</td>
+                                    <td>\(25x\)</td>
+                                    <td>\(+\)</td>
+                                    <td>\(50y\)</td>
+                                    <td>\(=\)</td>
+                                    <td>\(1200\)</td>
+                                    <td class="elim-label">\(\rightarrow\)</td>
+                                    <td>\(25x\)</td>
+                                    <td>\(+\)</td>
+                                    <td>\(50y\)</td>
+                                    <td>\(=\)</td>
+                                    <td>\(1200\)</td>
+                                </tr>
+                                <tr class="elim-rule">
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>\(25y\)</td>
+                                    <td>\(=\)</td>
+                                    <td>\(450\)</td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>\(y\)</td>
+                                    <td>\(=\)</td>
+                                    <td>\(18\)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="solution-callout" role="note">
+                        This means we need \(18\) liters of \(50\%\) solution, and \(x + 18 = 30 \rightarrow x = 12\) liters of \(25\%\) solution to make \(30\) liters of \(40\%\) acid solution.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Investment Example -->
+        <section class="example" aria-labelledby="example-4-3-4-heading">
+            <div class="example-problem">
+                <h3 id="example-4-3-4-heading">Example</h3>
+                <p>
+                    Carl received a bonus check last year for \(\$32,000\), and instead of spending his money he invested part of his money into a bond that paid \(5.75\%\) interest, and part into a CD that paid \(6.25\%\) interest. Carl earned a total income of \(\$1,900\) from both investments. How much did he invest into each account?
+                </p>
+            </div>
+
+            <button class="solution-header"
+                    onclick="toggleExample(this)"
+                    aria-expanded="false"
+                    aria-controls="solution-4-3-4">
+                <span class="toggle-arrow">▼</span>
+                <span>Show Solution</span>
+            </button>
+
+            <div id="solution-4-3-4" class="example-content">
+                <div class="solution">
+                    <h4>Solution</h4>
+                    <p>
+                        In order to answer this question we first have to recall how to calculate simple interest, \(I = prt\) where \(p\) is the amount of the principal investment, \(r\) is the interest rate as a decimal and \(t\) is the time in years. Once again we will create a table to help us set up the problem:
+                    </p>
+
+                    <table class="app-table" aria-label="Investment table showing account type, amount invested, and interest earned for each account">
+                        <thead>
+                            <tr>
+                                <th>Account</th>
+                                <th>Amount</th>
+                                <th>Interest</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Bond (\(5.75\%\))</td>
+                                <td>\(x\)</td>
+                                <td>\(0.0575x\)</td>
+                            </tr>
+                            <tr>
+                                <td>CD (\(6.25\%\))</td>
+                                <td>\(y\)</td>
+                                <td>\(0.0625y\)</td>
+                            </tr>
+                            <tr>
+                                <td>Total</td>
+                                <td>\(\$32,000\)</td>
+                                <td>\(\$1,900\)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <p>
+                        Once again since we don't know how much he is investing in each account we need to use variables to set up the equations of:
+                    </p>
+                    \[\begin{cases} x + y = 32000 \\ 0.0575x + 0.0625y = 1900 \end{cases}\]
+                    <p>
+                        Since we have decimal values we know that we will have to get rid of those, by multiplying the second equation by \(10{,}000\): \((0.0575x + 0.0625y = 1900) \rightarrow 575x + 625y = 19{,}000{,}000\). Remember we need a zero for each decimal place that we need to move. Now, we are ready to solve our system of equations.
+                    </p>
+
+                    <div class="elim-wrap">
+                        <table class="elim-table" aria-label="Elimination table for the investment system">
+                            <tbody>
+                                <tr>
+                                    <td class="elim-op"></td>
+                                    <td>\(-575(x\)</td>
+                                    <td>\(+\)</td>
+                                    <td>\(y\)</td>
+                                    <td>\(=\)</td>
+                                    <td>\(32000)\)</td>
+                                    <td class="elim-label">\(\rightarrow\)</td>
+                                    <td>\(-575x\)</td>
+                                    <td>\(-\)</td>
+                                    <td>\(575y\)</td>
+                                    <td>\(=\)</td>
+                                    <td>\(-18{,}400{,}000\)</td>
+                                </tr>
+                                <tr>
+                                    <td class="elim-op">\(+\)</td>
+                                    <td>\(575x\)</td>
+                                    <td>\(+\)</td>
+                                    <td>\(625y\)</td>
+                                    <td>\(=\)</td>
+                                    <td>\(19{,}000{,}000\)</td>
+                                    <td class="elim-label">\(\rightarrow\)</td>
+                                    <td>\(575x\)</td>
+                                    <td>\(+\)</td>
+                                    <td>\(625y\)</td>
+                                    <td>\(=\)</td>
+                                    <td>\(19{,}000{,}000\)</td>
+                                </tr>
+                                <tr class="elim-rule">
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>\(50y\)</td>
+                                    <td>\(=\)</td>
+                                    <td>\(600{,}000\)</td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>\(y\)</td>
+                                    <td>\(=\)</td>
+                                    <td>\(12{,}000\)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="solution-callout" role="note">
+                        Carl invested \(\$12,000\) into the CD, and \(x + 12000 = 32000 \rightarrow x = \$20,000\) in the bond. Remember it is always a good choice to go back and double check your answer.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </section><!-- end applications -->
+
+</section><!-- end #elimination -->
+
+<!-- ══════════════════════════════════════════
+     EXERCISES
+══════════════════════════════════════════ -->
+<section class="exercises-section" role="region" aria-labelledby="exercises-4-3-heading">
+    <h2 id="exercises-4-3-heading" class="subsection-title">Exercises</h2>
+
+    <button class="exercises-header"
+            onclick="toggleExercises(this)"
+            aria-expanded="false"
+            aria-controls="exercises-4-3-content">
+        <span class="toggle-arrow">▼</span>
+        <span>Show Exercises</span>
+    </button>
+
+    <div id="exercises-4-3-content"
+         class="exercises-content"
+         role="region"
+         aria-labelledby="exercises-4-3-heading">
+        <p>Exercises to be added at a later date.</p>
+    </div>
+</section>
+
+</main>
+
+<!-- ── Toggle scripts ── -->
+<script>
+    function toggleExample(button) {
+        const content = button.nextElementSibling;
+        const arrow = button.querySelector('.toggle-arrow');
+
+        if (content.classList.contains('open')) {
+            content.classList.remove('open');
+            arrow.classList.remove('open');
+            button.querySelector('span:last-child').textContent = 'Show Solution';
+            button.setAttribute('aria-expanded', 'false');
+        } else {
+            content.classList.add('open');
+            arrow.classList.add('open');
+            button.querySelector('span:last-child').textContent = 'Hide Solution';
+            button.setAttribute('aria-expanded', 'true');
+        }
+    }
+
+    function toggleExercises(button) {
+        const content = document.getElementById(button.getAttribute('aria-controls'));
+        const arrow = button.querySelector('.toggle-arrow');
+
+        if (content.classList.contains('open')) {
+            content.classList.remove('open');
+            arrow.classList.remove('open');
+            button.querySelector('span:last-child').textContent = 'Show Exercises';
+            button.setAttribute('aria-expanded', 'false');
+        } else {
+            content.classList.add('open');
+            arrow.classList.add('open');
+            button.querySelector('span:last-child').textContent = 'Hide Exercises';
+            button.setAttribute('aria-expanded', 'true');
+        }
+    }
+</script>
+
+<!-- ── TOC loader ── -->
+<script>
+    fetch('toc.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('toc-placeholder').innerHTML = data;
+
+            const chapterButtons = document.querySelectorAll('.toc-chapter');
+            chapterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const expanded = button.getAttribute('aria-expanded') === 'true';
+                    button.setAttribute('aria-expanded', !expanded);
+                    const submenu = button.nextElementSibling;
+                    submenu.classList.toggle('open');
+                });
+            });
+        });
+</script>
+
+</body>
+</html>

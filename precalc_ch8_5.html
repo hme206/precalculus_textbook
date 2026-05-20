@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CH 8.5 – Graphs of Polar Equations</title>
+
+    <!-- MathJax configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)'], ['$', '$']],
+                displayMath: [['\\[', '\\]'], ['$$', '$$']],
+                packages: {'[+]': ['cancel', 'color']},
+                macros: {
+                    cancel: ['\\enclose{horizontalstrike}{#1}', 1]
+                }
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            },
+            loader: {
+                load: ['input/tex', 'output/chtml', '[tex]/cancel', '[tex]/color']
+            }
+        };
+    </script>
+    <script id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+
+    <link rel="stylesheet" href="styles.css" />
+
+    <style>
+        /* ── Collapsible exercises ── */
+        .exercises-section { margin: 25px 0; }
+
+        .exercises-header {
+            background-color: #33AB2B;
+            color: white;
+            padding: 12px 20px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+            border-radius: 4px;
+            transition: background-color 0.2s ease;
+            border: none;
+            font-size: 1em;
+            width: 100%;
+        }
+        .exercises-header:hover { background-color: #2a8922; }
+
+        .exercises-content {
+            display: none;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-top: none;
+            border-radius: 0 0 6px 6px;
+            padding: 20px;
+        }
+        .exercises-content.open { display: block; }
+
+        /* ── Utility colours ── */
+        .blue-text  { color: #0066cc; }
+        .red-text   { color: #c0392b; font-weight: bold; }
+        .green-text { color: #33AB2B; font-weight: bold; }
+
+        /* ── Two-column layout ── */
+        .division-wrap {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: start;
+            margin: 1.5rem 0;
+        }
+        @media (max-width: 600px) {
+            .division-wrap { grid-template-columns: 1fr; }
+        }
+
+        /* ── Four-column problem list ── */
+        .four-col-list {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin: 1rem 0;
+            list-style: none;
+            padding: 0;
+            counter-reset: prob-counter;
+        }
+        .four-col-list li {
+            counter-increment: prob-counter;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 0.8rem 1rem;
+            text-align: center;
+        }
+        .four-col-list li::before {
+            content: counter(prob-counter) ".";
+            display: block;
+            font-weight: bold;
+            color: #33AB2B;
+            margin-bottom: 0.3rem;
+        }
+        @media (max-width: 700px) {
+            .four-col-list { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 400px) {
+            .four-col-list { grid-template-columns: 1fr; }
+        }
+
+        /* ── Solution callout (green) ── */
+        .solution-callout {
+            background-color: #f0f8ed;
+            border-left: 4px solid #33AB2B;
+            padding: 0.6rem 1rem;
+            margin: 0.8rem 0;
+            border-radius: 0 4px 4px 0;
+            font-weight: bold;
+        }
+
+        /* ── Sub-example heading inside solution ── */
+        .sub-example-heading {
+            color: #33AB2B;
+            font-size: 1.05em;
+            font-weight: bold;
+            margin-top: 1.4rem;
+            margin-bottom: 0.6rem;
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 0.3rem;
+        }
+
+        /* ── Numbered solution list ── */
+        .solution-ol {
+            margin-left: 1.2rem;
+            padding: 0;
+        }
+        .solution-ol > li {
+            margin-bottom: 1.8rem;
+            line-height: 1.7;
+        }
+
+        /* ── Polar value table ── */
+        .polar-table {
+            width: auto;
+            border-collapse: collapse;
+            margin: 0 auto;
+            font-size: 0.95em;
+        }
+        .polar-table th,
+        .polar-table td {
+            border: 1px solid #999;
+            padding: 8px 14px;
+            text-align: center;
+            white-space: nowrap;
+        }
+        .polar-table th {
+            background-color: #f0f8ed;
+            color: #33AB2B;
+            font-weight: bold;
+        }
+        .polar-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        /* ── Table note ── */
+        .table-note {
+            font-style: italic;
+            color: #555;
+            font-size: 0.92em;
+            margin-top: 0.6rem;
+        }
+
+        /* ── Definition box bullet list spacing ── */
+        .definition-box ul {
+            margin: 0.4rem 0 0 1rem;
+        }
+        .definition-box ul li {
+            margin-bottom: 0.6rem;
+        }
+    </style>
+</head>
+<body>
+
+<div id="toc-placeholder"></div>
+
+<main class="container">
+
+<section id="polar-graphs" aria-labelledby="section-heading">
+    <h1 id="section-heading">CH 8.5 – Graphs of Polar Equations</h1>
+
+    <p>
+        In this section, we discuss how to graph equations in polar coordinates on the rectangular coordinate plane. Since any given point in the plane has infinitely many different representations in polar coordinates, our 'Fundamental Graphing Principle' in this section is not as clean as it was for graphs of rectangular equations. We state it below for completeness.
+    </p>
+
+    <!-- Fundamental Graphing Principle box -->
+    <div class="definition-box" role="note" aria-label="The Fundamental Graphing Principle for Polar Equations">
+        <h3>The Fundamental Graphing Principle for Polar Equations</h3>
+        <p>
+            The graph of an equation in polar coordinates is the set of points which satisfy the equation. That is, a point \(P(r,\theta)\) is on the graph of an equation if and only if there is a representation of \(P\), say \(\left(r',\theta'\right)\), such that \(r'\) and \(\theta'\) satisfy the equation.
+        </p>
+    </div>
+
+    <p>Our first example focuses on some of the more structurally simple polar equations.</p>
+
+    <hr class="divider" role="separator" aria-hidden="true" />
+
+    <!-- ══════════════════════════════════════════
+         EXAMPLE 1 — Simple polar equations
+    ══════════════════════════════════════════ -->
+    <section class="example" aria-labelledby="example-8-5-1-heading">
+        <div class="example-problem">
+            <h3 id="example-8-5-1-heading">Example</h3>
+            <p>Graph the following polar equations.</p>
+            <ol class="four-col-list" aria-label="Four simple polar equations to graph">
+                <li>\(r = 4\)</li>
+                <li>\(r = -3\sqrt{2}\)</li>
+                <li>\(\theta = \dfrac{5\pi}{4}\)</li>
+                <li>\(\theta = -\dfrac{3\pi}{2}\)</li>
+            </ol>
+        </div>
+
+        <button class="solution-header"
+                onclick="toggleExample(this)"
+                aria-expanded="false"
+                aria-controls="solution-8-5-1">
+            <span class="toggle-arrow">▼</span>
+            <span>Show Solution</span>
+        </button>
+
+        <div id="solution-8-5-1" class="example-content">
+            <div class="solution">
+                <h4>Solution</h4>
+                <p>
+                    In each of these equations, only one of the variables \(r\) and \(\theta\) is present making the other variable free. This makes these graphs easier to visualize than others.
+                </p>
+                <ol class="solution-ol">
+                    <li>
+                        <p>
+                            In the equation \(r = 4\), \(\theta\) is free. The graph of this equation is, therefore, all points which have a polar coordinate representation \((4,\theta)\), for any choice of \(\theta\). Graphically this translates into tracing out all of the points \(4\) units away from the origin. This is exactly the definition of circle, centered at the origin, with a radius of \(4\).
+                        </p>
+                        <img src="images/8_5_1.png"
+                             alt="Polar coordinate grid with concentric gray circles and radial lines. A red circle of radius 4 is drawn centered at the origin, touching the 4-unit ring. The polar axis extends horizontally to the right labeled 0, and the vertical axis is labeled pi over 2. Caption reads: The graph of r equals 4."
+                             style="max-width:100%; height:auto; display:block; margin: 1rem auto;" />
+                    </li>
+                    <li>
+                        <p>
+                            Once again we have \(\theta\) being free in the equation \(r = -3\sqrt{2}\). Plotting all of the points of the form \((-3\sqrt{2}, \theta)\) gives us a circle of radius \(3\sqrt{2}\) centered at the origin.
+                        </p>
+                        <img src="images/8_5_2.png"
+                             alt="Polar coordinate grid with concentric gray circles and radial lines. A red circle of radius 3 root 2 (approximately 4.24 units) is drawn centered at the origin. The polar axis is labeled 0 and the vertical axis is labeled pi over 2. Caption reads: The graph of r equals negative 3 root 2."
+                             style="max-width:100%; height:auto; display:block; margin: 1rem auto;" />
+                    </li>
+                    <li>
+                        <p>
+                            In the equation \(\theta = \frac{5\pi}{4}\), \(r\) is free, so we plot all of the points with polar representation \(\left(r, \frac{5\pi}{4}\right)\). What we find is that we are tracing out the line which contains the terminal side of \(\theta = \frac{5\pi}{4}\) when plotted in standard position.
+                        </p>
+                        <img src="images/8_5_3.png"
+                             alt="Polar coordinate grid with concentric gray circles and radial lines. A red double-headed arrow extends through the origin along the line at angle 5 pi over 4, which runs diagonally from upper right to lower left (the line y equals x). A blue arc sweeps counter-clockwise from the polar axis to the ray, labeled theta equals 5 pi over 4. Caption reads: The graph of theta equals 5 pi over 4."
+                             style="max-width:100%; height:auto; display:block; margin: 1rem auto;" />
+                    </li>
+                    <li>
+                        <p>
+                            As in the previous example, the variable \(r\) is free in the equation \(\theta = -\frac{3\pi}{2}\). Plotting \(\left(r, -\frac{3\pi}{2}\right)\) for various values of \(r\) shows us that we are tracing out the \(y\)-axis.
+                        </p>
+                        <img src="images/8_5_4.png"
+                             alt="Polar coordinate grid with concentric gray circles and radial lines. A red double-headed arrow runs vertically along the y-axis from bottom to top. A blue arc sweeps clockwise from the polar axis downward and around 270 degrees, labeled theta equals negative 3 pi over 2 in the lower left. Caption reads: The graph of theta equals negative 3 pi over 2."
+                             style="max-width:100%; height:auto; display:block; margin: 1rem auto;" />
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </section>
+
+    <p>Hopefully, our experience in the above examples makes the following result clear.</p>
+
+    <!-- Graphs of Constant r and theta box -->
+    <div class="definition-box" role="note" aria-label="Graphs of constant r and theta in polar coordinates">
+        <h3>Graphs of Constant \(r\) and \(\theta\)</h3>
+        <p>Suppose \(a\) and \(\alpha\) are constants, \(a \neq 0\).</p>
+        <ul>
+            <li>The graph of the polar equation \(r = a\) on the Cartesian plane is a circle centered at the origin of radius \(|a|\).</li>
+            <li>The graph of the polar equation \(\theta = \alpha\) on the Cartesian plane is the line containing the terminal side of \(\alpha\) when plotted in standard position.</li>
+        </ul>
+    </div>
+
+    <p>
+        Suppose we wish to graph \(r = 6\cos(\theta)\). A reasonable way to start is to treat \(\theta\) as the independent variable, \(r\) as the dependent variable, evaluate \(r = f(\theta)\) at some 'friendly' values of \(\theta\) and plot the resulting points. We generate the table below.
+    </p>
+
+    <!-- r = 6cos(theta) table + completed graph side by side -->
+    <div class="division-wrap" role="group" aria-label="Value table and completed graph for r equals 6 cosine theta">
+        <div>
+            <table class="polar-table" aria-label="Values of r equals 6 cosine theta at selected angles">
+                <thead>
+                    <tr>
+                        <th>\(\theta\)</th>
+                        <th>\(r = 6\cos(\theta)\)</th>
+                        <th>\((r,\theta)\)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>\(0\)</td><td>\(6\)</td><td>\((6,0)\)</td></tr>
+                    <tr><td>\(\dfrac{\pi}{4}\)</td><td>\(3\sqrt{2}\)</td><td>\(\left(3\sqrt{2},\, \dfrac{\pi}{4}\right)\)</td></tr>
+                    <tr><td>\(\dfrac{\pi}{2}\)</td><td>\(0\)</td><td>\(\left(0,\, \dfrac{\pi}{2}\right)\)</td></tr>
+                    <tr><td>\(\dfrac{3\pi}{4}\)</td><td>\(-3\sqrt{2}\)</td><td>\(\left(-3\sqrt{2},\, \dfrac{3\pi}{4}\right)\)</td></tr>
+                    <tr><td>\(\pi\)</td><td>\(-6\)</td><td>\((-6,\,\pi)\)</td></tr>
+                    <tr><td>\(\dfrac{5\pi}{4}\)</td><td>\(-3\sqrt{2}\)</td><td>\(\left(-3\sqrt{2},\, \dfrac{5\pi}{4}\right)\)</td></tr>
+                    <tr><td>\(\dfrac{3\pi}{2}\)</td><td>\(0\)</td><td>\(\left(0,\, \dfrac{3\pi}{2}\right)\)</td></tr>
+                    <tr><td>\(\dfrac{7\pi}{4}\)</td><td>\(3\sqrt{2}\)</td><td>\(\left(3\sqrt{2},\, \dfrac{7\pi}{4}\right)\)</td></tr>
+                    <tr><td>\(2\pi\)</td><td>\(6\)</td><td>\((6,\,2\pi)\)</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <img src="images/8_5_5.png"
+                 alt="Polar coordinate grid with concentric gray circles and radial lines. Four red dots are plotted at the key points derived from the table: at (6, 0) on the positive polar axis, at the origin, at approximately (3, 3) in the first quadrant, and at approximately (3, negative 3) in the fourth quadrant. A red circle of diameter 6 is drawn passing through all four points, centered at (3, 0). Caption reads: Graph of r equals 6 cosine theta."
+                 style="max-width:100%; height:auto; display:block; margin: 0 auto;" />
+        </div>
+    </div>
+
+    <p>
+        Despite having nine ordered pairs, we get only four distinct points on the graph. But, we can see from the graph the general shape that it makes, a circle to the right of the y-axis with a diameter of \(6\). When graphing polar equations it is important to have a reference to what the graph will look like to aid us in completing the graphs. But, before we get there let's look at the completed version of this graph.
+    </p>
+
+    <hr class="divider" role="separator" aria-hidden="true" />
+
+    <!-- ══════════════════════════════════════════
+         POLAR GRAPH PARENT FUNCTIONS
+    ══════════════════════════════════════════ -->
+    <section aria-labelledby="parent-functions-heading">
+        <h2 id="parent-functions-heading">Polar Graph "Parent Functions"</h2>
+
+        <img src="images/8_5_6.png"
+             alt="Large reference chart of polar graph parent functions divided into three groups. Top row labeled Circles and Lemniscates: four small polar grids showing a circle for r equals a cosine theta (circle shifted right of origin), a circle for r equals a sine theta (circle shifted above origin), a figure-eight lemniscate for r squared equals a squared sine 2 theta (lobes along a diagonal axis), and a figure-eight lemniscate for r squared equals a squared cosine 2 theta (lobes along the horizontal axis). Middle row labeled Limacons: four small polar grids showing a limacon with inner loop for a over b less than 1, a cardioid for a over b equals 1, a dimpled limacon for 1 less than a over b less than 2, and a convex limacon for a over b greater than or equal to 2. Each is labeled with its general equation r equals a plus or minus b cosine theta or r equals a plus or minus b sine theta. Bottom row labeled Rose Curves with note that n petals form when n is odd and 2n petals when n is even with n at least 2: four polar grids showing a 3-petal rose for r equals a cosine 3 theta, an 8-petal rose for r equals a cosine 4 theta, a 3-petal rose for r equals a sine 3 theta, and an 8-petal rose for r equals a sine 4 theta. Footer note: For all except Limacons, a is the length of the diameter of the circle or petal."
+             style="max-width:100%; height:auto; display:block; margin: 1rem auto;" />
+    </section>
+
+    <hr class="divider" role="separator" aria-hidden="true" />
+
+    <!-- ══════════════════════════════════════════
+         EXAMPLE 2 — Limaçons, rose, lemniscate
+    ══════════════════════════════════════════ -->
+    <section class="example" aria-labelledby="example-8-5-2-heading">
+        <div class="example-problem">
+            <h3 id="example-8-5-2-heading">Example</h3>
+            <p>Graph the following polar equations.</p>
+            <ol class="four-col-list" aria-label="Four polar equations to graph: two limacons, a rose curve, and a lemniscate">
+                <li>\(r = 4 - 2\sin(\theta)\)</li>
+                <li>\(r = 2 + 4\cos(\theta)\)</li>
+                <li>\(r = 5\sin(2\theta)\)</li>
+                <li>\(r^2 = 16\cos(2\theta)\)</li>
+            </ol>
+        </div>
+
+        <button class="solution-header"
+                onclick="toggleExample(this)"
+                aria-expanded="false"
+                aria-controls="solution-8-5-2">
+            <span class="toggle-arrow">▼</span>
+            <span>Show Solution</span>
+        </button>
+
+        <div id="solution-8-5-2" class="example-content">
+            <div class="solution">
+                <h4>Solution</h4>
+
+                <ol class="solution-ol">
+
+                    <!-- Item 1: r = 4 - 2sin(theta) -->
+                    <li>
+                        <p>
+                            Looking at the form of \(r = 4 - 2\sin(\theta)\) you need to decide which family this fits into. Since this is of the form \(r = a - b\sin(\theta)\), that tells me it is a Limaçon and since \(\frac{a}{b} = \frac{4}{2} = 2 \geq 2\) that tells us it is a Convex Limaçon. To get an idea of placement of points we need to find our common points through the interval \([0,2\pi)\) to help us graph the equation more accurately.
+                        </p>
+
+                        <div class="division-wrap" role="group" aria-label="Value table and graph for r equals 4 minus 2 sine theta">
+                            <div>
+                                <table class="polar-table" aria-label="Values of r equals 4 minus 2 sine theta at selected angles">
+                                    <thead>
+                                        <tr>
+                                            <th>\(\theta\)</th>
+                                            <th>\(r = 4 - 2\sin(\theta)\)</th>
+                                            <th>\((r,\theta)\)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td>\(0\)</td><td>\(4\)</td><td>\((4,0)\)</td></tr>
+                                        <tr><td>\(\dfrac{\pi}{6}\)</td><td>\(3\)</td><td>\(\left(3,\, \dfrac{\pi}{6}\right)\)</td></tr>
+                                        <tr><td>\(\dfrac{\pi}{2}\)</td><td>\(2\)</td><td>\(\left(2,\, \dfrac{\pi}{2}\right)\)</td></tr>
+                                        <tr><td>\(\dfrac{5\pi}{6}\)</td><td>\(3\)</td><td>\(\left(3,\, \dfrac{5\pi}{6}\right)\)</td></tr>
+                                        <tr><td>\(\pi\)</td><td>\(4\)</td><td>\((4,\,\pi)\)</td></tr>
+                                        <tr><td>\(\dfrac{7\pi}{6}\)</td><td>\(5\)</td><td>\(\left(5,\, \dfrac{7\pi}{6}\right)\)</td></tr>
+                                        <tr><td>\(\dfrac{3\pi}{2}\)</td><td>\(6\)</td><td>\(\left(6,\, \dfrac{3\pi}{2}\right)\)</td></tr>
+                                        <tr><td>\(\dfrac{11\pi}{6}\)</td><td>\(5\)</td><td>\(\left(5,\, \dfrac{11\pi}{6}\right)\)</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div>
+                                <img src="images/8_5_7.png"
+                                     alt="Polar coordinate grid with concentric gray circles and radial lines. A red convex limacon is plotted for r equals 4 minus 2 sine theta. The curve is widest at the bottom (reaching r equals 6 at 3 pi over 2) and narrowest at the top (reaching r equals 2 at pi over 2). Eight red dots mark the key plotted points. The shape is symmetric about the vertical axis and bulges downward."
+                                     style="max-width:100%; height:auto; display:block; margin: 0 auto;" />
+                            </div>
+                        </div>
+                    </li>
+
+                    <!-- Item 2: r = 2 + 4cos(theta) -->
+                    <li>
+                        <p>
+                            For the next example we take the same approach — \(r = 2 + 4\cos(\theta)\) is of the form \(r = a + b\cos(\theta)\) which suggests that it is a Limaçon again, and \(\frac{a}{b} = \frac{2}{4} = \frac{1}{2} &lt; 1\) telling us that it is a Limaçon with an inner loop. Once again we find some common points using our unit circle to graph.
+                        </p>
+
+                        <div class="division-wrap" role="group" aria-label="Value table and graph for r equals 2 plus 4 cosine theta">
+                            <div>
+                                <table class="polar-table" aria-label="Values of r equals 2 plus 4 cosine theta at selected angles">
+                                    <thead>
+                                        <tr>
+                                            <th>\(\theta\)</th>
+                                            <th>\(r = 2 + 4\cos(\theta)\)</th>
+                                            <th>\((r,\theta)\)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td>\(0\)</td><td>\(6\)</td><td>\((6,0)\)</td></tr>
+                                        <tr><td>\(\dfrac{\pi}{3}\)</td><td>\(4\)</td><td>\(\left(4,\, \dfrac{\pi}{3}\right)\)</td></tr>
+                                        <tr><td>\(\dfrac{\pi}{2}\)</td><td>\(2\)</td><td>\(\left(2,\, \dfrac{\pi}{2}\right)\)</td></tr>
+                                        <tr><td>\(\dfrac{2\pi}{3}\)</td><td>\(0\)</td><td>\(\left(0,\, \dfrac{2\pi}{3}\right)\)</td></tr>
+                                        <tr><td>\(\pi\)</td><td>\(-2\)</td><td>\((-2,\,\pi)\)</td></tr>
+                                        <tr><td>\(\dfrac{4\pi}{3}\)</td><td>\(-2\)</td><td>\(\left(-2,\, \dfrac{4\pi}{3}\right)\)</td></tr>
+                                        <tr><td>\(\dfrac{3\pi}{2}\)</td><td>\(2\)</td><td>\(\left(2,\, \dfrac{3\pi}{2}\right)\)</td></tr>
+                                        <tr><td>\(\dfrac{5\pi}{3}\)</td><td>\(4\)</td><td>\(\left(4,\, \dfrac{5\pi}{3}\right)\)</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div>
+                                <img src="images/8_5_8.png"
+                                     alt="Polar coordinate grid with concentric gray circles and radial lines. A red limacon with an inner loop is plotted for r equals 2 plus 4 cosine theta. The outer loop extends to r equals 6 along the positive polar axis and the inner loop is a small loop near the origin on the left side. Seven red dots mark key plotted points. The curve is symmetric about the horizontal polar axis."
+                                     style="max-width:100%; height:auto; display:block; margin: 0 auto;" />
+                            </div>
+                        </div>
+                    </li>
+
+                    <!-- Item 3: r = 5sin(2theta) -->
+                    <li>
+                        <p>
+                            Once again identify the general shape this function will take — \(r = 5\sin(2\theta)\) is of the form \(r = a\sin(n\theta)\) which suggests that it is a rose curve with 4 petals since \(n\) is even. Also it is important to note that the length across one petal will be 4 units. Once again find some of our common points using our unit circle and plot the graph.
+                        </p>
+
+                        <div class="division-wrap" role="group" aria-label="Value table and graph for r equals 5 sine 2 theta">
+                            <div>
+                                <table class="polar-table" aria-label="Values of r equals 5 sine 2 theta at selected angles">
+                                    <thead>
+                                        <tr>
+                                            <th>\(\theta\)</th>
+                                            <th>\(r = 5\sin(2\theta)\)</th>
+                                            <th>\((r,\theta)\)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td>\(0\)</td><td>\(0\)</td><td>\((0,0)\)</td></tr>
+                                        <tr><td>\(\dfrac{\pi}{12}\)</td><td>\(\dfrac{5}{2}\)</td><td>\(\left(\dfrac{5}{2},\, \dfrac{\pi}{12}\right)\)</td></tr>
+                                        <tr><td>\(\dfrac{\pi}{4}\)</td><td>\(5\)</td><td>\(\left(5,\, \dfrac{\pi}{4}\right)\)</td></tr>
+                                        <tr><td>\(\dfrac{5\pi}{12}\)</td><td>\(\dfrac{5}{2}\)</td><td>\(\left(\dfrac{5}{2},\, \dfrac{5\pi}{12}\right)\)</td></tr>
+                                        <tr><td>\(\dfrac{\pi}{2}\)</td><td>\(0\)</td><td>\(\left(0,\, \dfrac{\pi}{2}\right)\)</td></tr>
+                                        <tr><td>\(\dfrac{7\pi}{12}\)</td><td>\(-\dfrac{5}{2}\)</td><td>\(\left(-\dfrac{5}{2},\, \dfrac{7\pi}{12}\right)\)</td></tr>
+                                        <tr><td>\(\dfrac{3\pi}{4}\)</td><td>\(-5\)</td><td>\(\left(-5,\, \dfrac{3\pi}{4}\right)\)</td></tr>
+                                        <tr><td>\(\dfrac{11\pi}{12}\)</td><td>\(-\dfrac{5}{2}\)</td><td>\(\left(-\dfrac{5}{2},\, \dfrac{11\pi}{12}\right)\)</td></tr>
+                                    </tbody>
+                                </table>
+                                <p class="table-note">
+                                    It may be important to note that this really only gives us half the circle because of the double angle, which means you'd need to keep going around the second half of the circle to get the other points.
+                                </p>
+                            </div>
+                            <div>
+                                <img src="images/8_5_9.png"
+                                     alt="Polar coordinate grid with concentric gray circles and radial lines. A red 4-petal rose curve is plotted for r equals 5 sine 2 theta. The four petals are equally spaced and each extends 5 units from the origin, with petals pointing into the four diagonal quadrant directions (upper right, upper left, lower left, lower right). Thirteen red dots mark key plotted points at the tips and base intersections of the petals. The origin is also marked."
+                                     style="max-width:100%; height:auto; display:block; margin: 0 auto;" />
+                            </div>
+                        </div>
+                    </li>
+
+                    <!-- Item 4: r^2 = 16cos(2theta) -->
+                    <li>
+                        <p>
+                            Our last example is an example of a Lemniscate with a petal length of \(\sqrt{16} = 4\). If we used our unit circle to find and plot our points we'd end up with the graph below.
+                        </p>
+                        <img src="images/8_5_10.png"
+                             alt="Polar coordinate grid with concentric gray circles and radial lines. A red lemniscate (figure-eight curve) is plotted for r squared equals 16 cosine 2 theta. The two lobes extend horizontally, each reaching 4 units from the origin along the polar axis and its opposite direction. The curve pinches to a point at the origin and is symmetric about both the horizontal and vertical axes."
+                             style="max-width:100%; height:auto; display:block; margin: 1rem auto;" />
+                    </li>
+
+                </ol>
+
+            </div>
+        </div>
+    </section>
+
+    <p>
+        As with graphing any type of function from time to time it may be necessary to find more points than just the select few we found in each of these cases. There is no rule that says you can only use \(x\) amount of points to find the graph. Find and use as many points as you need.
+    </p>
+
+</section><!-- end #polar-graphs -->
+
+<!-- ══════════════════════════════════════════
+     EXERCISES
+══════════════════════════════════════════ -->
+<section class="exercises-section" role="region" aria-labelledby="exercises-8-5-heading">
+    <h2 id="exercises-8-5-heading" class="subsection-title">Exercises</h2>
+
+    <button class="exercises-header"
+            onclick="toggleExercises(this)"
+            aria-expanded="false"
+            aria-controls="exercises-8-5-content">
+        <span class="toggle-arrow">▼</span>
+        <span>Show Exercises</span>
+    </button>
+
+    <div id="exercises-8-5-content"
+         class="exercises-content"
+         role="region"
+         aria-labelledby="exercises-8-5-heading">
+        <p>Exercises to be added at a later date.</p>
+    </div>
+</section>
+
+</main>
+
+<!-- ── Toggle scripts ── -->
+<script>
+    function toggleExample(button) {
+        const content = button.nextElementSibling;
+        const arrow = button.querySelector('.toggle-arrow');
+
+        if (content.classList.contains('open')) {
+            content.classList.remove('open');
+            arrow.classList.remove('open');
+            button.querySelector('span:last-child').textContent = 'Show Solution';
+            button.setAttribute('aria-expanded', 'false');
+        } else {
+            content.classList.add('open');
+            arrow.classList.add('open');
+            button.querySelector('span:last-child').textContent = 'Hide Solution';
+            button.setAttribute('aria-expanded', 'true');
+        }
+    }
+
+    function toggleExercises(button) {
+        const content = document.getElementById(button.getAttribute('aria-controls'));
+        const arrow = button.querySelector('.toggle-arrow');
+
+        if (content.classList.contains('open')) {
+            content.classList.remove('open');
+            arrow.classList.remove('open');
+            button.querySelector('span:last-child').textContent = 'Show Exercises';
+            button.setAttribute('aria-expanded', 'false');
+        } else {
+            content.classList.add('open');
+            arrow.classList.add('open');
+            button.querySelector('span:last-child').textContent = 'Hide Exercises';
+            button.setAttribute('aria-expanded', 'true');
+        }
+    }
+</script>
+
+<!-- ── TOC loader ── -->
+<script>
+    fetch('toc.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('toc-placeholder').innerHTML = data;
+
+            const chapterButtons = document.querySelectorAll('.toc-chapter');
+            chapterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const expanded = button.getAttribute('aria-expanded') === 'true';
+                    button.setAttribute('aria-expanded', !expanded);
+                    const submenu = button.nextElementSibling;
+                    submenu.classList.toggle('open');
+                });
+            });
+        });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CH 4.4 – Multivariable Linear Systems</title>
+
+    <!-- MathJax configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)'], ['$', '$']],
+                displayMath: [['\\[', '\\]'], ['$$', '$$']],
+                packages: {'[+]': ['cancel', 'color']},
+                macros: {
+                    cancel: ['\\enclose{horizontalstrike}{#1}', 1]
+                }
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            },
+            loader: {
+                load: ['input/tex', 'output/chtml', '[tex]/cancel', '[tex]/color']
+            }
+        };
+    </script>
+    <script id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+
+    <link rel="stylesheet" href="styles.css" />
+
+    <style>
+        /* ── Collapsible exercises ── */
+        .exercises-section { margin: 25px 0; }
+
+        .exercises-header {
+            background-color: #33AB2B;
+            color: white;
+            padding: 12px 20px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+            border-radius: 4px;
+            transition: background-color 0.2s ease;
+            border: none;
+            font-size: 1em;
+            width: 100%;
+        }
+        .exercises-header:hover { background-color: #2a8922; }
+
+        .exercises-content {
+            display: none;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-top: none;
+            border-radius: 0 0 6px 6px;
+            padding: 20px;
+        }
+        .exercises-content.open { display: block; }
+
+        /* ── Utility colours ── */
+        .blue-text  { color: #0066cc; }
+        .red-text   { color: #c0392b; font-weight: bold; }
+        .green-text { color: #33AB2B; font-weight: bold; }
+
+        /* ── Two-column layout ── */
+        .division-wrap {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: start;
+            margin: 1.5rem 0;
+        }
+        @media (max-width: 600px) {
+            .division-wrap { grid-template-columns: 1fr; }
+        }
+
+        /* ── Equation label span ── */
+        .eq-label {
+            color: #c0392b;
+            font-weight: bold;
+        }
+
+        /* ── Elimination table ── */
+        .elim-table {
+            margin: 1rem auto;
+            border-collapse: collapse;
+            font-size: 1em;
+            width: auto;
+            background: transparent;
+        }
+        .elim-table td {
+            padding: 0.25rem 0.4rem;
+            border: none;
+            text-align: center;
+            vertical-align: middle;
+            background: transparent;
+            white-space: nowrap;
+        }
+        .elim-table tr.elim-rule td {
+            border-top: 2px solid #333;
+            padding-top: 0.4rem;
+        }
+        .elim-table td.elim-op {
+            font-weight: bold;
+            padding-right: 0.6rem;
+            color: #333;
+        }
+        .elim-table td.elim-label {
+            color: #555;
+            font-size: 0.9em;
+            padding-left: 0.8rem;
+            text-align: left;
+        }
+        .elim-wrap {
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+
+        /* ── Simple single-column elimination table ── */
+        .elim-simple {
+            margin: 1rem auto;
+            border-collapse: collapse;
+            font-size: 1em;
+            width: auto;
+            background: transparent;
+        }
+        .elim-simple td {
+            padding: 0.25rem 0.5rem;
+            border: none;
+            text-align: center;
+            vertical-align: middle;
+            background: transparent;
+            white-space: nowrap;
+        }
+        .elim-simple tr.elim-rule td {
+            border-top: 2px solid #333;
+            padding-top: 0.4rem;
+        }
+        .elim-simple td.elim-op {
+            font-weight: bold;
+            padding-right: 0.6rem;
+        }
+
+        /* ── Solution callout (green) ── */
+        .solution-callout {
+            background-color: #f0f8ed;
+            border-left: 4px solid #33AB2B;
+            padding: 0.6rem 1rem;
+            margin: 0.8rem 0;
+            border-radius: 0 4px 4px 0;
+            font-weight: bold;
+        }
+
+        /* ── No solution callout (red) ── */
+        .no-solution-box {
+            background-color: #fdecea;
+            border-left: 4px solid #c0392b;
+            padding: 0.6rem 1rem;
+            margin: 0.8rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+
+        /* ── Infinite solutions callout (blue) ── */
+        .infinite-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #0066cc;
+            padding: 0.8rem 1.2rem;
+            margin: 0.8rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+        .infinite-box p { margin-bottom: 0.5rem; }
+        .infinite-box p:last-child { margin-bottom: 0; }
+
+        /* ── Sub-example heading inside solution ── */
+        .sub-example-heading {
+            color: #33AB2B;
+            font-size: 1.05em;
+            font-weight: bold;
+            margin-top: 1.4rem;
+            margin-bottom: 0.6rem;
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 0.3rem;
+        }
+
+        /* ── Consistent badge ── */
+        .consistent-badge {
+            display: inline-block;
+            background-color: #33AB2B;
+            color: white;
+            border-radius: 4px;
+            padding: 0.15rem 0.6rem;
+            font-size: 0.88em;
+            font-weight: bold;
+            margin-left: 0.4rem;
+        }
+
+        /* ── Inconsistent badge ── */
+        .inconsistent-badge {
+            display: inline-block;
+            background-color: #c0392b;
+            color: white;
+            border-radius: 4px;
+            padding: 0.15rem 0.6rem;
+            font-size: 0.88em;
+            font-weight: bold;
+            margin-left: 0.4rem;
+        }
+
+        /* ── Application table ── */
+        .app-table {
+            width: auto;
+            border-collapse: collapse;
+            margin: 1rem auto;
+        }
+        .app-table th,
+        .app-table td {
+            border: 1px solid #999;
+            padding: 10px 18px;
+            text-align: center;
+        }
+        .app-table th {
+            background-color: #f0f8ed;
+            color: #33AB2B;
+            font-weight: bold;
+        }
+        .app-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        /* ── Footnote ── */
+        .footnote {
+            font-size: 0.85em;
+            color: #555;
+            margin-top: 0.5rem;
+            font-style: italic;
+        }
+
+        /* ── Quoted text highlight ── */
+        .quote-highlight {
+            color: #0066cc;
+        }
+    </style>
+</head>
+<body>
+
+<div id="toc-placeholder"></div>
+
+<main class="container">
+
+<section id="multivariable" aria-labelledby="section-heading">
+    <h1 id="section-heading">CH 4.4 – Multivariable Linear Systems</h1>
+
+    <p>
+        The majority of your mathematical careers have been spent in either the one-dimension or two-dimensional plane, meaning you've had either one-variable (\(x\)) or two-variables (\(x, y\)). We're now going to look at the three-dimensional plane, so three-variables (\(x, y, z\)). When you think about it, a third dimension makes sense, because you as a human being have three-dimensions, a length, width, and height. Imagine how funny you'd look without the width aspect.
+    </p>
+    <p>
+        When it comes to solving systems in the third dimension we use a process very similar to our elimination method learned in the previous section. To solve a system of equation in multivariables we use a method known as <strong class="blue-text">Gaussian Elimination</strong>. Carl Gauss was a rather famous mathematician who contributed a lot of pertinent information to mathematics. With this method we perform <strong>row operations</strong> to create equivalent systems. This is not a new concept we've already been doing this in the elimination method. Our goal with multivariable systems however, is to get the system into a form known as <strong class="blue-text">row-echelon form</strong>. Below is an example of a original multivariable system and then below it, is an example of a system in row-echelon form.
+    </p>
+
+    <p><strong>Original Equation</strong></p>
+    \[\begin{cases} x - 2y + 3z = 9 \\ -x + 3y = -4 \\ 2x - 5y + 5z = 17 \end{cases}\]
+
+    <p><strong>Row Echelon Form</strong></p>
+    \[\begin{cases} x - 2y + 3z = 9 \\ y + 3z = 5 \\ z = 2 \end{cases}\]
+
+    <p>
+        The row echelon form allow for back-substitution to solve the remainder of the equation once you get it to that point. Let's look at how we can get to this form.
+    </p>
+
+    <hr class="divider" role="separator" aria-hidden="true" />
+
+    <!-- ══════════════════════════════════════════
+         EXAMPLE 1 — Three-variable system
+    ══════════════════════════════════════════ -->
+    <section class="example" aria-labelledby="example-4-4-1-heading">
+        <div class="example-problem">
+            <h3 id="example-4-4-1-heading">Example</h3>
+            <p>Solve the system of linear equations</p>
+            \[\begin{cases}
+                2x + 4y - z = 7 \quad \textcolor{red}{(1)} \\
+                2x - 4y + 2z = -6 \quad \textcolor{red}{(2)} \\
+                x + 4y + z = 0 \quad \textcolor{red}{(3)}
+            \end{cases}\]
+        </div>
+
+        <button class="solution-header"
+                onclick="toggleExample(this)"
+                aria-expanded="false"
+                aria-controls="solution-4-4-1">
+            <span class="toggle-arrow">▼</span>
+            <span>Show Solution</span>
+        </button>
+
+        <div id="solution-4-4-1" class="example-content">
+            <div class="solution">
+                <h4>Solution</h4>
+
+                <p>
+                    To begin the process we are going to use equations <span class="eq-label">(1)</span> and <span class="eq-label">(2)</span> and reduce it down to two variables using row operations (part of the elimination method). Just like you would with your elimination method look at your two equations and decide which variable you want to eliminate. We want to eliminate the \(y\) since we want to eliminate a single variable and the \(y\) have opposite signs.
+                </p>
+
+                <div class="elim-wrap">
+                    <table class="elim-simple" aria-label="Elimination of y using equations 1 and 2">
+                        <tbody>
+                            <tr>
+                                <td>\((2x + 4y - z = 7)\)</td>
+                            </tr>
+                            <tr>
+                                <td>\(2x - 4y + 2z = -6\)</td>
+                            </tr>
+                            <tr class="elim-rule">
+                                <td>\(4x + z = 1\)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p>
+                    We're going to call this equation <span class="eq-label">(4)</span> right now, that means our system would now look like:
+                </p>
+                \[\begin{cases}
+                    2x + 4y - z = 7 \\
+                    4x + z = 1 \\
+                    x + 4y + z = 0
+                \end{cases}\]
+
+                <p>
+                    Next we take equation <span class="eq-label">(1)</span> and <span class="eq-label">(3)</span>, and eliminate the same variable as you did in the previous step.
+                </p>
+
+                <div class="elim-wrap">
+                    <table class="elim-table" aria-label="Elimination of y using equations 1 and 3">
+                        <tbody>
+                            <tr>
+                                <td class="elim-op"></td>
+                                <td>\(2x + 4y - z = 7\)</td>
+                                <td class="elim-label">\(\rightarrow\)</td>
+                                <td>\(2x + 4y - z = 7\)</td>
+                            </tr>
+                            <tr>
+                                <td class="elim-op"></td>
+                                <td>\(-1(x + 4y + z = 0)\)</td>
+                                <td class="elim-label">\(\rightarrow\)</td>
+                                <td>\(-x - 4y - z = 0\)</td>
+                            </tr>
+                            <tr class="elim-rule">
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>\(x - 2z = 7\)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p>
+                    We will call that equation <span class="eq-label">(5)</span>. To get to the last row of our table we take equation <span class="eq-label">(4)</span> and <span class="eq-label">(5)</span>, and eliminate the \(z\) variable:
+                </p>
+
+                <div class="elim-wrap">
+                    <table class="elim-table" aria-label="Elimination of z using equations 4 and 5">
+                        <tbody>
+                            <tr>
+                                <td class="elim-op"></td>
+                                <td>\(2(4x + z = 1)\)</td>
+                                <td class="elim-label">\(\rightarrow\)</td>
+                                <td>\(8x + 2z = 2\)</td>
+                            </tr>
+                            <tr>
+                                <td class="elim-op"></td>
+                                <td>\(x - 2z = 7\)</td>
+                                <td class="elim-label">\(\rightarrow\)</td>
+                                <td>\(x - 2z = 7\)</td>
+                            </tr>
+                            <tr class="elim-rule">
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>\(9x = 9\)</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>\(x = 1\)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p>This means our linear system in row echelon form would be:</p>
+                \[\begin{cases}
+                    2x + 4y - z = 7 \\
+                    4x + z = 1 \\
+                    x = 1
+                \end{cases}\]
+
+                <p>
+                    To finish solving this equation we would now just start back substituting our way back up until we've found each variable:
+                </p>
+
+                <div class="division-wrap" role="group" aria-label="Back substitution steps to find z and y">
+                    <div>
+                        \[\begin{aligned}
+                            1 - 2z &= 7 \\
+                            -2z &= 6 \\
+                            z &= -3
+                        \end{aligned}\]
+                    </div>
+                    <div>
+                        \[\begin{aligned}
+                            2(1) + 4y - (-3) &= 7 \\
+                            2 + 4y + 3 &= 7 \\
+                            4y + 5 &= 7 \\
+                            4y &= 2 \\
+                            y &= \frac{2}{4} \\
+                            y &= \frac{1}{2}
+                        \end{aligned}\]
+                    </div>
+                </div>
+
+                <div class="solution-callout" role="note">
+                    Thus we'd have the solution of \(\left(1,\, \dfrac{1}{2},\, -3\right)\). This would be a consistent system since we have one possible solution.
+                    <span class="consistent-badge">Consistent</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider" role="separator" aria-hidden="true" />
+
+    <!-- ══════════════════════════════════════════
+         EXAMPLE 2 — No Solution
+    ══════════════════════════════════════════ -->
+    <section class="example" aria-labelledby="example-4-4-2-heading">
+        <div class="example-problem">
+            <h3 id="example-4-4-2-heading">Example</h3>
+            <p>Solve the system of equations</p>
+            \[\begin{cases}
+                2x + y - z = 7 \\
+                x - 2y + 2z = -9 \\
+                3x - y + z = 5
+            \end{cases}\]
+        </div>
+
+        <button class="solution-header"
+                onclick="toggleExample(this)"
+                aria-expanded="false"
+                aria-controls="solution-4-4-2">
+            <span class="toggle-arrow">▼</span>
+            <span>Show Solution</span>
+        </button>
+
+        <div id="solution-4-4-2" class="example-content">
+            <div class="solution">
+                <h4>Solution</h4>
+
+                <p>
+                    Every time we have a system of equations we tend to start it the same exact way when there are multi-variables, and that is by eliminating the \(x\) variable first just like in the previous example, thus we will take equations <span class="eq-label">(1)</span> and <span class="eq-label">(2)</span> and eliminate the \(x\):
+                </p>
+
+                <div class="elim-wrap">
+                    <table class="elim-simple" aria-label="Elimination of x using equations 1 and 2">
+                        <tbody>
+                            <tr>
+                                <td class="elim-op"></td>
+                                <td>\(2x + y - z = 7\)</td>
+                            </tr>
+                            <tr>
+                                <td class="elim-op">\(+\)</td>
+                                <td>\(-2x + 4y - 4z = 18\)</td>
+                            </tr>
+                            <tr class="elim-rule">
+                                <td></td>
+                                <td>\(5y - 5z = 25\)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p>
+                    Next we will take <span class="eq-label">(1)</span> and <span class="eq-label">(3)</span>. We will have to multiply each equation by a number to eliminate the \(x\) in this case. While in this example we chose to multiply the first equation by positive three and the second by negative two, one could have easily multiplied by negative three and positive two and ended up with the same overall solution to the question.
+                </p>
+
+                <div class="elim-wrap">
+                    <table class="elim-table" aria-label="Elimination of x using equations 1 and 3">
+                        <tbody>
+                            <tr>
+                                <td class="elim-op"></td>
+                                <td>\(3(2x + y - z = 7)\)</td>
+                                <td class="elim-label">\(\rightarrow\)</td>
+                                <td>\(6x + 3y - 3z = 21\)</td>
+                            </tr>
+                            <tr>
+                                <td class="elim-op">\(+\)</td>
+                                <td>\(-2(3x - y + z = 5)\)</td>
+                                <td class="elim-label">\(\rightarrow\)</td>
+                                <td>\(-6x + 2y - 2z = -10\)</td>
+                            </tr>
+                            <tr class="elim-rule">
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>\(5y - 5z = 11\)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p>Now take those two resulting equations and eliminate the \(y\) variable:</p>
+
+                <div class="elim-wrap">
+                    <table class="elim-table" aria-label="Elimination of y from the two resulting equations, yielding a contradiction">
+                        <tbody>
+                            <tr>
+                                <td class="elim-op"></td>
+                                <td>\(5y - 5z = 25\)</td>
+                                <td class="elim-label">\(\rightarrow\)</td>
+                                <td>\(5y - 5z = 25\)</td>
+                            </tr>
+                            <tr>
+                                <td class="elim-op">\(+\)</td>
+                                <td>\(-1(5y - 5z = 11)\)</td>
+                                <td class="elim-label">\(\rightarrow\)</td>
+                                <td>\(-5y + 5z = -11\)</td>
+                            </tr>
+                            <tr class="elim-rule">
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>\(0 \neq 14\)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="no-solution-box" role="note">
+                    Recall in the previous sections, we concluded that when we end up with an equation where the left hand and right hand side do not match or make a true statement, then the system has <strong class="blue-text">No Solution</strong>. That means that this system is an inconsistent system.
+                    <span class="inconsistent-badge">Inconsistent</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider" role="separator" aria-hidden="true" />
+
+    <!-- ══════════════════════════════════════════
+         EXAMPLE 3 — Infinite Solutions
+    ══════════════════════════════════════════ -->
+    <section class="example" aria-labelledby="example-4-4-3-heading">
+        <div class="example-problem">
+            <h3 id="example-4-4-3-heading">Example</h3>
+            <p>Solve the system of equations</p>
+            \[\begin{cases}
+                3x - 3y + 6z = 6 \\
+                x + 2y - z = 5 \\
+                5x - 8y + 13z = 7
+            \end{cases}\]
+        </div>
+
+        <button class="solution-header"
+                onclick="toggleExample(this)"
+                aria-expanded="false"
+                aria-controls="solution-4-4-3">
+            <span class="toggle-arrow">▼</span>
+            <span>Show Solution</span>
+        </button>
+
+        <div id="solution-4-4-3" class="example-content">
+            <div class="solution">
+                <h4>Solution</h4>
+
+                <div class="elim-wrap">
+                    <table class="elim-table" aria-label="First elimination step using equations 1 and 2">
+                        <tbody>
+                            <tr>
+                                <td class="elim-op"></td>
+                                <td>\(3x - 3y + 6z = 6\)</td>
+                                <td class="elim-label">\(\rightarrow\)</td>
+                                <td>\(3x - 3y + 6z = 6\)</td>
+                            </tr>
+                            <tr>
+                                <td class="elim-op">\(+\)</td>
+                                <td>\(-3(x + 2y - z = 5)\)</td>
+                                <td class="elim-label">\(\rightarrow\)</td>
+                                <td>\(-3x - 6y + 3z = -15\)</td>
+                            </tr>
+                            <tr class="elim-rule">
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>\(-9y + 9z = -9\)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="elim-wrap">
+                    <table class="elim-table" aria-label="Second elimination step using equations 1 and 3">
+                        <tbody>
+                            <tr>
+                                <td class="elim-op"></td>
+                                <td>\(-5(3x - 3y + 6z = 6)\)</td>
+                                <td class="elim-label">\(\rightarrow\)</td>
+                                <td>\(-15x + 15y - 30z = -30\)</td>
+                            </tr>
+                            <tr>
+                                <td class="elim-op">\(+\)</td>
+                                <td>\(3(5x - 8y + 13z = 7)\)</td>
+                                <td class="elim-label">\(\rightarrow\)</td>
+                                <td>\(15x - 24y + 39z = 21\)</td>
+                            </tr>
+                            <tr class="elim-rule">
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>\(-9y + 9z = -9\)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="elim-wrap">
+                    <table class="elim-table" aria-label="Third elimination step showing the two identical equations yield zero equals zero">
+                        <tbody>
+                            <tr>
+                                <td class="elim-op"></td>
+                                <td>\(-9y + 9z = -9\)</td>
+                                <td class="elim-label">\(\rightarrow\)</td>
+                                <td>\(-9y + 9z = -9\)</td>
+                            </tr>
+                            <tr>
+                                <td class="elim-op">\(+\)</td>
+                                <td>\(-1(-9y + 9z = -9)\)</td>
+                                <td class="elim-label">\(\rightarrow\)</td>
+                                <td>\(9y - 9z = 9\)</td>
+                            </tr>
+                            <tr class="elim-rule">
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>\(0 = 0\)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="infinite-box" role="note">
+                    <p>
+                        Once again, recall that we previously learned that when the left hand and right hand side are equal to each other, that means that we have infinitely many solutions. When this happens we typically put all variables in terms of \(z\) since this is what our row echelon form sets us up for. Start by taking one of the last equations with two variables, and solve it for \(y\), then back substitute into one of the original equations to solve for \(x\):
+                    </p>
+                </div>
+
+                <div class="division-wrap" role="group" aria-label="Back substitution to find y and x in terms of z">
+                    <div>
+                        <p><strong>First find \(y\):</strong></p>
+                        \[\begin{aligned}
+                            -9y + 9z &= -9 \\
+                            -y + z &= -1 \\
+                            z &= y - 1 \\
+                            z + 1 &= y
+                        \end{aligned}\]
+                    </div>
+                    <div>
+                        <p><strong>Remember it doesn't matter which equation you choose to back substitute into:</strong></p>
+                        \[\begin{aligned}
+                            x + 2(z + 1) - z &= 5 \\
+                            x + 2z + 2 - z &= 5 \\
+                            x + z &= 3 \\
+                            x &= 3 - z
+                        \end{aligned}\]
+                    </div>
+                </div>
+
+                <div class="solution-callout" role="note">
+                    This means that we have the solution of \((3 - z,\; z + 1,\; z)\), and the system would be consistent.
+                    <span class="consistent-badge">Consistent</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <p>
+        Typically speaking when it comes to solving systems of linear equations, there should be an equation for every variable. This means that if you have three unknowns or three variables, you should have 3 equations. If you have 2 unknowns, you'd have two equations, so on and so forth. This is helpful information when solving application problems.
+    </p>
+
+    <hr class="divider" role="separator" aria-hidden="true" />
+
+    <!-- ══════════════════════════════════════════
+         APPLICATIONS
+    ══════════════════════════════════════════ -->
+    <section aria-labelledby="applications-heading">
+        <h2 id="applications-heading">Applications</h2>
+
+        <p>
+            In the previous section we looked at application problems involving two variables. It should be no surprise that in this section we are going to look at a few examples with three variables. One of the important things to remember when setting up any application question, is that for every unknown you must have an equation. Meaning if we are looking for three variables, then we need three equations.
+        </p>
+
+        <!-- Carnival Example -->
+        <section class="example" aria-labelledby="example-4-4-4-heading">
+            <div class="example-problem">
+                <h3 id="example-4-4-4-heading">Example</h3>
+                <p>
+                    At a carnival, \(\$2{,}941.25\) in receipts were taken at the end of the day. The cost of a child's ticket was \(\$20.50\), an adult ticket was \(\$29.75\), and a senior citizen ticket was \(\$15.25\). There were twice as many senior citizens as adults in attendance, and \(20\) more children than senior citizens. How many children, adult, and senior citizen tickets were sold?
+                </p>
+                <p class="footnote">Taken from OpenStax, Download for free at http://cnx.org/content/col11667/latest/.</p>
+            </div>
+
+            <button class="solution-header"
+                    onclick="toggleExample(this)"
+                    aria-expanded="false"
+                    aria-controls="solution-4-4-4">
+                <span class="toggle-arrow">▼</span>
+                <span>Show Solution</span>
+            </button>
+
+            <div id="solution-4-4-4" class="example-content">
+                <div class="solution">
+                    <h4>Solution</h4>
+                    <p>
+                        When it comes to solving application problems in three variables we set things up very similar to that of two variables, use a table when possible to help set up the situation:
+                    </p>
+
+                    <table class="app-table" aria-label="Carnival ticket table showing ticket type, amount, price, and total revenue for each group">
+                        <thead>
+                            <tr>
+                                <th>Type</th>
+                                <th>Amount</th>
+                                <th>Price</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Child</td>
+                                <td>\(x\)</td>
+                                <td>\(\$20.50\)</td>
+                                <td>\(\$20.50x\)</td>
+                            </tr>
+                            <tr>
+                                <td>Adult</td>
+                                <td>\(y\)</td>
+                                <td>\(\$29.75\)</td>
+                                <td>\(\$29.75y\)</td>
+                            </tr>
+                            <tr>
+                                <td>Seniors</td>
+                                <td>\(z\)</td>
+                                <td>\(\$15.25\)</td>
+                                <td>\(\$15.25z\)</td>
+                            </tr>
+                            <tr>
+                                <td>Total</td>
+                                <td></td>
+                                <td></td>
+                                <td>\(\$2{,}941.25\)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <p>
+                        Now, this problem only gave us one total for the table which was the total revenue (\(\$2{,}941.25\)), this allows us to come up with one equation which is \(20.50x + 29.75y + 15.25z = 2941.25\). However, we know that we need three equations, the other two equations come from inside the question.
+                    </p>
+                    <p>
+                        The question says <span class="quote-highlight">"There were twice as many senior citizens as adults in attendance,"</span> That tells us that \(2y = z\) and it also says <span class="quote-highlight">"and \(20\) more children than senior citizens"</span> this tells us that \(z + 20 = x\). Thus we have the system of:
+                    </p>
+                    \[\begin{cases}
+                        20.50x + 29.75y + 15.25z = 2941.25 \\
+                        2y = z \\
+                        z + 20 = x
+                    \end{cases}\]
+                    <p>
+                        Remember the method you use to solve this doesn't matter, you could use substitution, or elimination. We are going to use elimination to do that we need to make put each equation in the same format as the first one, which would give us \(2y = z \rightarrow 0x + 2y - z = 0\) and \(z + 20 = x \rightarrow -x + 0y + z = -20\), you do not have to use the place holders but they make the set up easier if you do.
+                    </p>
+                    <p>
+                        Next we need to eliminate the decimals in the first equation by multiplying the entire equation by \(100\), giving us \(100(20.50x + 29.75y + 15.25z = 2941.25) \rightarrow 2050x + 2975y + 1525z = 294125\), now we're ready to solve the system using our process that we've outlined before. To help us with this process let's re-look at how this system looks:
+                    </p>
+                    \[\begin{cases}
+                        2050x + 2975y + 1525z = 294125 \\
+                        0x + 2y - z = 0 \\
+                        -x + 0y + z = -20
+                    \end{cases}\]
+                    <p>
+                        There are multiple ways that you could proceed from here, by looking at our equations we can see that equation \((2)\) doesn't have a \(x\) term and equation \((3)\) doesn't have a \(y\) term, this means we should choose to eliminate one of those two. We're going to eliminate the \(x\) term. To do that we don't need to take equations (1) and (2) because equation (2) has already had that term reduced. That means we are only going to take equations (1) and (3) and eliminate the \(x\):
+                    </p>
+
+                    <div class="elim-wrap">
+                        <table class="elim-table" aria-label="Elimination of x using equations 1 and 3 in the carnival problem">
+                            <tbody>
+                                <tr>
+                                    <td class="elim-op"></td>
+                                    <td>\(2050x + 2975y + 1525z = 294125\)</td>
+                                    <td class="elim-label">\(\rightarrow\)</td>
+                                    <td>\(2050x + 2975y + 1525z = 294125\)</td>
+                                </tr>
+                                <tr>
+                                    <td class="elim-op">\(+\)</td>
+                                    <td>\(2050(-x + 0y + z = -20)\)</td>
+                                    <td class="elim-label">\(\rightarrow\)</td>
+                                    <td>\(-2050x + 0y + 2050z = -41000\)</td>
+                                </tr>
+                                <tr class="elim-rule">
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>\(2975y + 3575z = 253125\)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <p>Now take equation (2) and the equation we just found and solve for either \(y\) or \(z\):</p>
+
+                    <div class="elim-wrap">
+                        <table class="elim-table" aria-label="Elimination using equation 2 and the result from the previous step to find y">
+                            <tbody>
+                                <tr>
+                                    <td class="elim-op"></td>
+                                    <td>\(2975y + 3575z = 253125\)</td>
+                                    <td class="elim-label">\(\rightarrow\)</td>
+                                    <td>\(2975y + 3575z = 253125\)</td>
+                                </tr>
+                                <tr>
+                                    <td class="elim-op">\(+\)</td>
+                                    <td>\(3575(0x + 2y - z = 0)\)</td>
+                                    <td class="elim-label">\(\rightarrow\)</td>
+                                    <td>\(7150y - 3575z = 0\)</td>
+                                </tr>
+                                <tr class="elim-rule">
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>\(10125y = 253125\)</td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>\(y = 25\)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <p>
+                        Next, we start our back substitution to work our way back up to finding our other two variables. We will start by finding \(z \rightarrow z = 2(25) = 50\), then we can find \(x \rightarrow x = 50 + 20 = 70\).
+                    </p>
+                    <div class="solution-callout" role="note">
+                        This means that our solution would be \((70, 25, 50)\) which when put into context is \(70\) children tickets, \(25\) adult tickets and \(50\) senior citizen tickets that were sold.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Car Dealership Example -->
+        <section class="example" aria-labelledby="example-4-4-5-heading">
+            <div class="example-problem">
+                <h3 id="example-4-4-5-heading">Example</h3>
+                <p>
+                    Last year, at Haven's Pond Car Dealership, for a particular model of BMW, Jeep, and Toyota, one could purchase all three cars for a total of \(\$140{,}000\). This year, due to inflation, the same cars would cost \(\$151{,}830\). The cost of the BMW increased by \(8\%\), the Jeep by \(5\%\), and the Toyota by \(12\%\). If the price of last year's Jeep was \(\$7{,}000\) less than the price of last year's BMW, what was the price of each of the three cars last year?
+                </p>
+                <p class="footnote">Taken from OpenStax, Download for free at http://cnx.org/content/col11667/latest/.</p>
+            </div>
+
+            <button class="solution-header"
+                    onclick="toggleExample(this)"
+                    aria-expanded="false"
+                    aria-controls="solution-4-4-5">
+                <span class="toggle-arrow">▼</span>
+                <span>Show Solution</span>
+            </button>
+
+            <div id="solution-4-4-5" class="example-content">
+                <div class="solution">
+                    <h4>Solution</h4>
+                    <p>First set up our problem with the pieces that we have:</p>
+
+                    <table class="app-table" aria-label="Car dealership table showing each car, its old price, percentage increase, and new price">
+                        <thead>
+                            <tr>
+                                <th>Car</th>
+                                <th>Old Price</th>
+                                <th>Increase</th>
+                                <th>New Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>BMW</td>
+                                <td>\(x\)</td>
+                                <td>\(0.08x\)</td>
+                                <td>\(\$1.08x\)</td>
+                            </tr>
+                            <tr>
+                                <td>Jeep</td>
+                                <td>\(y\)</td>
+                                <td>\(0.05y\)</td>
+                                <td>\(\$1.05y\)</td>
+                            </tr>
+                            <tr>
+                                <td>Toyota</td>
+                                <td>\(z\)</td>
+                                <td>\(0.12z\)</td>
+                                <td>\(\$1.12z\)</td>
+                            </tr>
+                            <tr>
+                                <td>Total</td>
+                                <td>\(\$140{,}000\)</td>
+                                <td></td>
+                                <td>\(\$151{,}830\)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <p>
+                        We get the new price by adding the price increase to the old price. But, as we can see that only gives us two equations and we need three. The question states that <span class="quote-highlight">"the price of last year's Jeep was \(\$7{,}000\) less than the price of last year's BMW"</span> This means we have the equation \(y = x - \$7{,}000\) giving us the system:
+                    </p>
+                    \[\begin{cases}
+                        x + y + z = 140000 \\
+                        1.08x + 1.05y + 1.12z = 151830 \\
+                        y = x - 7000
+                    \end{cases}\]
+                    <p>
+                        Recall that we don't want to work with decimals, meaning we need to multiply our second equation by 100 giving us \(100(1.08x + 1.05y + 1.12z = 151830) \rightarrow 108x + 105y + 112z = 15183000\). Before we start to solve this system, let's set up our third equation so that it's in the same form as the other two. Making our system look like:
+                    </p>
+                    \[\begin{cases}
+                        x + y + z = 140000 \\
+                        108x + 105y + 112z = 15183000 \\
+                        -x + y + 0z = -7000
+                    \end{cases}\]
+                    <p>
+                        From looking at our equations we can see that our third equation is missing a \(z\) variable, this means that we should take equations (1) and (2) and eliminate the \(z\) to get:
+                    </p>
+
+                    <div class="elim-wrap">
+                        <table class="elim-table" aria-label="Elimination of z using equations 1 and 2 in the car dealership problem">
+                            <tbody>
+                                <tr>
+                                    <td class="elim-op"></td>
+                                    <td>\(-112(x + y + z = 140000)\)</td>
+                                    <td class="elim-label">\(\rightarrow\)</td>
+                                    <td>\(-112x - 112y - 112z = -15680000\)</td>
+                                </tr>
+                                <tr>
+                                    <td class="elim-op">\(+\)</td>
+                                    <td>\(108x + 105y + 112z = 15183000\)</td>
+                                    <td class="elim-label">\(\rightarrow\)</td>
+                                    <td>\(108x + 105y + 112z = 15183000\)</td>
+                                </tr>
+                                <tr class="elim-rule">
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>\(-4x - 7y = -497000\)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <p>Now take that equation with equation (3) and eliminate whichever variable you'd like. We are going to eliminate \(x\):</p>
+
+                    <div class="elim-wrap">
+                        <table class="elim-table" aria-label="Elimination of x to find y in the car dealership problem">
+                            <tbody>
+                                <tr>
+                                    <td class="elim-op"></td>
+                                    <td>\(-4x - 7y = -497000\)</td>
+                                    <td class="elim-label">\(\rightarrow\)</td>
+                                    <td>\(-4x - 7y = -497000\)</td>
+                                </tr>
+                                <tr>
+                                    <td class="elim-op">\(+\)</td>
+                                    <td>\(-4(-x + y + 0z = -7000)\)</td>
+                                    <td class="elim-label">\(\rightarrow\)</td>
+                                    <td>\(4x - 4y + 0z = 28000\)</td>
+                                </tr>
+                                <tr class="elim-rule">
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>\(-11y = -469000\)</td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>\(y = 42636.36\)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <p>Then work on the back substitution to find the remaining variables:</p>
+                    \[y = x - 7000 \rightarrow x = 42636.36 + 7000 = 49636.36\]
+                    \[x + y + z = 140000 \rightarrow z = 140000 - 49636.36 - 42636.36 = 47727.28\]
+
+                    <div class="solution-callout" role="note">
+                        This means that our solution is \((49636.36,\; 42636.36,\; 47727.28)\) meaning last year's price for the BMW was \(\$49{,}636.36\), for the Jeep \(\$42{,}636.36\), and last year's price for the Toyota was \(\$47{,}727.28\). It is important to list answers in the context of the problem. The reason for this, is while we used \(x\) for BMW, someone else could have used \(B\) or any other variable. Remember we use one method and one way to solve these problems, that is not the only possible way or method to do that.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </section><!-- end applications -->
+
+</section><!-- end #multivariable -->
+
+<!-- ══════════════════════════════════════════
+     EXERCISES
+══════════════════════════════════════════ -->
+<section class="exercises-section" role="region" aria-labelledby="exercises-4-4-heading">
+    <h2 id="exercises-4-4-heading" class="subsection-title">Exercises</h2>
+
+    <button class="exercises-header"
+            onclick="toggleExercises(this)"
+            aria-expanded="false"
+            aria-controls="exercises-4-4-content">
+        <span class="toggle-arrow">▼</span>
+        <span>Show Exercises</span>
+    </button>
+
+    <div id="exercises-4-4-content"
+         class="exercises-content"
+         role="region"
+         aria-labelledby="exercises-4-4-heading">
+        <p>Exercises to be added at a later date.</p>
+    </div>
+</section>
+
+</main>
+
+<!-- ── Toggle scripts ── -->
+<script>
+    function toggleExample(button) {
+        const content = button.nextElementSibling;
+        const arrow = button.querySelector('.toggle-arrow');
+
+        if (content.classList.contains('open')) {
+            content.classList.remove('open');
+            arrow.classList.remove('open');
+            button.querySelector('span:last-child').textContent = 'Show Solution';
+            button.setAttribute('aria-expanded', 'false');
+        } else {
+            content.classList.add('open');
+            arrow.classList.add('open');
+            button.querySelector('span:last-child').textContent = 'Hide Solution';
+            button.setAttribute('aria-expanded', 'true');
+        }
+    }
+
+    function toggleExercises(button) {
+        const content = document.getElementById(button.getAttribute('aria-controls'));
+        const arrow = button.querySelector('.toggle-arrow');
+
+        if (content.classList.contains('open')) {
+            content.classList.remove('open');
+            arrow.classList.remove('open');
+            button.querySelector('span:last-child').textContent = 'Show Exercises';
+            button.setAttribute('aria-expanded', 'false');
+        } else {
+            content.classList.add('open');
+            arrow.classList.add('open');
+            button.querySelector('span:last-child').textContent = 'Hide Exercises';
+            button.setAttribute('aria-expanded', 'true');
+        }
+    }
+</script>
+
+<!-- ── TOC loader ── -->
+<script>
+    fetch('toc.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('toc-placeholder').innerHTML = data;
+
+            const chapterButtons = document.querySelectorAll('.toc-chapter');
+            chapterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const expanded = button.getAttribute('aria-expanded') === 'true';
+                    button.setAttribute('aria-expanded', !expanded);
+                    const submenu = button.nextElementSibling;
+                    submenu.classList.toggle('open');
+                });
+            });
+        });
+</script>
+
+</body>
+</html>

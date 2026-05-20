@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CH 4.5 – Partial Fractions</title>
+
+    <!-- MathJax configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)'], ['$', '$']],
+                displayMath: [['\\[', '\\]'], ['$$', '$$']],
+                packages: {'[+]': ['cancel', 'color']},
+                macros: {
+                    cancel: ['\\enclose{horizontalstrike}{#1}', 1]
+                }
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            },
+            loader: {
+                load: ['input/tex', 'output/chtml', '[tex]/cancel', '[tex]/color']
+            }
+        };
+    </script>
+    <script id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+
+    <link rel="stylesheet" href="styles.css" />
+
+    <style>
+        /* ── Collapsible exercises ── */
+        .exercises-section { margin: 25px 0; }
+
+        .exercises-header {
+            background-color: #33AB2B;
+            color: white;
+            padding: 12px 20px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+            border-radius: 4px;
+            transition: background-color 0.2s ease;
+            border: none;
+            font-size: 1em;
+            width: 100%;
+        }
+        .exercises-header:hover { background-color: #2a8922; }
+
+        .exercises-content {
+            display: none;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-top: none;
+            border-radius: 0 0 6px 6px;
+            padding: 20px;
+        }
+        .exercises-content.open { display: block; }
+
+        /* ── Utility colours ── */
+        .blue-text  { color: #0066cc; }
+        .red-text   { color: #c0392b; font-weight: bold; }
+        .green-text { color: #33AB2B; font-weight: bold; }
+
+        /* ── Two-column layout ── */
+        .division-wrap {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: start;
+            margin: 1.5rem 0;
+        }
+        @media (max-width: 600px) {
+            .division-wrap { grid-template-columns: 1fr; }
+        }
+
+        /* ── Elimination table ── */
+        .elim-table {
+            margin: 1rem auto;
+            border-collapse: collapse;
+            font-size: 1em;
+            width: auto;
+            background: transparent;
+        }
+        .elim-table td {
+            padding: 0.25rem 0.4rem;
+            border: none;
+            text-align: center;
+            vertical-align: middle;
+            background: transparent;
+            white-space: nowrap;
+        }
+        .elim-table tr.elim-rule td {
+            border-top: 2px solid #333;
+            padding-top: 0.4rem;
+        }
+        .elim-table td.elim-op {
+            font-weight: bold;
+            padding-right: 0.6rem;
+            color: #333;
+        }
+        .elim-table td.elim-label {
+            color: #555;
+            font-size: 0.9em;
+            padding-left: 0.8rem;
+            text-align: left;
+        }
+        .elim-wrap {
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+
+        /* ── Solution callout (green) ── */
+        .solution-callout {
+            background-color: #f0f8ed;
+            border-left: 4px solid #33AB2B;
+            padding: 0.6rem 1rem;
+            margin: 0.8rem 0;
+            border-radius: 0 4px 4px 0;
+            font-weight: bold;
+        }
+
+        /* ── Sub-example heading inside solution ── */
+        .sub-example-heading {
+            color: #33AB2B;
+            font-size: 1.05em;
+            font-weight: bold;
+            margin-top: 1.4rem;
+            margin-bottom: 0.6rem;
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 0.3rem;
+        }
+
+        /* ── Consistent badge ── */
+        .consistent-badge {
+            display: inline-block;
+            background-color: #33AB2B;
+            color: white;
+            border-radius: 4px;
+            padding: 0.15rem 0.6rem;
+            font-size: 0.88em;
+            font-weight: bold;
+            margin-left: 0.4rem;
+        }
+
+        /* ── Process steps ol inside definition box ── */
+        .process-steps {
+            margin: 0.5rem 0 0 1.2rem;
+            padding: 0;
+        }
+        .process-steps li {
+            margin-bottom: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* ── Numbered solution steps inside example ── */
+        .solution-steps {
+            margin: 0.5rem 0 0.5rem 1.2rem;
+            padding: 0;
+        }
+        .solution-steps li {
+            margin-bottom: 1.2rem;
+            line-height: 1.7;
+        }
+
+        /* ── Polynomial long division display ── */
+        .poly-longdiv {
+            overflow-x: auto;
+            margin: 1rem auto;
+            text-align: center;
+        }
+
+        /* ── Italic note ── */
+        .italic-note {
+            font-style: italic;
+            color: #555;
+            margin: 0.5rem 0 1rem 0;
+        }
+    </style>
+</head>
+<body>
+
+<div id="toc-placeholder"></div>
+
+<main class="container">
+
+<section id="partial-fractions" aria-labelledby="section-heading">
+    <h1 id="section-heading">CH 4.5 – Partial Fractions</h1>
+
+    <p>
+        In chapter 2 we discussed rational functions, their graphs and inequalities. We know that a rational function is a function that has a polynomial in both the numerator and the denominator. In this section we are going to discuss something known as <strong class="blue-text">partial fraction decomposition</strong>, and what that does is, it allows us to write our rational function as the sum of rational expressions instead of one full one. For example:
+    </p>
+    \[\frac{x+7}{x^2-x-6} = \frac{2}{x-3} + \frac{-1}{x+2}\]
+    <p>
+        The left hand side is our rational function, where the right hand side is our partial fraction decomposition of that function. If you were to add together the two rational expressions on the right, it would be the same as what is on the left. Essentially it allows us to undo, addition of rational expressions.
+    </p>
+    <p>
+        The process for partial fraction decomposition can be a bit complicated when put into words, so we will be sure to do several examples. But first the process:
+    </p>
+
+    <!-- Process steps definition box -->
+    <div class="definition-box" role="note" aria-label="Process for partial fraction decomposition">
+        <h3>Process: Partial Fraction Decomposition</h3>
+        <ol class="process-steps">
+            <li>
+                If the fraction is improper, divide the numerator by the denominator and write the resulting quotient as \(P(x) + \dfrac{r(x)}{d(x)}\) where \(P(x)\) is the polynomial quotient, and \(r(x)\) is the remaining polynomial. Just like in Chapter 2, with dividing polynomials.
+            </li>
+            <li>
+                Factor the denominator.
+            </li>
+            <li>
+                For each factor using the letters <strong>"A, B, C, ..."</strong>, write the rational function as a sum of its linear factors with numerator values of <strong>"A, B, C, ..."</strong>.
+                \[\frac{A}{x-a_1} + \frac{B}{x-a_2} + \frac{C}{x-a_3} \cdots\]
+            </li>
+            <li>
+                Solve the linear factors using systems of equations.
+            </li>
+            <li>
+                Re-write the solution replacing the <strong>"A, B, C, ..."</strong> with the numbers found in the previous step.
+            </li>
+        </ol>
+    </div>
+
+    <p>
+        Now the way you set up step 3, differs depending on if you have linear factors or quadratic factors. We are only going to look at linear factors in this course. But note, in your future you could see non-linear factors.
+    </p>
+
+    <hr class="divider" role="separator" aria-hidden="true" />
+
+    <!-- ══════════════════════════════════════════
+         EXAMPLE 1 — x+7 / x^2-x-6
+    ══════════════════════════════════════════ -->
+    <section class="example" aria-labelledby="example-4-5-1-heading">
+        <div class="example-problem">
+            <h3 id="example-4-5-1-heading">Example</h3>
+            <p>Write the partial fraction decomposition of</p>
+            \[\frac{x+7}{x^2-x-6}\]
+        </div>
+
+        <button class="solution-header"
+                onclick="toggleExample(this)"
+                aria-expanded="false"
+                aria-controls="solution-4-5-1">
+            <span class="toggle-arrow">▼</span>
+            <span>Show Solution</span>
+        </button>
+
+        <div id="solution-4-5-1" class="example-content">
+            <div class="solution">
+                <h4>Solution</h4>
+                <ol class="solution-steps">
+                    <li>
+                        This rational expression isn't improper, thus we can go to the next step.
+                    </li>
+                    <li>
+                        Factor the denominator:
+                        \[\frac{x+7}{x^2-x-6} = \frac{x+7}{(x-3)(x+2)}\]
+                    </li>
+                    <li>
+                        Expand factors, notice how both factors are linear that means we can write this as:
+                        \[\frac{x+7}{(x-3)(x+2)} = \frac{A}{(x-3)} + \frac{B}{(x+2)}\]
+                        <p class="italic-note">If you wrote the A and B over the opposite factors, that is completely fine, the answer will still work out.</p>
+                    </li>
+                    <li>
+                        <p>Solve — To do this we have to recall a couple rules, such as you have to have common denominators to add two fractions, and how to find the lowest common multiple (LCM) for the denominator. Looking at these two rational expressions, they don't have anything in common in the denominator, meaning we can just multiply each one top and bottom by the opposite denominator:</p>
+                        \[\frac{A\textcolor{red}{(x+2)}}{(x-3)\textcolor{red}{(x+2)}} + \frac{B\textcolor{red}{(x-3)}}{(x+2)\textcolor{red}{(x-3)}} = \frac{Ax+2A}{(x-3)(x+2)} + \frac{Bx-3B}{(x-3)(x+2)}\]
+                        \[= \frac{Ax+2A+Bx-3B}{(x-3)(x+2)}\]
+                        <p>
+                            Using the combined rational, we will set up a system of equations using the pieces in the numerator. At this point we can disregard the denominator for a minute. You take the terms in the numerator that are common and set them equal to the portion of the original numerator that they had in common to get a system of equations.
+                        </p>
+                        <p>Our first equation would be the one created by the terms that contain an \("x"\):</p>
+                        \[Ax + Bx = x\]
+                        <p>Now take this equation and divide both sides by \("x"\) to reduce it and get:</p>
+                        \[A + B = 1\]
+                        <p>Our second equation would be created by our constant terms:</p>
+                        \[2A - 3B = 7\]
+                        <p>This would give us the system of:</p>
+                        \[\begin{cases} A + B = 1 \\ 2A - 3B = 7 \end{cases}\]
+                        <p>Using whichever method you prefer solve the system of equations:</p>
+
+                        <div class="elim-wrap">
+                            <table class="elim-table" aria-label="Elimination to solve for B in the partial fraction system">
+                                <tbody>
+                                    <tr>
+                                        <td class="elim-op"></td>
+                                        <td>\(-2(A + B = 1)\)</td>
+                                        <td class="elim-label">\(\rightarrow\)</td>
+                                        <td>\(-2A - 2B = -2\)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="elim-op">\(+\)</td>
+                                        <td>\(2A - 3B = 7\)</td>
+                                        <td class="elim-label">\(\rightarrow\)</td>
+                                        <td>\(2A - 3B = 7\)</td>
+                                    </tr>
+                                    <tr class="elim-rule">
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>\(-5B = 5\)</td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>\(B = -1\)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <p>Back substitution to find \("A"\):</p>
+                        \[A + B = 1 \rightarrow A + (-1) = 1 \rightarrow A = 2\]
+                    </li>
+                    <li>
+                        Now we are ready to re-write our solution:
+                        \[\frac{A}{(x-3)} + \frac{B}{(x+2)} = \frac{2}{(x-3)} + \frac{-1}{(x+2)}\]
+                        \[= \frac{2}{(x-3)} - \frac{1}{(x+2)}\]
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider" role="separator" aria-hidden="true" />
+
+    <!-- ══════════════════════════════════════════
+         EXAMPLE 2 — Three linear factors
+    ══════════════════════════════════════════ -->
+    <section class="example" aria-labelledby="example-4-5-2-heading">
+        <div class="example-problem">
+            <h3 id="example-4-5-2-heading">Example</h3>
+            <p>Express as the sum of linear factors</p>
+            \[\frac{x+6}{(x-2)(x+2)(x-3)}\]
+        </div>
+
+        <button class="solution-header"
+                onclick="toggleExample(this)"
+                aria-expanded="false"
+                aria-controls="solution-4-5-2">
+            <span class="toggle-arrow">▼</span>
+            <span>Show Solution</span>
+        </button>
+
+        <div id="solution-4-5-2" class="example-content">
+            <div class="solution">
+                <h4>Solution</h4>
+                <ol class="solution-steps">
+                    <li>
+                        Once again we can skip this step, because it isn't an improper fraction.
+                    </li>
+                    <li>
+                        We can also skip this step, since the denominator is already factored.
+                    </li>
+                    <li>
+                        Our first step with this problem would be to write it as the sum of our linear factors which would be:
+                        \[\frac{A}{x+2} + \frac{B}{x-2} + \frac{C}{x-3}\]
+                        Notice how for each factor we have a different variable in the numerator.
+                    </li>
+                    <li>
+                        <p>Now we need to find our LCM again and combine all of our linear factors:</p>
+                        \[\frac{A(\textcolor{red}{(x-2)(x-3)})}{(x+2)(\textcolor{red}{(x-2)(x-3)})} + \frac{B(\textcolor{red}{(x+2)(x-3)})}{(x-2)(\textcolor{red}{(x+2)(x-3)})} + \frac{C(\textcolor{red}{(x-2)(x+2)})}{(x-3)(\textcolor{red}{(x-2)(x+2)})}\]
+                        \[= \frac{A(x^2-x-6)}{(x-2)(x+2)(x-3)} + \frac{B(x^2-5x+6)}{(x-2)(x+2)(x-3)} + \frac{C(x^2-4)}{(x-2)(x+2)(x-3)}\]
+                        \[= \frac{Ax^2-Ax-6A}{(x-2)(x+2)(x-3)} + \frac{Bx^2-5Bx+6B}{(x-2)(x+2)(x-3)} + \frac{Cx^2-4C}{(x-2)(x+2)(x-3)}\]
+                        <p>
+                            Just like we did in the previous problem break them up into different equations using their terms and setting it equal to the original numerator. The equation we'd get from our squared terms would be:
+                        </p>
+                        \[Ax^2 + Bx^2 + Cx^2 = 0x^2\]
+                        <p>from our \("x"\) terms:</p>
+                        \[-Ax - 5Bx = 1x\]
+                        <p>and our constant terms:</p>
+                        \[-6A + 6B - 4C = 6\]
+                        <p>We'd divide the first equation by \(x^2\) and our second equation by \(x\) to end up with the system:</p>
+                        \[\begin{cases} A + B + C = 0 \\ -A - 5B = 1 \\ -6A + 6B - 4C = 6 \end{cases}\]
+                        <p>Now we're ready to solve the system of equations:</p>
+
+                        <div class="elim-wrap">
+                            <table class="elim-table" aria-label="First elimination step: equations 1 and 3 to eliminate C">
+                                <tbody>
+                                    <tr>
+                                        <td class="elim-op"></td>
+                                        <td>\(4(A + B + C = 0)\)</td>
+                                        <td class="elim-label">\(\rightarrow\)</td>
+                                        <td>\(4A + 4B + 4C = 0\)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="elim-op">\(+\)</td>
+                                        <td>\(-6A + 6B - 4C = 6\)</td>
+                                        <td class="elim-label">\(\rightarrow\)</td>
+                                        <td>\(-6A + 6B - 4C = 6\)</td>
+                                    </tr>
+                                    <tr class="elim-rule">
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>\(-2A + 10B = 6\)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="elim-wrap">
+                            <table class="elim-table" aria-label="Second elimination step to solve for B">
+                                <tbody>
+                                    <tr>
+                                        <td class="elim-op"></td>
+                                        <td>\(-2A + 10B = 6\)</td>
+                                        <td class="elim-label">\(\rightarrow\)</td>
+                                        <td>\(-2A + 10B = 6\)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="elim-op">\(+\)</td>
+                                        <td>\(-2(-A - 5B = 1)\)</td>
+                                        <td class="elim-label">\(\rightarrow\)</td>
+                                        <td>\(2A + 10B = -2\)</td>
+                                    </tr>
+                                    <tr class="elim-rule">
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>\(20B = 4\)</td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>\(B = \dfrac{4}{20} = \dfrac{1}{5}\)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <p>Back substitution to find \("A"\):</p>
+                        \[\begin{aligned}
+                            -A - 5B &= 1 \\
+                            -A - 5\!\left(\frac{1}{5}\right) &= 1 \\
+                            -A - 1 &= 1 \\
+                            -A &= 2 \\
+                            A &= -2
+                        \end{aligned}\]
+
+                        <p>then \("C"\):</p>
+                        \[\begin{aligned}
+                            A + B + C &= 0 \\
+                            -2 + \frac{1}{5} + C &= 0 \\
+                            -\frac{9}{5} + C &= 0 \\
+                            C &= \frac{9}{5}
+                        \end{aligned}\]
+                    </li>
+                    <li>
+                        Now we're ready to write our final answer:
+                        \[\frac{-2}{x+2} + \frac{\dfrac{1}{5}}{x-2} + \frac{\dfrac{9}{5}}{x-3}\]
+                        \[= \frac{-2}{x+2} + \frac{1}{5(x-2)} + \frac{9}{5(x-3)}\]
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </section>
+
+    <p>
+        Both of these are examples when you have just singular linear factors. However if you have repeat linear factors the process changes just slightly.
+    </p>
+
+    <hr class="divider" role="separator" aria-hidden="true" />
+
+    <!-- ══════════════════════════════════════════
+         REPEAT LINEAR FACTORS
+    ══════════════════════════════════════════ -->
+    <section aria-labelledby="repeat-factors-heading">
+        <h2 id="repeat-factors-heading">Repeat Linear Factors</h2>
+
+        <p>
+            A <strong class="blue-text">repeat linear factor</strong> is a linear factor with a multiplicity greater than one. It would be something like \(x^2 = x(x)\) or something like \((x-1)^3 = (x-1)(x-1)(x-1)\) each of those are a linear factor that has a multiplicity greater than one.
+        </p>
+
+        <!-- ══════════════════════════════════════════
+             EXAMPLE 3 — 3x / (x-3)^2
+        ══════════════════════════════════════════ -->
+        <section class="example" aria-labelledby="example-4-5-3-heading">
+            <div class="example-problem">
+                <h3 id="example-4-5-3-heading">Example</h3>
+                <p>Write the partial fraction decomposition of</p>
+                \[\frac{3x}{(x-3)^2}\]
+            </div>
+
+            <button class="solution-header"
+                    onclick="toggleExample(this)"
+                    aria-expanded="false"
+                    aria-controls="solution-4-5-3">
+                <span class="toggle-arrow">▼</span>
+                <span>Show Solution</span>
+            </button>
+
+            <div id="solution-4-5-3" class="example-content">
+                <div class="solution">
+                    <h4>Solution</h4>
+                    <p>
+                        For this problem we can skip the first couple steps and start at step 3 where we write this as the sum of partial fractions. However, this time it changes slightly because we have a repeat factor — this would give us:
+                    </p>
+                    \[\frac{A}{x-3} + \frac{B}{(x-3)^2}\]
+                    <p>
+                        You have to write a partial fraction for each power of \(x\). Meaning if \((x-3)^3\) was our denominator then we'd need one more partial fraction with \("C"\) as the numerator. Now we're ready to go ahead to step 4 and solve this to find \(A\) and \(B\):
+                    </p>
+                    \[\frac{A(\textcolor{red}{x-3})}{(x-3)(\textcolor{red}{x-3})} + \frac{B}{(x-3)^2}\]
+                    <p>This gives us the system:</p>
+                    \[\begin{cases} A = 3 \\ -3A + B = 0 \end{cases}\]
+                    \[\begin{aligned}
+                        -3(3) + B &= 0 \\
+                        -9 + B &= 0 \\
+                        B &= 9
+                    \end{aligned}\]
+                    <div class="solution-callout" role="note">
+                        Giving us the partial fraction decomposition:
+                        \[\frac{3}{x-3} + \frac{9}{(x-3)^2}\]
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <hr class="divider" role="separator" aria-hidden="true" />
+
+        <!-- ══════════════════════════════════════════
+             EXAMPLE 4 — Improper fraction + repeat factor
+        ══════════════════════════════════════════ -->
+        <section class="example" aria-labelledby="example-4-5-4-heading">
+            <div class="example-problem">
+                <h3 id="example-4-5-4-heading">Example</h3>
+                <p>Write the partial fraction decomposition of</p>
+                \[\frac{x^4+x^3+x+4}{x^3+x^2}\]
+            </div>
+
+            <button class="solution-header"
+                    onclick="toggleExample(this)"
+                    aria-expanded="false"
+                    aria-controls="solution-4-5-4">
+                <span class="toggle-arrow">▼</span>
+                <span>Show Solution</span>
+            </button>
+
+            <div id="solution-4-5-4" class="example-content">
+                <div class="solution">
+                    <h4>Solution</h4>
+                    <ol class="solution-steps">
+                        <li>
+                            <p>We can see that in this one we actually need to divide, since it gives us an improper fraction.</p>
+
+                            <!-- Polynomial long division display -->
+                            <div class="poly-longdiv" aria-label="Polynomial long division of x^4 plus x^3 plus x plus 4 divided by x^3 plus x^2">
+                                \[\require{enclose}
+                                \begin{array}{r}
+                                    x + 0 \\[-3pt]
+                                    x^3+x^2 \enclose{longdiv}{x^4+x^3+0x^2+x+4} \\[-3pt]
+                                    \underline{-(x^4+x^3)\phantom{{}+0x^2+x+4}} \\[-3pt]
+                                    0x^2 + x + 4
+                                \end{array}\]
+                            </div>
+
+                            <p>That means we'd end up with the equation:</p>
+                            \[x + \frac{x+4}{x^3+x^2}\]
+                            <p>We'd only need to find the partial fractions for the rational piece.</p>
+                        </li>
+                        <li>
+                            Factor the denominator completely:
+                            \[\frac{x+4}{x^2(x+1)}\]
+                            This time our repeat linear factor is our \(x\).
+                        </li>
+                        <li>
+                            Write as partial fractions:
+                            \[\frac{A}{x} + \frac{B}{x^2} + \frac{C}{x+1}\]
+                        </li>
+                        <li>
+                            <p>Solve our partial fraction:</p>
+                            \[\frac{A(\textcolor{red}{x(x+1)})}{x(\textcolor{red}{x(x+1)})} + \frac{B(\textcolor{red}{x+1})}{x^2(\textcolor{red}{x+1})} + \frac{C(\textcolor{red}{x^2})}{(x+1)(\textcolor{red}{x^2})}\]
+                            \[= \frac{Ax^2+Ax}{x^2(x+1)} + \frac{Bx+B}{x^2(x+1)} + \frac{Cx^2}{x^2(x+1)}\]
+                            <p>This gives us the system:</p>
+                            \[\begin{cases} A + C = 0 \\ A + B = 1 \\ B = 4 \end{cases}\]
+                            <p>Back Substitution:</p>
+                            <div class="division-wrap" role="group" aria-label="Back substitution to find A and C from the partial fraction system">
+                                <div>
+                                    \[\begin{aligned}
+                                        A + B &= 1 \\
+                                        A + 4 &= 1 \\
+                                        A &= -3
+                                    \end{aligned}\]
+                                </div>
+                                <div>
+                                    \[\begin{aligned}
+                                        A + C &= 0 \\
+                                        -3 + C &= 0 \\
+                                        C &= 3
+                                    \end{aligned}\]
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            Re-write the partial fraction:
+                            \[\frac{-3}{x} + \frac{4}{x^2} + \frac{3}{x+1}\]
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+    </section><!-- end repeat linear factors -->
+
+    <p>
+        When it comes to partial fractions try to think about un-packaging something. You're trying to pull the pieces back apart again. You can always check your work, by adding the fractions back together. It should give you the original fraction.
+    </p>
+
+</section><!-- end #partial-fractions -->
+
+<!-- ══════════════════════════════════════════
+     EXERCISES
+══════════════════════════════════════════ -->
+<section class="exercises-section" role="region" aria-labelledby="exercises-4-5-heading">
+    <h2 id="exercises-4-5-heading" class="subsection-title">Exercises</h2>
+
+    <button class="exercises-header"
+            onclick="toggleExercises(this)"
+            aria-expanded="false"
+            aria-controls="exercises-4-5-content">
+        <span class="toggle-arrow">▼</span>
+        <span>Show Exercises</span>
+    </button>
+
+    <div id="exercises-4-5-content"
+         class="exercises-content"
+         role="region"
+         aria-labelledby="exercises-4-5-heading">
+        <p>Exercises to be added at a later date.</p>
+    </div>
+</section>
+
+</main>
+
+<!-- ── Toggle scripts ── -->
+<script>
+    function toggleExample(button) {
+        const content = button.nextElementSibling;
+        const arrow = button.querySelector('.toggle-arrow');
+
+        if (content.classList.contains('open')) {
+            content.classList.remove('open');
+            arrow.classList.remove('open');
+            button.querySelector('span:last-child').textContent = 'Show Solution';
+            button.setAttribute('aria-expanded', 'false');
+        } else {
+            content.classList.add('open');
+            arrow.classList.add('open');
+            button.querySelector('span:last-child').textContent = 'Hide Solution';
+            button.setAttribute('aria-expanded', 'true');
+        }
+    }
+
+    function toggleExercises(button) {
+        const content = document.getElementById(button.getAttribute('aria-controls'));
+        const arrow = button.querySelector('.toggle-arrow');
+
+        if (content.classList.contains('open')) {
+            content.classList.remove('open');
+            arrow.classList.remove('open');
+            button.querySelector('span:last-child').textContent = 'Show Exercises';
+            button.setAttribute('aria-expanded', 'false');
+        } else {
+            content.classList.add('open');
+            arrow.classList.add('open');
+            button.querySelector('span:last-child').textContent = 'Hide Exercises';
+            button.setAttribute('aria-expanded', 'true');
+        }
+    }
+</script>
+
+<!-- ── TOC loader ── -->
+<script>
+    fetch('toc.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('toc-placeholder').innerHTML = data;
+
+            const chapterButtons = document.querySelectorAll('.toc-chapter');
+            chapterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const expanded = button.getAttribute('aria-expanded') === 'true';
+                    button.setAttribute('aria-expanded', !expanded);
+                    const submenu = button.nextElementSibling;
+                    submenu.classList.toggle('open');
+                });
+            });
+        });
+</script>
+
+</body>
+</html>
